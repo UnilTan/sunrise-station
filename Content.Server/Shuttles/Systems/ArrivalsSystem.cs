@@ -23,6 +23,9 @@ using Content.Shared.GameTicking;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Parallax.Biomes;
+using Content.Shared.Preferences;
+using Content.Shared.Random.Helpers;
+using Content.Shared.Roles;
 using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Tiles;
@@ -82,13 +85,12 @@ public sealed class ArrivalsSystem : EntitySystem
     /// </summary>
     private const float RoundStartFTLDuration = 10f;
 
-    // Sunrise-Edit
-    // private readonly List<ProtoId<BiomeTemplatePrototype>> _arrivalsBiomeOptions = new()
-    // {
-    //     "Grasslands",
-    //     "LowDesert",
-    //     "Snow",
-    // };
+    private readonly List<ProtoId<BiomeTemplatePrototype>> _arrivalsBiomeOptions = new()
+    {
+        "Grasslands",
+        "LowDesert",
+        "Snow",
+    };
 
     public override void Initialize()
     {
@@ -101,8 +103,7 @@ public sealed class ArrivalsSystem : EntitySystem
         SubscribeLocalEvent<ArrivalsShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ArrivalsShuttleComponent, FTLTagEvent>(OnShuttleTag);
 
-        // Sunrise-Edit
-        //SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeLocalEvent<ArrivalsShuttleComponent, FTLStartedEvent>(OnArrivalsFTL);
         SubscribeLocalEvent<ArrivalsShuttleComponent, FTLCompletedEvent>(OnArrivalsDocked);
 
@@ -511,15 +512,16 @@ public sealed class ArrivalsSystem : EntitySystem
         }
     }
 
-    // private void OnRoundStarting(RoundStartingEvent ev)
-    // {
-    //     // Setup arrivals station
-    //     if (!Enabled)
-    //         return;
-    //
-    //     SetupArrivalsStation();
-    // }
-    //
+    private void OnRoundStarting(RoundStartingEvent ev)
+    {
+        // Setup arrivals station
+        if (!Enabled)
+            return;
+
+        // Sunrise-Edit
+        //SetupArrivalsStation();
+    }
+
     // private void SetupArrivalsStation()
     // {
     //     var path = new ResPath(_cfgManager.GetCVar(CCVars.ArrivalsMap));
@@ -598,6 +600,62 @@ public sealed class ArrivalsSystem : EntitySystem
 
         // If it's a latespawn station then this will fail but that's okey
         SetupShuttle(uid, component);
+    }
+
+    public EntityUid? SpawnPlayersOnArrivals(EntityUid? station, JobPrototype jobPrototype, HumanoidCharacterProfile? profile)
+    {
+        var possiblePositions = GetArrivalsSpawnPoints();
+
+        if (possiblePositions.Count == 0)
+        {
+            Logger.Error("No valid arrival points found!");
+            return null;
+        }
+
+        var spawnLoc = _random.Pick(possiblePositions);
+
+        var playerMob = _stationSpawning.SpawnPlayerMob(
+            spawnLoc,
+            jobPrototype,
+            profile,
+            station);
+
+        return playerMob;
+    }
+
+    public List<EntityCoordinates> GetArrivalsSpawnPoints()
+    {
+        TryGetArrivalsSource(out var arrivals);
+        var possiblePositions = new List<EntityCoordinates>();
+
+        if (TryComp(arrivals, out TransformComponent? arrivalsXform))
+        {
+            var mapId = arrivalsXform.MapID;
+
+            var points = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+
+            while (points.MoveNext(out var uid, out var spawnPoint, out var xform))
+            {
+                if (spawnPoint.SpawnType != SpawnPointType.LateJoin || xform.MapID != mapId)
+                    continue;
+
+                possiblePositions.Add(xform.Coordinates);
+            }
+        }
+
+        return possiblePositions;
+    }
+
+    private bool TryGetArrivalsSource(out EntityUid uid)
+    {
+        var arrivalsSourceQuery = EntityQueryEnumerator<ArrivalsSourceComponent>();
+
+        while (arrivalsSourceQuery.MoveNext(out uid, out _))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void SetupShuttle(EntityUid uid, StationArrivalsComponent component)
