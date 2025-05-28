@@ -19,8 +19,7 @@
     - BaseStationGateway
     # Увы, но с онлайном в 130 слишком расточительно спавнить кучу говна
     #- BaseStationShuttles
-    # Нету смысла пока не будет консоли отправки ОБР
-    #- BaseStationCentComm # Sunrise-Edit
+    - BaseStationCentComm
     - BaseStationEvacuation
     - BaseStationAlertLevels
     - BaseStationMagnet
