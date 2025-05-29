@@ -444,5 +444,5 @@ public sealed partial class SunriseCCVars : CVars
     /// До сколько часов общего наиграного времени игроки будут появляться на станции даже в позднем присоединеии.
     /// </summary>
     public static readonly CVarDef<int> ArrivalsMinHours =
-        CVarDef.Create("transithub.arrivals_min_hours", 20, CVar.SERVER | CVar.ARCHIVE);
+        CVarDef.Create("transithub.arrivals_min_hours", 0, CVar.SERVER | CVar.ARCHIVE);
 }

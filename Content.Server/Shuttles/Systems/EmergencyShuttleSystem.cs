@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using Content.Server._Sunrise.ImmortalGrid;
 using Content.Server._Sunrise.TransitHub;
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
@@ -595,6 +596,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
         EnsureComp<ProtectedGridComponent>(uid.Value.Owner);
         EnsureComp<ArrivalsSourceComponent>(uid.Value.Owner); // Sunrise-edit
         EnsureComp<UnbuildableGridComponent>(uid.Value.Owner); // Sunrise-edit
+        EnsureComp<ImmortalGridComponent>(uid.Value.Owner); // Sunrise-edit
 
        var template = _random.Pick(component.Biomes);
        var biome = _prototypeManager.Index<BiomeTemplatePrototype>(template);
@@ -677,16 +679,16 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
         EnsureComp<EmergencyShuttleComponent>(shuttle.Value.Owner);
         EnsureComp<UnbuildableGridComponent>(shuttle.Value.Owner); // Sunrise-edit
 
-        var docks = new HashSet<Entity<DockingComponent>>();
-        _lookup.GetChildEntities(shuttle.Value.Owner, docks);
-        foreach (var dock in docks)
-        {
-            var airlock = EnsureComp<AirlockComponent>(dock);
-            _airlockSystem.SetSafety(airlock, false);
-            var door = EnsureComp<DoorComponent>(dock);
-            door.ForcedCrushClose = true;
-            door.CrushDamage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Blunt"), 1000);
-        }
+        // var docks = new HashSet<Entity<DockingComponent>>();
+        // _lookup.GetChildEntities(shuttle.Value.Owner, docks);
+        // foreach (var dock in docks)
+        // {
+        //     var airlock = EnsureComp<AirlockComponent>(dock);
+        //     _airlockSystem.SetSafety(airlock, false);
+        //     var door = EnsureComp<DoorComponent>(dock);
+        //     door.ForcedCrushClose = true;
+        //     door.CrushDamage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Blunt"), 1000);
+        // }
 
         // Sunrise-end
         Log.Info($"Added emergency shuttle {ToPrettyString(shuttle)} for station {ToPrettyString(ent)} and centcomm {ToPrettyString(ent.Comp2.Entity)}");
