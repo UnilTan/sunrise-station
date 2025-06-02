@@ -65,7 +65,7 @@ public sealed partial class CargoSystem
                     ("amount", args.Amount),
                     ("name1", Loc.GetString(ourAccount.Name)),
                     ("code1", Loc.GetString(ourAccount.Code)));
-                _radio.SendRadioMessage(ent, msg, ourAccount.RadioChannel, ent, escapeMarkup: false);
+                _radio.SendRadioMessage(ent, msg, ourAccount.RadioChannel, ent, escapeMarkup: false, playTts: false);
             }
         }
         else
@@ -82,8 +82,8 @@ public sealed partial class CargoSystem
                     ("code1", Loc.GetString(ourAccount.Code)),
                     ("name2", Loc.GetString(otherAccount.Name)),
                     ("code2", Loc.GetString(otherAccount.Code)));
-                _radio.SendRadioMessage(ent, msg, ourAccount.RadioChannel, ent, escapeMarkup: false);
-                _radio.SendRadioMessage(ent, msg, otherAccount.RadioChannel, ent, escapeMarkup: false);
+                _radio.SendRadioMessage(ent, msg, ourAccount.RadioChannel, ent, escapeMarkup: false, playTts: false);
+                _radio.SendRadioMessage(ent, msg, otherAccount.RadioChannel, ent, escapeMarkup: false, playTts: false);
             }
         }
     }
