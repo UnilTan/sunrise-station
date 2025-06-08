@@ -15,6 +15,7 @@ public sealed class ChatSanSystem : EntitySystem
     private bool _aggressive;
 
     private static readonly Regex UrlRegex = new("[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&\\/\\/=]*)");
+    private static readonly Regex AsciiArtRegex = new("[^\\w\\s!?.,@#$%^&*~|\\(\\)\\[\\]\\{\\}\\/-]");
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -42,13 +43,45 @@ public sealed class ChatSanSystem : EntitySystem
         // 1. Если regex нашел url: [-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)
         switch (_aggressive)
         {
-            case true when UrlRegex.IsMatch(ev.Message):
-                ev.Cancelled = true;
+            case true:
+                var conditions = new List<bool>
+                {
+                    IsUrlFound(ev.Message),
+                    IsAsciiArtFound(ev.Message),
+                };
+                ev.Cancelled = conditions.Contains(true);
                 return;
             case false:
-                ev.Message = UrlRegex.Replace(ev.Message, "");
+                ev.Message = UrlReplace(ev.Message);
+                ev.Message = AsciiArtReplace(ev.Message);
                 break;
         }
 
     }
+
+    # region Handlers
+
+    // 1. Если regex нашел url: [-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)
+    private bool IsUrlFound(string message)
+    {
+        return UrlRegex.IsMatch(message);
+    }
+
+    private string UrlReplace(string message, string replaceTo = "")
+    {
+        return UrlRegex.Replace(message, replaceTo);
+    }
+
+    // 2. Если regex нашел символы кроме разрешенного списка: [^\w\s!?.,@#$%^&*~|\(\)\[\]\{\}\/-]
+    private bool IsAsciiArtFound(string message)
+    {
+        return AsciiArtRegex.IsMatch(message);
+    }
+
+    private string AsciiArtReplace(string message, string replaceTo = "")
+    {
+        return AsciiArtRegex.Replace(message, replaceTo);
+    }
+
+    # endregion
 }
