@@ -1,14 +1,15 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Content.Server._Sunrise.Chat; //sunrise-edit
+using Content.Server._Sunrise.AntiSpam;
+using Content.Server._Sunrise.Chat;
+using Content.Server._Sunrise.ChatSan;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Players.RateLimiting;
-using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
+using Content.Server.Speech.Prototypes;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.CollectiveMind;
@@ -25,7 +26,6 @@ using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
-using Content.Shared.Speech;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -38,7 +38,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Server._Sunrise.AntiSpam;
+//sunrise-edit
 
 namespace Content.Server.Chat.Systems;
 
@@ -470,6 +470,13 @@ public sealed partial class ChatSystem : SharedChatSystem
     // Sunrise-Start
     private void SendCollectiveMindChat(EntityUid source, string message, CollectiveMindPrototype? collectiveMind)
     {
+        // Sunrise-Start
+        var sanEvent = new ChatSanRequestEvent(message);
+        RaiseLocalEvent(ref sanEvent);
+        if (sanEvent.Cancelled)
+            return;
+        message = sanEvent.Message;
+        // Sunrise-End
         if (_mobStateSystem.IsDead(source))
             return;
 
@@ -541,6 +548,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool isFormatted = false //sunrise-edit
         )
     {
+        // Sunrise-Start
+        var sanEvent = new ChatSanRequestEvent(originalMessage);
+        RaiseLocalEvent(ref sanEvent);
+        if (sanEvent.Cancelled)
+            return;
+        originalMessage = sanEvent.Message;
+        // Sunrise-End
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
 
@@ -615,6 +629,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool isFormatted = false //sunrise-edit
         )
     {
+        // Sunrise-Start
+        var sanEvent = new ChatSanRequestEvent(originalMessage);
+        RaiseLocalEvent(ref sanEvent);
+        if (sanEvent.Cancelled)
+            return;
+        originalMessage = sanEvent.Message;
+        // Sunrise-End
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
 
@@ -706,6 +727,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool isFormatted = false //sunrise-edit
         )
     {
+        // Sunrise-Start
+        var sanEvent = new ChatSanRequestEvent(action);
+        RaiseLocalEvent(ref sanEvent);
+        if (sanEvent.Cancelled)
+            return;
+        action = sanEvent.Message;
+        // Sunrise-End
         if (!_actionBlocker.CanEmote(source) && !ignoreActionBlocker)
             return;
 
@@ -749,6 +777,13 @@ public sealed partial class ChatSystem : SharedChatSystem
     // ReSharper disable once InconsistentNaming
     private void SendLOOC(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
+        // Sunrise-Start
+        var sanEvent = new ChatSanRequestEvent(message);
+        RaiseLocalEvent(ref sanEvent);
+        if (sanEvent.Cancelled)
+            return;
+        message = sanEvent.Message;
+        // Sunrise-End
         var name = FormattedMessage.EscapeText(Identity.Name(source, EntityManager));
 
         if (_adminManager.IsAdmin(player))
@@ -771,6 +806,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
+        // Sunrise-Start
+        var sanEvent = new ChatSanRequestEvent(message);
+        RaiseLocalEvent(ref sanEvent);
+        if (sanEvent.Cancelled)
+            return;
+        message = sanEvent.Message;
+        // Sunrise-End
         var clients = GetDeadChatClients();
         var playerName = Name(source);
         string wrappedMessage;
