@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Content.Shared._Sunrise.SunriseCCVars;
+using Content.Shared.Chat;
 using Robust.Shared.Configuration;
 
 namespace Content.Server._Sunrise.ChatSan;
@@ -10,6 +11,7 @@ namespace Content.Server._Sunrise.ChatSan;
 public sealed class ChatSanSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private readonly ISharedChatManager _chat = default!;
 
     private bool _enabled;
     private bool _aggressive;
@@ -49,7 +51,12 @@ public sealed class ChatSanSystem : EntitySystem
                     IsUrlFound(ev.Message),
                     IsAsciiArtFound(ev.Message),
                 };
-                ev.Cancelled = conditions.Contains(true);
+                var cancelled = conditions.Contains(true);
+                ev.Cancelled = cancelled;
+                if (cancelled)
+                {
+                    _chat.SendAdminAlert(Loc.GetString("chatsan-admin-alert", ("message_cropped", ev.Message.Substring(0, 20))));
+                }
                 return;
             case false:
                 ev.Message = UrlReplace(ev.Message);
