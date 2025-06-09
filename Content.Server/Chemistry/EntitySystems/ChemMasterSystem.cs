@@ -200,6 +200,10 @@ namespace Content.Server.Chemistry.EntitySystems
             if (message.Number == 0 || !_storageSystem.HasSpace((container, storage)))
                 return;
 
+            // fck u
+            if (message.Number > 50)
+                return;
+
             // Ensure the amount is valid.
             if (message.Dosage == 0 || message.Dosage > chemMaster.Comp.PillDosageLimit)
                 return;
