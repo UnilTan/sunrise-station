@@ -81,3 +81,5 @@ tts-voice-name-heartstone-hamul-runical-totem = (NEW) [Hearthstone] Руниче
 tts-voice-name-heartstone-djaina = (NEW) [Hearthstone] Джайна
 tts-voice-name-heartstone-bob1 = (NEW) [Hearthstone] БОБ
 tts-voice-name-heartstone-rexar = (NEW) [Hearthstone] Рексар
+tts-voice-name-crysis-ai-blackops-01 = (NEW) [Crysis 2] Оперативник Blackops 01
+tts-voice-name-crysis-ai-blackops-02 = (NEW) [Crysis 2] Оперативник Blackops 02
