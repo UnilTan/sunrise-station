@@ -666,7 +666,7 @@
 
 - type: ttsVoice
   id: Crysis2Blackops01
-  name: tts-voice-name-crysis-ai-blackops-01
+  name: tts-voice-name-crysis2-ai-blackops-01
   sex: Male
   speaker: crysis2_ai_blackops_01
   provider: sunrise
@@ -674,7 +674,7 @@
 
 - type: ttsVoice
   id: Crysis2Blackops02
-  name: tts-voice-name-crysis-ai-blackops-02
+  name: tts-voice-name-crysis2-ai-blackops-02
   sex: Male
   speaker: crysis2_ai_blackops_02
   provider: sunrise
