@@ -688,3 +688,19 @@
   provider: sunrise
   sponsorOnly: false
   roundStart: false # Это ТТС для автоматов с едой, напитками и т.д (вендоров)
+
+- type: ttsVoice
+  id: HearthstoneAlleria
+  name: tts-voice-name-hearthstone-alleria
+  sex: Female
+  speaker: hearthstone_alleria
+  provider: sunrise
+  sponsorOnly: false
+
+- type: ttsVoice
+  id: HearthstoneLunara
+  name: tts-voice-name-hearthstone-lunara
+  sex: Female
+  speaker: hearthstone_lunara
+  provider: sunrise
+  sponsorOnly: false
