@@ -68,7 +68,6 @@
   speaker: hl2_kleiner
   roundStart: true
   provider: sunrise
-  sponsorOnly: true
 
 - type: ttsVoice
   id: TF2Medic
@@ -86,7 +85,6 @@
   speaker: hl2_barni
   roundStart: true
   provider: sunrise
-  sponsorOnly: true
 
 - type: ttsVoice
   id: HL2Gman
@@ -95,7 +93,6 @@
   speaker: hl2_gman
   roundStart: true
   provider: sunrise
-  sponsorOnly: true
 
 - type: ttsVoice
   id: Losyash
@@ -113,7 +110,6 @@
   speaker: hl2_father_grigori
   roundStart: true
   provider: sunrise
-  sponsorOnly: true
 
 - type: ttsVoice
   id: Kopatich
