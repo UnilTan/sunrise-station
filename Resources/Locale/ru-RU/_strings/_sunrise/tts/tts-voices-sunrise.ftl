@@ -86,3 +86,4 @@ tts-voice-name-crysis2-ai-blackops-02 = (NEW) [Crysis 2] Оперативник 
 tts-voice-name-portal2-fact-core = [Portal 2] FactCore
 tts-voice-name-hearthstone-alleria = (NEW) [Hearthstone] Аллерия
 tts-voice-name-hearthstone-lunara = (NEW) [Hearthstone] Лунара
+tts-voice-name-barash = (NEW) [Смешарики] Бараш

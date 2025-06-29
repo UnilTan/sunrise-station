@@ -704,3 +704,12 @@
   speaker: hearthstone_lunara
   provider: sunrise
   sponsorOnly: false
+
+
+- type: ttsVoice
+  id: SmesharikiBarash
+  name: tts-voice-name-barash
+  sex: Male
+  speaker: smeshariki_barash
+  provider: sunrise
+  sponsorOnly: false
