@@ -88,3 +88,4 @@ tts-voice-name-hearthstone-alleria = (NEW) [Hearthstone] Аллерия
 tts-voice-name-hearthstone-lunara = (NEW) [Hearthstone] Лунара
 tts-voice-name-barash = (NEW) [Смешарики] Бараш
 tts-voice-name-chocolate-fabric-wonka = (NEW) [Шоколадная Фабрика] Вилли-Вонка
+tts-voice-name-death-note-yagami-light = (NEW) [Тетрадь Смерти] Ягами Лайт

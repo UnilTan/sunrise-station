@@ -639,3 +639,10 @@
   sex: Male
   speaker: chocolatefabric_wonka
   provider: sunrise
+
+- type: ttsVoice
+  id: DeathNoteYagami
+  name: tts-voice-name-death-note-yagami-light
+  sex: Male
+  speaker: deathnote_yagami_light
+  provider: sunrise
