@@ -1,8 +1,8 @@
 using System.Linq;
 using Content.Client._Sunrise.AntagObjectives;
 using Content.Client.Administration.Systems;
-using Content.Shared.Administration; // Lust-Edit
-using Content.Shared.Administration.Managers; // Lust-Edit
+using Content.Shared.Administration; // Sunrise-Edit
+using Content.Shared.Administration.Managers; // Sunrise-Edit
 using Content.Client.Administration.UI.AntagObjectives;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration;
@@ -24,7 +24,7 @@ public sealed partial class PlayerTab : Control
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IPlayerManager _playerMan = default!;
-    [Dependency] private readonly ISharedAdminManager _adminManager = default!; // Lust-Edit
+    [Dependency] private readonly ISharedAdminManager _adminManager = default!; // Sunrise-Edit
 
     private const string ArrowUp = "↑";
     private const string ArrowDown = "↓";
@@ -90,11 +90,11 @@ public sealed partial class PlayerTab : Control
 
     private void OverlayButtonPressed(ButtonEventArgs args)
     {
-        // Lust-Start
-        if (_playerMan.LocalEntity is not { } playerUid 
+        // Sunrise-Start
+        if (_playerMan.LocalEntity is not { } playerUid
         || !_adminManager.HasAdminFlag(playerUid, AdminFlags.Moderator))
             return;
-        // Lust-End
+        // Sunrise-End
         if (args.Button.Pressed)
         {
             _adminSystem.AdminOverlayOn();
@@ -157,11 +157,11 @@ public sealed partial class PlayerTab : Control
 
     private void RefreshPlayerList(IReadOnlyList<PlayerInfo> players)
     {
-        // Lust-Start
-        if (_playerMan.LocalEntity is not { } playerUid 
+        // Sunrise-Start
+        if (_playerMan.LocalEntity is not { } playerUid
         || !_adminManager.HasAdminFlag(playerUid, AdminFlags.Moderator))
             return;
-        // Lust-End
+        // Sunrise-End
         _players = players;
         PlayerCount.Text = Loc.GetString("player-tab-player-count", ("count", _playerMan.PlayerCount));
 
