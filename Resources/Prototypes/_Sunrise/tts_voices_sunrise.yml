@@ -646,3 +646,10 @@
   sex: Male
   speaker: deathnote_yagami_light
   provider: sunrise
+
+- type: ttsVoice
+  id: Warcraft3Jaina
+  name: tts-voice-name-warcraft3-jaina
+  sex: Female
+  speaker: warcraft3_jaina
+  provider: sunrise
