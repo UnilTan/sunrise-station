@@ -1,11 +1,11 @@
 ﻿- type: interaction
   id: FriendlyHandshake
   name: Пожать руку
-  icon: _Sunrise/Interactions//hand_shake.png
+  icon: _Sunrise/Interactions/hand_shake.png
   emotes:
   - жмёт руку %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//handshake/handshake.ogg
+  - path: /Audio/_Sunrise/Interactions/handshake/handshake.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -16,11 +16,11 @@
 - type: interaction
   id: FriendlyPatShoulder
   name: Похлопать по плечу
-  icon: _Sunrise/Interactions//pat_shoulder.png
+  icon: _Sunrise/Interactions/pat_shoulder.png
   emotes:
   - хлопает по плечу %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//clap/sev_clap.ogg
+  - path: /Audio/_Sunrise/Interactions/clap/sev_clap.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -31,7 +31,7 @@
 - type: interaction
   id: FriendlyHug
   name: Обнять
-  icon: _Sunrise/Interactions//friendly.png
+  icon: _Sunrise/Interactions/friendly.png
   emotes:
   - обнимает %target
   - крепко обнимает %target
@@ -48,14 +48,14 @@
 - type: interaction
   id: FriendlySniff
   name: Обнюхать
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - обхюнивает %target
   - приближает свой нос, обнюхивая %target
   - нюхает %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//sniff/sniff_1.ogg
-  - path: /Audio/_Sunrise/Interactions//sniff/sniff_2.ogg
+  - path: /Audio/_Sunrise/Interactions/sniff/sniff_1.ogg
+  - path: /Audio/_Sunrise/Interactions/sniff/sniff_2.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -68,13 +68,13 @@
 - type: interaction
   id: FriendlyHighfive
   name: Дать пять
-  icon: _Sunrise/Interactions//high_five.png
+  icon: _Sunrise/Interactions/high_five.png
   emotes:
   - даёт пять %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//clap/five1.ogg
-  - path: /Audio/_Sunrise/Interactions//clap/five2.ogg
-  - path: /Audio/_Sunrise/Interactions//clap/five3.ogg
+  - path: /Audio/_Sunrise/Interactions/clap/five1.ogg
+  - path: /Audio/_Sunrise/Interactions/clap/five2.ogg
+  - path: /Audio/_Sunrise/Interactions/clap/five3.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -85,11 +85,11 @@
 - type: interaction
   id: FriendlyPatHead
   name: Погладить по голове
-  icon: _Sunrise/Interactions//pet_head.png
+  icon: _Sunrise/Interactions/pet_head.png
   emotes:
   - гладит %target по голове
   sounds:
-  - path: /Audio/_Sunrise/Interactions//stroke/stroke_1.ogg
+  - path: /Audio/_Sunrise/Interactions/stroke/stroke_1.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -102,7 +102,7 @@
 - type: interaction
   id: FriendlyShoulderMassage
   name: Помассировать плечи
-  icon: _Sunrise/Interactions//shoulder_massage.png
+  icon: _Sunrise/Interactions/shoulder_massage.png
   emotes:
   - массирует плечи %target
   - делает массаж плечей %target
@@ -119,13 +119,13 @@
 - type: interaction
   id: FaceRubCat
   name: Потереться как котик
-  icon: _Sunrise/Interactions//face_rub_cat.png
+  icon: _Sunrise/Interactions/face_rub_cat.png
   emotes:
   - по-кошачьи трется щекой об лицо %target
   - как котик трется головой об %target
   - мурлыкая, трется ушками об %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//clothes_rub.ogg
+  - path: /Audio/_Sunrise/Interactions/clothes_rub.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -142,7 +142,7 @@
 - type: interaction
   id: FriendlyHeadTailpats
   name: Погладить хвостиком
-  icon: _Sunrise/Interactions//tail.png
+  icon: _Sunrise/Interactions/tail.png
   emotes:
   - нежно гладит хвостиком голову %target
   - ласково гладит хвостиком по спине %target
@@ -168,7 +168,7 @@
 - type: interaction
   id: FriendlyTailPull
   name: Дернуть за хвост
-  icon: _Sunrise/Interactions//friendly_tail_pull.png
+  icon: _Sunrise/Interactions/friendly_tail_pull.png
   emotes:
   - резко дергает за хвост %target
   - грубо дергает за хвост %target
@@ -191,20 +191,20 @@
 - type: interaction
   id: FriendlyBlowSlap
   name: Дать пощечину
-  icon: _Sunrise/Interactions//blow_slap.png
+  icon: _Sunrise/Interactions/blow_slap.png
   emotes:
   - резко бьет ладонью по щеке %target
   - сильно шлепает %target по лицу ладонью
   - с громким хлопком ударяет %target по щеке ладонью
   - дает ладонью звонкую пощечину %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//slap/slap_1.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_2.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_3.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_4.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_5.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_6.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_7.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_1.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_2.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_3.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_4.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_5.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_6.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_7.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -215,20 +215,20 @@
 - type: interaction
   id: FriendlyWristSlap
   name: Дать подзатыльник
-  icon: _Sunrise/Interactions//blow_slap.png
+  icon: _Sunrise/Interactions/blow_slap.png
   emotes:
   - резко бьет ладонью по затылку %target
   - сильно шлепает %target по затылку своей ладонью
   - с громким хлопком ударяет %target по затылку своей ладонью
   - дает ладонью смачный подзатыльник %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//slap/slap_1.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_2.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_3.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_4.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_5.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_6.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_7.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_1.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_2.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_3.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_4.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_5.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_6.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_7.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -239,7 +239,7 @@
 - type: interaction
   id: FriendlyNoseBoop
   name: Тронуть кончик носа пальцем
-  icon: _Sunrise/Interactions//friendly_nose_boop.png
+  icon: _Sunrise/Interactions/friendly_nose_boop.png
   emotes:
   - прикасается пальцем к носу %target, буп!
   userSex:
@@ -252,7 +252,7 @@
 - type: interaction
   id: FriendlyFingerTap
   name: Потрогать спину пальцем
-  icon: _Sunrise/Interactions//friendly_finger_tap.png
+  icon: _Sunrise/Interactions/friendly_finger_tap.png
   emotes:
   - трогает пальцем спину %target
   userSex:
@@ -265,14 +265,14 @@
 - type: interaction
   id: FriendlyJojoPosing
   name: Принять крутую позу
-  icon: _Sunrise/Interactions//friendly_finger_tap.png
+  icon: _Sunrise/Interactions/friendly_finger_tap.png
   emotes:
   - принимает крутую позу
   - встает в крутую позу
   - позирует играя мускулами
   - делает jojo reference
   sounds:
-  - path: /Audio/_Sunrise/Interactions//coolpose/coolpose.ogg
+  - path: /Audio/_Sunrise/Interactions/coolpose/coolpose.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -284,15 +284,15 @@
 - type: interaction
   id: NeckСhoke
   name: Душить
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - сильно сдавливает шею %target своими пальцами
   - обхатывает шею %target рукой, сдавливая её
   - схватил за горло %target и с силой сжал его своими пальцами
   - хватает рукой шею %target и, сдавливая её, заставляет %target задыхаться
   sounds:
-  - path: /Audio/_Sunrise/Interactions//chock/neckchock_1.ogg
-  - path: /Audio/_Sunrise/Interactions//chock/neckchock_2.ogg
+  - path: /Audio/_Sunrise/Interactions/chock/neckchock_1.ogg
+  - path: /Audio/_Sunrise/Interactions/chock/neckchock_2.ogg
   userSex:
   - Unsexed
   targetSex:
@@ -303,7 +303,7 @@
 - type: interaction
   id: FriendlyBackMassage
   name: Помассировать спину
-  icon: _Sunrise/Interactions//shoulder_massage.png
+  icon: _Sunrise/Interactions/shoulder_massage.png
   emotes:
   - массирует спину %target
   - делает массаж спины %target
@@ -321,7 +321,7 @@
 - type: interaction
   id: TailIntertwine
   name: Сплестись хвостами
-  icon: _Sunrise/Interactions//tail_hug.png
+  icon: _Sunrise/Interactions/tail_hug.png
   emotes:
   - нежно сплетается хвостами с %target
   - аккуратно сплетает свой хвост с хвостом %target
@@ -345,7 +345,7 @@
 - type: interaction
   id: EarsMrrr
   name: Помурчать на ушко
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - нежно мурчит на ушко %target
   - поднося свою голову ближе к %target, начинает мурчать на ушко
@@ -372,7 +372,7 @@
 - type: interaction
   id: FriendlyShowTongue
   name: Высунуть язык
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - открывает рот и высовывает язык на всю длину
   userSex:
@@ -388,7 +388,7 @@
 - type: interaction
   id: FriendlyVulpaBreath
   name: Дышать по-собачьи
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - быстро дышит с высунутым языком
   - быстро дышит с открытой пастью
@@ -407,7 +407,7 @@
 - type: interaction
   id: FriendlyPushups
   name: Делать отжимания
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - отжимается от пола
   sounds:
@@ -423,7 +423,7 @@
 - type: interaction
   id: FriendlyGrimace
   name: Скорчить рожу
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - корчит рожу
   userSex:
@@ -437,7 +437,7 @@
 - type: interaction
   id: FriendlyFuck
   name: Показать фак
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - показывает фак %target
   - элегантно показывает фак %target
@@ -453,7 +453,7 @@
 - type: interaction
   id: FriendlyFingerIntertwine
   name: Сплестись пальчиками
-  icon: _Sunrise/Interactions//friendly.png
+  icon: _Sunrise/Interactions/friendly.png
   emotes:
   - слетается своим пальцем с пальцем %target
   - нежно берёт палец %target и сплетает со своим
@@ -472,7 +472,7 @@
 - type: interaction
   id: FriendlyNoseClick
   name: Дать по носу
-  icon: _Sunrise/Interactions//friendly_nose_boop.png
+  icon: _Sunrise/Interactions/friendly_nose_boop.png
   emotes:
   - бьёт пальцем по носу %target
   userSex:
@@ -485,20 +485,20 @@
 - type: interaction
   id: FriendlyFofan
   name: Дать фофан
-  icon: _Sunrise/Interactions//blow_slap.png
+  icon: _Sunrise/Interactions/blow_slap.png
   emotes:
   - натягивает средний палец, после со всей силы дает по лбу %target
   - натягивает указательный палец, после со всей силы дает по лбу %target
   - натягивает средний палец, удерживая его большим пальцем, после бьёт по лбу %target
   - натягивает указательный палец, удерживая его большим пальцем, после бьёт по лбу %target
   sounds:
-  - path: /Audio/_Sunrise/Interactions//slap/slap_1.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_2.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_3.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_4.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_5.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_6.ogg
-  - path: /Audio/_Sunrise/Interactions//slap/slap_7.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_1.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_2.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_3.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_4.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_5.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_6.ogg
+  - path: /Audio/_Sunrise/Interactions/slap/slap_7.ogg
   userSex:
   - Unsexed
   targetSex:

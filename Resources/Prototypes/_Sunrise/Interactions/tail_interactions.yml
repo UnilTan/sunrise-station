@@ -1,7 +1,7 @@
 - type: interaction
   id: PatTail
   name: Погладить хвост
-  icon: _Sunrise/Interactions//pat_tail.png
+  icon: _Sunrise/Interactions/pat_tail.png
   emotes:
   - нежно гладит хвостик %target
   - ласково проводит ладонью по хвосту %target

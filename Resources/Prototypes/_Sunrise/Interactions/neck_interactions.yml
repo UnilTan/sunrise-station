@@ -3,7 +3,7 @@
 - type: interaction
   id: NeckNuzzle
   name: Потереться мордочкой о шею
-  icon: _Sunrise/Interactions//ERP2.png
+  icon: _Sunrise/Interactions/ERP2.png
   emotes:
   - нежно трётся мордочкой о шею %target
   - мягко касается мордочкой шеи %target, создавая приятное ощущение

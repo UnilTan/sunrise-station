@@ -1,7 +1,7 @@
 - type: interaction
   id: HornsPat
   name: Погладить рожки
-  icon: _Sunrise/Interactions//horns_pat.png
+  icon: _Sunrise/Interactions/horns_pat.png
   emotes:
   - нежно гладит рожки %target
   - ласково гладит рожки %target
