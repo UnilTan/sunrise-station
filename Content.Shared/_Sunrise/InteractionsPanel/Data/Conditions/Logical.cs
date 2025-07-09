@@ -40,7 +40,7 @@ public sealed partial class InteractionOrCondition : IAppearCondition, IInteract
 }
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class ErpNotCondition : IAppearCondition, IInteractCondition
+public sealed partial class InteractionNotCondition : IAppearCondition, IInteractCondition
 {
     [DataField]
     public IInteractionCondition Condition { get; private set; } = default!;
