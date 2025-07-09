@@ -1,0 +1,63 @@
+﻿- type: interaction
+  id: FaceCheeksPull
+  name: Потискать за щёчки
+  icon: _Sunrise/Interactions//cheeks_pat.png
+  emotes:
+  - нежно треплет щёчки %target
+  - слегка растягивает щёчки %target
+  - тискает щечки %target
+  userSex:
+  - Unsexed
+  targetSex:
+  - Unsexed
+  erp: false
+  targetTagBlacklist:
+  - щёки
+  userTagBlacklist:
+  - рот
+  category: лицо
+
+- type: interaction
+  id: FacePats
+  name: Погладить по лицу
+  icon: _Sunrise/Interactions//pet_head.png
+  emotes:
+  - нежно проводит ладонью по лицу %target
+  - ласково гладит ладонью лицо %target
+  - слегка поглаживает ладонью лицо %target
+  sounds:
+  - path: /Audio/_Sunrise/Interactions//clothes_rub.ogg
+  userSex:
+  - Unsexed
+  targetSex:
+  - Unsexed
+  erp: false
+  targetTagBlacklist:
+  - лицо
+  userTagBlacklist:
+  - гладкие перчатки
+  category: лицо
+
+- type: interaction
+  id: FaceLickDoggyStyle
+  name: Облизать лицо по-собачьи
+  icon: _Sunrise/Interactions//face_lick_doggy_style.png
+  emotes:
+  - по-собачьи облизывает щёки %target
+  - по-собачьи облизывает губы %target
+  - по-собачьи лижет в нос %target
+  sounds:
+  - path: /Audio/_Sunrise/Interactions//lick1.ogg
+  - path: /Audio/_Sunrise/Interactions//lick2.ogg
+  userSex:
+  - Unsexed
+  targetSex:
+  - Unsexed
+  erp: false
+  userTagWhitelist:
+  - Vulpkanin
+  targetTagBlacklist:
+  - лицо
+  userTagBlacklist:
+  - рот
+  category: лицо

@@ -1,0 +1,23 @@
+﻿# 4. ШЕЯ
+
+- type: interaction
+  id: NeckNuzzle
+  name: Потереться мордочкой о шею
+  icon: _Sunrise/Interactions//ERP2.png
+  emotes:
+  - нежно трётся мордочкой о шею %target
+  - мягко касается мордочкой шеи %target, создавая приятное ощущение
+  userSex:
+  - Unsexed
+  targetSex:
+  - Unsexed
+  erp: true
+  lovePercentUser: 2
+  lovePercentTarget: 4
+  userMoanChance: 0
+  targetMoanChance: 0
+  targetTagBlacklist:
+  - шея
+  userTagBlacklist:
+  - лицо
+  category: шея
