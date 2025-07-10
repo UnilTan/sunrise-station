@@ -1,0 +1,24 @@
+- type: interaction
+  id: HornsPat
+  name: "Погладить рожки"
+  icon: FriendlyPatHornsIcon
+  category: Face
+  emotes:
+  - "нежно гладит рожки %target"
+  - "ласково гладит рожки %target"
+  - "с теплотой гладит рожки %target"
+#  targetTagWhitelist: TODO сделать проверку на прототипы
+#  - DemonHornsDeer
+#  - DemonCowHorns
+#  - DemonHornsSmall
+#  - LizardHornsAngler
+#  - LizardHornsCurled
+#  - LizardHornsRam
+#  - LizardHornsShort
+#  - LizardHornsSimple
+#  - LizardHornsDemonic
+#  - LizardHornsBighorn
+#  - LizardHornsMyrsore
+#  - LizardHornsAyrshire
+#  - LizardHornsArgali
+#  - LizardHornsDouble

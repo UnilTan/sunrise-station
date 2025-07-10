@@ -1,0 +1,21 @@
+- type: interaction
+  id: NeckNuzzle
+  name: "Потереться мордочкой о шею"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Neck
+  emotes:
+  - "нежно трётся мордочкой о шею %target"
+  - "мягко касается мордочкой шеи %target, создавая приятное ощущение"
+  appearConditions:
+    - !type:HasTargetCondition
+      allowSelfTargeting: false
+    - !type:BodyAreaTagCondition
+      checkInitiator: true
+      checkTarget: false
+      categories: [ "лицо"]
+      requireExposed: true
+    - !type:BodyAreaTagCondition
+      checkInitiator: false
+      checkTarget: true
+      categories: [ "шея"]
+      requireExposed: true

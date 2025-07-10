@@ -406,6 +406,9 @@
 ### INTERACTION TAGS ###
 # Как одежда закрывает/не закрывает ту или иную область тела
 
+- type: Tag
+  id: CommandSuit
+
 # face
 # Лицо закрыто
 - type: Tag

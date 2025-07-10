@@ -14,11 +14,6 @@
   icon: /Textures/_Sunrise/Interactions/face_lick_doggy_style.png
 
 - type: interactionIcon
-  id: FriendlyHandshakeIcon
-  name: "Пожать руку"
-  icon: /Textures/_Sunrise/Interactions/hand_shake.png
-
-- type: interactionIcon
   id: FriendlyPatShoulderIcon
   name: "Похлопать по плечу"
   icon: /Textures/_Sunrise/Interactions/pat_shoulder.png
@@ -77,3 +72,13 @@
   id: FriendlyTailHugIcon
   name: "Сплестись хвостами"
   icon: /Textures/_Sunrise/Interactions/tail_hug.png
+
+- type: interactionIcon
+  id: FriendlyTailIcon
+  name: "Хвостик"
+  icon: /Textures/_Sunrise/Interactions/tail.png
+
+- type: interactionIcon
+  id: FriendlyPatHornsIcon
+  name: "Гладить рожки"
+  icon: /Textures/_Sunrise/Interactions/horns_pat.png

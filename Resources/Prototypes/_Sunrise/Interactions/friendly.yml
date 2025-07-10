@@ -1,0 +1,388 @@
+- type: interaction
+  id: FriendlyHandshake
+  name: "Пожать руку"
+  icon: FriendlyHandshakeIcon
+  category: Friendly
+  interactionMessages:
+    - "жмёт руку %target"
+  interactionSounds:
+    - FriendlyHandshakeSound
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyPatShoulder
+  name: "Похлопать по плечу"
+  icon: FriendlyPatShoulderIcon
+  category: Friendly
+  interactionMessages:
+    - "хлопает по плечу %target"
+  interactionSounds:
+    - FriendlyPatShoulderSound
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyHug
+  name: "Обнять"
+  icon: FriendlyIcon
+  category: Friendly
+  interactionMessages:
+    - "обнимает %target"
+    - "крепко обнимает %target"
+    - "прижимает к себе %target"
+  interactionSounds:
+    - FriendlyStroke
+  cooldown: 3
+
+- type: interaction
+  id: FriendlySniff
+  name: "Обнюхать"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions:
+  - !type:HasTargetCondition
+    allowSelfTargeting: false
+  - !type:BodyAreaTagCondition
+    checkInitiator: true
+    checkTarget: false
+    categories: [ "рот" ]
+    requireExposed: true
+  interactionMessages:
+    - "обхюнивает %target"
+    - "приближает свой нос, обнюхивая %target"
+    - "нюхает %target"
+  interactionSounds:
+    - FriendlySniff1
+    - FriendlySniff2
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyHighfive
+  name: "Дать пять"
+  icon: FriendlyHignFiveIcon
+  category: Friendly
+  interactionMessages:
+  - "даёт пять %target"
+  interactionSounds:
+  - FriendlyFive1
+  - FriendlyFive2
+  - FriendlyFive3
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyPatHead
+  name: "Погладить по голове"
+  icon: FacePatsIcon
+  category: Friendly
+  interactionMessages:
+  - "гладит %target по голове"
+  interactionSounds:
+  - FriendlyStroke
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyShoulderMassage
+  name: "Помассировать плечи"
+  icon: FriendlyShoulderMassageIcon
+  category: Friendly
+  interactionMessages:
+  - "массирует плечи %target"
+  - "делает массаж плечей %target"
+  - "разминает плечи %target"
+  cooldown: 3
+
+- type: interaction
+  id: FaceRubCat
+  name: "Потереться как котик"
+  icon: FriendlyFaceRubCatIcon
+  category: Friendly
+  appearConditions:
+    - !type:HasTargetCondition
+      allowSelfTargeting: false
+    - !type:BodyAreaTagCondition
+      checkInitiator: true
+      checkTarget: false
+      categories: [ "щёки"]
+      requireExposed: true
+  interactionMessages:
+  - "по-кошачьи трется щекой об лицо %target"
+  - "как котик трется головой об %target"
+  - "мурлыкая, трется ушками об %target"
+  interactionSounds:
+  - FacePatsSound
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyHeadTailpats
+  name: "Погладить хвостиком"
+  icon: FriendlyTailIcon
+  category: Friendly
+  appearConditions:
+    - !type:HasTargetCondition
+      allowSelfTargeting: false
+    - !type:BodyAreaTagCondition
+      checkInitiator: false
+      checkTarget: true
+      categories: [ "волосы"]
+      requireExposed: true
+    - !type:SpeciesCondition
+      checkTarget: false
+      сheckInitiator: true
+      allowedSpecies: [Vulpkanin, Slime, Felinid, Demon, Reptilian]
+    - !type:HasVisualLayerCondition
+      checkTarget: false
+      сheckInitiator: true
+      layer: Tail
+  interactionMessages:
+  - "нежно гладит хвостиком голову %target"
+  - "ласково гладит хвостиком по спине %target"
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyTailPull
+  name: "Дернуть за хвост"
+  icon: FriendlyTailPullIcon
+  category: Friendly
+  appearConditions:
+    - !type:SpeciesCondition
+      checkTarget: true
+      сheckInitiator: false
+      allowedSpecies: [Vulpkanin, Slime, Felinid, Demon, Reptilian]
+    - !type:HasVisualLayerCondition
+      checkTarget: true
+      сheckInitiator: false
+      layer: Tail
+  interactionMessages:
+  - "резко дергает за хвост %target"
+  - "грубо дергает за хвост %target"
+  - "неожиданно дергает хвост %target"
+  cooldown: 3
+
+- type: interaction
+  id: FriendlyBlowSlap
+  name: "Дать пощечину"
+  icon: FriendlyBlowSlapIcon
+  category: Friendly
+  interactionMessages:
+  - "резко бьет ладонью по щеке %target"
+  - "сильно шлепает %target по лицу ладонью"
+  - "с громким хлопком ударяет %target по щеке ладонью"
+  - "дает ладонью звонкую пощечину %target"
+  interactionSounds:
+  - FriendlySlap1
+  - FriendlySlap2
+  - FriendlySlap3
+  - FriendlySlap4
+  - FriendlySlap5
+  - FriendlySlap6
+  - FriendlySlap7
+
+- type: interaction
+  id: FriendlyWristSlap
+  name: "Дать подзатыльник"
+  icon: FriendlyBlowSlapIcon
+  category: Friendly
+  interactionMessages:
+  - "резко бьет ладонью по затылку %target"
+  - "сильно шлепает %target по затылку своей ладонью"
+  - "с громким хлопком ударяет %target по затылку своей ладонью"
+  - "дает ладонью смачный подзатыльник %target"
+  interactionSounds:
+    - FriendlySlap1
+    - FriendlySlap2
+    - FriendlySlap3
+    - FriendlySlap4
+    - FriendlySlap5
+    - FriendlySlap6
+    - FriendlySlap7
+
+- type: interaction
+  id: FriendlyNoseBoop
+  name: "Тронуть кончик носа пальцем"
+  icon: FriendlyNoseBoopIcon
+  category: Friendly
+  interactionMessages:
+  - "прикасается пальцем к носу %target, буп!"
+
+- type: interaction
+  id: FriendlyFingerTap
+  name: "Потрогать спину пальцем"
+  icon: FriendlyFingerTapIcon
+  category: Friendly
+  interactionMessages:
+  - "трогает пальцем спину %target"
+
+- type: interaction
+  id: FriendlyJojoPosing
+  name: "Принять крутую позу"
+  icon: FriendlyFingerTapIcon
+  category: Friendly
+  interactionMessages:
+  - "принимает крутую позу"
+  - "встает в крутую позу"
+  - "позирует играя мускулами"
+  - "делает jojo reference"
+  interactionSounds:
+  - FriendlyXZ
+
+- type: interaction
+  id: NeckСhoke
+  name: "Душить"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  interactionMessages:
+  - "сильно сдавливает шею %target своими пальцами"
+  - "обхатывает шею %target рукой, сдавливая её"
+  - "схватил за горло %target и с силой сжал его своими пальцами"
+  - "хватает рукой шею %target и, сдавливая её, заставляет %target задыхаться"
+  interactionSounds:
+  - FriendlyNeckChockSound1
+  - FriendlyNeckChockSound2
+
+- type: interaction
+  id: FriendlyBackMassage
+  name: "Помассировать спину"
+  icon: FriendlyShoulderMassageIcon
+  category: Friendly
+  interactionMessages:
+  - "массирует спину %target"
+  - "делает массаж спины %target"
+  - "разминает спину %target"
+
+- type: interaction
+  id: TailIntertwine
+  name: "Сплестись хвостами"
+  icon: FriendlyTailHugIcon
+  category: Friendly
+  appearConditions:
+    - !type:SpeciesCondition
+      checkTarget: true
+      сheckInitiator: true
+      allowedSpecies: [Vulpkanin, Slime, Felinid, Demon, Reptilian]
+    - !type:HasVisualLayerCondition
+      checkTarget: true
+      сheckInitiator: true
+      layer: Tail # TODO код не видит присутствие хвоста у сущностей
+  interactionMessages:
+  - "нежно сплетается хвостами с %target"
+  - "аккуратно сплетает свой хвост с хвостом %target"
+  - "обволакивает хвост %target своим хвостом"
+  - "играется своим хвостом с хвостом %target"
+
+- type: interaction
+  id: EarsMrrr
+  name: "Помурчать на ушко"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions: # TODO не работает проверка
+    - !type:SpeciesCondition
+      checkTarget: false
+      сheckInitiator: true
+      allowedSpecies: [Felinid]
+  interactionMessages:
+  - "нежно мурчит на ушко %target"
+  - "поднося свою голову ближе к %target, начинает мурчать на ушко"
+  interactionSounds:
+  - FelinidPurrs
+
+- type: interaction
+  id: FriendlyShowTongue
+  name: Высунуть язык
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions:
+    - !type:SelfOnlyCondition
+    - !type:BodyAreaTagCondition
+      checkInitiator: true
+      checkTarget: false
+      categories: [ "рот" ]
+      requireExposed: true
+  interactionMessages:
+  - "открывает рот и высовывает язык на всю длину"
+
+- type: interaction
+  id: FriendlyVulpaBreath
+  name: "Дышать по-собачьи"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions:
+    - !type:SelfOnlyCondition
+    - !type:BodyAreaTagCondition
+      checkInitiator: true
+      checkTarget: false
+      categories: [ "рот" ]
+      requireExposed: true
+  interactionMessages:
+  - "быстро дышит с высунутым языком"
+  - "быстро дышит с открытой пастью"
+
+- type: interaction
+  id: FriendlyPushups
+  name: "Делать отжимания"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions:
+    - !type:SelfOnlyCondition
+  interactionMessages:
+  - "отжимается от пола"
+  interactionSounds:
+  - FriendlySalute
+
+- type: interaction
+  id: FriendlyGrimace
+  name: "Скорчить рожу"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions:
+    - !type:SelfOnlyCondition
+  interactionMessages:
+  - "корчит рожу"
+
+- type: interaction
+  id: FriendlyFuck
+  name: "Показать фак"
+  icon: FriendlyHandshakeIcon # TODO новый спрайт
+  category: Friendly
+  appearConditions:
+    - !type:SelfOnlyCondition
+  interactionMessages:
+  - "показывает фак %target"
+  - "элегантно показывает фак %target"
+  interactionSounds:
+  - FriendlySalute
+
+- type: interaction
+  id: FriendlyFingerIntertwine
+  name: "Сплестись пальчиками"
+  icon: FriendlyIcon
+  category: Friendly
+  interactionMessages:
+  - "слетается своим пальцем с пальцем %target"
+  - "нежно берёт палец %target и сплетает со своим"
+  - "аккуратно сплетает пальцы с %target"
+
+- type: interaction
+  id: FriendlyNoseClick
+  name: "Дать по носу"
+  icon: FriendlyNoseClick
+  category: Friendly
+  interactionMessages:
+  - "бьёт пальцем по носу %target"
+
+- type: interaction
+  id: FriendlyFofan
+  name: "Дать фофан"
+  icon: FriendlyFofan
+  category: Friendly
+  interactionMessages:
+  - "натягивает средний палец, после со всей силы дает по лбу %target"
+  - "натягивает указательный палец, после со всей силы дает по лбу %target"
+  - "натягивает средний палец, удерживая его большим пальцем, после бьёт по лбу %target"
+  - "натягивает указательный палец, удерживая его большим пальцем, после бьёт по лбу %target"
+  interactionSounds:
+    - FriendlySlap1
+    - FriendlySlap2
+    - FriendlySlap3
+    - FriendlySlap4
+    - FriendlySlap5
+    - FriendlySlap6
+    - FriendlySlap7

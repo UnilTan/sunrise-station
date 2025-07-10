@@ -1,0 +1,16 @@
+- type: interaction
+  id: PatTail
+  name: "Погладить хвост"
+  icon: FriendlyPatTailIcon
+  category: Tail
+  emotes:
+  - "нежно гладит хвостик %target"
+  - "ласково проводит ладонью по хвосту %target"
+  - "игриво поглаживает ладонью хвостик %target"
+  appearConditions:
+    - !type:HasTargetCondition
+      allowSelfTargeting: false
+    - !type:HasVisualLayerCondition
+      checkTarget: true
+      сheckInitiator: false
+      layer: Tail
