@@ -363,7 +363,7 @@
 - type: interaction
   id: FriendlyNoseClick
   name: "Дать по носу"
-  icon: FriendlyNoseClick
+  icon: FriendlyNoseBoopIcon
   category: Friendly
   interactionMessages:
   - "бьёт пальцем по носу %target"
@@ -371,7 +371,7 @@
 - type: interaction
   id: FriendlyFofan
   name: "Дать фофан"
-  icon: FriendlyFofan
+  icon: FriendlyBlowSlapIcon
   category: Friendly
   interactionMessages:
   - "натягивает средний палец, после со всей силы дает по лбу %target"
