@@ -107,6 +107,11 @@
                                         MinHeight="28"/>
                             </BoxContainer>
 
+                            <Label Text="%user — имя вызывающего; %target — имя цели. Можно использовать несколько раз."
+                                   FontColorOverride="#AAAAAA"
+                                   Margin="4 0 4 4"
+                                   HorizontalAlignment="Left" />
+
                             <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 8" HorizontalExpand="True" MinHeight="80">
                                 <ScrollContainer HorizontalExpand="True" MaxHeight="100" VScrollEnabled="True">
                                     <BoxContainer Name="MessagesContainer"

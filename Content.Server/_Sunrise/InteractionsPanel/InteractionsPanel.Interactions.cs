@@ -63,7 +63,8 @@ public partial class InteractionsPanel
         var userPref = _netConfigManager.GetClientCVar(userSession.Channel, InteractionsCVars.EmoteVisibility);
         var targetPref = !targetIsPlayer || _netConfigManager.GetClientCVar(targetSession!.Channel, InteractionsCVars.EmoteVisibility);
 
-        var msg = $"{MetaData(ent.Owner).EntityName} " + _random.Pick(interactionPrototype.InteractionMessages) + $" {MetaData(target.Value).EntityName}";
+        var rawMsg = _random.Pick(interactionPrototype.InteractionMessages);
+        var msg = FormatInteractionMessage(rawMsg, ent.Owner, target.Value);
 
         if (userPref && targetPref && targetIsPlayer)
         {
@@ -121,7 +122,7 @@ public partial class InteractionsPanel
         var userPref = _netConfigManager.GetClientCVar(userSession.Channel, InteractionsCVars.EmoteVisibility);
         var targetPref = !targetIsPlayer || _netConfigManager.GetClientCVar(targetSession!.Channel, InteractionsCVars.EmoteVisibility);
 
-        var msg = $"{MetaData(user).EntityName} " + data.InteractionMessage + $" {MetaData(target).EntityName}";
+        var msg = FormatInteractionMessage(data.InteractionMessage, user, target);
 
         if (userPref && targetPref && targetIsPlayer)
         {
@@ -240,5 +241,20 @@ public partial class InteractionsPanel
         };
 
         args.Verbs.Add(verb);
+    }
+
+    private string FormatInteractionMessage(string template, EntityUid user, EntityUid target)
+    {
+        var userName = MetaData(user).EntityName;
+        var targetName = MetaData(target).EntityName;
+
+        var result = template
+            .Replace("%user", userName)
+            .Replace("%target", targetName);
+
+        if (!template.Contains("%user") && !template.Contains("%target"))
+            result = $"{userName} {template} {targetName}";
+
+        return result;
     }
 }
