@@ -3,144 +3,173 @@
                x:Class="Content.Client._Sunrise.InteractionsPanel.InteractionsUIWindow"
                xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                Title="Interactions Panel"
-               MinSize="385 735">
+               MinSize="500 800">
 
     <PanelContainer StyleClasses="BackgroundDark">
-        <BoxContainer Orientation="Vertical" Margin="2">
-            <PanelContainer StyleClasses="PanelBackgroundDark" Margin="2 2 2 4">
-                <Label Text="Панель взаимодействий"
-                       FontColorOverride="#ffd700"
-                       HorizontalAlignment="Center"
-                       StyleClasses="LabelBig"
-                       Margin="4 6"/>
+        <BoxContainer Orientation="Vertical" Margin="0">
+            <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 0 0 2">
+                <BoxContainer Orientation="Vertical" Margin="0">
+                    <Label Text="ПАНЕЛЬ ВЗАИМОДЕЙСТВИЙ"
+                           FontColorOverride="#00d4ff"
+                           HorizontalAlignment="Center"
+                           StyleClasses="LabelHeading"
+                           Margin="0 12"/>
+                    <PanelContainer MinHeight="2" StyleClasses="BackgroundDark">
+                        <PanelContainer StyleClasses="PanelBackgroundDark"
+                                       Margin="60 0 60 0"
+                                       MinHeight="2"/>
+                    </PanelContainer>
+                </BoxContainer>
             </PanelContainer>
 
-            <BoxContainer Orientation="Horizontal"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Center"
-                         HorizontalExpand="True"
-                         Margin="5 3">
+            <PanelContainer StyleClasses="PanelBackgroundDark" Margin="8 6 8 0">
+                <BoxContainer Orientation="Horizontal"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             HorizontalExpand="True"
+                             Margin="12 16">
 
-                <PanelContainer Margin="4 0 8 0">
-                    <BoxContainer Orientation="Vertical"
-                                HorizontalAlignment="Center"
-                                Margin="6 6 6 6">
-
-                        <PanelContainer StyleClasses="BackgroundDark" Margin="0 0 0 4">
-                            <SpriteView Name="UserSpriteView"
-                                    OverrideDirection="South"
-                                    Scale="2.0, 2.0"
+                    <PanelContainer StyleClasses="BackgroundDark" Margin="0 0 12 0">
+                        <BoxContainer Orientation="Vertical"
                                     HorizontalAlignment="Center"
-                                    Margin="5 5 5 5"/>
-                        </PanelContainer>
+                                    Margin="16 12">
 
-                        <Label Name="NameUser"
-                            FontColorOverride="#ffd700"
-                            HorizontalAlignment="Center"
-                            StyleClasses="LabelSubText"
-                            Margin="0 0 0 4"/>
-                    </BoxContainer>
-                </PanelContainer>
-
-                <PanelContainer Name="TargetContainer" Margin="8 0 4 0">
-                    <BoxContainer Orientation="Vertical"
-                                HorizontalAlignment="Center"
-                                Margin="6 6 6 6">
-
-                        <PanelContainer StyleClasses="BackgroundDark" Margin="0 0 0 4">
-                            <SpriteView Name="TargetSpriteView"
+                            <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 0 0 8">
+                                <SpriteView Name="UserSpriteView"
                                         OverrideDirection="South"
-                                        Scale="2.0, 2.0"
+                                        Scale="2.2, 2.2"
                                         HorizontalAlignment="Center"
-                                        Margin="5 5 5 5"/>
-                        </PanelContainer>
+                                        Margin="8 8 8 8"/>
+                            </PanelContainer>
 
-                        <Label Name="NameTarget"
-                            FontColorOverride="#ffd700"
-                            HorizontalAlignment="Center"
-                            StyleClasses="LabelSubText"
-                            Margin="0 0 0 4"/>
-                    </BoxContainer>
-                </PanelContainer>
-            </BoxContainer>
+                            <Label Name="NameUser"
+                                FontColorOverride="#00d4ff"
+                                HorizontalAlignment="Center"
+                                StyleClasses="LabelSubText"
+                                Margin="0 4 0 0"/>
+                        </BoxContainer>
+                    </PanelContainer>
 
-            <controls:HSpacer Spacing="8" />
+                    <PanelContainer Name="TargetContainer" StyleClasses="BackgroundDark" Margin="12 0 0 0">
+                        <BoxContainer Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    Margin="16 12">
+
+                            <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 0 0 8">
+                                <SpriteView Name="TargetSpriteView"
+                                            OverrideDirection="South"
+                                            Scale="2.2, 2.2"
+                                            HorizontalAlignment="Center"
+                                            Margin="8 8 8 8"/>
+                            </PanelContainer>
+
+                            <Label Name="NameTarget"
+                                FontColorOverride="#00d4ff"
+                                HorizontalAlignment="Center"
+                                StyleClasses="LabelSubText"
+                                Margin="0 4 0 0"/>
+                        </BoxContainer>
+                    </PanelContainer>
+                </BoxContainer>
+            </PanelContainer>
+
+            <controls:HSpacer Spacing="12" />
 
             <TabContainer Name="MainTabContainer"
                          HorizontalExpand="True"
                          VerticalExpand="True"
-                         Margin="2">
+                         Margin="8 0 8 8">
 
-                <BoxContainer Orientation="Vertical" Margin="2">
-                    <BoxContainer Orientation="Horizontal" Margin="2 2 2 6">
-                        <LineEdit
-                            Name="SearchInput"
-                            PlaceHolder="Поиск взаимодействий..."
-                            HorizontalExpand="True"
-                            MinHeight="24"
-                            VerticalAlignment="Center"/>
-                    </BoxContainer>
+                <BoxContainer Orientation="Vertical" Margin="0">
+                    <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 0 0 8">
+                        <BoxContainer Orientation="Horizontal" Margin="12 8">
+                            <LineEdit
+                                Name="SearchInput"
+                                PlaceHolder="🔍 Поиск взаимодействий..."
+                                HorizontalExpand="True"
+                                MinHeight="28"
+                                VerticalAlignment="Center"
+                                StyleClasses="LineEditDark"/>
+                        </BoxContainer>
+                    </PanelContainer>
 
                     <ScrollContainer HorizontalExpand="True"
                                    VerticalExpand="True"
-                                   HScrollEnabled="False">
+                                   HScrollEnabled="False"
+                                   Margin="0 4 0 0">
                         <BoxContainer Name="CategoriesContainer"
                                      Orientation="Vertical"
                                      HorizontalExpand="True"
                                      VerticalExpand="True"
-                                     Margin="1"/>
+                                     Margin="4"/>
                     </ScrollContainer>
                 </BoxContainer>
 
-                <BoxContainer Orientation="Vertical" Margin="4">
-                    <BoxContainer Orientation="Horizontal" Margin="2 2 2 6">
-                        <Button Name="NewCustomInteractionButton"
-                                Text="Создать новую"
-                                StyleClasses="ButtonSquare"
-                                HorizontalExpand="False"
-                                VerticalAlignment="Center"
-                                Margin="0 0 4 0"/>
+                <BoxContainer Orientation="Vertical" Margin="0">
+                    <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 0 0 8">
+                        <BoxContainer Orientation="Horizontal" Margin="12 8">
+                            <Button Name="NewCustomInteractionButton"
+                                    Text="+ СОЗДАТЬ НОВУЮ"
+                                    StyleClasses="ButtonSquare"
+                                    HorizontalExpand="False"
+                                    VerticalAlignment="Center"
+                                    MinHeight="28"
+                                    Margin="0 12 0 0"/>
 
-                        <LineEdit
-                            Name="CustomInteractionSearchInput"
-                            PlaceHolder="Поиск сохраненных..."
-                            HorizontalExpand="True"
-                            MinHeight="24"
-                            VerticalAlignment="Center"/>
-                    </BoxContainer>
+                            <LineEdit
+                                Name="CustomInteractionSearchInput"
+                                PlaceHolder="🔍 Поиск сохраненных..."
+                                HorizontalExpand="True"
+                                MinHeight="28"
+                                VerticalAlignment="Bottom"
+                                StyleClasses="LineEditDark"/>
+                        </BoxContainer>
+                    </PanelContainer>
 
                     <ScrollContainer HorizontalExpand="True"
                                      VerticalExpand="True"
-                                     HScrollEnabled="False">
+                                     HScrollEnabled="False"
+                                     Margin="0 4 0 0">
                         <BoxContainer Name="SavedInteractionsContainer"
                                       Orientation="Vertical"
                                       HorizontalExpand="True"
                                       VerticalExpand="True"
-                                      Margin="1"/>
+                                      Margin="4"/>
                     </ScrollContainer>
                 </BoxContainer>
 
-                <BoxContainer Orientation="Vertical" Margin="4">
+                <BoxContainer Orientation="Vertical" Margin="0">
+                    <PanelContainer StyleClasses="PanelBackgroundDark" Margin="0 0 0 8">
+                        <Label Text="⚙ НАСТРОЙКИ"
+                               FontColorOverride="#00d4ff"
+                               HorizontalAlignment="Center"
+                               StyleClasses="LabelHeading"
+                               Margin="0 12"/>
+                    </PanelContainer>
 
-                    <BoxContainer Orientation="Vertical" Margin="2 8 2 8" VerticalExpand="True">
-                        <PanelContainer Margin="0 2 0 6">
-                            <BoxContainer Orientation="Horizontal" Margin="6 4" VerticalAlignment="Center">
-                                <CheckBox Name="EmoteVisibilityCheckBox" Pressed="True"/>
-                                <Label Text="Показывать эмоуты взаимодействий"
-                                       VerticalAlignment="Center"
-                                       Margin="6 0 0 0"/>
+                    <BoxContainer Orientation="Vertical" Margin="12 24" VerticalExpand="True">
+                        <PanelContainer StyleClasses="BackgroundDark" Margin="0 0 0 12">
+                            <BoxContainer Orientation="Horizontal" Margin="16 12" VerticalAlignment="Center">
+                                <CheckBox Name="EmoteVisibilityCheckBox"
+                                         Pressed="True"
+                                         Margin="0 0 12 0"/>
+                                <Label Text="Показывать эмоуты взаимодействий другим"
+                                       FontColorOverride="#ffffff"
+                                       VerticalAlignment="Center"/>
                             </BoxContainer>
                         </PanelContainer>
 
                         <Control VerticalExpand="True"/>
 
-                        <Button Name="ApplySettingsButton"
-                                Text="Применить"
-                                StyleClasses="ButtonSquare"
-                                HorizontalAlignment="Center"
-                                Margin="0 4 0 2"/>
+                        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="ApplySettingsButton"
+                                    Text="ПРИМЕНИТЬ ИЗМЕНЕНИЯ"
+                                    StyleClasses="ButtonSquare"
+                                    MinWidth="200"
+                                    MinHeight="32"
+                                    Margin="0 8 0 0"/>
+                        </BoxContainer>
                     </BoxContainer>
-
                 </BoxContainer>
 
             </TabContainer>
