@@ -287,7 +287,15 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
                 continue;
 
             var sortedInteractions = categoryData.Interactions
-                .OrderBy(i => i is InteractionCategoryPrototype proto ? proto.Name : ((CustomInteraction)i).Name)
+                .OrderBy(i =>
+                {
+                    return i switch
+                    {
+                        InteractionPrototype proto => proto.Name,
+                        CustomInteraction custom => custom.Name,
+                        _ => string.Empty
+                    };
+                })
                 .ToList();
 
             var collapsible = CreateCategoryCollapsible(categoryData.Name, sortedInteractions);

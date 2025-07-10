@@ -3,6 +3,8 @@ using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
 using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared.Chat;
+using Content.Shared.Clothing;
+using Content.Shared.Hands;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
@@ -22,6 +24,51 @@ public partial class InteractionsPanel
 
         SubscribeLocalEvent<InteractionsComponent, GetVerbsEvent<AlternativeVerb>>(AddInteractionsVerb);
         SubscribeLocalEvent<InteractionsComponent, ComponentInit>(OnInteractionsComponentInit);
+
+        SubscribeLocalEvent<InteractionsComponent, ClothingDidEquippedEvent>(ClothingDidEquipped);
+        SubscribeLocalEvent<InteractionsComponent, ClothingDidUnequippedEvent>(ClothingDidUnequipped);
+        SubscribeLocalEvent<InteractionsComponent, DidEquipHandEvent>(DidEquipped);
+        SubscribeLocalEvent<InteractionsComponent, DidUnequipHandEvent>(DidUnequipped);
+    }
+
+    private void DidEquipped(EntityUid uid, InteractionsComponent component, DidEquipHandEvent args)
+    {
+        UpdateUIForClothingChange(uid);
+    }
+
+    private void DidUnequipped(EntityUid uid, InteractionsComponent component, DidUnequipHandEvent args)
+    {
+        UpdateUIForClothingChange(uid);
+    }
+
+    private void ClothingDidEquipped(EntityUid uid, InteractionsComponent component, ClothingDidEquippedEvent args)
+    {
+        UpdateUIForClothingChange(uid);
+    }
+
+    private void ClothingDidUnequipped(EntityUid uid, InteractionsComponent component, ClothingDidUnequippedEvent args)
+    {
+        UpdateUIForClothingChange(uid);
+    }
+
+    private void UpdateUIForClothingChange(EntityUid changedEntity)
+    {
+        var query = EntityQueryEnumerator<InteractionsComponent>();
+        while (query.MoveNext(out var observerUid, out var observerComp))
+        {
+            if (!_ui.IsUiOpen(observerUid, InteractionWindowUiKey.Key))
+                continue;
+
+            if (!observerComp.CurrentTarget.HasValue)
+                continue;
+
+            var needsUpdate = observerComp.CurrentTarget.Value == changedEntity || observerUid == changedEntity;
+            if (!needsUpdate)
+                continue;
+
+            var state = PrepareUIState(observerUid, observerComp.CurrentTarget.Value);
+            _ui.SetUiState(observerUid, InteractionWindowUiKey.Key, state);
+        }
     }
 
     private void OnInteractionsComponentInit(EntityUid uid, InteractionsComponent component, ComponentInit args)
@@ -48,7 +95,7 @@ public partial class InteractionsPanel
         if (IsOnCooldown(ent.Owner, args.InteractionId))
             return;
 
-        if (args.IsCustom && args.CustomData != null)
+        if (args is { IsCustom: true, CustomData: not null })
         {
             HandleCustomInteraction(ent.Owner, target.Value, args.InteractionId, args.CustomData, userSession, targetSession, targetIsPlayer);
             return;
@@ -98,8 +145,12 @@ public partial class InteractionsPanel
             {
                 if (_random.Prob(interactionPrototype.EffectChance))
                 {
-                    Spawn(effectPrototype.EntityEffect.ID, Transform(ent.Owner).Coordinates);
-                    Spawn(effectPrototype.EntityEffect.ID, Transform(target.Value).Coordinates);
+                    Spawn(effectPrototype.EntityEffect, Transform(ent.Owner).Coordinates);
+
+                    if (ent.Owner != target.Value)
+                    {
+                        Spawn(effectPrototype.EntityEffect, Transform(target.Value).Coordinates);
+                    }
                 }
             }
         }
@@ -149,8 +200,13 @@ public partial class InteractionsPanel
         {
             if (_random.Prob(data.EffectChance))
             {
-                Spawn(effectProto.EntityEffect.ID, Transform(user).Coordinates);
-                Spawn(effectProto.EntityEffect.ID, Transform(target).Coordinates);
+
+                Spawn(effectProto.EntityEffect, Transform(user).Coordinates);
+
+                if (user != target)
+                {
+                    Spawn(effectProto.EntityEffect, Transform(target).Coordinates);
+                }
             }
         }
 
@@ -165,7 +221,7 @@ public partial class InteractionsPanel
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<InteractionsComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        while (query.MoveNext(out var uid, out _))
         {
             UpdateCooldowns(uid);
         }

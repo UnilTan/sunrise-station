@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
 
 [Prototype]
-public sealed partial class InteractionEntityEffectPrototype: IPrototype
+public sealed partial class InteractionEntityEffectPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
@@ -13,5 +13,5 @@ public sealed partial class InteractionEntityEffectPrototype: IPrototype
     public string Name { get; private set; } = string.Empty;
 
     [DataField]
-    public EntityPrototype EntityEffect { get; private set; } = default!;
+    public EntProtoId EntityEffect { get; private set; } = default!;
 }
