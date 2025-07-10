@@ -3,7 +3,7 @@
   name: "Погладить рожки"
   icon: FriendlyPatHornsIcon
   category: Face
-  emotes:
+  interactionMessages:
   - "нежно гладит рожки %target"
   - "ласково гладит рожки %target"
   - "с теплотой гладит рожки %target"

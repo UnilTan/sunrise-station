@@ -3,7 +3,7 @@
   name: "Погладить хвост"
   icon: FriendlyPatTailIcon
   category: Tail
-  emotes:
+  interactionMessages:
   - "нежно гладит хвостик %target"
   - "ласково проводит ладонью по хвосту %target"
   - "игриво поглаживает ладонью хвостик %target"

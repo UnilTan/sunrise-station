@@ -3,7 +3,7 @@
   name: "Потереться мордочкой о шею"
   icon: FriendlyHandshakeIcon # TODO новый спрайт
   category: Neck
-  emotes:
+  interactionMessages:
   - "нежно трётся мордочкой о шею %target"
   - "мягко касается мордочкой шеи %target, создавая приятное ощущение"
   appearConditions:
