@@ -41,6 +41,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private string _customSearchText = string.Empty;
     private Dictionary<Button, string> _buttonInteractions = new();
     private HashSet<string> _customInteractionIds = new();
+    private readonly HashSet<string> _openCategories = new();
 
     #endregion
 
@@ -63,6 +64,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         NewCustomInteractionButton.OnPressed += OnNewCustomInteractionPressed;
 
         LoadSavedInteractions();
+        LoadOpenCategories();
         InitializeSettings();
     }
 
@@ -305,7 +307,6 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
     private Collapsible CreateCategoryCollapsible(string categoryName, List<object> interactions)
     {
-        var collapsible = new Collapsible();
 
         var heading = new CollapsibleHeading(categoryName)
         {
@@ -318,6 +319,20 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         var body = new CollapsibleBody
         {
             Margin = new Thickness(0, 0, 0, 0)
+        };
+
+        var collapsible = new Collapsible(heading, body);
+
+        heading.OnPressed += _ =>
+        {
+            collapsible.BodyVisible = !collapsible.BodyVisible;
+
+            if (collapsible.BodyVisible)
+                _openCategories.Add(categoryName);
+            else
+                _openCategories.Remove(categoryName);
+
+            SaveOpenCategories();
         };
 
         var interactionsContainer = new BoxContainer
@@ -348,14 +363,9 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         body.AddChild(interactionsContainer);
 
-        collapsible.AddChild(heading);
-        collapsible.AddChild(body);
         collapsible.Margin = new Thickness(0, 0, 0, 2);
 
-        if (!string.IsNullOrEmpty(_searchText))
-        {
-            collapsible.BodyVisible = true;
-        }
+        collapsible.BodyVisible = _openCategories.Contains(categoryName) || !string.IsNullOrEmpty(_searchText);
 
         return collapsible;
     }
@@ -558,6 +568,26 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         _cfg.SetCVar(InteractionsCVars.EmoteVisibility, visible);
     }
 
+    private void SaveOpenCategories()
+    {
+        var joined = string.Join(",", _openCategories);
+        _cfg.SetCVar(InteractionsCVars.OpenInteractionCategories, joined);
+    }
+
+    private void LoadOpenCategories()
+    {
+        _openCategories.Clear();
+
+        var saved = _cfg.GetCVar(InteractionsCVars.OpenInteractionCategories);
+        if (!string.IsNullOrEmpty(saved))
+        {
+            foreach (var cat in saved.Split(','))
+            {
+                _openCategories.Add(cat);
+            }
+        }
+    }
+
     #endregion
 
     #region Custom
@@ -571,7 +601,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private void OnNewCustomInteractionPressed(BaseButton.ButtonEventArgs args)
     {
         var editor = new CustomInteractionEditor();
-        editor.SetCloseCallback((saved) =>
+        editor.SetCloseCallback(saved =>
         {
             if (saved)
             {
