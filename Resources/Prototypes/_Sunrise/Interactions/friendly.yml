@@ -273,7 +273,7 @@
   name: "Помурчать на ушко"
   icon: FriendlyHandshakeIcon # TODO новый спрайт
   category: Friendly
-  appearConditions: # TODO не работает проверка
+  appearConditions:
     - !type:SpeciesCondition
       checkTarget: false
       checkInitiator: true

@@ -106,11 +106,9 @@
 - type: interactionSound
   id: FelinidPurrs
   name: "Мурлыкание"
-  files:
-    - /Audio/_Sunrise/Voice/Felinid/cat_purr1.ogg
+  sound: /Audio/_Sunrise/Voice/Felinid/cat_purr1.ogg
 
 - type: interactionSound
   id: FriendlySalute
   name: "Салют"
-  files:
-    - /Audio/Effects/Emotes/salute.ogg
+  sound: /Audio/Effects/Emotes/salute.ogg
