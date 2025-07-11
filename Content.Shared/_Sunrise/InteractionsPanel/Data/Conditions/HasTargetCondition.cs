@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class HasTargetCondition : IAppearCondition, IInteractCondition
+public sealed partial class HasTargetCondition : IAppearCondition
 {
     [DataField]
     public bool AllowSelfTargeting { get; private set; }

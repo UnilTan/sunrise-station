@@ -4,13 +4,13 @@
   icon: FriendlyPatTailIcon
   category: Tail
   interactionMessages:
-  - "нежно гладит хвостик %target"
-  - "ласково проводит ладонью по хвосту %target"
-  - "игриво поглаживает ладонью хвостик %target"
+  - "%user нежно гладит хвостик %target"
+  - "%user ласково проводит ладонью по хвосту %target"
+  - "%user игриво поглаживает ладонью хвостик %target"
   appearConditions:
     - !type:HasTargetCondition
       allowSelfTargeting: false
     - !type:HasVisualLayerCondition
       checkTarget: true
-      сheckInitiator: false
+      checkInitiator: false
       layer: Tail

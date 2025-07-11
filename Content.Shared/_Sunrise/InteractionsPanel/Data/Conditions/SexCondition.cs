@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class SexCondition : IAppearCondition, IInteractionCondition
+public sealed partial class SexCondition : IAppearCondition
 {
     [DataField]
     public bool CheckInitiator { get; private set; } = false;

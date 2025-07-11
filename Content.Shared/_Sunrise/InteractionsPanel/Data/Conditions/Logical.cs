@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class InteractionAndCondition : IAppearCondition, IInteractCondition
+public sealed partial class InteractionAndCondition : IAppearCondition
 {
     [DataField]
     public List<IInteractionCondition> Conditions { get; private set; } = new();
@@ -20,7 +20,7 @@ public sealed partial class InteractionAndCondition : IAppearCondition, IInterac
 }
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class InteractionOrCondition : IAppearCondition, IInteractCondition
+public sealed partial class InteractionOrCondition : IAppearCondition
 {
     [DataField]
     public List<IInteractionCondition> Conditions { get; private set; } = new();
@@ -40,7 +40,7 @@ public sealed partial class InteractionOrCondition : IAppearCondition, IInteract
 }
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class InteractionNotCondition : IAppearCondition, IInteractCondition
+public sealed partial class InteractionNotCondition : IAppearCondition
 {
     [DataField]
     public IInteractionCondition Condition { get; private set; } = default!;

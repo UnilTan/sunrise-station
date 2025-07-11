@@ -5,7 +5,7 @@ using Content.Shared.Tag;
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class BodyAreaTagCondition : IAppearCondition, IInteractCondition
+public sealed partial class BodyAreaTagCondition : IAppearCondition
 {
     [DataField]
     public bool CheckInitiator { get; private set; }

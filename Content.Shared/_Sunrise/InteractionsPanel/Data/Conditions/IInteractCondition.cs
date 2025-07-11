@@ -8,7 +8,3 @@ public interface IInteractionCondition
 public interface IAppearCondition : IInteractionCondition
 {
 }
-
-public interface IInteractCondition : IInteractionCondition
-{
-}

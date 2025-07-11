@@ -1,10 +1,11 @@
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
 
 [Serializable, NetSerializable, DataDefinition]
-public sealed partial class HasVisualLayerCondition : IAppearCondition, IInteractCondition
+public sealed partial class HasVisualLayerCondition : IAppearCondition
 {
     [DataField]
     public bool CheckInitiator { get; private set; }
@@ -31,13 +32,9 @@ public sealed partial class HasVisualLayerCondition : IAppearCondition, IInterac
         if (!entMan.TryGetComponent<HumanoidAppearanceComponent>(uid, out var appearance))
             return false;
 
-        var hasLayer = appearance.CustomBaseLayers.ContainsKey(Layer)
-                       || appearance.BaseLayers.ContainsKey(Layer);
+        var category = MarkingCategoriesConversion.FromHumanoidVisualLayers(Layer);
+        var markingSet = appearance.MarkingSet;
 
-        if (!hasLayer)
-            return false;
-
-        return !appearance.PermanentlyHidden.Contains(Layer);
+        return markingSet.TryGetCategory(category, out var markings) && markings.Count > 0;
     }
 }
-

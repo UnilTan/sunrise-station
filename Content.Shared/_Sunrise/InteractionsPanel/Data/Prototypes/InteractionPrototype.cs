@@ -25,9 +25,6 @@ public sealed partial class InteractionPrototype : IPrototype
     [DataField]
     public List<IAppearCondition> AppearConditions { get; private set; } = new();
 
-    [DataField]
-    public List<IInteractCondition> InteractionConditions { get; private set; } = new();
-
     [DataField(required: true)]
     public List<string> InteractionMessages { get; private set; } = new();
 

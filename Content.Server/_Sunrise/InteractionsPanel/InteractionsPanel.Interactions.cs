@@ -104,7 +104,7 @@ public partial class InteractionsPanel
         if (!_prototypeManager.TryIndex<InteractionPrototype>(args.InteractionId, out var interactionPrototype))
             return;
 
-        if (!CheckAllInteractionConditions(interactionPrototype, ent.Owner, target.Value))
+        if (!CheckAllAppearConditions(interactionPrototype, ent.Owner, target.Value))
             return;
 
         var userPref = _netConfigManager.GetClientCVar(userSession.Channel, InteractionsCVars.EmoteVisibility);
