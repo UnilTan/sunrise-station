@@ -15,6 +15,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.InteractionsPanel;
 
@@ -44,6 +45,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private static readonly Color ErrorColor = new Color(255, 69, 58);         // #ff453a
     private static readonly Color SuccessColor = new Color(48, 209, 88);       // #30d158
     private static readonly Color TextMuted = new Color(142, 142, 147);        // #8e8e93
+    private static readonly Color FavoriteColor = new Color(255, 214, 10);     // #ffd60a
 
     #endregion
 
@@ -56,6 +58,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private Dictionary<Button, string> _buttonInteractions = new();
     private HashSet<string> _customInteractionIds = new();
     private readonly HashSet<string> _openCategories = new();
+    private readonly HashSet<string> _favoriteInteractions = new();
 
     #endregion
 
@@ -79,6 +82,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         LoadSavedInteractions();
         LoadOpenCategories();
+        LoadFavoriteInteractions();
         InitializeSettings();
     }
 
@@ -243,6 +247,8 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         var categorizedInteractions = new Dictionary<string, (string Name, List<object> Interactions)>();
 
+        var favoriteInteractions = new List<object>();
+
         foreach (var id in interactionIds)
         {
             if (!_prototypeManager.TryIndex<InteractionPrototype>(id, out var interaction))
@@ -257,6 +263,11 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
                     continue;
             }
 
+            if (_favoriteInteractions.Contains(interaction.ID))
+            {
+                favoriteInteractions.Add(interaction);
+            }
+
             var categoryId = interaction.Category.ToString();
 
             if (!_prototypeManager.TryIndex(interaction.Category, out InteractionCategoryPrototype? category))
@@ -268,7 +279,10 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
                 categorizedInteractions[categoryId] = (categoryName, new List<object>());
             }
 
-            categorizedInteractions[categoryId].Interactions.Add(interaction);
+            if (!_favoriteInteractions.Contains(interaction.ID))
+            {
+                categorizedInteractions[categoryId].Interactions.Add(interaction);
+            }
         }
 
         foreach (var customInteraction in customInteractions)
@@ -278,18 +292,44 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             if (string.IsNullOrEmpty(categoryId) || !_prototypeManager.TryIndex<InteractionCategoryPrototype>(categoryId, out _))
                 continue;
 
+            if (_favoriteInteractions.Contains(customInteraction.Id))
+            {
+                favoriteInteractions.Add(customInteraction);
+            }
+
             if (!categorizedInteractions.TryGetValue(categoryId, out _))
             {
                 var category = _prototypeManager.Index<InteractionCategoryPrototype>(categoryId);
                 categorizedInteractions[categoryId] = (category.Name, new List<object>());
             }
 
-            categorizedInteractions[categoryId].Interactions.Add(customInteraction);
+            if (!_favoriteInteractions.Contains(customInteraction.Id))
+            {
+                categorizedInteractions[categoryId].Interactions.Add(customInteraction);
+            }
 
             _customInteractionIds.Add(customInteraction.Id);
         }
 
-        if (categorizedInteractions.Count == 0)
+        if (favoriteInteractions.Count > 0)
+        {
+            var sortedFavorites = favoriteInteractions
+                .OrderBy(i =>
+                {
+                    return i switch
+                    {
+                        InteractionPrototype proto => proto.Name,
+                        CustomInteraction custom => custom.Name,
+                        _ => string.Empty
+                    };
+                })
+                .ToList();
+
+            var favoritesCollapsible = CreateCategoryCollapsible("⭐ Избранные", sortedFavorites);
+            CategoriesContainer.AddChild(favoritesCollapsible);
+        }
+
+        if (categorizedInteractions.Count == 0 && favoriteInteractions.Count == 0)
         {
             var noResultsLabel = new Label
             {
@@ -342,7 +382,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         heading.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = BackgroundMedium,
-            BorderColor = PrimaryColor,
+            BorderColor = categoryName.StartsWith("⭐") ? FavoriteColor : PrimaryColor,
             BorderThickness = new Thickness(0, 0, 0, 1)
         };
 
@@ -487,6 +527,43 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         buttonBox.AddChild(button);
 
+        var favoriteButton = new Button
+        {
+            MinSize = new Vector2(32, 40),
+            MaxSize = new Vector2(32, 40),
+            StyleClasses = { "ButtonSquare" },
+            Margin = new Thickness(2, 0, 0, 0),
+            VerticalAlignment = VAlignment.Center
+        };
+
+        var isFavorite = _favoriteInteractions.Contains(interaction.ID);
+
+        favoriteButton.StyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = isFavorite ? FavoriteColor : BackgroundLight,
+            BorderColor = isFavorite ? FavoriteColor : TextMuted,
+            BorderThickness = new Thickness(1)
+        };
+
+        var starIcon = new TextureRect
+        {
+            Texture = _spriteSystem.Frame0(new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/examine-star.png"))),
+            TextureScale = new Vector2(0.8f, 0.8f),
+            Stretch = TextureRect.StretchMode.KeepAspectCentered,
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Center,
+            Modulate = isFavorite ? Color.White : TextMuted
+        };
+
+        favoriteButton.AddChild(starIcon);
+
+        favoriteButton.OnPressed += _ =>
+        {
+            ToggleFavorite(interaction.ID);
+        };
+
+        buttonBox.AddChild(favoriteButton);
+
         return buttonBox;
     }
 
@@ -579,6 +656,43 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         buttonBox.AddChild(button);
 
+        var favoriteButton = new Button
+        {
+            MinSize = new Vector2(32, 40),
+            MaxSize = new Vector2(32, 40),
+            StyleClasses = { "ButtonSquare" },
+            Margin = new Thickness(2, 0, 0, 0),
+            VerticalAlignment = VAlignment.Center
+        };
+
+        var isFavorite = _favoriteInteractions.Contains(interaction.Id);
+
+        favoriteButton.StyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = isFavorite ? FavoriteColor : BackgroundLight,
+            BorderColor = isFavorite ? FavoriteColor : TextMuted,
+            BorderThickness = new Thickness(1)
+        };
+
+        var starIcon = new TextureRect
+        {
+            Texture = _spriteSystem.Frame0(new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/examine-star.png"))),
+            TextureScale = new Vector2(0.8f, 0.8f),
+            Stretch = TextureRect.StretchMode.KeepAspectCentered,
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Center,
+            Modulate = isFavorite ? Color.White : TextMuted
+        };
+
+        favoriteButton.AddChild(starIcon);
+
+        favoriteButton.OnPressed += _ =>
+        {
+            ToggleFavorite(interaction.Id);
+        };
+
+        buttonBox.AddChild(favoriteButton);
+
         return buttonBox;
     }
 
@@ -617,6 +731,55 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
     #endregion
 
+    #region Favorites
+
+    private void ToggleFavorite(string interactionId)
+    {
+        if (_favoriteInteractions.Contains(interactionId))
+        {
+            _favoriteInteractions.Remove(interactionId);
+        }
+        else
+        {
+            _favoriteInteractions.Add(interactionId);
+        }
+
+        SaveFavoriteInteractions();
+
+        if (_currentInteractionIds != null)
+        {
+            _buttonInteractions.Clear();
+            _customInteractionIds.Clear();
+            PopulateCategories(_currentInteractionIds);
+        }
+    }
+
+    private void SaveFavoriteInteractions()
+    {
+        var joined = string.Join(",", _favoriteInteractions);
+        _cfg.SetCVar(InteractionsCVars.FavoriteInteractions, joined);
+        _cfg.SaveToFile();
+    }
+
+    private void LoadFavoriteInteractions()
+    {
+        _favoriteInteractions.Clear();
+
+        var saved = _cfg.GetCVar(InteractionsCVars.FavoriteInteractions);
+        if (!string.IsNullOrEmpty(saved))
+        {
+            foreach (var interactionId in saved.Split(','))
+            {
+                if (!string.IsNullOrEmpty(interactionId))
+                {
+                    _favoriteInteractions.Add(interactionId);
+                }
+            }
+        }
+    }
+
+    #endregion
+
     #region API
 
     public void SetOwner(InteractionsWindowBoundUserInterface owner)
@@ -631,12 +794,14 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private void SetEmoteVisibility(bool visible)
     {
         _cfg.SetCVar(InteractionsCVars.EmoteVisibility, visible);
+        _cfg.SaveToFile();
     }
 
     private void SaveOpenCategories()
     {
         var joined = string.Join(",", _openCategories);
         _cfg.SetCVar(InteractionsCVars.OpenInteractionCategories, joined);
+        _cfg.SaveToFile();
     }
 
     private void LoadOpenCategories()
