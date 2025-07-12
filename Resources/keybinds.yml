@@ -280,7 +280,7 @@ binds:
   type: State
   key: R
   mod1: Shift
-- function: FlipObject
+- function: Interact
   type: State
   key: F
 - function: TextCursorLeft

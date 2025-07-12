@@ -5,8 +5,11 @@ using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
+using Content.Shared.Input;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -29,6 +32,28 @@ public partial class InteractionsPanel
         SubscribeLocalEvent<InteractionsComponent, ClothingDidUnequippedEvent>(ClothingDidUnequipped);
         SubscribeLocalEvent<InteractionsComponent, DidEquipHandEvent>(DidEquipped);
         SubscribeLocalEvent<InteractionsComponent, DidUnequipHandEvent>(DidUnequipped);
+
+        CommandBinds.Builder
+            .Bind(ContentKeyFunctions.Interact, new PointerInputCmdHandler(HandleInteract))
+            .Register<InteractionsPanel>();
+    }
+
+    public bool HandleInteract(ICommonSession? playerSession, EntityCoordinates coordinates, EntityUid entity)
+    {
+        if (playerSession?.AttachedEntity is not { Valid: true } player || !Exists(player))
+            return false;
+        if(!HasComp<TransformComponent>(player))
+            return false;
+        if(!HasComp<TransformComponent>(entity))
+            return false;
+        if (!_interaction.InRangeAndAccessible(player, entity))
+            return false;
+        if (!HasComp<InteractionsComponent>(player))
+            return false;
+        if (!HasComp<InteractionsComponent>(entity))
+            return false;
+        OpenUI(player, entity);
+        return true;
     }
 
     private void DidEquipped(EntityUid uid, InteractionsComponent component, DidEquipHandEvent args)
@@ -292,7 +317,7 @@ public partial class InteractionsPanel
             {
                 OpenUI((user, interfaceComponent), target);
             },
-            Text = "Открыть панель интеракций",
+            Text = "Взаимодействовать [F]",
             Priority = -1
         };
 
