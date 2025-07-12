@@ -74,4 +74,10 @@ public sealed class InteractionsCVars
 
     public static readonly CVarDef<string> OpenInteractionCategories =
         CVarDef.Create("interactions.open_categories", "", CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> WindowPosX =
+        CVarDef.Create("interactions.window_pos_x", 0, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> WindowPosY =
+        CVarDef.Create("interactions.window_pos_y", 0, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 }

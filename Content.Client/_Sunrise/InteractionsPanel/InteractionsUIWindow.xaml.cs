@@ -113,6 +113,13 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         UpdateButtonsState();
     }
 
+    public override void Close()
+    {
+        _cfg.SetCVar(InteractionsCVars.WindowPosX, (int)Position.X);
+        _cfg.SetCVar(InteractionsCVars.WindowPosY, (int)Position.Y);
+        base.Close();
+    }
+
     private bool IsInteractionOnCooldown(string interactionId)
     {
         var userEntity = _owner?.Owner ?? default;
