@@ -90,3 +90,4 @@ tts-voice-name-barash = (NEW) [Смешарики] Бараш
 tts-voice-name-chocolate-fabric-wonka = (NEW) [Шоколадная Фабрика] Вилли-Вонка
 tts-voice-name-death-note-yagami-light = (NEW) [Тетрадь Смерти] Ягами Лайт
 tts-voice-name-warcraft3-jaina = (NEW) [Warcraft 3] Джайна Праудмур
+tts-voice-name-lol-aurora = (NEW) [LOL] Аврора
