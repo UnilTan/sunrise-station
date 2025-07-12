@@ -218,6 +218,8 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             TargetSpriteView.SetEntity(_entityManager.GetEntity(targetEntity));
             var nameTarget = _entityManager.GetComponentOrNull<MetaDataComponent>(_entityManager.GetEntity(targetEntity));
             NameTarget.Text = $"{nameTarget?.EntityName}";
+            TargetSpriteView.InvalidateArrange();
+            TargetSpriteView.InvalidateMeasure();
         }
     }
 
