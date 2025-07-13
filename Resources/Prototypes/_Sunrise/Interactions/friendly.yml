@@ -389,8 +389,8 @@
   appearConditions:
     - !type:SelfOnlyCondition
   interactionMessages:
-  - "%user показывает фак %target"
-  - "%user элегантно показывает фак %target"
+  - "%user показывает фак"
+  - "%user элегантно показывает фак"
   interactionSounds:
   - FriendlySalute
 
@@ -399,6 +399,9 @@
   name: "Сплестись пальчиками"
   icon: FriendlyIcon
   category: Friendly
+  appearConditions:
+  - !type:HasTargetCondition
+    allowSelfTargeting: false
   interactionMessages:
   - "%user слетается своим пальцем с пальцем %target"
   - "%user нежно берёт палец %target и сплетает со своим"
