@@ -462,7 +462,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             Text = interaction.Name,
             ToolTip = interaction.Description,
             HorizontalExpand = true,
-            MinHeight = 62,
+            MinHeight = 54,
             StyleClasses = { "ButtonSquare" },
             Disabled = isOnCooldown
         };
@@ -603,7 +603,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             Text = interaction.Name,
             ToolTip = interaction.Description,
             HorizontalExpand = true,
-            MinHeight = 62,
+            MinHeight = 54,
             StyleClasses = { "ButtonSquare" },
             Disabled = isOnCooldown,
         };
