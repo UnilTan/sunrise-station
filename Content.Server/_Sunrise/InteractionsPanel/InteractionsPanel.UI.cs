@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
 using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
+using Content.Shared.Database;
 
 namespace Content.Server._Sunrise.InteractionsPanel;
 
@@ -64,6 +65,9 @@ public partial class InteractionsPanel
             interactions.CurrentTarget = target;
             Dirty(user, interactions);
         }
+
+        _log.Add(LogType.Interactions, LogImpact.Low,
+            $"[InteractionsPanel] {ToPretty(user)} открыл панель взаимодействий с {ToPretty(target)}");
     }
 
     private InteractionWindowBoundUserInterfaceState PrepareUIState(EntityUid user, EntityUid target)

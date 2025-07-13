@@ -1,9 +1,11 @@
+using System.Numerics;
 using Content.Server.Chat.Systems;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
 using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
+using Content.Shared.Database;
 using Content.Shared.Hands;
 using Content.Shared.Input;
 using Content.Shared.Verbs;
@@ -35,7 +37,49 @@ public partial class InteractionsPanel
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.Interact, new PointerInputCmdHandler(HandleInteract))
+            .Bind(ContentKeyFunctions.Interact, InputCmdHandler.FromDelegate(enabled: TryAutoInteraction))
             .Register<InteractionsPanel>();
+    }
+
+    private void TryAutoInteraction(ICommonSession? session)
+    {
+        if (session?.AttachedEntity is not { Valid: true } player || !Exists(player))
+            return;
+
+        if (!HasComp<InteractionsComponent>(player))
+            return;
+
+        if (_ui.IsUiOpen(player, InteractionWindowUiKey.Key))
+        {
+            _ui.CloseUi(player, InteractionWindowUiKey.Key);
+            return;
+        }
+
+        var xform = Transform(player);
+        var mapPos = xform.MapPosition;
+        var entitiesInRange = new List<EntityUid>();
+
+        var bounds = Box2.CenteredAround(mapPos.Position, new Vector2(3, 3));
+        var query = _lookup.GetEntitiesInRange(mapPos, 1.0f, LookupFlags.Approximate | LookupFlags.Dynamic);
+
+        foreach (var ent in query)
+        {
+            if (ent == player) continue;
+            if (!HasComp<InteractionsComponent>(ent)) continue;
+            if (!_interaction.InRangeAndAccessible(player, ent)) continue;
+
+            entitiesInRange.Add(ent);
+        }
+
+        if (entitiesInRange.Count > 0)
+        {
+            var target = entitiesInRange[0];
+            OpenUI(player, target);
+        }
+        else
+        {
+            OpenUI(player, player);
+        }
     }
 
     public bool HandleInteract(ICommonSession? playerSession, EntityCoordinates coordinates, EntityUid entity)
@@ -184,6 +228,9 @@ public partial class InteractionsPanel
         {
             SetCooldown(ent.Owner, args.InteractionId, interactionPrototype.Cooldown);
         }
+
+        _log.Add(LogType.Interactions, LogImpact.Medium,
+            $"[InteractionsPanel] {ToPretty(ent.Owner)} использует \"{interactionPrototype.ID}\" на {ToPretty(target.Value)}");
     }
 
     private void HandleCustomInteraction(
@@ -239,6 +286,14 @@ public partial class InteractionsPanel
         {
             SetCooldown(user, interactionId, TimeSpan.FromSeconds(data.Cooldown));
         }
+
+        _log.Add(LogType.Interactions, LogImpact.Medium,
+            $"[InteractionsPanel] {ToPretty(user)} кастомное взаимодействие \"{interactionId}\" с {ToPretty(target)}: \"{data.InteractionMessage}\"");
+    }
+
+    private string ToPretty(EntityUid uid)
+    {
+        return $"{uid} ({MetaData(uid).EntityName})";
     }
 
     private void UpdateInteractions(float frameTime)

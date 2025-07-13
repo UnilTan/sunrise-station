@@ -12,5 +12,5 @@ public sealed class CustomInteraction
     public bool SpawnsEffect { get; set; }
     public float EffectChance { get; set; }
     public string EntityEffectId { get; set; } = string.Empty;
-    public float Cooldown { get; set; } = 5.0f;
+    public float Cooldown { get; set; } = 3.0f;
 }

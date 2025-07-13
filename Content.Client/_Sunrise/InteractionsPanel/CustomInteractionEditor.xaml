@@ -294,9 +294,9 @@
                                        FontColorOverride="#b8e6ff"/>
                                 <Slider Name="CooldownSlider"
                                         HorizontalExpand="True"
-                                        MinValue="5"
+                                        MinValue="3"
                                         MaxValue="20"
-                                        Value="5"
+                                        Value="3"
                                         Margin="0 0 6 0"/>
                                 <Label Name="CooldownLabel"
                                        Text="5с"

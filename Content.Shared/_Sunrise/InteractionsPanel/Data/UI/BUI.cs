@@ -72,6 +72,9 @@ public sealed class InteractionsCVars
     public static readonly CVarDef<bool> EmoteVisibility =
         CVarDef.Create("interactions.emote", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
+    public static readonly CVarDef<bool> Expand =
+        CVarDef.Create("interactions.expand", false, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
     public static readonly CVarDef<string> OpenInteractionCategories =
         CVarDef.Create("interactions.open_categories", "", CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 

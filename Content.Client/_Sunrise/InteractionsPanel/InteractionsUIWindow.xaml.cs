@@ -46,6 +46,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private static readonly Color SuccessColor = new Color(48, 209, 88);       // #30d158
     private static readonly Color TextMuted = new Color(142, 142, 147);        // #8e8e93
     private static readonly Color FavoriteColor = new Color(255, 214, 10);     // #ffd60a
+    private static readonly Color FavoriteHoverColor = new Color(255, 180, 0); // #ffb400
 
     #endregion
 
@@ -89,14 +90,19 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     private void InitializeSettings()
     {
         var currentVisibility = _cfg.GetCVar(InteractionsCVars.EmoteVisibility);
+        var currentExpand = _cfg.GetCVar(InteractionsCVars.Expand);
         EmoteVisibilityCheckBox.Pressed = currentVisibility;
+        HideTopPanelCheckBox.Pressed = currentExpand;
         ApplySettingsButton.OnPressed += OnApplySettings;
+        TopUserInfoBox.Visible = !currentExpand;
     }
 
     private void OnApplySettings(BaseButton.ButtonEventArgs args)
     {
         var emoteVisible = EmoteVisibilityCheckBox.Pressed;
+        var expand = HideTopPanelCheckBox.Pressed;
         SetEmoteVisibility(emoteVisible);
+        SetExpanded(expand);
     }
 
     private void OnSearchTextChanged(LineEdit.LineEditEventArgs args)
@@ -409,7 +415,7 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
-            Margin = new Thickness(2, 1, 2, 2),
+            Margin = new Thickness(0, 1, 0, 2),
         };
 
         foreach (var interaction in interactions)
@@ -449,12 +455,16 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             VerticalAlignment = VAlignment.Center
         };
 
-        var iconContainer = new Control
+        var isOnCooldown = IsInteractionOnCooldown(interaction.ID);
+
+        var button = new Button
         {
-            MinSize = new Vector2(40, 40),
-            MaxSize = new Vector2(40, 40),
-            Margin = new Thickness(2, 0, 4, 0),
-            VerticalAlignment = VAlignment.Center
+            Text = interaction.Name,
+            ToolTip = interaction.Description,
+            HorizontalExpand = true,
+            MinHeight = 62,
+            StyleClasses = { "ButtonSquare" },
+            Disabled = isOnCooldown
         };
 
         if (interaction.Icon.HasValue && _prototypeManager.TryIndex(interaction.Icon.Value, out InteractionIconPrototype? iconProto))
@@ -464,25 +474,14 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
                 TextureScale = new Vector2(1.0f, 1.0f),
                 Stretch = TextureRect.StretchMode.KeepAspectCentered,
                 Texture = _spriteSystem.Frame0(iconProto.Icon),
-                HorizontalAlignment = HAlignment.Center,
-                VerticalAlignment = VAlignment.Center
+                HorizontalAlignment = HAlignment.Left,
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(10, 0, 10, 0),
+                MinSize = new Vector2(64, 64),
+                MaxSize = new Vector2(64, 64)
             };
-            iconContainer.AddChild(iconRect);
+            button.AddChild(iconRect);
         }
-
-        buttonBox.AddChild(iconContainer);
-
-        var isOnCooldown = IsInteractionOnCooldown(interaction.ID);
-
-        var button = new Button
-        {
-            Text = interaction.Name,
-            ToolTip = interaction.Description,
-            HorizontalExpand = true,
-            MinHeight = 40,
-            StyleClasses = { "ButtonSquare" },
-            Disabled = isOnCooldown
-        };
 
         if (isOnCooldown)
         {
@@ -529,8 +528,8 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         var favoriteButton = new Button
         {
-            MinSize = new Vector2(32, 40),
-            MaxSize = new Vector2(32, 40),
+            MinSize = new Vector2(32, 62),
+            MaxSize = new Vector2(32, 62),
             StyleClasses = { "ButtonSquare" },
             Margin = new Thickness(2, 0, 0, 0),
             VerticalAlignment = VAlignment.Center
@@ -562,6 +561,26 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             ToggleFavorite(interaction.ID);
         };
 
+        favoriteButton.OnMouseEntered += _ =>
+        {
+            favoriteButton.StyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = isFavorite ? FavoriteHoverColor : BackgroundHighlight,
+                BorderColor = isFavorite ? FavoriteHoverColor : PrimaryColor,
+                BorderThickness = new Thickness(1)
+            };
+        };
+
+        favoriteButton.OnMouseExited += _ =>
+        {
+            favoriteButton.StyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = isFavorite ? FavoriteColor : BackgroundLight,
+                BorderColor = isFavorite ? FavoriteColor : TextMuted,
+                BorderThickness = new Thickness(1)
+            };
+        };
+
         buttonBox.AddChild(favoriteButton);
 
         return buttonBox;
@@ -577,12 +596,16 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
             VerticalAlignment = VAlignment.Center
         };
 
-        var iconContainer = new Control
+        var isOnCooldown = IsInteractionOnCooldown(interaction.Id);
+
+        var button = new Button
         {
-            MinSize = new Vector2(40, 40),
-            MaxSize = new Vector2(40, 40),
-            Margin = new Thickness(2, 0, 4, 0),
-            VerticalAlignment = VAlignment.Center
+            Text = interaction.Name,
+            ToolTip = interaction.Description,
+            HorizontalExpand = true,
+            MinHeight = 62,
+            StyleClasses = { "ButtonSquare" },
+            Disabled = isOnCooldown,
         };
 
         if (!string.IsNullOrEmpty(interaction.IconId) &&
@@ -593,25 +616,14 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
                 TextureScale = new Vector2(1.0f, 1.0f),
                 Stretch = TextureRect.StretchMode.KeepAspectCentered,
                 Texture = _spriteSystem.Frame0(iconProto.Icon),
-                HorizontalAlignment = HAlignment.Center,
-                VerticalAlignment = VAlignment.Center
+                HorizontalAlignment = HAlignment.Left,
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(10, 0, 10, 0),
+                MinSize = new Vector2(64, 64),
+                MaxSize = new Vector2(64, 64)
             };
-            iconContainer.AddChild(iconRect);
+            button.AddChild(iconRect);
         }
-
-        buttonBox.AddChild(iconContainer);
-
-        var isOnCooldown = IsInteractionOnCooldown(interaction.Id);
-
-        var button = new Button
-        {
-            Text = interaction.Name,
-            ToolTip = interaction.Description,
-            HorizontalExpand = true,
-            MinHeight = 40,
-            StyleClasses = { "ButtonSquare" },
-            Disabled = isOnCooldown,
-        };
 
         if (isOnCooldown)
         {
@@ -658,8 +670,8 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 
         var favoriteButton = new Button
         {
-            MinSize = new Vector2(32, 40),
-            MaxSize = new Vector2(32, 40),
+            MinSize = new Vector2(32, 62),
+            MaxSize = new Vector2(32, 62),
             StyleClasses = { "ButtonSquare" },
             Margin = new Thickness(2, 0, 0, 0),
             VerticalAlignment = VAlignment.Center
@@ -689,6 +701,26 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         favoriteButton.OnPressed += _ =>
         {
             ToggleFavorite(interaction.Id);
+        };
+
+        favoriteButton.OnMouseEntered += _ =>
+        {
+            favoriteButton.StyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = isFavorite ? FavoriteHoverColor : BackgroundHighlight,
+                BorderColor = isFavorite ? FavoriteHoverColor : PrimaryColor,
+                BorderThickness = new Thickness(1)
+            };
+        };
+
+        favoriteButton.OnMouseExited += _ =>
+        {
+            favoriteButton.StyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = isFavorite ? FavoriteColor : BackgroundLight,
+                BorderColor = isFavorite ? FavoriteColor : TextMuted,
+                BorderThickness = new Thickness(1)
+            };
         };
 
         buttonBox.AddChild(favoriteButton);
@@ -795,6 +827,14 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     {
         _cfg.SetCVar(InteractionsCVars.EmoteVisibility, visible);
         _cfg.SaveToFile();
+    }
+
+    private void SetExpanded(bool expand)
+    {
+        _cfg.SetCVar(InteractionsCVars.Expand, expand);
+        _cfg.SaveToFile();
+
+        TopUserInfoBox.Visible = !expand;
     }
 
     private void SaveOpenCategories()
