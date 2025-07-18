@@ -28,22 +28,12 @@
 # MARKINGS START
     bodyTypeMarkingsDisplacement:
       body-fat-m:
-#        Eyes:
-#          sizeMaps:
-#            32:
-#              sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-#              state: eye_overlay
         Hair:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
               state: marking
       body-fat-f:
-        #        Eyes:
-        #          sizeMaps:
-        #            32:
-        #              sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-        #              state: eye_overlay
         Hair:
           sizeMaps:
             32:
@@ -481,22 +471,12 @@
 # MARKINGS START
     bodyTypeMarkingsDisplacement:
       body-fat-m:
-#        Eyes:
-#          sizeMaps:
-#            32:
-#              sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-#              state: eye_overlay
         Hair:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
               state: marking
       body-fat-f:
-        #        Eyes:
-        #          sizeMaps:
-        #            32:
-        #              sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-        #              state: eye_overlay
         Hair:
           sizeMaps:
             32:
