@@ -26,6 +26,31 @@
     - Hair
     - Snout
   - type: Inventory
+# HANDS DISPLACEMENT
+  - type: Hands
+    body-giga-m:
+      leftHandBodyTypeDisplacements:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
+            state: hand_l
+      rightHandBodyTypeDisplacements:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
+            state: hand_r
+    body-giga-f:
+      leftHandBodyTypeDisplacements:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
+            state: hand_l
+      rightHandBodyTypeDisplacements:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
+            state: hand_r
+# HANDS DISPLACEMENT
 ### Female
 ## BASE
     femaleDisplacements:
