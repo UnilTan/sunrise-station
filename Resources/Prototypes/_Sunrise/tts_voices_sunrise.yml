@@ -660,3 +660,10 @@
   sex: Female
   speaker: lol_aurora
   provider: sunrise
+
+- type: ttsVoice
+  id: 314Zabolotniy
+  name: tts-voice-name-314-zabolotniy
+  sex: Male
+  speaker: 314_zabolotniy
+  provider: sunrise
