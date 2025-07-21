@@ -92,3 +92,5 @@ tts-voice-name-death-note-yagami-light = (NEW) [Тетрадь Смерти] Я�
 tts-voice-name-warcraft3-jaina = (NEW) [Warcraft 3] Джайна Праудмур
 tts-voice-name-lol-aurora = (NEW) [LOL] Аврора
 tts-voice-name-314-zabolotniy = (NEW) [314 Кабинет] Заболотный
+tts-voice-name-lol-akali1 = (NEW) [LOL] Акали
+tts-voice-name-lol-nasus = (NEW) [LOL] Насус

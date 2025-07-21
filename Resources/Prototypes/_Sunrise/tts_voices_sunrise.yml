@@ -667,3 +667,17 @@
   sex: Male
   speaker: 314_zabolotniy
   provider: sunrise
+
+- type: ttsVoice
+  id: LOLAkali1
+  name: tts-voice-name-lol-akali1
+  sex: Female
+  speaker: lol_akali1
+  provider: sunrise
+
+- type: ttsVoice
+  id: LOLNasus
+  name: tts-voice-name-lol-nasus
+  sex: Male
+  speaker: lol_nasus
+  provider: sunrise
