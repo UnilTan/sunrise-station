@@ -681,3 +681,10 @@
   sex: Male
   speaker: lol_nasus
   provider: sunrise
+
+- type: ttsVoice
+  id: Crysis2Overlord1
+  name: tts-voice-name-crysis2-overlord-1
+  sex: Male
+  speaker: crysis2_overlord1
+  provider: sunrise
