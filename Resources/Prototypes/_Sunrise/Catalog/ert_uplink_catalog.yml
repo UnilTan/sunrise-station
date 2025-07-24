@@ -376,7 +376,7 @@
 
 - type: listing
   id: NTUplinkSunriseSpeedLoaderMagnum
-  productEntity: SpeedLoaderMagnum
+  productEntity: SpeedLoaderMagnumSP
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: speedloader45 }
   cost:
     Crystallite: 1

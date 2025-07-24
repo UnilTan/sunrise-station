@@ -4,19 +4,14 @@
     # Sunrise-Start
     MagazineBoxCaselessRifle: 5
     MagazineBoxCaselessRiflePractice: 3
-    MagazineBoxCaselessRifleRubber: 1
     MagazineBoxLightRifleBig: 5
     MagazineBoxLightRiflePractice: 3
-    MagazineBoxLightRifleRubber: 1
     MagazineBoxMagnumSP: 5
     MagazineBoxMagnumPractice: 3
-    MagazineBoxMagnumRubber: 1
     MagazineBoxPistolSP: 5
     MagazineBoxPistolPractice: 3
-    MagazineBoxPistolRubber: 1
     MagazineBoxRifleSP: 5
     MagazineBoxRiflePractice: 3
-    MagazineBoxRifleRubber: 1
     # Sunrise-End
 
     BoxLethalshot: 6

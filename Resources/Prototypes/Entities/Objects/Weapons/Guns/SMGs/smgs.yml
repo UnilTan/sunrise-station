@@ -47,7 +47,7 @@
         priority: 2
         whitelist:
           tags:
-          - MagazinePistolSubMachineGunSP
+          - MagazinePistolSubMachineGun
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber

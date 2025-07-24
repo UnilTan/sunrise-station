@@ -141,7 +141,7 @@
     tags:
     - MagazineRPD
   - type: BallisticAmmoProvider
-    proto: SunriseCartridgeLightRifleSP
+    proto: CartridgeLightRifleSP
     capacity: 100
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/pk_box.rsi
@@ -328,8 +328,8 @@
     mayTransfer: true
     whitelist:
       tags:
-      - CartridgeLightRifle  # 762x39
-    proto: SunriseCartridgeLightRifle  # 762x39
+      - CartridgeLightRifle
+    proto: CartridgeLightRifleSP
     capacity: 30
   - type: Item
     size: Small
@@ -358,7 +358,7 @@
     tags:
       - MagazineDl6902
   - type: BallisticAmmoProvider
-    proto: SunriseCartridgeLightRifle
+    proto: CartridgeLightRifleSP
     capacity: 200
   - type: Item
   - type: Sprite
@@ -402,7 +402,7 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeHeavyRifleSP
+        - CartridgeHeavyRifle
     proto: CartridgeHeavyRifle
     capacity: 30
   - type: Item
