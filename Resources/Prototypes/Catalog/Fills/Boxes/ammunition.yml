@@ -42,8 +42,14 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazineLightRifle
-        amount: 4
+    - id: MagazineLightRifleSP
+      amount: 1
+    - id: MagazineLightRifleHP
+      amount: 1
+    - id: MagazineLightRifleFMJ
+      amount: 1
+    - id: MagazineLightRifleAP
+      amount: 1
 
 - type: entity
   name: box of .30 rifle (practice) magazines

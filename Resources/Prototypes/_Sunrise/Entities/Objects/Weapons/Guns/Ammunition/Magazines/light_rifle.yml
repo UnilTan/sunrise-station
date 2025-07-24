@@ -10,8 +10,8 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeLightRifle  # 762x39
-    proto: SunriseCartridgeLightRifle  # 762x39
+        - CartridgeLightRifle
+    proto: CartridgeLightRifleSP
     capacity: 30
   - type: Item
     size: Small
@@ -41,10 +41,10 @@
     - MagazineMP38
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol  # 57x28
+    proto: CartridgePistolSP
     whitelist:
       tags:
-      - CartridgePistol  # 57x28
+      - CartridgePistol
     capacity: 32
   - type: Item
     size: Small
@@ -74,10 +74,10 @@
     - MagazineScorpion
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol  # 57x28
+    proto: CartridgePistolSP
     whitelist:
       tags:
-      - CartridgePistol  # 57x28
+      - CartridgePistol
     capacity: 20
   - type: Item
     size: Small
@@ -107,10 +107,10 @@
     - MagazineNewVector
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgeLightRifle  # 57x28
+    proto: CartridgeLightRifleSP
     whitelist:
       tags:
-      - CartridgeLightRifle  # 57x28
+      - CartridgeLightRifle
     capacity: 45
   - type: Item
     size: Small
@@ -141,7 +141,7 @@
     tags:
     - MagazineRPD
   - type: BallisticAmmoProvider
-    proto: SunriseCartridgeLightRifle  # 762x39
+    proto: SunriseCartridgeLightRifleSP
     capacity: 100
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/pk_box.rsi
@@ -161,10 +161,10 @@
     - MagazineMachineGunMG42
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgeHeavyRifleNT  # 7.62х51 NT
+    proto: CartridgeHeavyRifle
     whitelist:
       tags:
-      - CartridgeHeavyRifleNT  # 7.62х51 NT
+      - CartridgeHeavyRifle
     capacity: 50
   - type: Item
     size: Normal
@@ -402,8 +402,8 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeHeavyRifleNT  # 762x51
-    proto: CartridgeHeavyRifleNT  # 762x51
+        - CartridgeHeavyRifleSP
+    proto: CartridgeHeavyRifle
     capacity: 30
   - type: Item
     size: Small

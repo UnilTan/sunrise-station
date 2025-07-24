@@ -67,7 +67,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: BulletRedLaser
+    proto: RedLaser
     fireCost: 100
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -569,7 +569,7 @@
     availableModes:
     - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: BulletSyndiPlasmaDouble
+    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 50
   - type: Battery
     maxCharge: 10000

@@ -40,7 +40,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifle
+        startingItem: MagazineLightRifleSP
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -50,7 +50,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifle
+        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -93,6 +93,12 @@
   - type: EyeCursorOffset
     maxOffset: 2.5
     pvsIncrease: 0.25
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 0.1
+      Felinid:
+        knockback: 0.1
 
 - type: entity
   name: AKMS
@@ -125,7 +131,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifle
+        startingItem: MagazineLightRifleSP
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -134,11 +140,11 @@
             - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: SunriseCartridgeLightRifle  # 762x39
+        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
-            - CartridgeLightRifle  # 762x39
+            - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -187,7 +193,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifle
+        startingItem: MagazineLightRifleSP
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -196,11 +202,11 @@
           - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: SunriseCartridgeLightRifle  # 762x39
+        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
-          - CartridgeLightRifle  # 762x39
+          - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -327,7 +333,7 @@
             - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: SunriseCartridgeRifle
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -379,7 +385,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: SunriseMagazineRifle
+        startingItem: MagazineRifleSP
         insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
         priority: 2
@@ -388,7 +394,7 @@
             - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: SunriseCartridgeRifle
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -453,11 +459,11 @@
             - MagazineAR18 #MagazineM28 Одно и тоже
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifleNT #7.62х51 NT
+        startingItem: CartridgeHeavyRifle
         priority: 1
         whitelist:
           tags:
-            - CartridgeHeavyRifleNT #7.62х51 NT
+            - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -518,11 +524,11 @@
           - MagazineAR18
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifleNT  # 7.62х51
+        startingItem: CartridgeHeavyRifle
         priority: 1
         whitelist:
           tags:
-          - CartridgeHeavyRifleNT  #7.62х51 NT
+          - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -567,7 +573,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: SunriseMagazineRifle
+        startingItem: MagazineRifleSP
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -576,11 +582,11 @@
           - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: SunriseCartridgeRifle  # 556
+        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle  # 556
+          - CartridgeRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -636,11 +642,11 @@
           - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: SunriseCartridgeLightRifle  # 762x39
+        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
-          - CartridgeLightRifle  # 762x39
+          - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -746,11 +752,11 @@
         priority: 3
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifleNT  # 7.62 NT
+        startingItem: CartridgeHeavyRifle
         priority: 1
         whitelist:
           tags:
-            - CartridgeHeavyRifleNT  # 7.62 NT
+            - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

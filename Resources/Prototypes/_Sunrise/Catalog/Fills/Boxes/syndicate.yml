@@ -170,10 +170,6 @@
     - id: MagazineShotgunUranium
     - id: MagazineShotgunUranium
     - id: MagazineShotgunUranium
-    - id: MagazineShotgunUraniumSlug
-    - id: MagazineShotgunUraniumSlug
-    - id: MagazineShotgunUraniumSlug
-    - id: MagazineShotgunUraniumSlug
   - type: Sprite
     layers:
     - state: box_of_doom_big
@@ -193,10 +189,10 @@
     - 0,0,3,2
   - type: StorageFill
     contents:
-    - id: MagazineLightRifleBox
-    - id: MagazineLightRifleBox
-    - id: MagazineLightRifleBox
-    - id: MagazineLightRifleBox
+    - id: MagazineLightRifleBoxSP
+    - id: MagazineLightRifleBoxSP
+    - id: MagazineLightRifleBoxSP
+    - id: MagazineLightRifleBoxSP
   - type: Sprite
     layers:
     - state: box_of_doom_big

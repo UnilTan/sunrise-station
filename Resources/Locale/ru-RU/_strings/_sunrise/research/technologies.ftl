@@ -11,3 +11,4 @@ research-technology-extended-amunitions = Расширенные магазин�
 research-technology-phazon = Фазон
 research-technology-cargo-bluespace-equipment = Блюспейс экипировка карго
 research-technology-medical-hyposprays = Гипоспреи
+research-technology-armor-penetration = Пробитие брони

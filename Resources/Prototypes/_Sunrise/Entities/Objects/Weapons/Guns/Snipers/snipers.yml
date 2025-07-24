@@ -49,11 +49,11 @@
             - MagazineDragunov
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyLightRifle  # 762x54
+        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
-            - CartridgeHeavyRifle  # 762x54
+            - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -123,11 +123,11 @@
             - MagazineBR64
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifleNT  # 062
+        startingItem: CartridgeHeavyRifle
         priority: 1
         whitelist:
           tags:
-          - CartridgeHeavyRifleNT  # 062
+          - CartridgeHeavyRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

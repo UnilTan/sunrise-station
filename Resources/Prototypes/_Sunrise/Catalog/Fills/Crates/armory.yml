@@ -60,8 +60,14 @@
     contents:
       - id: WeaponRifleAKM
         amount: 2
-      - id: MagazineLightRifle
-        amount: 4
+      - id: MagazineLightRifleSP
+        amount: 1
+      - id: MagazineLightRifleHP
+        amount: 1
+      - id: MagazineLightRifleFMJ
+        amount: 1
+      - id: MagazineLightRifleAP
+        amount: 1
 
 - type: entity
   id: CrateArmoryMP5
@@ -119,5 +125,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazineBoxRifle
+      - id: MagazineBoxRifleSP
         amount: 4

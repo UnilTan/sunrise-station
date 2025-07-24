@@ -24,6 +24,14 @@
   - type: SpeedModifiedOnWield
     walkModifier: 0.9
     sprintModifier: 0.9
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 3
+        staminaMultiplier: 20
+      Felinid:
+        knockback: 1.5
+        staminaMultiplier: 20
 
 - type: entity
   name: XM1014

@@ -44,7 +44,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeLightRifle
+    proto: CartridgeLightRifleSP
     fireCost: 8
   - type: Appearance
   - type: AmmoCounter
@@ -183,7 +183,7 @@
       params:
         volume: -1
   - type: HitscanBatteryAmmoProvider
-    proto: BulletSyndiPlasmaDouble
+    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 25
   - type: Appearance
   - type: AmmoCounter

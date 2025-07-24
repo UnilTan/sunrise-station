@@ -52,6 +52,14 @@
   - type: EmitSoundOnLand
     sound:
       collection: ShotgunsDrop
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 3
+        staminaMultiplier: 20
+      Felinid:
+        knockback: 1.5
+        staminaMultiplier: 20
   # Sunrise end
 
 - type: entity

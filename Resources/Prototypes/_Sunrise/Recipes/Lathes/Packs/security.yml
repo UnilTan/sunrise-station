@@ -8,6 +8,78 @@
     - MagazinePistolHighCapacity
     - MagazinePistolHighCapacityEmpty
     - MagazineMagnum
+    - MagazineP90
+    ######################BOX#######################
+    # Light Rifle
+    - MagazineBoxLightRifleSP
+    - MagazineBoxLightRifleHP
+    - MagazineBoxLightRifleFMJ
+    # Magnum
+    - MagazineBoxMagnumSP
+    - MagazineBoxMagnumHP
+    - MagazineBoxMagnumFMJ
+    # Pistol
+    - MagazineBoxPistolSP
+    - MagazineBoxPistolHP
+    - MagazineBoxPistolFMJ
+    - MagazineBoxPistol40SP
+    - MagazineBoxPistol40HP
+    - MagazineBoxPistol40FMJ
+    # Rifle
+    - MagazineBoxRifleSP
+    - MagazineBoxRifleHP
+    - MagazineBoxRifleFMJ
+    # Shotgun
+    - BoxLethalshot
+    - BoxShotgunSlug
+    - BoxShellTranquilizer
+    #####################MAGAZINE#######################
+    # LMG
+    - LightRifleHeavyMagazineSP
+    - LightRifleHeavyMagazineHP
+    - LightRifleHeavyMagazineFMJ
+    - LightRifleHeavyMagazineEmpty
+    # Light Rifle
+    - MagazineLightRifleSP
+    - MagazineLightRifleHP
+    - MagazineLightRifleFMJ
+    - MagazineLightRifleEmpty
+    # Magnum
+    - SpeedLoaderMagnumSP
+    - SpeedLoaderMagnumHP
+    - SpeedLoaderMagnumFMJ
+    - SpeedLoaderMagnumEmpty
+    # Pistol
+    - MagazinePistolSP
+    - MagazinePistolHP
+    - MagazinePistolFMJ
+    - MagazinePistolEmpty
+    #- MagazinePistol40SP
+    #- MagazinePistol40HP
+    #- MagazinePistol40FMJ
+    - MagazinePistol40Empty
+    # SMG
+    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGunHP
+    - MagazinePistolSubMachineGunFMJ
+    - MagazinePistolSubMachineGunEmpty
+    - MagazinePistolSubMachineGunTopMounted
+    - MagazinePistolSubMachineGunTopMountedEmpty
+    # Rifle
+    - MagazineRifleSP
+    - MagazineRifleHP
+    - MagazineRifleFMJ
+    - MagazineRifleEmpty
+    # Shotgun
+    - MagazineShotgun
+    - MagazineShotgunEmpty
+    - MagazineShotgunSlug
+
+    - SpeedLoaderMagnumBasic
+    - SpeedLoaderShotgunEmpty
+    - SpeedLoaderShotgunSlug
+    - SpeedLoaderShotgunBeanbag
+####################################################
 
 - type: latheRecipePack
   id: SecurityDynamicSunrise
@@ -18,23 +90,81 @@
     - WeaponEnergyGunPistol
     - WeaponGunLaserCarbineAutomatic
     - FlareGunSecurityUpgrade
-    - BaseMagazinePistolCaselessRifleExtended
-    - MagazinePPSH41Extended
-    - MagazineMP5Extended
-    - MagazineMP7Extended
-    - MagazineP90Extended
-    - SunriseMagazineRifleExtended
-    - MagazineAR18Extended
-    #- MagazineM28Extended
-    - MagazineV31Extended
-    #- MagazineBauer127Extended
-    - MagazineBR64Extended
-    - MagazineDragunovExtended
+# Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
+#    - BaseMagazinePistolCaselessRifleExtended
+#    - MagazinePPSH41Extended
+#    - MagazineMP5Extended
+#    - MagazineMP7Extended
+#    - MagazineP90Extended
+#    - MagazineRifleExtended
+#    - MagazineAR18Extended
+#    - MagazineM28Extended
+#    - MagazineV31Extended
+#   - MagazineBauer127Extended
+#    - MagazineBR64Extended
+#    - MagazineDragunovExtended
     - ShellBlastArtillery
     - ShellEMPArtillery
     - ShellFlashArtillery
     - EnergyDomeDirectionalTurtle
     - WeaponTemperatureGun
+  #####################BOX#######################
+  # Light Rifle
+    - MagazineBoxLightRifleIncendiary
+    - MagazineBoxLightRifleUranium
+    - MagazineBoxLightRifleAP
+  # Magnum
+    - MagazineBoxMagnumIncendiary
+    - MagazineBoxMagnumUranium
+    - MagazineBoxMagnumAP
+  # Pistol
+    - MagazineBoxPistolIncendiary
+    - MagazineBoxPistolUranium
+    - MagazineBoxPistolAP
+    - MagazineBoxPistol40AP
+  # Rifle
+    - MagazineBoxRifleIncendiary
+    - MagazineBoxRifleUranium
+    - MagazineBoxRifleAP
+  # Shotgun
+    - BoxBeanbag
+    - BoxShotgunIncendiary
+    - BoxShotgunUranium
+    - BoxShellTranquilizer
+  #####################MAGAZINE#######################
+  # LMG
+    - LightRifleHeavyMagazineIncendiary
+    - LightRifleHeavyMagazineUranium
+    - LightRifleHeavyMagazineAP
+  # Light Rifle
+    - MagazineLightRifleIncendiary
+    - MagazineLightRifleUranium
+    - MagazineLightRifleAP
+  # Magnum
+    - SpeedLoaderMagnumIncendiary
+    - SpeedLoaderMagnumUranium
+    - SpeedLoaderMagnumAP
+  # Pistol
+    - MagazinePistolIncendiary
+    - MagazinePistolUranium
+    - MagazinePistolAP
+    #- MagazinePistol40AP
+  # SMG
+    - MagazinePistolSubMachineGunIncendiary
+    - MagazinePistolSubMachineGunUranium
+    - MagazinePistolSubMachineGunAP
+  # Rifle
+    - MagazineRifleIncendiary
+    - MagazineRifleUranium
+    - MagazineRifleAP
+  # Shotgun
+    - MagazineShotgunBeanbag
+    - MagazineShotgunIncendiary
+    - SpeedLoaderShotgunIncendiary
+    - SpeedLoaderShotgunUranium
+  # Grenade
+    - MagazineGrenadeEmpty
+####################################################
 
 - type: latheRecipePack
   id: SecurityDynamicSunriseClothing

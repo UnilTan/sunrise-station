@@ -505,3 +505,30 @@
       path: /Audio/Effects/countdown.ogg
   - type: TimedDespawn
     lifetime: 3.5
+
+- type: entity
+  id: BulletKineticTrash
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: false
+    sprite: _Sunrise/Objects/Weapons/Projectiles/projectiles.rsi
+    layers:
+    - state: bullet_trash
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectKinetic
+    damage:
+      types:
+        Blunt: 20
+        Structural: 25
+  - type: Ammo
+    muzzleFlash: HitscanEffect
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: PointLight
+    radius: 2.5
+    color: white
+    energy: 0.5
+  - type: GatheringProjectile

@@ -26,3 +26,6 @@ ui-options-function-hold-look-up = Удерживать клавишу для п
 ui-options-chat-icons-enable = Использовать иконки профессий в чате
 ui-options-chat-pointing-visuals-enable = Отображать указывания с иконками в чате
 ui-options-play-heartbeat-sound = Проигрывать звук сердцебиения
+ui-options-trace = Display the bullet's trace
+ui-options-trace-tooltip = If you're lagging while shooting, uncheck this box,
+                           and the hitscan won't display the texture of the smoke behind the flying bullet.

@@ -350,17 +350,17 @@
     stock: 4
 
 # Боеприпасы:
-#- type: listing
-#  id: NTUplinkSunriseBoxMagazineSubMachineGunTopMounted
-#  productEntity: BoxMagazinePistolSubMachineGunTopMounted
-#  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: box_wt550 }
-#  cost:
-#    Crystallite: 2
-#  categories:
-#  - NTAmmo
-#  conditions:
-#  - !type:ListingLimitedStockCondition
-#    stock: 6
+- type: listing
+  id: NTUplinkSunriseBoxMagazineSubMachineGunTopMounted
+  productEntity: BoxMagazinePistolSubMachineGunTopMounted
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: box_wt550 }
+  cost:
+    Crystallite: 2
+  categories:
+  - NTAmmo
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 6
 
 - type: listing
   id: NTUplinkSunriseBoxShotgunFlare

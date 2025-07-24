@@ -76,10 +76,10 @@
   description: 7-round single stack pistol magazine. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnum
+    proto: CartridgeMagnumSP
   - type: Sprite
     layers:
-    - state: base
+    - state: red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -87,8 +87,12 @@
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#575EF5"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#575EF5"
 
 - type: entity
   id: MagazineMagnumPractice
@@ -100,22 +104,20 @@
     proto: CartridgeMagnumPractice
   - type: Sprite
     layers:
-    - state: base
+    - state: practice
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#dbdbdb"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#dbdbdb"
+        color: "#F5514C"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#dbdbdb"
+        color: "#F5514C"
 
 - type: entity
   id: MagazineMagnumUranium
@@ -127,22 +129,20 @@
     proto: CartridgeMagnumUranium
   - type: Sprite
     layers:
-    - state: base
+    - state: uranium
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#00cd42"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#00cd42"
+        color: "#40F57A"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#00cd42"
+        color: "#40F57A"
 
 - type: entity
   id: MagazineMagnumAP
@@ -154,22 +154,20 @@
     proto: CartridgeMagnumAP
   - type: Sprite
     layers:
-    - state: base
+    - state: piercing
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#540000"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#540000"
+        color: "#72E374"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#540000"
+        color: "#72E374"
 
 - type: entity
   id: MagazineMagnumSubMachineGunEmpty

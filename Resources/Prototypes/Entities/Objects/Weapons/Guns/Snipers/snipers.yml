@@ -27,10 +27,10 @@
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: BallisticAmmoProvider
     capacity: 10
-    proto: CartridgeHeavyLightRifle #Sunrise-Edit 7,62x54R
+    proto: CartridgeLightRifleFMJ
     whitelist:
       tags:
-      - CartridgeHeavyRifle #Sunrise-Edit
+      - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -51,6 +51,14 @@
   - type: EyeCursorOffset
     maxOffset: 3
     pvsIncrease: 0.3
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 4
+        staminaMultiplier: 15
+      Felinid:
+        knockback: 2
+        staminaMultiplier: 15
   # Sunrise end
 
 - type: entity

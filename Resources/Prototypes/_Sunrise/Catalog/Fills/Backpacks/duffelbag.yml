@@ -82,7 +82,7 @@
     - type: StorageFill
       contents:
         - id: WeaponAMS-42
-        - id: SunriseMagazineRifleExtended
+        - id: MagazineRifleSP
           amount: 4
 
 - type: entity
@@ -94,7 +94,7 @@
     - type: StorageFill
       contents:
         - id: WeaponRifleG36
-        - id: SunriseMagazineRifle
+        - id: MagazineRifleSP
           amount: 4
 
 - type: entity

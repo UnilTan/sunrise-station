@@ -5,13 +5,14 @@
   - type: Tag
     tags:
     - MagazineV31
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    capacity: 40
-    proto: CartridgeRail
-    whitelist:
-      tags:
-      - CartridgeRail
+# Увы
+#  - type: BallisticAmmoProvider
+#    mayTransfer: true
+#    capacity: 40
+#    proto: CartridgeRail
+#    whitelist:
+#      tags:
+#      - CartridgeRail
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -44,10 +45,10 @@
 #     size: Small
 #   - type: BallisticAmmoProvider
 #     mayTransfer: true
-#     proto: CartridgeHeavyRifleNT  # 762
+#     proto: CartridgeHeavyRifle
 #     whitelist:
 #       tags:
-#       - CartridgeHeavyRifleNT  # 762
+#       - CartridgeHeavyRifle
 #     capacity: 20
 #   - type: ContainerContainer
 #     containers:
@@ -77,10 +78,10 @@
     size: Small
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgeHeavyRifleNT  # 762
+    proto: CartridgeHeavyRifle
     whitelist:
       tags:
-      - CartridgeHeavyRifleNT  # 762
+      - CartridgeHeavyRifle
     capacity: 20
   - type: ContainerContainer
     containers:

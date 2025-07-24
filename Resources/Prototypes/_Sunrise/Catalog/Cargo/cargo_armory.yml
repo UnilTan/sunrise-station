@@ -52,7 +52,7 @@
   id: ArmoryMagazineBoxRifleBig
   icon:
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/rifle.rsi
-    state: base-big
+    state: base-b
   product: CrateArmoryMagazineBoxRifleBig
   cost: 2150
   category: cargoproduct-category-name-armory

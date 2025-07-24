@@ -156,7 +156,7 @@
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser
+    - hitscanProto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
       state: lethal
@@ -217,7 +217,7 @@
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser
+    - hitscanProto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
       state: lethal
@@ -288,7 +288,7 @@
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser #BulletPulse
+    - hitscanProto: RedLaserBeam #BulletPulse
       fireCost: 110
       name: energy-gun-lethal
       state: lethal
@@ -344,7 +344,7 @@
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser
+    - hitscanProto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
       state: lethal
@@ -400,7 +400,7 @@
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser
+    - hitscanProto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
       state: lethal
@@ -492,7 +492,7 @@
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser
+    - hitscanProto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
       state: lethal
@@ -615,9 +615,9 @@
     autoRechargePauseTime: 60
   - type: Wieldable
   - type: GunRequiresWield
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletEMP
-    fireCost: 1000
+  - type: HitscanBatteryAmmoProvider
+    proto: EmpPulse
+    fireCost: 250
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -651,7 +651,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: HitscanBatteryAmmoProvider
-    proto: BulletRedLaser
+    proto: RedLaser
     fireCost: 62.5
   - type: MagazineVisuals
     magState: mag
@@ -701,7 +701,7 @@
     maxCharge: 3000
     startingCharge: 3000
   - type: HitscanBatteryAmmoProvider
-    proto: BulletRedLaser
+    proto: RedLaser
     fireCost: 50
   - type: Wieldable
   - type: UseDelay
@@ -746,7 +746,7 @@
     maxCharge: 2000
     startingCharge: 2000
   - type: HitscanBatteryAmmoProvider
-    proto: BulletRedLaser
+    proto: RedLaser
     fireCost: 50
   - type: Wieldable
   - type: UseDelay
@@ -795,7 +795,7 @@
     maxCharge: 8000
     startingCharge: 8000
   - type: HitscanBatteryAmmoProvider
-    proto: BulletRedLaser
+    proto: RedLaser
     fireCost: 50
   - type: Wieldable
   - type: UseDelay
@@ -894,7 +894,7 @@
     maxCharge: 1800
     startingCharge: 1800
   - type: HitscanBatteryAmmoProvider
-    proto: BulletRedHeavyLaser
+    proto: RedHeavyLaser
     fireCost: 100
   - type: Wieldable
   - type: UseDelay
@@ -937,7 +937,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: EmpImmune
   - type: HitscanBatteryAmmoProvider
-    proto: BulletPulse
+    proto: Pulse
     fireCost: 125
   - type: Battery
     maxCharge: 5000
@@ -985,7 +985,7 @@
     availableModes:
     - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: BulletSyndiPlasmaTriple
+    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 40
   - type: Wieldable
   - type: GunWieldBonus
@@ -1037,7 +1037,7 @@
       - SemiAuto
       - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: BulletSyndiPlasmaDouble
+    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 50
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -1084,7 +1084,7 @@
     availableModes:
     - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: BulletSyndiPlasmaDouble
+    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 25
   - type: MultiHandedItem
   - type: Battery
@@ -1126,7 +1126,7 @@
       name: energy-gun-disable
       state: base
       shotType: Hitscan
-    - hitscanProto: BulletEnergyGunLaser
+    - hitscanProto: RedLaserBeam
       fireCost: 50
       name: energy-gun-lethal
       shotType: Hitscan

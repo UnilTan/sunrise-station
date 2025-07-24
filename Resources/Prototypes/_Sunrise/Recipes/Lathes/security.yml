@@ -70,15 +70,6 @@
     Steel: 145
 
 - type: latheRecipe
-  id: SunriseMagazineRifle
-  result: SunriseMagazineRifle
-  categories:
-  - Ammo
-  completetime: 5
-  materials:
-    Steel: 325
-
-- type: latheRecipe
   id: MagazineLightMachineGunMG60
   result: MagazineLightMachineGunMG60
   categories:
@@ -107,7 +98,7 @@
 
 - type: latheRecipe
   id: MagazineLightRifleBox
-  result: MagazineLightRifleBox
+  result: MagazineLightRifleBoxSP
   categories:
   - Ammo
   completetime: 5
@@ -327,72 +318,72 @@
   completetime: 5
   materials:
     Steel: 30
-
-- type: latheRecipe
-  id: BaseMagazinePistolCaselessRifleExtended
-  result: BaseMagazinePistolCaselessRifleExtended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 350
-    Plastic: 200
-
-- type: latheRecipe
-  id: MagazinePPSH41Extended
-  result: MagazinePPSH41Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 1200
-
-- type: latheRecipe
-  id: MagazineMP5Extended
-  result: MagazineMP5Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 600
-
-- type: latheRecipe
-  id: MagazineMP7Extended
-  result: MagazineMP7Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 600
-
-- type: latheRecipe
-  id: MagazineP90Extended
-  result: MagazineP90Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 1400
-    Plastic: 50
-
-- type: latheRecipe
-  id: SunriseMagazineRifleExtended
-  result: SunriseMagazineRifleExtended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 450
-
-- type: latheRecipe
-  id: MagazineAR18Extended
-  result: MagazineAR18Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 650
-
+#
+#- type: latheRecipe
+#  id: BaseMagazinePistolCaselessRifleExtended
+#  result: BaseMagazinePistolCaselessRifleExtended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 350
+#    Plastic: 200
+#
+#- type: latheRecipe
+#  id: MagazinePPSH41Extended
+#  result: MagazinePPSH41Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 1200
+#
+#- type: latheRecipe
+#  id: MagazineMP5Extended
+#  result: MagazineMP5Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 600
+#
+#- type: latheRecipe
+#  id: MagazineMP7Extended
+#  result: MagazineMP7Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 600
+#
+#- type: latheRecipe
+#  id: MagazineP90Extended
+#  result: MagazineP90Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 1400
+#    Plastic: 50
+#
+#- type: latheRecipe
+#  id: MagazineRifleExtended
+#  result: MagazineRifleExtended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 450
+#
+#- type: latheRecipe
+#  id: MagazineAR18Extended
+#  result: MagazineAR18Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 650
+#
 #- type: latheRecipe
 #  id: MagazineM28Extended
 #  result: MagazineM28Extended
@@ -401,17 +392,17 @@
 #  completetime: 12
 #  materials:
 #    Steel: 650
-
-- type: latheRecipe
-  id: MagazineV31Extended
-  result: MagazineV31Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 1300
-    Plastic: 100
-
+#
+#- type: latheRecipe
+#  id: MagazineV31Extended
+#  result: MagazineV31Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 1300
+#    Plastic: 100
+#
 #- type: latheRecipe
 #  id: MagazineBauer127Extended
 #  result: MagazineBauer127Extended
@@ -421,25 +412,25 @@
 #  materials:
 #    Steel: 1200
 #    Plastic: 50
-
-- type: latheRecipe
-  id: MagazineBR64Extended
-  result: MagazineBR64Extended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 1000
-    Plastic: 50
-
-- type: latheRecipe
-  id: MagazineDragunovExtended
-  result: MagazineDragunovExtended
-  categories:
-  - Weapons
-  completetime: 12
-  materials:
-    Steel: 1200
+#
+#- type: latheRecipe
+#  id: MagazineBR64Extended
+#  result: MagazineBR64Extended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 1000
+#    Plastic: 50
+#
+#- type: latheRecipe
+#  id: MagazineDragunovExtended
+#  result: MagazineDragunovExtended
+#  categories:
+#  - Weapons
+#  completetime: 12
+#  materials:
+#    Steel: 1200
 
 
 - type: latheRecipe
