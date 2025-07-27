@@ -95,3 +95,6 @@ tts-voice-name-314-zabolotniy = (NEW) [314 Кабинет] Заболотный
 tts-voice-name-lol-akali1 = (NEW) [LOL] Акали
 tts-voice-name-lol-nasus = (NEW) [LOL] Насус
 tts-voice-name-crysis2-overlord-1 = (NEW) [Crysis 2] Overlord 1
+tts-voice-name-crysis2-overlord-2 = (NEW) [Crysis 2] Overlord 2
+tts-voice-name-dictor-vsevolod-kuznetsov (NEW) [Диктор] Всеволод Кузнецов
+tts-voice-name-duke-nukem-forever = (NEW) Дюк Нюкем/Шрек
