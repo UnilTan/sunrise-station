@@ -167,7 +167,7 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
-        color: "#1A8C1A"
+        color: "#8a1b1b"
 
 - type: entity
   id: SpeedLoaderMagnumIncendiary

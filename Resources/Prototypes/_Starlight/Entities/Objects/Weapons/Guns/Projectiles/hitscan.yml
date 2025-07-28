@@ -208,7 +208,7 @@
   bullet:
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-      state: ap
+      state: piercing
 
 ### pistol
 
@@ -333,7 +333,7 @@
   bullet:
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-      state: ap
+      state: piercing
 
 - type: hitscan
   id: BulletPistolTrace40SP
@@ -394,7 +394,7 @@
   bullet:
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-      state: ap
+      state: piercing
   armorPenetration: 0.50
   pierceChance: 0.63
   derivation: 0.15
@@ -514,7 +514,7 @@
   bullet:
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-      state: ap
+      state: piercing
 
 - type: hitscan
   id: BulletLightRifleTracePractice
@@ -619,7 +619,7 @@
   bullet:
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-      state: ap
+      state: piercing
 
 - type: hitscan
   id: BulletRifleTracePractice
@@ -1005,7 +1005,7 @@
   damage:
     types:
       Piercing: 20 #- 30%
-      Structural: 5
+      Structural: 2
   armorPenetration: 0.80
   pierceChance: 0.85
   ricochetChance: 0.30
@@ -1014,7 +1014,7 @@
   bullet:
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-      state: ap
+      state: piercing
 
 - type: hitscan
   id: BulletRifleTraceHeavyPractice

@@ -66,6 +66,8 @@
 - type: Tag
   id: HandGrenadeAmmo
 
+- type: Tag
+  id: SpeedLoaderShotgun
 # Weapons
 - type: Tag
   id: WrappedWeapon

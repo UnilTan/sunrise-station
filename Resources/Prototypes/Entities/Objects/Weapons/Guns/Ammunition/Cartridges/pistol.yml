@@ -76,7 +76,7 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#1A8C1A"
+        color: "#8a1b1b"
 
 - type: entity
   id: CartridgePistolPractice

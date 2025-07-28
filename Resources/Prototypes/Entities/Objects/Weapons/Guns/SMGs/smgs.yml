@@ -183,11 +183,11 @@
           priority: 2
           whitelist:
             tags:
-            - MagazinePistolSubMachineGunSP
+            - MagazinePistolSubMachineGun
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistolFMJ
+          startingItem: CartridgePistolSP
           priority: 1
           whitelist:
             tags:

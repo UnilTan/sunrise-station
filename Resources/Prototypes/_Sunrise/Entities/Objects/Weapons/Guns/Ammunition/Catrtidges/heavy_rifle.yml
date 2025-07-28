@@ -83,7 +83,7 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#B68F0E"
-        
+
 - type: entity
   id: CartridgeRifleHeavyAP
   name: cartridge (.308 AP)
@@ -97,7 +97,7 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#1A8C1A"
+        color: "#8a1b1b"
 
 - type: entity
   id: CartridgeRifleHeavyPractice
@@ -189,7 +189,7 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#B68F0E"
-        
+
 - type: entity
   id: CartridgeRifleMachineAP
   name: cartridge (7.62mmR AP)
@@ -203,7 +203,7 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#1A8C1A"
+        color: "#8a1b1b"
 
 - type: entity
   id: CartridgeRifleMachinePractice
