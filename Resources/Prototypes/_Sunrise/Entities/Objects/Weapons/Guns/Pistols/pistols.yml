@@ -83,7 +83,7 @@
           - MagazinePistolHighCapacity
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistolFMJ
         priority: 1
         whitelist:
           tags:
@@ -137,7 +137,7 @@
           - MagazineGlock22
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -180,7 +180,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineGlock22
+        startingItem: null
         insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_unload.ogg
         priority: 2
@@ -191,7 +191,7 @@
           - MagazineGlock22
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: null
         priority: 1
         whitelist:
           tags:
@@ -241,7 +241,7 @@
           - MagazineHIBrowning
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgePistolFMJ
         priority: 1
         whitelist:
           tags:
@@ -291,7 +291,7 @@
           - MagazineACP14
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnum
+        startingItem: CartridgeMagnumSP
         priority: 1
         whitelist:
           tags:
@@ -333,9 +333,9 @@
   - type: Gun
     minAngle: 4
     maxAngle: 16
-    angleIncrease: 4
-    angleDecay: 3
-    fireRate: 3.75
+    angleIncrease: 6
+    angleDecay: 7
+    fireRate: 5
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -358,7 +358,7 @@
           - MagazineDeagle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnum
+        startingItem: CartridgeMagnumSP
         priority: 1
         whitelist:
           tags:

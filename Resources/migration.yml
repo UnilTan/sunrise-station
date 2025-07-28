@@ -295,23 +295,23 @@ BulletRifleRubber: BulletRifle
 BulletCaselessRifleRubber: BulletCaselessRifle
 CartridgePistolRubber: CartridgePistolFMJ
 CartridgeLightRifleRubber: CartridgeLightRifleSP
-CartridgeRifleRubber: CartridgeRifle
+CartridgeRifleRubber: CartridgeRifleSP
 CartridgeCaselessRifleRubber: CartridgeCaselessRifle
 MagazinePistolRubber: MagazinePistol
 MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGunSP
 MagazinePistolCaselessRifleRubber: MagazinePistolCaselessRifle
 MagazineMagnumRubber: MagazineMagnum
-MagazineMagnumSubMachineGunRubber: MagazineMagnumSubMachineGunSP
+MagazineMagnumSubMachineGunRubber: MagazineMagnumSubMachineGun
 MagazineLightRifleRubber: MagazineLightRifleSP
 MagazineRifleRubber: MagazineRifleSP
 MagazineCaselessRifleRubber: MagazineCaselessRifle
 MagazineCaselessRifleShortRubber: MagazineCaselessRifleShort
 SpeedLoaderPistolRubber: SpeedLoaderPistol
-SpeedLoaderMagnumRubber: SpeedLoaderMagnum
-MagazineBoxPistolRubber: MagazineBoxPistol
+SpeedLoaderMagnumRubber: SpeedLoaderMagnumSP
+MagazineBoxPistolRubber: MagazineBoxPistolSP
 # RIP box of magnum rubbers 202X to 2024
 MagazineBoxMagnumRubber: MagazineBoxMagnumSP
-MagazineBoxLightRifleRubber: MagazineBoxLightRifle
+MagazineBoxLightRifleRubber: MagazineBoxLightRifleSP
 MagazineBoxRifleRubber: MagazineBoxRifleSP
 MagazineBoxRifleBigRubber: MagazineBoxRifleBig
 MagazineBoxCaselessRifleRubber: MagazineBoxCaselessRifle
@@ -779,4 +779,5 @@ MagazineFamas: null
 BaseUplinkNTERT75BC: null
 BaseUplinkNTERT100BC: null
 BaseUplinkNTERT200BC: null
+CartridgePistol: null
 # Sunrise migrations end

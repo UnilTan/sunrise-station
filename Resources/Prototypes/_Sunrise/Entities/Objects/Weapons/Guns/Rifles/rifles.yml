@@ -324,7 +324,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifle
+        startingItem: MagazineRifleFMJ
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/Famas/famas_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/Famas/famas_unload.ogg
         priority: 2
@@ -459,7 +459,7 @@
             - MagazineAR18 #MagazineM28 Одно и тоже
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifle
+        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
@@ -524,7 +524,7 @@
           - MagazineAR18
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifle
+        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
@@ -752,7 +752,7 @@
         priority: 3
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifle
+        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:

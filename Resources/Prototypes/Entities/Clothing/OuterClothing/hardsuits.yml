@@ -568,7 +568,7 @@
     damageCoefficient: 0.5
   - type: StaminaResistance
   - type: Pierceable
-    level: Rock
+    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -614,7 +614,7 @@
   - type: ExplosionResistance #Sunrise-start
     damageCoefficient: 0.35
   - type: Pierceable
-    level: Rock
+    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -729,7 +729,7 @@
   - type: StaminaResistance # Should not have stamina resistance, this is purely so people know it was not forgotten.
     damageCoefficient: 0.40 #Sunrise-edit
   - type: Pierceable
-    level: Metal
+    level: Rock
   - type: Armor
     modifiers:
       coefficients:
@@ -768,7 +768,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Pierceable
-    level: Metal
+    level: Rock
   - type: Armor
     modifiers:
       coefficients:

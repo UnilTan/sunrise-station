@@ -26,14 +26,14 @@
     - 0,0,3,3
   - type: StorageFill
     contents:
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
-    - id: MagazinePistolSubMachineGun
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
+    - id: MagazinePistolSubMachineGunSP
   - type: Sprite
     layers:
     - state: box_of_doom_big

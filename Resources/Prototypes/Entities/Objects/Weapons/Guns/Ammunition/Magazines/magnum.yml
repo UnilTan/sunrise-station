@@ -196,7 +196,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnum
+    proto: CartridgeMagnumFMJ
   - type: Sprite
     layers:
     - state: base

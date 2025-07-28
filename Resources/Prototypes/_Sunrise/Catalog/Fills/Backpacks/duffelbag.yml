@@ -46,20 +46,20 @@
   - type: StorageFill
     contents:
     - id: WeaponSubMachineGunMP7
-    - id: MagazinePistolSubMachineGun
+    - id: BoxMagazinePistolHighCapacityFMJ
       amount: 3
 
-#- type: entity
-#  id: ClothingBackpackDuffelWeaponRifleLecterFilled
-#  parent: ClothingBackpackDuffelMilitary
-#  name: Bundlelecter
-#  description: Lecter with 3 raspy magazines.
-#  components:
-#    - type: StorageFill
-#      contents:
-#        - id: WeaponRifleLecter
-#        - id: MagazineRifle
-#          amount: 3
+- type: entity
+  id: ClothingBackpackDuffelWeaponRifleLecterFilled
+  parent: ClothingBackpackDuffelMilitary
+  name: Bundlelecter
+  description: Lecter with 3 raspy magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleLecter
+    - id: MagazineRifleFMJ
+      amount: 3
 
 - type: entity
   id: ClothingBackpackDuffelWeaponSubMachineGunP90Filled

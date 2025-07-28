@@ -8,11 +8,11 @@
     - MagazineP90
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol
+    proto: CartridgePistolFMJ
     whitelist:
       tags:
       - CartridgePistol
-    capacity: 30
+    capacity: 35
   - type: Item
     size: Small
   - type: ContainerContainer
@@ -41,7 +41,7 @@
     - MagazineMP7
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol
+    proto: CartridgePistolFMJ
     whitelist:
       tags:
       - CartridgePistol
@@ -74,7 +74,7 @@
     - MagazineMP5
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol
+    proto: CartridgePistolSP
     whitelist:
       tags:
       - CartridgePistol
@@ -107,7 +107,7 @@
     - MagazinePPSH41
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol  # 57x28
+    proto: CartridgePistolSP  # 57x28
     whitelist:
       tags:
       - CartridgePistol  # 57x28
@@ -168,7 +168,7 @@
     - MagazineGlock22
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistol  # 57x28
+    proto: CartridgePistolSP  # 57x28
     whitelist:
       tags:
       - CartridgePistol  # 57x28

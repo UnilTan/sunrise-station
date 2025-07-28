@@ -92,7 +92,7 @@
     contents:
       - id: WeaponSubMachineGunMP7
         amount: 2
-      - id: MagazinePistolSubMachineGun
+      - id: MagazinePistolHighCapacityFMJ
         amount: 2
 
 - type: entity

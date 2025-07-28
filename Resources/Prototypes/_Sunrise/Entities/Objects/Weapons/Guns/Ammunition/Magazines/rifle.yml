@@ -78,7 +78,7 @@
     size: Small
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgeHeavyRifle
+    proto: CartridgeRifleHeavySP
     whitelist:
       tags:
       - CartridgeHeavyRifle

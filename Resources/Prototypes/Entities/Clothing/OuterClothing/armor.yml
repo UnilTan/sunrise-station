@@ -256,7 +256,7 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
   - type: Pierceable
-    level: Metal
+    level: Rock
   - type: Armor
     modifiers:
       coefficients:

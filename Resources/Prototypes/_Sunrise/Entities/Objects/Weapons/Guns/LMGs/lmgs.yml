@@ -41,11 +41,11 @@
           - MagazineLightMachineGunMG60
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
+        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
-          - CartridgeLightRifle
+          - CartridgeRifleMachine
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -170,11 +170,11 @@
     minAngle: 0
     maxAngle: 0
   - type: Gun
-    minAngle: 6
+    minAngle: 7
     maxAngle: 140
-    angleIncrease: 5
-    angleDecay: 55
-    fireRate: 12
+    angleIncrease: 5.25
+    angleDecay: 60
+    fireRate: 13
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
       params:
@@ -192,7 +192,7 @@
           - MagazineMachineGunMG42
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifle
+        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:

@@ -1,0 +1,251 @@
+﻿- type: entity
+  id: BaseCartridgeRifleHeavy
+  name: cartridge (.308)
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CartridgeHeavyRifle
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavySP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+- type: entity
+  id: BaseCartridgeRifleMachine
+  name: cartridge (7.62mmR)
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CartridgeRifleMachine
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavySP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+# .308 cartridges
+- type: entity
+  id: CartridgeRifleHeavySP
+  name: cartridge (.308 SP)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavySP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#3F47DB"
+
+- type: entity
+  id: CartridgeRifleHeavyHP
+  name: cartridge (.308 HP)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#000000"
+
+- type: entity
+  id: CartridgeRifleHeavyFMJ
+  name: cartridge (.308 FMJ)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyFMJ
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#B68F0E"
+        
+- type: entity
+  id: CartridgeRifleHeavyAP
+  name: cartridge (.308 AP)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#1A8C1A"
+
+- type: entity
+  id: CartridgeRifleHeavyPractice
+  name: cartridge (.308 practice)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyPractice
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#D86E2C"
+
+- type: entity
+  id: CartridgeRifleHeavyIncendiary
+  name: cartridge (.308 incendiary)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyIncendiary
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#BFC8CA"
+
+- type: entity
+  id: CartridgeRifleHeavyUranium
+  name: cartridge (.308 uranium)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyUranium
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"
+
+# 7.62mmR cartridges
+- type: entity
+  id: CartridgeRifleMachineSP
+  name: cartridge (7.62mmR SP)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavySP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#3F47DB"
+
+- type: entity
+  id: CartridgeRifleMachineHP
+  name: cartridge (7.62mmR HP)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#000000"
+
+- type: entity
+  id: CartridgeRifleMachineFMJ
+  name: cartridge (7.62mmR FMJ)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyFMJ
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#B68F0E"
+        
+- type: entity
+  id: CartridgeRifleMachineAP
+  name: cartridge (7.62mmR AP)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#1A8C1A"
+
+- type: entity
+  id: CartridgeRifleMachinePractice
+  name: cartridge (7.62mmR practice)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyPractice
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#D86E2C"
+
+- type: entity
+  id: CartridgeRifleMachineIncendiary
+  name: cartridge (7.62mmR incendiary)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyIncendiary
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#BFC8CA"
+
+- type: entity
+  id: CartridgeRifleMachineUranium
+  name: cartridge (7.62mmR uranium)
+  parent: BaseCartridgeRifleMachine
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletRifleTraceHeavyUranium
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"

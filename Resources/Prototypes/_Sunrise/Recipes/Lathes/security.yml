@@ -302,15 +302,6 @@
     Plastic: 100
 
 - type: latheRecipe
-  id: MagazinePistolHighCapacity
-  result: MagazinePistolHighCapacity
-  categories:
-  - Weapons
-  completetime: 5
-  materials:
-    Steel: 170
-
-- type: latheRecipe
   id: MagazinePistolHighCapacityEmpty
   result: MagazinePistolHighCapacityEmpty
   categories:

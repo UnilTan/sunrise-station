@@ -1354,7 +1354,7 @@
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mech_seraph }
   productEntity: CrateCommandSeraphBundle
   cost:
-    Bluecrystal: 160
+    Bluecrystal: 220
   categories:
   - NTMechs
   conditions:

@@ -97,8 +97,8 @@
     id: ERTSecurityPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSecurityFilled
-    pocket1: MagazinePistolSubMachineGun
-    pocket2: MagazinePistolSubMachineGun
+    pocket1: MagazinePistolSubMachineGunSP
+    pocket2: MagazinePistolSubMachineGunSP
   inhand:
   - WeaponSubMachineGunSkorpion
   storage:

@@ -123,7 +123,7 @@
             - MagazineBR64
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifle
+        startingItem: CartridgeRifleHeavyFMJ
         priority: 1
         whitelist:
           tags:
@@ -311,7 +311,7 @@
       tags:
       - CartridgeMagnum
     capacity: 7
-    proto: CartridgeMagnum
+    proto: CartridgeMagnumFMJ
   - type: Wieldable
   - type: UseDelay
     delay: 0.5
