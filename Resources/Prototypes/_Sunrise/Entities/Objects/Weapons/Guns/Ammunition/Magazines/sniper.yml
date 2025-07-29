@@ -9,7 +9,7 @@
       - MagazineBR64
   - type: BallisticAmmoProvider
     mayTransfer: true
-    capacity: 32
+    capacity: 20
     proto: CartridgeHeavyRifle
     whitelist:
       tags:
@@ -105,7 +105,7 @@
   id: MagazineBR64Extended
   components:
   - type: BallisticAmmoProvider
-    capacity: 36
+    capacity: 30
 
 #Magazine
 - type: entity
@@ -123,7 +123,7 @@
     mayTransfer: true
     whitelist:
       tags:
-      - CartridgeHeavyRifle
+      - CartridgeRifleMachine
     capacity: 10
   - type: ContainerContainer
     containers:
@@ -148,7 +148,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgeRifleMachineSP
     capacity: 20
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi
@@ -171,7 +171,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgeRifleMachineSP
   - type: Sprite
     layers:
     - state: base
@@ -213,7 +213,7 @@
   parent: MagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleIncendiary
+    proto: CartridgeRifleMachineIncendiary
   - type: Sprite
     layers:
     - state: base
@@ -240,7 +240,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRiflePractice
+    proto: CartridgeRifleMachinePractice
   - type: Sprite
     layers:
     - state: base
@@ -267,7 +267,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleUranium
+    proto: CartridgeRifleMachineUranium
   - type: Sprite
     layers:
     - state: base

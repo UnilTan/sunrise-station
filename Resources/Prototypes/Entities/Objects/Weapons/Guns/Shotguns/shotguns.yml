@@ -85,7 +85,7 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #- type: GunRequiresWield #remove when inaccuracy on spreads is fixed # Sunrise-Edit
   - type: Gun
     fireRate: 2
     selectedMode: FullAuto

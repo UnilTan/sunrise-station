@@ -17,7 +17,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/HMGs/minigun_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeRifle
+    proto: CartridgeRifleSP
     fireCost: 7
   - type: Appearance
   - type: AmmoCounter
@@ -44,7 +44,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgeRifleMachineSP
     fireCost: 8
   - type: Appearance
   - type: AmmoCounter
@@ -73,7 +73,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeRifle
+    proto: CartridgeRifleSP
     fireCost: 8
   - type: Appearance
   - type: AmmoCounter
@@ -91,7 +91,7 @@
   - type: Gun
     minAngle: -10
     maxAngle: 15
-    fireRate: 0.2
+    fireRate: 0.25
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -99,7 +99,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: CannonBall
-    fireCost: 160
+    fireCost: 150
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -118,7 +118,7 @@
   - type: Gun
     minAngle: -10
     maxAngle: 15
-    fireRate: 0.4
+    fireRate: 0.25
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -126,7 +126,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: CannonBallGrapeshot
-    fireCost: 50
+    fireCost: 75
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -145,7 +145,7 @@
   - type: Gun
     minAngle: -10
     maxAngle: 15
-    fireRate: 0.35
+    fireRate: 0.25
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -153,7 +153,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: CannonBallGlassshot
-    fireCost: 80
+    fireCost: 75
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
