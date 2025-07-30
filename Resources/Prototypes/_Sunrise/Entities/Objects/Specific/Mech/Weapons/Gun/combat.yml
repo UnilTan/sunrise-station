@@ -44,7 +44,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeRifleMachineSP
+    proto: CartridgeHeavyRifleRSP
     fireCost: 8
   - type: Appearance
   - type: AmmoCounter

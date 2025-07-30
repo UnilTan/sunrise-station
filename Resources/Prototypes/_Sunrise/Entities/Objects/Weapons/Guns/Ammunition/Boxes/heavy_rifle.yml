@@ -164,8 +164,8 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeRifleMachine
-    proto: CartridgeRifleMachineSP
+        - CartridgeHeavyRifleR
+    proto: CartridgeHeavyRifleRSP
     capacity: 20
   - type: Item
     size: Small
@@ -188,7 +188,7 @@
   components:
   - type: BallisticAmmoProvider
     capacity: 160
-    proto: CartridgeRifleMachineSP
+    proto: CartridgeHeavyRifleRSP
   - type: Sprite
     layers:
     - state: base-b
@@ -207,7 +207,7 @@
   name: ammunition box (7.62mmR SP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineSP
+    proto: CartridgeHeavyRifleRSP
   - type: Sprite
     layers:
     - state: base
@@ -222,7 +222,7 @@
   name: ammunition box (7.62mmR HP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineHP
+    proto: CartridgeHeavyRifleRHP
   - type: Sprite
     layers:
     - state: base
@@ -236,7 +236,7 @@
   name: ammunition box (7.62mmR FMJ)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineFMJ
+    proto: CartridgeHeavyRifleRFMJ
   - type: Sprite
     layers:
     - state: base
@@ -251,7 +251,7 @@
   name: ammunition box (7.62mmR AP)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineAP
+    proto: CartridgeHeavyRifleRAP
   - type: Sprite
     layers:
     - state: base
@@ -267,7 +267,7 @@
   description: A cardboard box of 7.62mmR rounds. Intended to hold non-harmful chalk ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachinePractice
+    proto: CartridgeHeavyRifleRPractice
   - type: Sprite
     layers:
     - state: base
@@ -283,7 +283,7 @@
   description: A cardboard box of 7.62mmR rounds. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineIncendiary
+    proto: CartridgeHeavyRifleRIncendiary
   - type: Sprite
     layers:
     - state: base
@@ -299,7 +299,7 @@
   description: A cardboard box of 7.62mmR rounds. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineUranium
+    proto: CartridgeHeavyRifleRUranium
   - type: Sprite
     layers:
     - state: base

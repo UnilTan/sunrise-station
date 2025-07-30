@@ -12,7 +12,7 @@
     whitelist:
       tags:
       - CartridgePistol
-    capacity: 35
+    capacity: 50
   - type: Item
     size: Small
   - type: ContainerContainer
@@ -150,13 +150,6 @@
   components:
   - type: BallisticAmmoProvider
     capacity: 42
-
-- type: entity
-  parent: MagazineP90
-  id: MagazineP90Extended
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 50
 
 - type: entity
   id: MagazineGlock22

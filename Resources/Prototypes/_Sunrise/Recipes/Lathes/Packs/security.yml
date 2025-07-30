@@ -1,13 +1,6 @@
 - type: latheRecipePack
   id: SecurityStaticSunrise
   recipes:
-    - MagazineMagnumEmpty
-    - MagazineMagnum
-    - MagazineP90
-    - MagazineBR64
-    - MagazinePistolHighCapacityEmpty
-    - MagazineMagnum
-    - MagazineP90
     ######################BOX#######################
     # Light Rifle
     - MagazineBoxLightRifleSP
@@ -17,6 +10,8 @@
     - MagazineBoxMagnumSP
     - MagazineBoxMagnumHP
     - MagazineBoxMagnumFMJ
+    - MagazineMagnum
+    - MagazineMagnumEmpty
     # Pistol
     - MagazineBoxPistolSP
     - MagazineBoxPistolHP
@@ -62,19 +57,22 @@
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunFMJ
     - MagazinePistolSubMachineGunEmpty
-    - MagazinePistolSubMachineGunTopMounted
+    # SMG Top Mounted
+    - MagazinePistolSubMachineGunTopMounted # FMJ
+    - MagazinePistolSubMachineGunTopMountedSP
+    - MagazinePistolSubMachineGunTopMountedHP
     - MagazinePistolSubMachineGunTopMountedEmpty
     # Rifle
     - MagazineRifleSP
     - MagazineRifleHP
     - MagazineRifleFMJ
     - MagazineRifleEmpty
-    # Shotgun
+    # Shotgun Magazine
     - MagazineShotgun
     - MagazineShotgunEmpty
     - MagazineShotgunSlug
-
-    - SpeedLoaderMagnumBasic
+    # Shotgun Speedloader
+    - SpeedLoaderShellShotgun
     - SpeedLoaderShotgunEmpty
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
@@ -94,7 +92,6 @@
 #    - MagazinePPSH41Extended
 #    - MagazineMP5Extended
 #    - MagazineMP7Extended
-#    - MagazineP90Extended
 #    - MagazineRifleExtended
 #    - MagazineAR18Extended
 #    - MagazineM28Extended
@@ -152,6 +149,10 @@
     - MagazinePistolSubMachineGunIncendiary
     - MagazinePistolSubMachineGunUranium
     - MagazinePistolSubMachineGunAP
+    # SMG Top Mounted
+    - MagazinePistolSubMachineGunTopMountedAP
+    - MagazinePistolSubMachineGunTopMountedIncendiary
+    - MagazinePistolSubMachineGunTopMountedUranium
   # Rifle
     - MagazineRifleIncendiary
     - MagazineRifleUranium

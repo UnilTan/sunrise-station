@@ -458,36 +458,12 @@
   - !type:ListingLimitedStockCondition
     stock: 6
 
-# - type: listing #Закомментировано, т.к. закоментирован SMGIncendiaryAmmoKit
-#   id: NTUplinkSunriseSMGIncendiaryAmmoKit
-#   productEntity: SMGIncendiaryAmmoKit
-#   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: box_smg_red }
-#   cost:
-#     Crystallite: 18
-#   categories:
-#   - NTAmmo
-#   conditions:
-#   - !type:ListingLimitedStockCondition
-#     stock: 4
-
 - type: listing
   id: NTUplinkSunriseBoxMagazineShotgun
   productEntity: BoxMagazineShotgun
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: box_shot }
   cost:
     Crystallite: 5
-  categories:
-  - NTAmmo
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 8
-
-- type: listing
-  id: NTUplinkSunriseBoxMagazineShotgunIncendiary
-  productEntity: BoxMagazineShotgunIncendiary
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: box_shot_red }
-  cost:
-    Crystallite: 10
   categories:
   - NTAmmo
   conditions:

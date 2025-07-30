@@ -4,6 +4,8 @@
   parent: [ BaseItem ]
   abstract: true
   components:
+  - type: Item
+    size: Normal
   - type: Tag
     tags:
       - SpeedLoaderShotgun
@@ -54,7 +56,7 @@
         color: "#F4001F"
 
 - type: entity
-  id: SpeedLoaderMagnumBasic
+  id: SpeedLoaderShellShotgun
   name: "speed loader (.50 pellet)"
   parent: [ BaseSpeedLoaderShotgun, BaseSecurityContraband ]
   components:

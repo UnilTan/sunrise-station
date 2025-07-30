@@ -677,7 +677,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: GrenadeFragLight
+    proto: GrenadeFrag
     fireCost: 250
   - type: Battery
     maxCharge: 1500

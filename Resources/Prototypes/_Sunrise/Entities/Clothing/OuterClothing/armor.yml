@@ -66,12 +66,16 @@
     sprite: Clothing/OuterClothing/Armor/heavy.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/heavy.rsi
+  - type: StaminaResistance
+    damageCoefficient: 0.75
+  - type: Pierceable
+    level: Rock
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.55
         Slash: 0.55
-        Piercing: 0.55
+        Piercing: 0.50
         Heat: 0.6
         Radiation: 0.6
         Caustic: 0.6
@@ -84,8 +88,8 @@
     heatingCoefficient: 0.5
     coolingCoefficient: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET

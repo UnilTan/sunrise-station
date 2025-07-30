@@ -82,6 +82,18 @@
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#3F47DB"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      - state: inhand-left-stripe
+        color: "#3F47DB"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
+      - state: inhand-right-stripe
+        color: "#3F47DB"
 
 - type: entity
   id: SpeedLoaderMagnumHP
@@ -99,7 +111,19 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
-        color: "#000000"
+        color: "#F5514C"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      - state: inhand-left-stripe
+        color: "#F5514C"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
+      - state: inhand-right-stripe
+        color: "#F5514C"
 
 - type: entity
   id: SpeedLoaderMagnumFMJ
@@ -117,6 +141,18 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
+        color: "#C7B458"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      - state: inhand-left-stripe
+        color: "#C7B458"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
+      - state: inhand-right-stripe
         color: "#C7B458"
 
 - type: entity
@@ -136,19 +172,19 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
-        color: "#D86E2C"
+        color: "#dbdbdb"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-ammo
       - state: inhand-left-stripe
-        color: "#ea5800"
+        color: "#dbdbdb"
       right:
       - state: inhand-right-mag
       - state: inhand-right-ammo
       - state: inhand-right-stripe
-        color: "#ea5800"
+        color: "#dbdbdb"
 
 - type: entity
   id: SpeedLoaderMagnumAP
@@ -167,7 +203,19 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
-        color: "#8a1b1b"
+        color: "#540000"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      - state: inhand-left-stripe
+        color: "#540000"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
+      - state: inhand-right-stripe
+        color: "#540000"
 
 - type: entity
   id: SpeedLoaderMagnumIncendiary
@@ -185,7 +233,19 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
-        color: "#BFC8CA"
+        color: "#ff6e52"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      - state: inhand-left-stripe
+        color: "#ff6e52"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
+      - state: inhand-right-stripe
+        color: "#ff6e52"
 
 - type: entity
   id: SpeedLoaderMagnumUranium
@@ -204,4 +264,16 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: base-tip-6
         map: [ "enum.GunVisualLayers.Tip" ]
+        color: "#65fe08"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      - state: inhand-left-stripe
+        color: "#65fe08"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
+      - state: inhand-right-stripe
         color: "#65fe08"

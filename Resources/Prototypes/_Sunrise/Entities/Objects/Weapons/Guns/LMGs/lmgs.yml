@@ -45,7 +45,7 @@
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifleMachine
+          - CartridgeHeavyRifleR
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -150,7 +150,7 @@
   - type: HeldSpeedModifier
 
 - type: entity
-  name: MG-42
+  name: MG-342
   parent: BaseWeaponLightMachineGun
   id: WeaponMachineGunMG42
   components:
@@ -170,11 +170,11 @@
     minAngle: 0
     maxAngle: 0
   - type: Gun
-    minAngle: 7
+    minAngle: 5
     maxAngle: 140
-    angleIncrease: 5.25
-    angleDecay: 60
-    fireRate: 13
+    angleIncrease: 4.5
+    angleDecay: 70
+    fireRate: 12
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
       params:
@@ -190,6 +190,7 @@
         whitelist:
           tags:
           - MagazineMachineGunMG42
+          - MagazineMachineGunHeavyRifle
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifleHeavySP

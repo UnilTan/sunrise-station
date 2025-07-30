@@ -79,7 +79,7 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#8a1b1b"
+        color: "#540000"
 
 - type: entity
   id: CartridgeMagnumPractice
@@ -94,7 +94,7 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#D86E2C"
+        color: "#dbdbdb"
 
 - type: entity
   id: CartridgeMagnumIncendiary
@@ -110,7 +110,7 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#BFC8CA"
+        color: "#ff6e52"
 
 - type: entity
   id: CartridgeMagnumUranium

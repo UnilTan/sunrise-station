@@ -266,7 +266,7 @@
   id: LightRifleHeavyMagazineEmpty
   result: LightRifleHeavyMagazineEmpty
   materials:
-    Steel: 25
+    Steel: 100
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
@@ -294,7 +294,7 @@
   id: LightRifleHeavyMagazineUranium
   result: LightRifleHeavyMagazineUranium
   materials:
-    Steel: 25
+    Steel: 100
     Plastic: 1080
     Uranium: 1080
 
@@ -303,7 +303,7 @@
   id: LightRifleHeavyMagazineIncendiary
   result: LightRifleHeavyMagazineIncendiary
   materials:
-    Steel: 25
+    Steel: 100
     Plastic: 1350
 
 - type: latheRecipe
@@ -722,8 +722,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: SpeedLoaderMagnumBasic
-  result: SpeedLoaderMagnumBasic
+  id: SpeedLoaderShellShotgun
+  result: SpeedLoaderShellShotgun
   materials:
     Steel: 140
 

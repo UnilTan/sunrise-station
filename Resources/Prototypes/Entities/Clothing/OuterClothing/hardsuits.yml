@@ -567,6 +567,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: StaminaResistance
+    damageCoefficient: 0.75
   - type: Pierceable
     level: Metal
   - type: Armor

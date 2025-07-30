@@ -146,9 +146,10 @@
   result: MagazineP90
   categories:
   - Ammo
-  completetime: 5
+  completetime: 10
   materials:
-    Steel: 700
+    Steel: 1250
+    Plastic: 100
 
 - type: latheRecipe
   id: MagazineScorpion
@@ -176,24 +177,6 @@
   completetime: 5
   materials:
     Steel: 500
-
-# - type: latheRecipe
-#   id: MagazineM28 #Есть MagazineAR18
-#   result: MagazineM28
-#   categories:
-#   - Ammo
-#   completetime: 5
-#   materials:
-#     Steel: 325
-
-- type: latheRecipe
-  id: MagazineBR64
-  result: MagazineBR64
-  categories:
-  - Ammo
-  completetime: 5
-  materials:
-    Steel: 850
 
 - type: latheRecipe
   id: MagazineDragunov
@@ -301,14 +284,14 @@
     Steel: 800
     Plastic: 100
 
-- type: latheRecipe
-  id: MagazinePistolHighCapacityEmpty
-  result: MagazinePistolHighCapacityEmpty
-  categories:
-  - Weapons
-  completetime: 5
-  materials:
-    Steel: 30
+# - type: latheRecipe # Отдельной технологией
+#   id: MagazinePistolHighCapacityEmpty
+#   result: MagazinePistolHighCapacityEmpty
+#   categories:
+#   - Weapons
+#   completetime: 5
+#   materials:
+#     Steel: 30
 #
 #- type: latheRecipe
 #  id: BaseMagazinePistolCaselessRifleExtended
@@ -346,16 +329,6 @@
 #  completetime: 12
 #  materials:
 #    Steel: 600
-#
-#- type: latheRecipe
-#  id: MagazineP90Extended
-#  result: MagazineP90Extended
-#  categories:
-#  - Weapons
-#  completetime: 12
-#  materials:
-#    Steel: 1400
-#    Plastic: 50
 #
 #- type: latheRecipe
 #  id: MagazineRifleExtended
@@ -630,3 +603,52 @@
     Steel: 2000
     Plastic: 500
     Gold: 500
+
+# WT550 Sunrise Ammunition
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunTopMountedSP
+  result: MagazinePistolSubMachineGunTopMountedSP
+  materials:
+    Steel: 300
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunTopMountedHP
+  result: MagazinePistolSubMachineGunTopMountedHP
+  materials:
+    Steel: 300
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunTopMountedAP
+  result: MagazinePistolSubMachineGunTopMountedAP
+  materials:
+    Plastic: 150
+    Steel: 150
+    Uranium: 300
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunTopMountedPractice
+  result: MagazinePistolSubMachineGunTopMountedPractice
+  materials:
+    Steel: 150
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunTopMountedIncendiary
+  result: MagazinePistolSubMachineGunTopMountedIncendiary
+  materials:
+    Steel: 25
+    Plastic: 135
+    Plasma: 140
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunTopMountedUranium
+  result: MagazinePistolSubMachineGunTopMountedUranium
+  materials:
+    Steel: 25
+    Plastic: 250
+    Uranium: 250

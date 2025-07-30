@@ -36,7 +36,7 @@
   - MagazineBoxMagnumIncendiary
   - MagazineBoxLightRifleIncendiary
   - MagazineBoxRifleIncendiary
-  - MagazineLightRifleBoxIncendiary #Sunrise-Add
+  - MagazinePistolSubMachineGunTopMountedIncendiary #Sunrise-Add
 
 - type: technology
   id: WeaponizedLaserManipulation

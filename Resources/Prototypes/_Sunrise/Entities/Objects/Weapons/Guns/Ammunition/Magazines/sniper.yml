@@ -123,7 +123,7 @@
     mayTransfer: true
     whitelist:
       tags:
-      - CartridgeRifleMachine
+      - CartridgeHeavyRifleR
     capacity: 10
   - type: ContainerContainer
     containers:
@@ -148,7 +148,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineSP
+    proto: CartridgeHeavyRifleRSP
     capacity: 20
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi
@@ -171,7 +171,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineSP
+    proto: CartridgeHeavyRifleRSP
   - type: Sprite
     layers:
     - state: base
@@ -213,7 +213,7 @@
   parent: MagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineIncendiary
+    proto: CartridgeHeavyRifleRIncendiary
   - type: Sprite
     layers:
     - state: base
@@ -240,7 +240,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachinePractice
+    proto: CartridgeHeavyRifleRPractice
   - type: Sprite
     layers:
     - state: base
@@ -267,7 +267,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleMachineUranium
+    proto: CartridgeHeavyRifleRUranium
   - type: Sprite
     layers:
     - state: base

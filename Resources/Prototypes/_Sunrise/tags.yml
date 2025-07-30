@@ -49,7 +49,7 @@
 # Catridges:
 
 - type: Tag
-  id: CartridgeRifleMachine
+  id: CartridgeHeavyRifleR
 
 - type: Tag
   id: FireThrowerBall
@@ -126,6 +126,9 @@
 
 - type: Tag
   id: MagazineLightMachineGunMG60
+
+- type: Tag
+  id: MagazineMachineGunHeavyRifle # .308 calibler
 
 - type: Tag
   id: MagazineVP70

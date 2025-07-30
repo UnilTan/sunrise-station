@@ -194,10 +194,10 @@
     - MagazineLightMachineGunMG60
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgeRifleMachineSP  # 762x54
+    proto: CartridgeHeavyRifleRSP  # 762x54
     whitelist:
       tags:
-      - CartridgeRifleMachine  # 762x54
+      - CartridgeHeavyRifleR  # 762x54
     capacity: 100
   - type: Item
     size: Normal

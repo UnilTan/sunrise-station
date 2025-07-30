@@ -5,7 +5,7 @@
   components:
   - type: Tag
     tags:
-      - MagazineMachineGunMG42
+      - MagazineMachineGunHeavyRifle
   - type: BallisticAmmoProvider
     proto: CartridgeRifleHeavySP
     capacity: 100
