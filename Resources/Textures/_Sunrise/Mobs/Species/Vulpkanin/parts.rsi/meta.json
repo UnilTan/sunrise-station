@@ -23,7 +23,11 @@
             "directions": 4
         },
         {
-            "name": "l_foot",
+            "name": "l_foot_straight",
+            "directions": 4
+        },
+        {
+            "name": "l_foot_curved",
             "directions": 4
         },
         {
@@ -31,7 +35,11 @@
             "directions": 4
         },
         {
-            "name": "l_leg",
+            "name": "l_leg_straight",
+            "directions": 4
+        },
+        {
+            "name": "l_leg_curved",
             "directions": 4
         },
         {
@@ -39,7 +47,11 @@
             "directions": 4
         },
         {
-            "name": "r_foot",
+            "name": "r_foot_straight",
+            "directions": 4
+        },
+        {
+            "name": "r_foot_curved",
             "directions": 4
         },
         {
@@ -47,7 +59,11 @@
             "directions": 4
         },
         {
-            "name": "r_leg",
+            "name": "r_leg_straight",
+            "directions": 4
+        },
+        {
+            "name": "r_leg_curved",
             "directions": 4
         },
         {

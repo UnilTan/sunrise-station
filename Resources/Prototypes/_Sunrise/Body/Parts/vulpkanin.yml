@@ -5,7 +5,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Sunrise/Mobs/Species/Vulpkanin/Curved/parts.rsi
+    sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
 
 - type: entity
   id: TorsoVulpkanin
