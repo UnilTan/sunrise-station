@@ -21,64 +21,63 @@
   - type: Inventory
     speciesId: human
     femaleDisplacements:
-      body-curved:
 #        mask: TODO дисплейсмент на морду
 #        sizeMaps:
 #          32:
 #            sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
 #            state: mask
-        jumpsuit:
+        jumpsuit-body-curved:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
               state: jumpsuit-female
-        shoes:
+        shoes-body-curved:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
               state: shoes
-        socks:
+        socks-body-curved:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
               state: socks
-        outerClothing:
+        outerClothing-body-curved:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
               state: outer
-        hardsuit:
+        hardsuit-body-curved:
           sizeMaps:
             32:
               sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
               state: hardsuit
-      maleDisplacements:
-        jumpsuit:
-          sizeMaps:
-            32:
-              sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
-              state: jumpsuit
-        shoes:
-          sizeMaps:
-            32:
-              sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
-              state: shoes
-        socks:
-          sizeMaps:
-            32:
-              sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
-              state: socks
-        outerClothing:
-          sizeMaps:
-            32:
-              sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
-              state: outer
-        hardsuit-body-normal:
-          sizeMaps:
-            32:
-              sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
-              state: hardsuit
-    body-straight:
+    maleDisplacements:
+      jumpsuit-body-curved:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit
+      shoes-body-curved:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      socks-body-curved:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: socks
+      outerClothing-body-curved:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: outer
+      hardsuit-body-curved:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: hardsuit
+#    body-straight:
 #        mask: TODO дисплейсмент на морду
 #        sizeMaps:
 #          32:
@@ -119,54 +118,74 @@
   - type: Inventory
     speciesId: human
     femaleDisplacements:
-      jumpsuit:
+#        mask-body-curved: TODO дисплейсмент на морду
+#        sizeMaps:
+#          32:
+#            sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
+#            state: mask
+#        mask-body-straight: TODO дисплейсмент на морду
+#        sizeMaps:
+#          32:
+#            sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
+#            state: mask
+      jumpsuit-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: jumpsuit-female
-      shoes:
+      shoes-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: shoes
-      socks:
+      socks-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: socks
-      outerClothing:
+      outerClothing-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: outer
-      hardsuit:
+      hardsuit-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: hardsuit
     maleDisplacements:
-      jumpsuit:
+      jumpsuit-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: jumpsuit
-      shoes:
+      shoes-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: shoes
-      socks:
+      socks-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: socks
-      outerClothing:
+      outerClothing-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: outer
-      hardsuit-body-normal:
+      hardsuit-body-curved:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: hardsuit
+#        mask-body-curved: TODO дисплейсмент на морду
+#        sizeMaps:
+#          32:
+#            sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
+#            state: mask
+#        mask-body-straight: TODO дисплейсмент на морду
+#        sizeMaps:
+#          32:
+#            sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
+#            state: mask
