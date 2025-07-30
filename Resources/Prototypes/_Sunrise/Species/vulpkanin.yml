@@ -4,9 +4,8 @@
   roundStart: true
   prototype: MobVulpkanin
   bodyTypes:
-  # Ни в коем случае не попутайте типы!
-  - VulpkaninNormal # Изогнутые ноги, идеал
-  - VulpkaninStraight # Старый спрайт вульп, с прямыми ногами (на мой взгляд очень плохой, но в будущем улучшим)
+  - VulpkaninNormal # VulpkaninCurved
+  - VulpkaninStraight
   defaultSkinTone: "#FFBBC3"
   markingLimits: MobVulpkaninMarkingLimits
   dollPrototype: MobVulpkaninDummy
@@ -15,7 +14,7 @@
 
 - type: bodyType
   id: VulpkaninNormal # VulpkaninCurved
-  name: body-normal
+  name: body-curved
   sprites:
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking
