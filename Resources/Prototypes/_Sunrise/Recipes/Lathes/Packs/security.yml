@@ -52,6 +52,11 @@
     #- MagazinePistol40HP
     #- MagazinePistol40FMJ
     #- MagazinePistol40Empty
+    # Pistol High Capacity
+    - MagazinePistolHighCapacitySP
+    - MagazinePistolHighCapacityHP
+    - MagazinePistolHighCapacityFMJ
+    - MagazinePistolHighCapacityEmpty
     # SMG
     - MagazinePistolSubMachineGunSP
     - MagazinePistolSubMachineGunHP
@@ -145,6 +150,10 @@
     - MagazinePistolUranium
     - MagazinePistolAP
     #- MagazinePistol40AP
+  # Pistol High Capacity
+    - MagazinePistolHighCapacityIncendiary
+    - MagazinePistolHighCapacityUranium
+    - MagazinePistolHighCapacityAP
   # SMG
     - MagazinePistolSubMachineGunIncendiary
     - MagazinePistolSubMachineGunUranium

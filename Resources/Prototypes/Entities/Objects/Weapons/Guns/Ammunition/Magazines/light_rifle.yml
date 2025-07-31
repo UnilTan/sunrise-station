@@ -59,7 +59,7 @@
   id: MagazineLightRifleEmpty
   name: "magazine (.30 rifle any)"
   suffix: empty
-  parent: MagazineLightRifleSP
+  parent: BaseMagazineLightRifle
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -79,10 +79,22 @@
     proto: CartridgeLightRifleSP
   - type: Sprite
     layers:
-    - state: sp
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#575EF5"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#575EF5"
 
 
 - type: entity
@@ -99,12 +111,18 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#F5514C"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#F5514C"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#F5514C"
 
 - type: entity
   id: MagazineLightRifleFMJ
@@ -113,12 +131,6 @@
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleFMJ
-  - type: Sprite
-    layers:
-    - state: fmj
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineLightRifleAP
@@ -129,16 +141,22 @@
     proto: CartridgeLightRifleAP
   - type: Sprite
     layers:
-    - state: ap
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#540000"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#540000"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#540000"
 
 - type: entity
   id: MagazineLightRiflePractice

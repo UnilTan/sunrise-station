@@ -34,6 +34,8 @@
   - MagazineBoxLightRifleAP
   - LightRifleHeavyMagazineAP
   - MagazinePistolSubMachineGunAP
+  - MagazinePistolSubMachineGunTopMountedAP
+    - MagazinePistolHighCapacityAP
   radioChannels:
   - Security
 
@@ -130,7 +132,6 @@
 #  - MagazinePPSH41Extended
 #  - MagazineMP5Extended
 #  - MagazineMP7Extended
-#  - MagazineP90Extended
 #  - MagazineRifleExtended
 #  - MagazineAR18Extended
 #  #- MagazineM28Extended

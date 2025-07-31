@@ -308,8 +308,8 @@
     maxAngle: 28
     angleIncrease: 1.65
     angleDecay: 18
-    fireRate: 5.45
-    burstFireRate: 8
+    fireRate: 5.25
+    burstFireRate: 9
     selectedMode: Burst
     availableModes:
     - Burst

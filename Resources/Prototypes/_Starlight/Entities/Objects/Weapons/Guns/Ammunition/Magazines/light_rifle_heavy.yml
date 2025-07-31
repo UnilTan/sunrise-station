@@ -1,7 +1,7 @@
 - type: entity
   id: LightRifleHeavyBase
-  name: ".308 Magazine Box"
-  parent: MagazineMachineGunMG42
+  parent: BaseItem
+  abstract: true
   components:
   - type: Tag
     tags:
