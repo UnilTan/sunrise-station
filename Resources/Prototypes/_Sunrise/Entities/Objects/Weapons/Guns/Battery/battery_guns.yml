@@ -555,12 +555,12 @@
     autoRechargePauseTime: 30
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisablerSmg
+    - hitscanProto: DisablerBoltSmg
       fireCost: 49
       name: energy-gun-disable
       state: disabler
       shotType: Hitscan
-    - hitscanProto: BulletLaser
+    - hitscanProto: LaserTrace
       fireCost: 70
       name: energy-gun-lethal
       state: lethal
@@ -1117,11 +1117,11 @@
     shape:
     - 0, 0, 1, 1
   - type: HitscanBatteryAmmoProvider
-    proto: BulletDisabler
+    proto: DisablerBolt
     fireCost: 50
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
       state: base
