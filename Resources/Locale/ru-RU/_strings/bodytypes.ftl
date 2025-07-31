@@ -13,3 +13,5 @@ body-giga-m = Мускулистое
 body-distrofik-f = Истощённое
 body-distrofik-m = Истощённое
 
+body-curved = Изогнутые ноги
+body-straight = Прямые ноги

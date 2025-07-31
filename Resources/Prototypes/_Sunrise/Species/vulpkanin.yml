@@ -37,8 +37,6 @@
 - type: bodyType
   id: VulpkaninStraight
   name: body-straight
-  sexRestrictions:
-  - Male
   sprites:
     Head: MobVulpkaninHead
     Hair: MobHumanoidAnyMarking
