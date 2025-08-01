@@ -11,11 +11,19 @@
             "name": "full"
         },
         {
-            "name": "head_f",
+            "name": "head_f_small_muzzle",
             "directions": 4
         },
         {
-            "name": "head_m",
+            "name": "head_f_big_muzzle",
+            "directions": 4
+        },
+        {
+            "name": "head_m_small_muzzle",
+            "directions": 4
+        },
+        {
+            "name": "head_m_big_muzzle",
             "directions": 4
         },
         {

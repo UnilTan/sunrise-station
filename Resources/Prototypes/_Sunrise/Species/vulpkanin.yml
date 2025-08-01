@@ -4,8 +4,11 @@
   roundStart: true
   prototype: MobVulpkanin
   bodyTypes:
-  - VulpkaninNormal # VulpkaninCurved
-  - VulpkaninStraight
+  # оставил VulpkaninNormal чтобы у людей не сбрасывались их настройки
+  - VulpkaninNormal # VulpkaninCurvedSmallMuzzle
+  - VulpkaninStraightSmallMuzzle
+  - VulpkaninCurvedBigMuzzle
+  - VulpkaninStraightBigMuzzle
   defaultSkinTone: "#FFBBC3"
   markingLimits: MobVulpkaninMarkingLimits
   dollPrototype: MobVulpkaninDummy
@@ -13,10 +16,10 @@
   buttScanTexture: /Textures/_Sunrise/ButtsScans/human.png # SUNRISE-TODO: Спрайт жопы вульп
 
 - type: bodyType
-  id: VulpkaninNormal # VulpkaninCurved
-  name: body-curved
+  id: VulpkaninNormal # VulpkaninCurvedSmallMuzzle
+  name: body-curved-small-muzzle
   sprites:
-    Head: MobVulpkaninHead
+    Head: MobVulpkaninHeadSmallMuzzle
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
@@ -35,10 +38,54 @@
     RFoot: MobVulpkaninCurvedRFoot
 
 - type: bodyType
-  id: VulpkaninStraight
-  name: body-straight
+  id: VulpkaninStraightSmallMuzzle
+  name: body-straight-small-muzzle
   sprites:
-    Head: MobVulpkaninHead
+    Head: MobVulpkaninHeadSmallMuzzle
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Snout: MobHumanoidAnyMarking
+    Chest: MobVulpkaninTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobVulpkaninLArm
+    RArm: MobVulpkaninRArm
+    LHand: MobVulpkaninLHand
+    RHand: MobVulpkaninRHand
+    LLeg: MobVulpkaninStraightLLeg
+    RLeg: MobVulpkaninStraightRLeg
+    LFoot: MobVulpkaninStraightLFoot
+    RFoot: MobVulpkaninStraightRFoot
+
+- type: bodyType
+  id: VulpkaninCurvedBigMuzzle
+  name: body-curved-big-muzzle
+  sprites:
+    Head: MobVulpkaninHeadBigMuzzle
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Snout: MobHumanoidAnyMarking
+    Chest: MobVulpkaninTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobVulpkaninLArm
+    RArm: MobVulpkaninRArm
+    LHand: MobVulpkaninLHand
+    RHand: MobVulpkaninRHand
+    LLeg: MobVulpkaninCurvedLLeg
+    RLeg: MobVulpkaninCurvedRLeg
+    LFoot: MobVulpkaninCurvedLFoot
+    RFoot: MobVulpkaninCurvedRFoot
+
+- type: bodyType
+  id: VulpkaninStraightBigMuzzle
+  name: body-straight-big-muzzle
+  sprites:
+    Head: MobVulpkaninHeadBigMuzzle
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
@@ -90,22 +137,22 @@
       required: false
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninHead
+  id: MobVulpkaninHeadSmallMuzzle
   baseSprite:
     sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
-    state: head_m
+    state: head_m_small_muzzle
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninHeadMale
+  id: MobVulpkaninHeadSmallMuzzleMale
   baseSprite:
     sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
-    state: head_m
+    state: head_m_small_muzzle
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninHeadFemale
+  id: MobVulpkaninHeadSmallMuzzleFemale
   baseSprite:
     sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
-    state: head_f
+    state: head_f_small_muzzle
 
 - type: humanoidBaseSprite
   id: MobVulpkaninTorso
@@ -198,3 +245,23 @@
   baseSprite:
     sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
     state: r_foot_straight
+
+# big muzzle
+
+- type: humanoidBaseSprite
+  id: MobVulpkaninHeadBigMuzzle
+  baseSprite:
+    sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+    state: head_m_big_muzzle
+
+- type: humanoidBaseSprite
+  id: MobVulpkaninHeadBigMuzzleMale
+  baseSprite:
+    sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+    state: head_m_big_muzzle
+
+- type: humanoidBaseSprite
+  id: MobVulpkaninHeadBigMuzzleFemale
+  baseSprite:
+    sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+    state: head_f_big_muzzle
