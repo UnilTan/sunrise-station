@@ -11,15 +11,15 @@
     },
     "states": [
         {
-            "name": "hardsuit_curved_small_muzzle",
+            "name": "head_big_muzzle",
             "directions": 4
         },
         {
-            "name": "hardsuit_curved_big_muzzle",
+            "name": "head_small_muzzle",
             "directions": 4
         },
         {
-            "name": "mask_big_muzzle",
+            "name": "mask",
             "directions": 4
         }
     ]
