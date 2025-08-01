@@ -530,8 +530,8 @@
     - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletPulse
+  - type: HitscanBatteryAmmoProvider #ProjectileBatteryAmmoProvider
+    proto: Pulse
     fireCost: 200
   - type: Battery
     maxCharge: 5000
@@ -609,7 +609,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: BulletLightRifleTraceSP
+    proto: CartridgeLightRifleSP #BulletLightRifleTraceSP
     fireCost: 50
   - type: Battery
     maxCharge: 10000
@@ -719,7 +719,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: BulletPistolTraceSP
+    proto: CartridgePistolSP #BulletPistolTraceSP
     fireCost: 50
   - type: Battery
     maxCharge: 5000
