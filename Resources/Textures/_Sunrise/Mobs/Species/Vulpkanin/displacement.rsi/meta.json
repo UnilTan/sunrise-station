@@ -1,0 +1,23 @@
+﻿{
+    "version": 1,
+    "license": "CLA",
+    "copyright": "Made by Odleer",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "load": {
+        "srgb": false
+    },
+    "states": [
+        {
+            "name": "hardsuit_small_muzzle",
+            "directions": 4
+        },
+        {
+            "name": "hardsuit_big_muzzle",
+            "directions": 4
+        }
+    ]
+}
+
