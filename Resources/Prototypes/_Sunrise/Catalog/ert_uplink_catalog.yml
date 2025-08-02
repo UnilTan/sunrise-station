@@ -31,7 +31,7 @@
   productEntity: ClothingBackpackDuffelWeaponSubMachineGunP90Filled
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: p90 }
   cost:
-    Bluecrystal: 18 #C-20r Analog
+    Bluecrystal: 24
   categories:
   - NTAutoGun
   conditions:
@@ -44,7 +44,7 @@
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: ams42 }
   productEntity: ClothingBackpackDuffelWeaponAMS42Filled
   cost:
-    Bluecrystal: 10
+    Bluecrystal: 12
   categories:
   - NTAutoGun
   conditions:
@@ -57,7 +57,7 @@
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: g36 }
   productEntity: ClothingBackpackDuffelWeaponRifleG36Filled
   cost:
-    Bluecrystal: 10
+    Bluecrystal: 12
   categories:
   - NTAutoGun
   conditions:
@@ -94,7 +94,7 @@
   productEntity: ClothingBackpackDuffelWeaponRifleAR18Filled
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: ar18 }
   cost:
-    Bluecrystal: 11
+    Bluecrystal: 13
   categories:
   - NTAutoGun
   conditions:
@@ -106,7 +106,7 @@
   productEntity: ClothingBackpackDuffelWeaponRifleM28Filled
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: m28 }
   cost:
-    Bluecrystal: 12
+    Bluecrystal: 14
   categories:
   - NTAutoGun
   conditions:
@@ -196,7 +196,7 @@
   productEntity: WeaponPulseRifle
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: pulse-r }
   cost:
-    Bluecrystal: 30
+    Bluecrystal: 35
   categories:
   - NTLasers
   conditions:
@@ -208,7 +208,7 @@
   productEntity: WeaponSniperPulseCarbine
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: pulse-sc }
   cost:
-    Bluecrystal: 20
+    Bluecrystal: 22
   categories:
   - NTLasers
   conditions:
@@ -232,7 +232,7 @@
   productEntity: WeaponPulseCarbine
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: pulse-c }
   cost:
-    Bluecrystal: 15
+    Bluecrystal: 17
   categories:
     - NTLasers
   conditions:
@@ -268,7 +268,7 @@
   productEntity: WeaponEnergyGun
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: energygun }
   cost:
-    Bluecrystal: 1
+    Bluecrystal: 3
   categories:
   - NTLasers
   conditions:
@@ -305,7 +305,7 @@
   productEntity: WeaponPulsePistol
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: pulse-p }
   cost:
-    Bluecrystal: 9
+    Bluecrystal: 8
   categories:
   - NTPistols
   conditions:

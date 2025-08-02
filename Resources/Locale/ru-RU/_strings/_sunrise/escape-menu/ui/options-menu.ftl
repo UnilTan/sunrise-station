@@ -29,3 +29,6 @@ ui-options-play-heartbeat-sound = Проигрывать звук сердцеб
 ui-options-trace = Display the bullet's trace
 ui-options-trace-tooltip = If you're lagging while shooting, uncheck this box,
                            and the hitscan won't display the texture of the smoke behind the flying bullet.
+ui-options-tts-enabled = ТТС интеграция
+ui-options-tts-queue = Использовать очередь для TTS рации?
+ui-options-tts-radio-ghost-enabled = ТТС рации в призраке

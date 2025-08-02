@@ -526,4 +526,14 @@ public sealed partial class SunriseCCVars : CVars
 
     public static readonly CVarDef<bool> TracesEnabled =
         CVarDef.Create("opt.traces_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+    /// <summary>
+    /// Смена даты на документах от принтера
+    /// </summary>
+    public static readonly CVarDef<int> PrinterDocTimeOffsetHours =
+        CVarDef.Create("printerdoc.time_offset_hours", 3, CVar.SERVERONLY);
+    public static readonly CVarDef<int> PrinterDocYearOffset =
+        CVarDef.Create("printerdoc.year_offset", 1000, CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> HoldLookUp =
+        CVarDef.Create("scope.hold_look_up", true, CVar.CLIENT | CVar.ARCHIVE);
 }
