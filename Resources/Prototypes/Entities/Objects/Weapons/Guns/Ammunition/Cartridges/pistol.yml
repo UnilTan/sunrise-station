@@ -19,6 +19,21 @@
   - type: SpentAmmoVisuals
 
 - type: entity
+  id: CartridgePistolRubber
+  name: cartridge (.35 auto rubber)
+  parent: BaseCartridgePistol
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletPistolTraceRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#00c1b8"
+
+- type: entity
   id: CartridgePistolSP
   name: cartridge (.35 auto SP)
   parent: BaseCartridgePistol

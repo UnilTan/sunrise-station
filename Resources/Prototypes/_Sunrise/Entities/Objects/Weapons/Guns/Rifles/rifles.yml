@@ -443,20 +443,20 @@
     maxAngle: 18
     angleIncrease: 0.85
     angleDecay: 8
-    fireRate: 5.5
+    fireRate: 4.5
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/m28/m28.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineAR18
+        startingItem: MagazineRifleHeavySP
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/m28/m28_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/m28/m28_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineAR18 #MagazineM28 Одно и тоже
+            - MagazineHeavyRifle
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifleHeavySP
@@ -508,20 +508,20 @@
     maxAngle: 24
     angleIncrease: 1.25
     angleDecay: 8
-    fireRate: 5.5
+    fireRate: 4.5
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/ar18/ar18_shot.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineAR18
+        startingItem: MagazineRifleHeavySP
         insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineAR18
+          - MagazineHeavyRifle
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifleHeavySP

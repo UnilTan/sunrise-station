@@ -269,7 +269,7 @@
     maxAngle: 18
     angleIncrease: 5
     angleDecay: 9
-    fireRate: 2.35
+    fireRate: 2.25
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -321,6 +321,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
 
+# Sidearm HOS and Nukies.
 - type: entity
   name: Desert Eagle
   parent: BaseWeaponPistolSunrise
@@ -372,6 +373,7 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
 
+# Sidearm for detectives.
 - type: entity
   parent: BaseWeaponRevolver
   id: WeaponRevolverSpearhead
@@ -454,9 +456,9 @@
     selectedMode: SemiAuto
     minAngle: 4.7
     maxAngle: 25
-    angleIncrease: 1.75
+    angleIncrease: 2
     angleDecay: 14
-    fireRate: 8.4
+    fireRate: 8
     availableModes:
     - SemiAuto
     useKey: true

@@ -10,12 +10,15 @@
     - MagazineBoxMagnumSP
     - MagazineBoxMagnumHP
     - MagazineBoxMagnumFMJ
+    - MagazineBoxMagnumRubber
+    - MagazineMagnumRubber
     - MagazineMagnum
     - MagazineMagnumEmpty
     # Pistol
     - MagazineBoxPistolSP
     - MagazineBoxPistolHP
     - MagazineBoxPistolFMJ
+    - MagazineBoxPistolRubber
     #- MagazineBoxPistol40SP
     #- MagazineBoxPistol40HP
     #- MagazineBoxPistol40FMJ
@@ -42,11 +45,13 @@
     - SpeedLoaderMagnumSP
     - SpeedLoaderMagnumHP
     - SpeedLoaderMagnumFMJ
+    - SpeedLoaderMagnumRubber
     - SpeedLoaderMagnumEmpty
     # Pistol
     - MagazinePistolSP
     - MagazinePistolHP
     - MagazinePistolFMJ
+    - MagazinePistolRubber
     - MagazinePistolEmpty
     #- MagazinePistol40SP
     #- MagazinePistol40HP
@@ -56,6 +61,7 @@
     - MagazinePistolHighCapacitySP
     - MagazinePistolHighCapacityHP
     - MagazinePistolHighCapacityFMJ
+    - MagazinePistolHighCapacityRubber
     - MagazinePistolHighCapacityEmpty
     # SMG
     - MagazinePistolSubMachineGunSP

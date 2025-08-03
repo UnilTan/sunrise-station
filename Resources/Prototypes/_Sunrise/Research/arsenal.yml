@@ -133,10 +133,7 @@
 #  - MagazineMP5Extended
 #  - MagazineMP7Extended
 #  - MagazineRifleExtended
-#  - MagazineAR18Extended
-#  #- MagazineM28Extended
 #  - MagazineV31Extended
-#  - MagazineBR64Extended
 #  - MagazineDragunovExtended
 #  radioChannels:
 #  - Security

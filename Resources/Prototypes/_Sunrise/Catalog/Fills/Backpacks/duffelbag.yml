@@ -169,7 +169,7 @@
     - type: StorageFill
       contents:
         - id: WeaponRifleAR18
-        - id: MagazineAR18
+        - id: MagazineRifleHeavySP
           amount: 2
 
 - type: entity
@@ -181,8 +181,8 @@
     - type: StorageFill
       contents:
         - id: WeaponRifleM28
-        - id: MagazineAR18
-          amount: 2
+        - id: MagazineRifleHeavySP
+          amount: 3
 
 - type: entity
   id: ClothingBackpackDuffelWeaponRifleBR64Filled
@@ -193,7 +193,7 @@
     - type: StorageFill
       contents:
         - id: WeaponRifleBR64
-        - id: MagazineBR64Extended
+        - id: MagazineRifleHeavyFMJ
           amount: 2
 
 #- type: entity

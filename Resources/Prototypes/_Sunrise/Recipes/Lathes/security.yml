@@ -698,3 +698,50 @@
     Plastic: 75
     Steel: 125
     Uranium: 150
+
+# Rubber Ammunition
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolRubber
+  result: MagazinePistolRubber
+  materials:
+    Steel: 25
+    Plastic: 50
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolHighCapacityRubber
+  result: MagazinePistolHighCapacityRubber
+  materials:
+    Steel: 30
+    Plastic: 70
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: SpeedLoaderMagnumRubber
+  result: SpeedLoaderMagnumRubber
+  materials:
+    Steel: 50
+    Plastic: 50
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineMagnumRubber
+  result: MagazineMagnumRubber
+  materials:
+    Steel: 25
+    Plastic: 60
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxMagnumRubber
+  result: MagazineBoxMagnumRubber
+  materials:
+    Plastic: 120
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxPistolRubber
+  result: MagazineBoxPistolRubber
+  materials:
+    Plastic: 300

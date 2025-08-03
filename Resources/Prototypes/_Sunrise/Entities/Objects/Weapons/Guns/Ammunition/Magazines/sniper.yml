@@ -100,13 +100,6 @@
       - state: inhand-right-stripe
         color: "#9b0000"
 
-- type: entity
-  parent: MagazineBR64
-  id: MagazineBR64Extended
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 30
-
 #Magazine
 - type: entity
   id: BaseMagazineDragunov

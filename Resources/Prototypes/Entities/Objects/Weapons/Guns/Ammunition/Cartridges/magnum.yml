@@ -19,6 +19,21 @@
   - type: SpentAmmoVisuals
 
 - type: entity
+  id: CartridgeMagnumRubber
+  name: cartridge (.45 magnum rubber)
+  parent: BaseCartridgeMagnum
+  components:
+  - type: HitScanCartridgeAmmo
+    hitscan: BulletMagnumTraceRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#00c1b8"
+
+- type: entity
   id: CartridgeMagnumSP
   name: cartridge (.45 magnum SP)
   parent: BaseCartridgeMagnum

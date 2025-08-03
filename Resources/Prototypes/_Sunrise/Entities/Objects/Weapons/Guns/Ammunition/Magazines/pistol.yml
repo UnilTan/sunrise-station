@@ -8,7 +8,7 @@
     - MagazineP90
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistolFMJ
+    proto: CartridgePistolSP
     whitelist:
       tags:
       - CartridgePistol
@@ -45,7 +45,7 @@
     whitelist:
       tags:
       - CartridgePistol
-    capacity: 32
+    capacity: 35
   - type: Item
     size: Small
   - type: ContainerContainer
@@ -78,7 +78,7 @@
     whitelist:
       tags:
       - CartridgePistol
-    capacity: 32
+    capacity: 30
   - type: Item
     size: Small
   - type: ContainerContainer

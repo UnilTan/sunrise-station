@@ -21,7 +21,6 @@
     minAngle: -23
     maxAngle: -44
   - type: Gun
-    projectileSpeed: 55
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -97,13 +96,12 @@
     - 0,0,6,2
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/br-64/tiny.rsi
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -40
+    minAngle: -21
+    maxAngle: -41
   - type: Gun
-    projectileSpeed: 55
-    fireRate: 2
-    minAngle: 28
-    maxAngle: 48
+    minAngle: 25
+    maxAngle: 46
+    fireRate: 2.25
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/SR-64/SR64_shot.ogg
       params:
@@ -114,13 +112,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBR64
+        startingItem: MagazineRifleHeavyFMJ
         insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineBR64
+            - MagazineHeavyRifle
       gun_chamber:
         name: Chamber
         startingItem: CartridgeRifleHeavyFMJ

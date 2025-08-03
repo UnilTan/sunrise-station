@@ -297,26 +297,26 @@ CartridgePistolRubber: CartridgePistolFMJ
 CartridgeLightRifleRubber: CartridgeLightRifleSP
 CartridgeRifleRubber: CartridgeRifleSP
 CartridgeCaselessRifleRubber: CartridgeCaselessRifle
-MagazinePistolRubber: MagazinePistol
+# MagazinePistolRubber: MagazinePistol # Its me! Rubber!
 MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGunSP
 MagazinePistolCaselessRifleRubber: MagazinePistolCaselessRifle
-MagazineMagnumRubber: MagazineMagnum
+# MagazineMagnumRubber: MagazineMagnum # Its me! Rubber!
 MagazineMagnumSubMachineGunRubber: MagazineMagnumSubMachineGun
 MagazineLightRifleRubber: MagazineLightRifleSP
 MagazineRifleRubber: MagazineRifleSP
 MagazineCaselessRifleRubber: MagazineCaselessRifle
 MagazineCaselessRifleShortRubber: MagazineCaselessRifleShort
 SpeedLoaderPistolRubber: SpeedLoaderPistol
-SpeedLoaderMagnumRubber: SpeedLoaderMagnumSP
+# SpeedLoaderMagnumRubber: SpeedLoaderMagnumSP # Its me! Rubber!
 MagazineBoxPistolRubber: MagazineBoxPistolSP
 # RIP box of magnum rubbers 202X to 2024
-MagazineBoxMagnumRubber: MagazineBoxMagnumSP
+# MagazineBoxMagnumRubber: MagazineBoxMagnumSP
 MagazineBoxLightRifleRubber: MagazineBoxLightRifleSP
 MagazineBoxRifleRubber: MagazineBoxRifleSP
 MagazineBoxRifleBigRubber: MagazineBoxRifleBig
 MagazineBoxCaselessRifleRubber: MagazineBoxCaselessRifle
 #MagazineBoxCaselessRifleBigRubber: MagazineBoxCaselessRifle10x24
-BoxMagazinePistolRubber: BoxMagazinePistol
+# BoxMagazinePistolRubber: BoxMagazinePistol
 BoxMagazinePistolHighCapacityRubber: BoxMagazinePistolHighCapacity
 BoxMagazinePistolSubMachineGunRubber: BoxMagazinePistolSubMachineGun
 BoxMagazineLightRifleRubber: BoxMagazineLightRifle
@@ -780,4 +780,9 @@ BaseUplinkNTERT200BC: null
 CartridgePistol: null
 AtmosDeviceFanTiny: null
 AtmosDeviceFanDirectional: null
-# Sunrise-End
+MagazineBR64Extended: null
+MagazineBR64: null
+MagazineAR18Extended: null
+MagazineAR18: null
+# Sunrise migrations end
+

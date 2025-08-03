@@ -1087,3 +1087,37 @@
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
       state: uranium
+
+# Rubber bullets
+
+- type: hitscan
+  id: BulletMagnumTraceRubber
+  parent: BulletTrace
+  damage:
+    types:
+      Blunt: 2
+  ricochetChance: 0.75
+  staminaDamage: 20
+  armorPenetration: -0.95
+  pierceChance: 0.05
+  derivation: 0.05
+  bullet:
+    sprite:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+      state: rubber
+
+- type: hitscan
+  id: BulletPistolTraceRubber
+  parent: BulletTrace
+  damage:
+    types:
+      Blunt: 1
+  ricochetChance: 0.5
+  staminaDamage: 13
+  armorPenetration: -0.95
+  pierceChance: 0.05
+  derivation: 0.05
+  bullet:
+    sprite:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+      state: rubber
