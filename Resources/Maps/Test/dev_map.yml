@@ -2095,7 +2095,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 43.5,48.5
       parent: 1
-- proto: AtmosDeviceFanDirectional
+- proto: AtmosDeviceFanDirectionalDev
   entities:
   - uid: 574
     components:
@@ -2462,7 +2462,7 @@ entities:
     - type: Transform
       pos: 0.5,-4.5
       parent: 2709
-- proto: AtmosDeviceFanTiny
+- proto: AtmosDeviceFanTinyDev
   entities:
   - uid: 1412
     components:

@@ -54,3 +54,61 @@
 #  - type: Tag
 #    tags:
 #      - SpreaderIgnore
+
+# Sunrise-start
+- type: entity
+ id: AtmosDeviceFanTinyDev
+ name: tiny DEBUG fan
+ categories: [ DoNotMap ]
+ placement:
+   mode: SnapgridCenter
+ components:
+ - type: Transform
+   anchored: true
+ - type: Physics
+   bodyType: Static
+ - type: Sprite
+   sprite: Structures/Piping/Atmospherics/tinyfan.rsi
+   state: icon
+ - type: Fixtures
+   fixtures:
+     fix1:
+       shape:
+         !type:PhysShapeAabb
+           bounds: "-0.5,-0.5,0.5,0.5"
+ - type: Airtight
+   noAirWhenFullyAirBlocked: false
+ - type: Clickable
+ - type: Tag
+   tags:
+     - SpreaderIgnore
+
+- type: entity
+  id: AtmosDeviceFanDirectionalDev # Только для дебаг вещей
+  name: directional DEBUG fan
+  categories: [ DoNotMap ]
+  placement:
+     mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/directionalfan.rsi
+    state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "-0.48,-0.48,0.48,-0.40"
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+      - South
+  - type: Clickable
+  - type: Tag
+    tags:
+     - SpreaderIgnore
+# Sunrise-end
