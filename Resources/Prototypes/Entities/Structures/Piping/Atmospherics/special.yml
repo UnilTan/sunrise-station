@@ -57,31 +57,31 @@
 
 # Sunrise-start
 - type: entity
- id: AtmosDeviceFanTinyDev
- name: tiny DEBUG fan
- categories: [ DoNotMap ]
- placement:
-   mode: SnapgridCenter
- components:
- - type: Transform
-   anchored: true
- - type: Physics
-   bodyType: Static
- - type: Sprite
-   sprite: Structures/Piping/Atmospherics/tinyfan.rsi
-   state: icon
- - type: Fixtures
-   fixtures:
-     fix1:
-       shape:
-         !type:PhysShapeAabb
-           bounds: "-0.5,-0.5,0.5,0.5"
- - type: Airtight
-   noAirWhenFullyAirBlocked: false
- - type: Clickable
- - type: Tag
-   tags:
-     - SpreaderIgnore
+  id: AtmosDeviceFanTinyDev
+  name: tiny DEBUG fan
+  categories: [ DoNotMap ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/tinyfan.rsi
+    state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: Clickable
+  - type: Tag
+    tags:
+      - SpreaderIgnore
 
 - type: entity
   id: AtmosDeviceFanDirectionalDev # Только для дебаг вещей
