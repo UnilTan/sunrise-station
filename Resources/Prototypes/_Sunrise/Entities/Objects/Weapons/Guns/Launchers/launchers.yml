@@ -41,8 +41,8 @@
     sprintModifier: 0.5
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
+    maxOffset: 4
+    pvsIncrease: 0.4
 
 - type: entity
   name: GL-79
@@ -94,8 +94,8 @@
     sprintModifier: 0.5
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
+    maxOffset: 4
+    pvsIncrease: 0.4
 
 - type: entity
   name: GL-79

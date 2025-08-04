@@ -117,8 +117,8 @@
     sprintModifier: 0.25
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 10 # Sunrise-Edit
-    pvsIncrease: 1 # Sunrise-Edit
+    maxOffset: 14 # Sunrise-Edit
+    pvsIncrease: 1.5 # Sunrise-Edit
   - type: StaticPrice
     price: 3500
 

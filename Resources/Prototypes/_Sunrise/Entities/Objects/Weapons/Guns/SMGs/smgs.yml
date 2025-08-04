@@ -13,25 +13,29 @@
     fireRate: 5
     useKey: true
     selectedMode: FullAuto
-  - type: MeleeWeapon
-    angle: 60
-    range: 1
-    damage:
-      types:
-        Blunt: 9
-        Structural: 4
-    bluntStaminaDamageFactor: 2.0
-    attackRate: 0.9
-    autoAttack: false
-  - type: AltFireMelee
-    attackType: Heavy
+  # - type: MeleeWeapon #Sunrise-TODO: Вынести в отдельную кнопку удара
+  #   angle: 60
+  #   range: 1
+  #   damage:
+  #     types:
+  #       Blunt: 9
+  #       Structural: 4
+  #   bluntStaminaDamageFactor: 2.0
+  #   attackRate: 0.9
+  #   autoAttack: false
+  # - type: AltFireMelee
+  #   attackType: Heavy
   - type: SpeedModifiedOnWield
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: ClothingSpeedModifier
     walkModifier: 0.97
     sprintModifier: 0.97
   - type: HeldSpeedModifier
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 3
+    pvsIncrease: 0.3
 
 - type: entity
   name: P-90
@@ -53,10 +57,10 @@
     minAngle: -2.9
     maxAngle: -30
   - type: Gun
-    minAngle: 7
-    maxAngle: 55
-    angleIncrease: 2.75
-    angleDecay: 15
+    minAngle: 6
+    maxAngle: 65
+    angleIncrease: 2.95
+    angleDecay: 24
     fireRate: 8
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_shot.ogg

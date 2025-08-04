@@ -68,8 +68,8 @@
     sprintModifier: 0.25
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 13
-    pvsIncrease: 1.5
+    maxOffset: 14
+    pvsIncrease: 1.65
   - type: UseDelay
     delay: 0.5
   - type: GunRequiresWield
@@ -144,7 +144,7 @@
     sprintModifier: 0.5
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 9
+    maxOffset: 10
     pvsIncrease: 1.25
   - type: ChamberMagazineAmmoProvider
     autoEject: true

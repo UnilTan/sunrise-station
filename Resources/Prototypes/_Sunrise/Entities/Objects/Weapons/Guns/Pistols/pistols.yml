@@ -415,17 +415,17 @@
   - type: EyeCursorOffset
     maxOffset: 2.75
     pvsIncrease: 1
-  - type: MeleeWeapon
-    angle: 60
-    range: 0.9
-    damage:
-      types:
-        Blunt: 10
-    bluntStaminaDamageFactor: 2.0
-    attackRate: 1
-    autoAttack: false
-  - type: AltFireMelee
-    attackType: Light
+  # - type: MeleeWeapon
+  #   angle: 60
+  #   range: 0.9
+  #   damage:
+  #     types:
+  #       Blunt: 10
+  #   bluntStaminaDamageFactor: 2.0
+  #   attackRate: 1
+  #   autoAttack: false
+  # - type: AltFireMelee #Sunrise-TODO: Вынести в отдельную кнопку удара
+  #   attackType: Light
 
 - type: entity
   parent: WeaponRevolverSpearhead
@@ -469,7 +469,7 @@
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 2
-    pvsIncrease: 1
+    pvsIncrease: 0.25
   - type: SpeedModifiedOnWield
     walkModifier: 0.99
     sprintModifier: 0.99

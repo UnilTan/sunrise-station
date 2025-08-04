@@ -59,18 +59,18 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-  - type: MeleeWeapon
-    angle: 60
-    range: 1
-    damage:
-      types:
-        Blunt: 11
-        Structural: 4
-    bluntStaminaDamageFactor: 2.0
-    attackRate: 0.9
-    autoAttack: false
-  - type: AltFireMelee
-    attackType: Heavy
+  # - type: MeleeWeapon
+  #   angle: 60
+  #   range: 1
+  #   damage:
+  #     types:
+  #       Blunt: 11
+  #       Structural: 4
+  #   bluntStaminaDamageFactor: 2.0
+  #   attackRate: 0.9
+  #   autoAttack: false
+  # - type: AltFireMelee #Sunrise-TODO: Вынести в отдельную кнопку удара
+  #   attackType: Heavy
   - type: StaticPrice
     price: 500
   - type: EmitSoundOnPickup
@@ -82,17 +82,14 @@
   - type: EmitSoundOnLand
     sound:
       collection: RiflesDrop
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.85
-    sprintModifier: 0.85
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.95
   - type: HeldSpeedModifier
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 2.5
-    pvsIncrease: 0.25
+    maxOffset: 4.5
+    pvsIncrease: 0.45
   - type: KnockbackByUserTag
     doestContain:
       Resomi:
@@ -413,8 +410,8 @@
     delay: 0.75
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 5
-    pvsIncrease: 0.45
+    maxOffset: 6
+    pvsIncrease: 0.6
   - type: SpeedModifiedOnWield
     walkModifier: 0.85
     sprintModifier: 0.85
@@ -478,8 +475,8 @@
     delay: 0.75
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 4
-    pvsIncrease: 0.35
+    maxOffset: 5
+    pvsIncrease: 0.5
   - type: SpeedModifiedOnWield
     walkModifier: 0.8
     sprintModifier: 0.8

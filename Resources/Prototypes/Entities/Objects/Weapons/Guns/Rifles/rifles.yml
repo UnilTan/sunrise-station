@@ -67,6 +67,14 @@
         knockback: 0.1
       Felinid:
         knockback: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: HeldSpeedModifier
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 4.5
+    pvsIncrease: 0.45
   # Sunrise end
 
 - type: entity

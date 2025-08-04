@@ -107,8 +107,8 @@
   # Sunrise start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
+    maxOffset: 4
+    pvsIncrease: 0.4
   - type: SpeedModifiedOnWield
     walkModifier: 0.85
     sprintModifier: 0.85
