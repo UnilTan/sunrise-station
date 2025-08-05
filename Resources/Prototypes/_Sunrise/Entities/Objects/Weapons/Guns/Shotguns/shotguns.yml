@@ -86,6 +86,7 @@
     delay: 0.25
   - type: GunRequiresWield
   - type: Gun
+    pump: true
     fireRate: 2
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Shotguns/paladin_12/paladin12_shot.ogg
@@ -159,6 +160,7 @@
     delay: 0.5
   - type: GunRequiresWield
   - type: Gun
+    pump: true
     fireRate: 1
   - type: GunSpreadModifier
     spread: 0.6
@@ -175,6 +177,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034_sawn/big.rsi
   - type: Gun
+    pump: true
     fireRate: 1
     useKey: true
     selectedMode: SemiAuto
