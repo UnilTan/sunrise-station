@@ -804,9 +804,9 @@
     damage: 80
 
 - type: entity
-  id: BulletGrenadeBlast
+  id: BulletGrenadeBlastContact
   name: blast grenade
-  parent: BaseBulletGrenade # Sunrise-Edit
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -821,9 +821,9 @@
     maxIntensity: 10
 
 - type: entity
-  id: BulletGrenadeFlash
+  id: BulletGrenadeFlashContact
   name: flash grenade
-  parent: BaseBulletGrenade # Sunrise-Edit
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -840,9 +840,9 @@
 
 # This is supposed to spawn shrapnel and stuff so uhh... TODO?
 - type: entity
-  id: BulletGrenadeFrag
+  id: BulletGrenadeFragContact
   name: frag grenade
-  parent: BaseBulletGrenade # Sunrise-Edit
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -887,9 +887,9 @@
     tileBreakScale: 0.01
 
 - type: entity
-  id: BulletGrenadeEMP
-  name: EMP rocket
-  parent: BaseBulletGrenade # Sunrise-Edit
+  id: BulletGrenadeEMPContact
+  name: contact EMP grenade
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -1525,7 +1525,7 @@
     deleteOnCollide: false
   - type: StartTimerOnShoot
   - type: OnUseTimerTrigger
-    delay: 1
+    delay: 2
   - type: Fixtures
     fixtures:
       fix1:

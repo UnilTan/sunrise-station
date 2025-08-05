@@ -177,3 +177,13 @@
     factions:
     - Syndicate
     alertText: Данное оружие биокодировано. Вы не можете его использовать.
+
+- type: entity
+  parent: WeaponGrenadeLauncherGL70
+  id: WeaponGrenadeLauncherGL70Biocode
+  suffix: BIOCODE
+  components:
+  - type: FactionWeaponBlocker
+    factions:
+    - Syndicate
+    alertText: Данное оружие биокодировано. Вы не можете его использовать.

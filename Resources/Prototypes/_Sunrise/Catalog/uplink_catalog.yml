@@ -306,11 +306,11 @@
 
 # For the China-Lake
 - type: listing
-  id: UplinkGrenadeFrag
-  name: uplink-grenade-frag-name
+  id: UplinkGrenadeFragTimer
+  name: uplink-grenade-frag-timer-name
   description: uplink-grenade-frag-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: frag }
-  productEntity: GrenadeFrag
+  productEntity: GrenadeFragTimer
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -326,11 +326,11 @@
       - LoneOpsUplink
 
 - type: listing
-  id: UplinkGrenadeBlast
-  name: uplink-grenade-blast-name
+  id: UplinkGrenadeBlastTimer
+  name: uplink-grenade-blast-timer-name
   description: uplink-grenade-blast-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: blast }
-  productEntity: GrenadeBlast
+  productEntity: GrenadeBlastTimer
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -346,16 +346,76 @@
       - LoneOpsUplink
 
 - type: listing
-  id: UplinkGrenadeEMP
-  name: uplink-grenade-emp-name
-  description: uplink-grenade-emp-desc
+  id: UplinkGrenadeEMPTimer
+  name: uplink-grenade-emp-timer-name
+  description: uplink-grenade-emp-timer-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: emp }
-  productEntity: GrenadeEMP
+  productEntity: GrenadeEMPTimer
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
   cost:
     Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkGrenadeFragContact
+  name: uplink-grenade-frag-contact-name
+  description: uplink-grenade-frag-contact-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: frag }
+  productEntity: GrenadeFragContact
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkGrenadeBlastContact
+  name: uplink-grenade-blast-contact-name
+  description: uplink-grenade-blast-contact-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: blast }
+  productEntity: GrenadeBlastContact
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkGrenadeEMPContact
+  name: uplink-grenade-emp-contact-name
+  description: uplink-grenade-emp-contact-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: emp }
+  productEntity: GrenadeEMPContact
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
   categories:
   - UplinkAmmo
   conditions:
@@ -1476,6 +1536,26 @@
     Telecrystal: 5
   cost:
     Telecrystal: 9
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkGrenadeLauncherGL70
+  name: uplink-grenade-launcher-gl70-name
+  description: uplink-grenade-launcher-gl70-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/HMGs/gl-64/big.rsi, state: icon }
+  productEntity: WeaponGrenadeLauncherGL70Biocode
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 30
+  cost:
+    Telecrystal: 40
   categories:
   - UplinkWeaponry
   conditions:

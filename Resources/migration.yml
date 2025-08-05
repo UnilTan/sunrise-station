@@ -789,4 +789,8 @@ CrateArmoryMagazineBoxLightRifleBig: null
 CrateArmoryMagazineBoxRifleBig: null
 CrateArmoryM16A4: null
 CrateArmoryMP7: null
+GrenadeBlast: GrenadeBlastTimer
+GrenadeEMP: GrenadeEMPTimer
+GrenadeFlash: GrenadeFlashTimer
+GrenadeFrag: GrenadeFragTimer
 # Sunrise-End

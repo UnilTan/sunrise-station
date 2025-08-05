@@ -68,13 +68,13 @@
     whitelist:
       tags:
         - Grenade
-    capacity: 3
-    proto: GrenadeFrag
+    capacity: 1 # Sunrise-Edit
+    proto: GrenadeFragTimer
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
   - type: GunRequiresWield
   - type: StaticPrice
-    price: 10000
+    price: 5000
 
 - type: entity
   parent: [ BaseWeaponLauncher, BaseGunWieldable, BaseMajorContraband ]

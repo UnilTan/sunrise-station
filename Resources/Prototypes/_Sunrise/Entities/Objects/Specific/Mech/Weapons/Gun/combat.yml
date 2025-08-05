@@ -208,7 +208,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: GrenadeFrag
+    proto: GrenadeFragTimer
     fireCost: 250
   - type: Appearance
   - type: AmmoCounter

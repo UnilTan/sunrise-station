@@ -345,7 +345,7 @@
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
   - type: Appearance
   - type: ProjectileBatteryAmmoProvider
-    proto: GrenadeFrag
+    proto: GrenadeFragTimer
     fireCost: 1000
   - type: Battery
     maxCharge: 10000
@@ -677,7 +677,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: GrenadeFrag
+    proto: GrenadeFragTimer
     fireCost: 250
   - type: Battery
     maxCharge: 1500

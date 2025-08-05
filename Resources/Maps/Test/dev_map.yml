@@ -11263,7 +11263,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: GrenadeFrag
+- proto: GrenadeFragTimer
   entities:
   - uid: 2081
     components:
