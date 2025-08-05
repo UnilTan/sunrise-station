@@ -818,7 +818,6 @@
   name: narrow laser barrage
   id: LaserTraceSpreadNarrow
   parent: LaserTrace
-  components:
   count: 4
   spread: 10
 

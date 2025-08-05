@@ -157,7 +157,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: HitscanBatteryAmmoProvider
     proto: DisablerBoltSmgSpreadTrace # Sunrise-Edit
     fireCost: 45
   - type: Appearance
