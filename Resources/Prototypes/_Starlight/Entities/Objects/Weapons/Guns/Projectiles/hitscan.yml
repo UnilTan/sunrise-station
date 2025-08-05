@@ -808,6 +808,21 @@
   reflective: Energy
 
 - type: hitscan
+  name: wide laser barrage
+  id: LaserTraceSpread
+  parent: LaserTrace
+  count: 5
+  spread: 10
+
+- type: hitscan
+  name: narrow laser barrage
+  id: LaserTraceSpreadNarrow
+  parent: LaserTrace
+  components:
+  count: 4
+  spread: 10
+
+- type: hitscan
   id: RedLaserBeam
   name: laser beam
   parent: LaserTrace
@@ -877,6 +892,13 @@
   id: AdvancedDisablerBolt
   parent: DisablerBolt
   staminaDamage: 35
+
+- type: hitscan
+  id: DisablerBoltSmgSpreadTrace
+  parent: DisablerBoltSmg
+  staminaDamage: 15
+  count: 3
+  spread: 9
 
 - type: hitscan
   id: TaserBolt

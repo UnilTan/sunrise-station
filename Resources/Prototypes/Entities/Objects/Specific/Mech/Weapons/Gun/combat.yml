@@ -158,7 +158,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: BulletDisablerSmgSpread
+    proto: DisablerBoltSmgSpreadTrace # Sunrise-Edit
     fireCost: 45
   - type: Appearance
   - type: AmmoCounter

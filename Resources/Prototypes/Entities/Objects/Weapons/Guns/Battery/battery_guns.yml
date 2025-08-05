@@ -800,15 +800,15 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: EnergyGunFireModes # Sunrise-Edit
     fireModes:
-    - hitscanProto: BulletLaserSpread
+    - hitscanProto: LaserTraceSpread # Sunrise-Edit
       fireCost: 150
       name: energy-gun-shotgun-spread # Sunrise-Edit
       shotType: Hitscan # Sunrise-Edit
-    - hitscanProto: BulletLaserSpreadNarrow
+    - hitscanProto: LaserTraceSpreadNarrow # Sunrise-Edit
       fireCost: 200
       name: energy-gun-shotgun-spread-narrow # Sunrise-Edit
       shotType: Hitscan # Sunrise-Edit
-    - hitscanProto: BulletDisablerSmgSpread
+    - hitscanProto: DisablerBoltSmgSpreadTrace # Sunrise-Edit
       fireCost: 120
       name: energy-gun-disable # Sunrise-Edit
       shotType: Hitscan # Sunrise-Edit
