@@ -25,27 +25,25 @@
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 0.90
-  # SUNRISE EDIT
+  # Sunrise-Start
   - type: Tag
     tags:
     - Vest
     - NudeBottom # INTERACTIONS
     - WhitelistChameleon
   - type: ArmorSparkEffect #starlight
-  # SUNRISE EDIT
+  # Sunrise-End
 
 #Standard armor vest, allowed for security and bartenders
 - type: entity
   parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBase]
   id: ClothingOuterArmorBasic
-  # Sunrise-Start
   components:
   - type: Tag
     tags:
     - Vest
-    - NudeBottom # INTERACTIONS
+    - NudeBottom # Sunrise-Add
     - WhitelistChameleon
-  # Sunrise-End
 
 #Alternate / slim basic armor vest
 - type: entity

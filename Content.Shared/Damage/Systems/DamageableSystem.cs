@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._Sunrise.Medical.Damage;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry;
 using Content.Shared._Sunrise.SunriseCCVars;
@@ -49,7 +50,7 @@ namespace Content.Shared.Damage
         public float UniversalTopicalsHealModifier { get; private set; } = 1f;
         public float UniversalMobDamageModifier { get; private set; } = 1f;
 
-        public float Variance = 0.15f; // Sunrise-Edit
+        public float Variance = 0.3f; // Sunrise-Edit
         public float DamageModifier = 1f; // Sunrise-Edit
         public float HealModifier = 1f; // Sunrise-Edit
 
@@ -239,9 +240,7 @@ namespace Content.Shared.Damage
                 }
             }
 
-            damage = ApplyUniversalAllModifiers(damage);
-
-            // Sunrise-start
+            // 🌟Starlight🌟 start
             var finalEv = new DamageBeforeApplyEvent
             {
                 Damage = damage,
@@ -250,7 +249,9 @@ namespace Content.Shared.Damage
             RaiseLocalEvent(uid.Value, finalEv);
             if (finalEv.Cancelled)
                 return damage;
-            // Sunrise-end
+            // 🌟Starlight🌟 end
+
+            damage = ApplyUniversalAllModifiers(damage);
 
             // TODO DAMAGE PERFORMANCE
             // Consider using a local private field instead of creating a new dictionary here.

@@ -446,8 +446,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             return;
         }
 
-        var NonEmptyGunShotEvent = new OnNonEmptyGunShotEvent(user, ev.Ammo);
-        RaiseLocalEvent(gunUid, ref NonEmptyGunShotEvent);
+        var nonEmptyGunShotEvent = new OnNonEmptyGunShotEvent(user, ev.Ammo);
+        RaiseLocalEvent(gunUid, ref nonEmptyGunShotEvent);
 
         // Handle burstfire
         if (gun.SelectedMode == SelectiveFire.Burst)

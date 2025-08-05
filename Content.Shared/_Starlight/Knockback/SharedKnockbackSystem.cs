@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Shared._Starlight.Weapon.Components;
 using Content.Shared.Damage.Components;
@@ -9,11 +10,9 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
-
 //linq
-using System.Linq;
 
-namespace Content.Shared.Starlight.Knockback;
+namespace Content.Shared._Starlight.Knockback;
 public abstract partial class SharedKnockbackSystem : EntitySystem
 {
     [Dependency] private readonly TagSystem _tagSystem = default!;
@@ -21,6 +20,7 @@ public abstract partial class SharedKnockbackSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<KnockbackByUserTagComponent, OnNonEmptyGunShotEvent>(OnGunShot);
