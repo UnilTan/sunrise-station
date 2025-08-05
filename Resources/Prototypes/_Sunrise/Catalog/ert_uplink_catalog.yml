@@ -427,7 +427,7 @@
   productEntity: MagazineBoxMagnumIncendiary
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: box_magnum_ince }
   cost:
-    Crystallite: 3
+    Crystallite: 6
   categories:
     - NTAmmo
   conditions:
@@ -436,7 +436,7 @@
 
 - type: listing
   id: NTUplinkSunriseMagazineP90
-  productEntity: MagazineP90Extended
+  productEntity: MagazineP90
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mag_p90 }
   cost:
     Crystallite: 6

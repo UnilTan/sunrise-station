@@ -10,7 +10,7 @@
   - type: BallisticAmmoProvider
     mayTransfer: true
     capacity: 20
-    proto: CartridgeHeavyRifleSP
+    proto: CartridgeRifleHeavySP
     whitelist:
       tags:
         - CartridgeHeavyRifle

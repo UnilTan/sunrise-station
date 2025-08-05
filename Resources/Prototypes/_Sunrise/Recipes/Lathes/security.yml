@@ -170,8 +170,8 @@
     Steel: 565
 
 - type: latheRecipe
-  id: MagazineAR18
-  result: MagazineAR18
+  id: MagazineRifleHeavySP
+  result: MagazineRifleHeavySP
   categories:
   - Ammo
   completetime: 5

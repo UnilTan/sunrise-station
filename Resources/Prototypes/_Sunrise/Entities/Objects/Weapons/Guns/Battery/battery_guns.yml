@@ -151,7 +151,7 @@
     startingCharge: 1500
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 60
       name: energy-gun-disable
       state: disabler
@@ -212,7 +212,7 @@
   #   autoRechargePauseTime: 30
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 65
       name: energy-gun-disable
       state: disabler
@@ -283,7 +283,7 @@
     autoRechargePauseTime: 6
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 90
       name: energy-gun-disable
       state: disabler
@@ -339,7 +339,7 @@
     startingCharge: 600
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
       state: disabler
@@ -395,7 +395,7 @@
     startingCharge: 1000
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
       state: disabler
@@ -487,7 +487,7 @@
     startingCharge: 1000
   - type: EnergyGunFireModes
     fireModes:
-    - hitscanProto: BulletDisabler
+    - hitscanProto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
       state: disabler

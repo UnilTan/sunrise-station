@@ -58,7 +58,7 @@
   - type: StorageFill
     contents:
     - id: WeaponSubMachineGunMP7
-    - id: BoxMagazinePistolHighCapacityFMJ
+    - id: MagazinePistolHighCapacityFMJ
       amount: 3
 
 - type: entity
