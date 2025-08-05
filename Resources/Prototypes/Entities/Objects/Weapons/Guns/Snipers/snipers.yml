@@ -26,11 +26,11 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: BallisticAmmoProvider
-    capacity: 10
-    proto: CartridgeLightRifleFMJ
+    capacity: 5 # Sunrise-Edit
+    proto: CartridgeHeavyRifleRFMJ
     whitelist:
       tags:
-      - CartridgeLightRifle
+      - CartridgeHeavyRifleR # Sunrise-Edit
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -50,7 +50,7 @@
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 3
-    pvsIncrease: 0.3
+    pvsIncrease: 0.35
   - type: KnockbackByUserTag
     doestContain:
       Resomi:

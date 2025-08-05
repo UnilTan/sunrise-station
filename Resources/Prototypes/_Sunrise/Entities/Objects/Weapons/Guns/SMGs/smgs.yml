@@ -35,7 +35,7 @@
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 3
-    pvsIncrease: 0.3
+    pvsIncrease: 0.35
 
 - type: entity
   name: P-90
