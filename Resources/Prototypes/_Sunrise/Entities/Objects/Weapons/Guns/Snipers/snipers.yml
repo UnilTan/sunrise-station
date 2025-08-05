@@ -329,11 +329,11 @@
     shape:
     - 0,0,4,1
   - type: BallisticAmmoProvider
-    capacity: 10
+    capacity: 5
     proto: null
     whitelist:
       tags:
-      - CartridgeHeavyRifle
+      - CartridgeHeavyRifleR
   - type: Lubed
     slipStrength: 3
     slipsLeft: 3

@@ -44,7 +44,7 @@
     sprite: _Sunrise/Structures/Storage/Crates/woodcrate_ussp_mosin.rsi
     state: icon
   product: CrateShelfMosin
-  cost: 3500
+  cost: 3250
   category: cargoproduct-category-name-armory
   group: market
 
@@ -54,6 +54,6 @@
     sprite: _Sunrise/Structures/Storage/Crates/woodcrate_ussp_small.rsi
     state: icon
   product: CrateAmmunitionSmallLightRifle
-  cost: 1200
+  cost: 925
   category: cargoproduct-category-name-armory
   group: market

@@ -249,3 +249,37 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
+
+- type: entity
+  id: SpeedLoaderHeavyRifleRFMJ
+  name: "speed loader (7.62mmR FMJ)"
+  parent: [ BaseItem, BaseMinorContraband ]
+  components:
+  - type: Tag
+    tags:
+      - SpeedLoaderRifle
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    fillDelay: 0.1
+    whitelist:
+      tags:
+        - CartridgeHeavyRifleR
+    capacity: 5
+    proto: CartridgeHeavyRifleRFMJ
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
