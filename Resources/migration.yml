@@ -778,8 +778,8 @@ BaseUplinkNTERT75BC: null
 BaseUplinkNTERT100BC: null
 BaseUplinkNTERT200BC: null
 CartridgePistol: null
-AtmosDeviceFanTiny: null
-AtmosDeviceFanDirectional: null
+AtmosDeviceFanTiny: AtmosDeviceFanTinyDev
+AtmosDeviceFanDirectional: AtmosDeviceFanDirectionalDev
 MagazineBR64Extended: null
 MagazineBR64: null
 MagazineAR18Extended: null
@@ -789,5 +789,4 @@ CrateArmoryMagazineBoxLightRifleBig: null
 CrateArmoryMagazineBoxRifleBig: null
 CrateArmoryM16A4: null
 CrateArmoryMP7: null
-# Sunrise migrations end
-
+# Sunrise-End
