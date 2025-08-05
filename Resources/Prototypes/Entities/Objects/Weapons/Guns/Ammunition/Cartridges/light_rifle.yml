@@ -11,7 +11,8 @@
   - type: HitScanCartridgeAmmo
     hitscan: BulletLightRifleTraceSP
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/7.62x39.rsi # Sunrise-Edit
+    scale: 0.78, 0.78 # Sunrise-Added
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
