@@ -94,8 +94,8 @@
     belt: ClothingBeltSecurityFilled
     pocket1: MagazineRifleSP
     pocket2: MagazineRifleIncendiary
-  #inhand:
-  #- WeaponRifleLecter
+  inhand:
+  - WeaponRifleLecter
   storage:
     back:
     - WeaponDisabler
