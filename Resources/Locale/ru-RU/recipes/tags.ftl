@@ -108,8 +108,8 @@ construction-graph-tag-human-head = { ent-HeadHuman }
 construction-graph-tag-light-bulb = { ent-LightBulb }
 construction-graph-tag-radio = { ent-RadioHandheld }
 construction-graph-tag-upgradeflaregun = { ent-FlareGunSecurityUpgrade }
-construction-graph-tag-UpgradeFlareGun = { ent-DrozdUpgrade }
-construction-graph-tag-UpgradeFlareGun = { ent-LecterUpgrade }
+construction-graph-tag-upgradedrozd = { ent-DrozdUpgrade }
+construction-graph-tag-upgradelecter = { ent-LecterUpgrade }
 construction-graph-tag-ModularReceiverAuto = { ent-ModularReceiverAuto }
 # Щиты и защита
 construction-graph-tag-strobe-shield = { ent-RiotShield }

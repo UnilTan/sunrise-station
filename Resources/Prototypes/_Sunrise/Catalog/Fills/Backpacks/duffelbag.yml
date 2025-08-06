@@ -78,7 +78,7 @@
 - type: entity
   id: ClothingBackpackDuffelWeaponSubMachineGunDrozdMk2
   parent: ClothingBackpackDuffelMilitary
-  name: Bundle WT550
+  name: Bundle Drozd Mk2
   description: Drozd Mk2 with 3 raspy magazines FMJ and 2 HP.
   components:
   - type: StorageFill
@@ -92,7 +92,7 @@
 - type: entity
   id: ClothingBackpackDuffelWeaponRifleLecterFilled
   parent: ClothingBackpackDuffelMilitary
-  name: Bundle lecter
+  name: Bundle lecter Mk2
   description: Lecter Mk2 with 3 raspy FMJ magazines and 2 HP.
   components:
   - type: StorageFill
