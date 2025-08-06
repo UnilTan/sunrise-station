@@ -166,7 +166,7 @@
   - type: GunRequiresWield
   - type: Gun
     pump: true
-    fireRate: 1
+    fireRate: 1.45
   - type: GunSpreadModifier
     spread: 0.6
   - type: Construction

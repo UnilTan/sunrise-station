@@ -224,7 +224,6 @@
   - PortableRecharger
   - WeaponMechCombatImmolationGun # Sunrise-Add
   - WeaponMechCombatIon # Sunrise-Add
-  - WeaponGunLaserCarbineSemi #Sunrise-Add
 
 - type: technology
   id: ThermalWeaponry

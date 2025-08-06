@@ -167,6 +167,7 @@
   cost: 12500
   recipeUnlocks:
   - WeaponGunLaserCarbineAutomatic
+  - MagazineBatteryLr30
   - WeaponEnergyGunPistol
   radioChannels:
   - Security

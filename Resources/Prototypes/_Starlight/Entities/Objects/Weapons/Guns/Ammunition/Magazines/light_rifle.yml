@@ -1,13 +1,13 @@
 - type: entity
-  id: RifleHeavyBase
+  id: LightRifleHeavyBase
   parent: BaseItem
   abstract: true
   components:
   - type: Tag
     tags:
-      - MagazineMachineGunHeavyRifle
+      - LightRifleHeavy
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavySP
+    proto: CartridgeLightRifleSP
     capacity: 100
   - type: Item
     size: Normal
@@ -27,10 +27,10 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineEmpty
-  name: "Magazine Box (.308 any)"
+  id: LightRifleHeavyMagazineEmpty
+  name: "Magazine Box (7.62 any)"
   suffix: empty
-  parent: RifleHeavyBase
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -45,12 +45,12 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineSP
-  name: "Magazine Box (.308 SP)"
-  parent: RifleHeavyBase
+  id: LightRifleHeavyMagazineSP
+  name: "Magazine Box (7.62 SP)"
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavySP
+    proto: CartridgeLightRifleSP
   - type: Sprite
     layers:
     - state: base
@@ -65,12 +65,12 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineHP
-  name: "Magazine Box (.308 HP)"
-  parent: RifleHeavyBase
+  id: LightRifleHeavyMagazineHP
+  name: "Magazine Box (7.62 HP)"
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyHP
+    proto: CartridgeLightRifleHP
   - type: Sprite
     layers:
     - state: base
@@ -85,12 +85,12 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineFMJ
-  name: "Magazine Box (.308 FMJ)"
-  parent: RifleHeavyBase
+  id: LightRifleHeavyMagazineFMJ
+  name: "Magazine Box (7.62 FMJ)"
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyFMJ
+    proto: CartridgeLightRifleFMJ
   - type: Sprite
     layers:
     - state: base
@@ -105,12 +105,12 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineIncendiary
-  name: "Magazine Box (.308 incendiary)"
-  parent: RifleHeavyBase
+  id: LightRifleHeavyMagazineIncendiary
+  name: "Magazine Box (7.62 incendiary)"
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyIncendiary
+    proto: CartridgeLightRifleIncendiary
   - type: Sprite
     layers:
     - state: base
@@ -125,12 +125,12 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineUranium
-  name: "Magazine Box (.308 uranium)"
-  parent: RifleHeavyBase
+  id: LightRifleHeavyMagazineUranium
+  name: "Magazine Box (7.62 uranium)"
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyUranium
+    proto: CartridgeLightRifleUranium
   - type: Sprite
     layers:
     - state: base
@@ -145,12 +145,12 @@
   - type: Appearance
 
 - type: entity
-  id: RifleHeavyMagazineAP
-  name: "Magazine Box (.308 AP)"
-  parent: RifleHeavyBase
+  id: LightRifleHeavyMagazineAP
+  name: "Magazine Box (7.62 AP)"
+  parent: LightRifleHeavyBase
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyAP
+    proto: CartridgeLightRifleAP
   - type: Sprite
     layers:
     - state: base

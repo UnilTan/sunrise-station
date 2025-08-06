@@ -92,11 +92,11 @@
 - type: latheRecipePack
   id: SecurityDynamicSunrise
   recipes:
-    - WeaponGunLaserCarbineSemi
     - WeaponEnergyGun
     - WeaponEnergyGunMini
     - WeaponEnergyGunPistol
     - WeaponGunLaserCarbineAutomatic
+    - MagazineBatteryLr30
     - FlareGunSecurityUpgrade
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended

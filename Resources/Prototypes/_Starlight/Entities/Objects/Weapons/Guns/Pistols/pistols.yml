@@ -313,6 +313,7 @@
   - type: Clothing
     sprite: _Starlight/Objects/Weapons/Guns/Pistols/improvised_pistol.rsi
   - type: Gun
+    pump: false
     fireRate: 3
     availableModes:
     - SemiAuto

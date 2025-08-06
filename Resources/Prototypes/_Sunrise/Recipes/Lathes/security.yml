@@ -47,6 +47,15 @@
     Plasma: 500
 
 - type: latheRecipe
+  id: MagazineBatteryLr30
+  parent: BaseAmmoRecipe
+  result: MagazineBatteryLr30
+  materials:
+    Steel: 250
+    Glass: 50
+    Plasma: 25
+
+- type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazineLightRifleBoxIncendiary
   result: MagazineLightRifleBoxIncendiary
@@ -585,15 +594,6 @@
     Plasma: 1200
     Glass: 300
     Plastic: 50
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponGunLaserCarbineSemi
-  result: WeaponGunLaserCarbineSemi
-  materials:
-    Steel: 2000
-    Plastic: 500
-    Gold: 500
 
 # WT550 Sunrise Ammunition
 - type: latheRecipe

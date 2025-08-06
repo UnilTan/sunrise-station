@@ -174,7 +174,6 @@
   parent: [BaseWeaponRifle, BaseSecurityContraband]
   id: WeaponRifleLecter
   description: A high end military grade assault rifle. Uses .20 rifle ammo.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi

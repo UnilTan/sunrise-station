@@ -615,6 +615,9 @@
       tags:
         - ShellShotgun
         - CartridgeMagnum
+        - CartridgePistolImprovised
+        - CartridgeLightRifleImprovised
+        - CartridgeMagnumImprovised
     capacity: 21 # Sunrise-edit
 
 - type: entity

@@ -116,27 +116,6 @@
     reflective:
     - Energy
 
-- type: entity
-  id: BulletGrenadeFragLight
-  name: light frag grenade
-  parent: BaseBulletGrenade
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-      - state: grenade
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    maxIntensity: 2
-    intensitySlope: 1
-    totalIntensity: 4
-    maxTileBreak: 0
-  - type: ProjectileGrenade
-    fillPrototype: PelletClusterLethal
-    capacity: 5
-
 # Shells that used for friendship and duster
 
 - type: entity
@@ -549,6 +528,7 @@
     totalIntensity: 150 # a ~2 tile radius
     intensitySlope: 5
     maxIntensity: 10
+    canCreateVacuum: false
 
 - type: entity
   id: BulletGrenadeFlashTimer
@@ -582,9 +562,16 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 175 # about a ~6 tile radius
+    totalIntensity: 50
     intensitySlope: 1
-    maxIntensity: 10
+    maxIntensity: 5
+    canCreateVacuum: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    fillPrototype: PelletClusterLessLethal
+    capacity: 30
 
 - type: entity
   id: BulletGrenadeEMPTimer

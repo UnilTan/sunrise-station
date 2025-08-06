@@ -27,7 +27,7 @@
     sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: Gun
-    minAngle: 20
+    minAngle: 22
     maxAngle: 35
     angleIncrease: 2
     angleDecay: 10

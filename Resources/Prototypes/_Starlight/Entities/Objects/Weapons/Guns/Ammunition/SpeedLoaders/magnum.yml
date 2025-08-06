@@ -27,3 +27,12 @@
   - type: Construction
     graph: ImprovisedMagnumSpeedLoaderGraph
     node: shell
+  - type: Appearance
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-ammo
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-ammo
