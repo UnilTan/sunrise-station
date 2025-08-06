@@ -643,6 +643,25 @@
       components:
       - SurplusBundle
 
+# # Wearables # Sunrise-TODO: Перенести со Старлайт
+# - type: listing
+#   id: UplinkHardsuitInfiltration
+#   name: uplink-hardsuit-infiltration-name
+#   description: uplink-hardsuit-infiltration-desc
+#   icon: { sprite: /Textures/_Starlight/Clothing/OuterClothing/Hardsuits/infiltrationsyndie.rsi, state: icon }
+#   productEntity: ClothingBackpackDuffelSyndicateFilledInfiltration
+#   discountCategory: veryRareDiscounts
+#   discountDownTo:
+#     Telecrystal: 5
+#   cost:
+#     Telecrystal: 10
+#   categories:
+#   - UplinkWearables
+#   - !type:StoreWhitelistCondition
+#     whitelist:
+#       tags:
+#       - NukeOpsUplink
+
 - type: listing
   id: UplinkHardsuitSyndieMedic
   name: uplink-hardsuit-syndie-medic-name
