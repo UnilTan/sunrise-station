@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Shared._Sunrise.Medical.Damage;
+using Content.Shared._Starlight.Medical.Damage;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry;
 using Content.Shared._Sunrise.SunriseCCVars;
@@ -19,7 +19,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Random;
-using Content.Shared._Sunrise.Medical.Damage;
 
 namespace Content.Shared.Damage
 {

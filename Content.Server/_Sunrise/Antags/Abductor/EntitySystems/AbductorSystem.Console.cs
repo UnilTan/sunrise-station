@@ -8,8 +8,6 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Prototypes;
 using Content.Shared._Sunrise.Antags.Abductor;
-using Content.Shared._Sunrise.ItemSwitch;
-using Content.Shared._Sunrise.Medical.Surgery;
 using Content.Shared.UserInterface;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
@@ -19,6 +17,7 @@ using Content.Server.VendingMachines;
 using Content.Shared.VendingMachines;
 using Content.Shared._Sunrise.Carrying;
 using Content.Shared.Popups;
+using Content.Shared.Starlight.ItemSwitch;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 

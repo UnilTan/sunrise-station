@@ -81,3 +81,12 @@
 
 - type: Tag
   id: CartridgeBattery
+
+- type: Tag
+  id: Patch
+
+- type: Tag
+  id: PatchPack
+
+- type: Tag
+  id: BrigmedicBeltEquip
