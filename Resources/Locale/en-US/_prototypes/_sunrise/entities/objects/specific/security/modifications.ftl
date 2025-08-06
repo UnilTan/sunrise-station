@@ -2,3 +2,7 @@ ent-FlareGunSecurityUpgrade = upgrade kit (security flare gun)
     .desc = A security flare gun modification kit. Includes a barrel replacement with a larger caliber and sight adjustments to safely launch any hand grenades over long distances.
 ent-ModularReceiverAuto = modular Auto receiver
     .desc = A vital part used in the creation of Auto firearms.
+ent-LecterUpgrade = Upgrade Kit (Lecter)
+    .desc = A modification kit for the Security Lecter. Replaces the standard handguard and stock with ones made from lighter materials and adds an automatic magazine release system.
+ent-DrozdUpgrade = Upgrade Kit (Drozd)
+    .desc = A modification kit for the Drozd submachine gun. Replaces the standard grip and stock with lighter versions and adds an automatic magazine release system.

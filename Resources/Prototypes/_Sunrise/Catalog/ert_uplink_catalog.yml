@@ -1,11 +1,10 @@
 # Автоматы:
 - type: listing
-  id: ERTUplinkWeaponSubMachineGunMP5
-  name: ntuplink-gun-bundlemp5-name
-  productEntity: ClothingBackpackDuffelWeaponSubMachineGunMP5Filled
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mp5 }
+  id: ERTUplinkWeaponSubMachineGunDrozdMk2
+  productEntity: ClothingBackpackDuffelWeaponSubMachineGunDrozdMk2
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: drozd }
   cost:
-    Bluecrystal: 7
+    Bluecrystal: 9
   categories:
     - NTAutoGun
   conditions:
@@ -17,7 +16,7 @@
   productEntity: ClothingBackpackDuffelWeaponRifleLecterFilled
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: lecter }
   cost:
-    Bluecrystal: 10
+    Bluecrystal: 9
   categories:
     - NTAutoGun
   conditions:
@@ -30,7 +29,7 @@
   productEntity: ClothingBackpackDuffelWeaponSubMachineGunWt550
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: wt550 }
   cost:
-    Bluecrystal: 10
+    Bluecrystal: 9
   categories:
     - NTAutoGun
   conditions:

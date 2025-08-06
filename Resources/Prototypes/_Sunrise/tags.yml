@@ -81,6 +81,12 @@
 - type: Tag
   id: ModularReceiverAuto
 
+- type: Tag
+  id: UpgradeDrozd
+
+- type: Tag
+  id: UpgradeLecter
+
 # Magazines:
 - type: Tag
   id: MagazineM28

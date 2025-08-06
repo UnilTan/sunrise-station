@@ -288,10 +288,33 @@
   result: ModularReceiverAuto
   categories:
   - Weapons
-  completetime: 12
+  completetime: 10
   materials:
-    Steel: 800
-    Plastic: 100
+    Steel: 500
+    Plastic: 50
+
+- type: latheRecipe
+  id: DrozdUpgrade
+  result: DrozdUpgrade
+  categories:
+  - Weapons
+  completetime: 16
+  materials:
+    Steel: 150
+    Plastic: 300
+    Gold: 50
+
+- type: latheRecipe
+  id: LecterUpgrade
+  result: LecterUpgrade
+  categories:
+  - Weapons
+  completetime: 16
+  materials:
+    Steel: 150
+    Plastic: 300
+    Gold: 50
+
 #
 #- type: latheRecipe  # Отдельной технологией
 #  id: BaseMagazinePistolCaselessRifleExtended

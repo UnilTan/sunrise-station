@@ -215,6 +215,9 @@
     steps: 5
     zeroVisible: true
   - type: Appearance
+  - type: Construction  # Sunrise-start
+    graph: LecterSecurity
+    node: start   # Sunrise-end
 
 - type: entity
   name: Foam Force Astro Ace

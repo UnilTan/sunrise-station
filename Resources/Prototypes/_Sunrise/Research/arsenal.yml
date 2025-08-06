@@ -151,6 +151,8 @@
   recipeUnlocks:
   - ClothingShoesBootsMagCombat
   - ModularReceiverAuto
+  - LecterUpgrade
+  - DrozdUpgrade
   technologyPrerequisites:
   - AdvancedRiotControl
   radioChannels:

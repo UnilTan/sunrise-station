@@ -115,6 +115,9 @@
     - ShellFlashArtillery
     - EnergyDomeDirectionalTurtle
     - WeaponTemperatureGun
+    - ModularReceiverAuto
+    - LecterUpgrade
+    - DrozdUpgrade
   #####################BOX#######################
   # Light Rifle
     - MagazineBoxLightRifleIncendiary

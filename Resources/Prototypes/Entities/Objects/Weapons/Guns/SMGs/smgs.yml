@@ -208,6 +208,9 @@
       steps: 5
       zeroVisible: true
     - type: Appearance
+    - type: Construction  # Sunrise-start
+      graph: DrozdSecurity
+      node: start   # Sunrise-end
 
 - type: entity
   name: WT550

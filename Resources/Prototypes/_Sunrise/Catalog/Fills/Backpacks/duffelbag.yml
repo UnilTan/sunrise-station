@@ -50,6 +50,18 @@
       amount: 4
 
 - type: entity
+  id: ClothingBackpackDuffelWeaponSubMachineGunMP7Filled
+  parent: ClothingBackpackDuffelMilitary
+  name: Bundle MP7
+  description: MP7 with 3 raspy magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSubMachineGunMP7
+    - id: MagazinePistolHighCapacityFMJ
+      amount: 3
+
+- type: entity
   id: ClothingBackpackDuffelWeaponSubMachineGunWt550
   parent: ClothingBackpackDuffelMilitary
   name: Bundle WT550
@@ -64,16 +76,18 @@
       amount: 2
 
 - type: entity
-  id: ClothingBackpackDuffelWeaponSubMachineGunMP7Filled
+  id: ClothingBackpackDuffelWeaponSubMachineGunDrozdMk2
   parent: ClothingBackpackDuffelMilitary
-  name: Bundle MP7
-  description: MP7 with 3 raspy magazines.
+  name: Bundle WT550
+  description: Drozd Mk2 with 3 raspy magazines FMJ and 2 HP.
   components:
   - type: StorageFill
     contents:
-    - id: WeaponSubMachineGunMP7
-    - id: MagazinePistolHighCapacityFMJ
+    - id: WeaponSubMachineGunDrozdMk2
+    - id: MagazinePistolSubMachineGunFMJ
       amount: 3
+    - id: MagazinePistolSubMachineGunHP
+      amount: 2
 
 - type: entity
   id: ClothingBackpackDuffelWeaponRifleLecterFilled
