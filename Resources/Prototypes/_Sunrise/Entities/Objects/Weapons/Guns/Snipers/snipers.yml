@@ -173,11 +173,12 @@
     minAngle: -23
     maxAngle: -43
   - type: Gun
+    pump: true
     projectileSpeed: 55
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    fireRate: 0.65
+    fireRate: 0.75
     minAngle: 24
     maxAngle: 45
     soundGunshot:
@@ -274,6 +275,7 @@
     - 0,0,4,1
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/mosin/tiny.rsi
   - type: Gun
+    pump: true
     fireRate: 0.8
   - type: Wieldable
   - type: UseDelay
@@ -298,6 +300,7 @@
   - type: StaticPrice
     price: 850
   - type: Gun
+    pump: true
     fireRate: 1.35
     selectedMode: SemiAuto
     availableModes:

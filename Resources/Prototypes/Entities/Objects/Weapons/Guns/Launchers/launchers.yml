@@ -57,6 +57,7 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
+    pump: true
     fireRate: 1
     selectedMode: SemiAuto
     availableModes:
@@ -68,13 +69,13 @@
     whitelist:
       tags:
         - Grenade
-    capacity: 1 # Sunrise-Edit
+    capacity: 4 # Sunrise-Edit
     proto: GrenadeFragTimer
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
   - type: GunRequiresWield
   - type: StaticPrice
-    price: 5000
+    price: 10000
 
 - type: entity
   parent: [ BaseWeaponLauncher, BaseGunWieldable, BaseMajorContraband ]
