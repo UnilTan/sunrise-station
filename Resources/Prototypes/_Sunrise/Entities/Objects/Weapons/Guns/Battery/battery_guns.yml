@@ -148,6 +148,9 @@
   - type: Battery
     maxCharge: 1500
     startingCharge: 1500
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 60
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBolt
@@ -201,6 +204,9 @@
   #   autoRechargeRate: 25
   #   autoRechargePause: true
   #   autoRechargePauseTime: 30
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 65
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBolt
@@ -259,6 +265,9 @@
     autoRechargeRate: 60
     autoRechargePause: true
     autoRechargePauseTime: 6
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 90
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBolt
@@ -308,6 +317,9 @@
   - type: Battery
     maxCharge: 600
     startingCharge: 600
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 50
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBolt
@@ -356,6 +368,9 @@
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 50
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBolt
@@ -441,6 +456,9 @@
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 50
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBolt
@@ -502,6 +520,9 @@
     autoRechargeRate: 14 # ~2 minute
     autoRechargePause: true
     autoRechargePauseTime: 30
+  - type: HitscanBatteryAmmoProvider
+    proto: DisablerBolt
+    fireCost: 49
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: DisablerBoltSmg
@@ -885,7 +906,7 @@
     availableModes:
     - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
+    proto: RedLaserBeam # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 40
   - type: Wieldable
   - type: GunWieldBonus
@@ -937,7 +958,7 @@
       - SemiAuto
       - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
+    proto: RedLaserBeam # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 50
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -984,7 +1005,7 @@
     availableModes:
     - FullAuto
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
+    proto: RedLaserBeam # Sunrise-TODO: Нужен товый прототип для данной пушки
     fireCost: 25
   - type: MultiHandedItem
   - type: Battery

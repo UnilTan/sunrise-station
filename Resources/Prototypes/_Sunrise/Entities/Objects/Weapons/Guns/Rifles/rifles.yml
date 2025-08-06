@@ -69,7 +69,7 @@
   #   bluntStaminaDamageFactor: 2.0
   #   attackRate: 0.9
   #   autoAttack: false
-  # - type: AltFireMelee #Sunrise-TODO: Вынести в отдельную кнопку удара
+  # - type: AltFireMelee
   #   attackType: Heavy
   - type: StaticPrice
     price: 500

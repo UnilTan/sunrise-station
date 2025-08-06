@@ -19,7 +19,7 @@
     bluntStaminaDamageFactor: 2.0
     attackRate: 0.85
     autoAttack: false
-  - type: AltFireMelee  #Sunrise-TODO: Вынести в отдельную кнопку удара
+  - type: AltFireMelee
     attackType: Heavy
   - type: SpeedModifiedOnWield
     walkModifier: 0.9
@@ -197,7 +197,7 @@
     bluntStaminaDamageFactor: 2.0
     attackRate: 1
     autoAttack: false
-  - type: AltFireMelee  #Sunrise-TODO: Вынести в отдельную кнопку удара
+  - type: AltFireMelee
     attackType: Light
   - type: Item
     size: Normal
@@ -267,5 +267,5 @@
     bluntStaminaDamageFactor: 2.0
     attackRate: 1
     autoAttack: false
-  - type: AltFireMelee  #Sunrise-TODO: Вынести в отдельную кнопку удара
+  - type: AltFireMelee
     attackType: Light

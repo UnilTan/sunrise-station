@@ -13,7 +13,7 @@
     fireRate: 5
     useKey: true
     selectedMode: FullAuto
-  # - type: MeleeWeapon #Sunrise-TODO: Вынести в отдельную кнопку удара
+  # - type: MeleeWeapon
   #   angle: 60
   #   range: 1
   #   damage:

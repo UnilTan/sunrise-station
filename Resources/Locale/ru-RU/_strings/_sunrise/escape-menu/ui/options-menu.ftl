@@ -17,6 +17,7 @@ ui-options-vote-music-disable = Отключить музыку голосова
 ui-options-mute-new-ghost-roles = Отключить звук новых гост-ролей
 ui-options-function-toggle-standing = Лечь/Встать
 ui-options-function-cock-gun = Взвести оружие/Разрядить
+ui-options-function-melee-gun-attack = Удар прикладом/штыком
 ui-options-function-jump = Прыжок
 ui-options-function-reloading = Перезарядка
 ui-options-function-interact = Открыть панель взаимодействий

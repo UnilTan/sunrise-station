@@ -798,6 +798,9 @@
     fireRate: 2 # Sunrise-edit
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: LaserTraceSpread
+    fireCost: 150
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: LaserTraceSpread # Sunrise-Edit

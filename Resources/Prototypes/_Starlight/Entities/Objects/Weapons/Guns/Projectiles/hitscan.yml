@@ -811,13 +811,19 @@
   name: wide laser barrage
   id: LaserTraceSpread
   parent: LaserTrace
+  damage:
+    types:
+      Heat: 13
   count: 5
-  spread: 10
+  spread: 30
 
 - type: hitscan
   name: narrow laser barrage
   id: LaserTraceSpreadNarrow
   parent: LaserTrace
+  damage:
+    types:
+      Heat: 13
   count: 4
   spread: 10
 

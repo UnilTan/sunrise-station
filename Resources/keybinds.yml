@@ -19,7 +19,7 @@ binds:
   canFocus: true
 - function: UseSecondary
   type: State
-  key: MouseMiddle # Sunrise-Edit
+  key: MouseRight
   canFocus: true
   priority: -1 # UIRightClick & EditorCancelPlace should fire first.
 - function: ShowDebugMonitors
@@ -645,4 +645,7 @@ binds:
 - function: LookUp
   type: State
   key: MouseRight
+- function: MeleeGunAttack
+  type: State
+  key: MouseMiddle
 # Sunrise-End

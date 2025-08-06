@@ -85,10 +85,6 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Gun
-    soundGunshot:
-      path: /Audio/_Starlight/Weapons/Guns/Gunshots/mosin.ogg
-      params:
-        variation: 0.246
     pump: true
     fireRate: 1
   - type: AltFireMelee

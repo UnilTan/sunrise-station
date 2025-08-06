@@ -424,7 +424,7 @@
   #   bluntStaminaDamageFactor: 2.0
   #   attackRate: 1
   #   autoAttack: false
-  # - type: AltFireMelee #Sunrise-TODO: Вынести в отдельную кнопку удара
+  # - type: AltFireMelee
   #   attackType: Light
 
 - type: entity
