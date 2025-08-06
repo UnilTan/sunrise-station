@@ -174,6 +174,7 @@
   - type: Gun
     soundGunshot:
       collection: xm1014 # Sunrise-Edit
+    pump: true # Sunrise-Edit
 
 - type: entity
   parent: WeaponShotgunEnforcer
@@ -208,6 +209,7 @@
     fireRate: 1
     soundGunshot:
       collection: m3 # Sunrise-Edit
+    pump: true # Sunrise-Edit
   - type: GunSpreadModifier
     spread: 0.6
   - type: Tag

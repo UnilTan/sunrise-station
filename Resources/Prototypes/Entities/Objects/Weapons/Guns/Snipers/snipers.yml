@@ -84,6 +84,13 @@
     animation: WeaponArcThrust
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_Starlight/Weapons/Guns/Gunshots/mosin.ogg
+      params:
+        variation: 0.246
+    pump: true
+    fireRate: 1
   - type: AltFireMelee
     attackType: Heavy
   # Sunrise end
@@ -100,8 +107,8 @@
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
   - type: GunRequiresWield
   - type: Gun
-    pump: true
-    fireRate: 0.55
+    pump: true # Sunrise-Edit
+    fireRate: 0.55 # Sunrise-Edit
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

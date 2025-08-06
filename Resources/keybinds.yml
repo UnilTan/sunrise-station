@@ -19,7 +19,7 @@ binds:
   canFocus: true
 - function: UseSecondary
   type: State
-  key: MouseRight
+  key: MouseMiddle # Sunrise-Edit
   canFocus: true
   priority: -1 # UIRightClick & EditorCancelPlace should fire first.
 - function: ShowDebugMonitors

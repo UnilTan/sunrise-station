@@ -252,9 +252,9 @@
   productEntity: WeaponLauncherChinaLakeBiocode
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 5
-  cost:
     Telecrystal: 10
+  cost:
+    Telecrystal: 20
   categories:
   - UplinkWeaponry
 #Sunrise-start

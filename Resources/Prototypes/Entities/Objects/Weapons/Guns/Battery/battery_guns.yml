@@ -798,20 +798,17 @@
     fireRate: 2 # Sunrise-edit
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: EnergyGunFireModes # Sunrise-Edit
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: LaserTraceSpread # Sunrise-Edit
+    - proto: LaserTraceSpread # Sunrise-Edit
       fireCost: 150
       name: energy-gun-shotgun-spread # Sunrise-Edit
-      shotType: Hitscan # Sunrise-Edit
-    - hitscanProto: LaserTraceSpreadNarrow # Sunrise-Edit
+    - proto: LaserTraceSpreadNarrow # Sunrise-Edit
       fireCost: 200
       name: energy-gun-shotgun-spread-narrow # Sunrise-Edit
-      shotType: Hitscan # Sunrise-Edit
-    - hitscanProto: DisablerBoltSmgSpreadTrace # Sunrise-Edit
+    - proto: DisablerBoltSmgSpreadTrace # Sunrise-Edit
       fireCost: 120
       name: energy-gun-disable # Sunrise-Edit
-      shotType: Hitscan # Sunrise-Edit
   - type: Item
     size: Large
     shape:

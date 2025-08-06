@@ -129,9 +129,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -149,30 +148,23 @@
   - type: Battery
     maxCharge: 1500
     startingCharge: 1500
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 60
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam
+      visualState: disable
+      heldPrefix: disable
+    - proto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
-          Special: { state: mode-stun } # Unused
 
 - type: entity
   name: x-01 multiphase energy gun
@@ -189,9 +181,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -210,35 +201,23 @@
   #   autoRechargeRate: 25
   #   autoRechargePause: true
   #   autoRechargePauseTime: 30
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 65
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam
+      visualState: disable
+      heldPrefix: disable
+    - proto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
-    # - projectileProto: BulletEnergyGunIon
-    #   fireCost: 500 #250
-    #   name: ion
-    #   state: special
-    #  shotType: Projectile
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
-          Special: { state: mode-ion }
   - type: Tag
     tags:
     - HighRiskItem
@@ -259,9 +238,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -281,29 +259,23 @@
     autoRechargeRate: 60
     autoRechargePause: true
     autoRechargePauseTime: 6
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 90
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam #BulletPulse
+      visualState: disable
+      heldPrefix: disable
+    - proto: RedLaserBeam #BulletPulse
       fireCost: 110
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
   - type: Tag
     tags:
     - Sidearm
@@ -324,9 +296,8 @@
     - state: mag-unshaded-4
       map: [ "enum.GunVisualLayers.MagUnshaded" ]
       shader: unshaded
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Battery/mini_energygun.rsi
   - type: Gun
@@ -337,30 +308,23 @@
   - type: Battery
     maxCharge: 600
     startingCharge: 600
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam
+      visualState: disable
+      heldPrefix: disable
+    - proto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: false
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
-          Special: { state: mode-stun } # Unused
 
 - type: entity
   name: PDW-9 Energy Pistol
@@ -377,9 +341,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -393,29 +356,23 @@
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam
+      visualState: disable
+      heldPrefix: disable
+    - proto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
   - type: Tag
     tags:
     - Sidearm
@@ -469,9 +426,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -485,29 +441,23 @@
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam
+      visualState: disable
+      heldPrefix: disable
+    - proto: RedLaserBeam
       fireCost: 100
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
   - type: Tag
     tags:
     - Sidearm
@@ -525,9 +475,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mode-disabler
-      shader: unshaded
-      map: [ "Firemode" ]
+    - state: disable
+      map: ["enum.FireModesLayers.FireMode"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
@@ -553,29 +502,23 @@
     autoRechargeRate: 14 # ~2 minute
     autoRechargePause: true
     autoRechargePauseTime: 30
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBoltSmg
+    - proto: DisablerBoltSmg
       fireCost: 49
       name: energy-gun-disable
-      state: disabler
-      shotType: Hitscan
-    - hitscanProto: LaserTrace
+      visualState: disable
+      heldPrefix: disable
+    - proto: LaserTrace
       fireCost: 70
       name: energy-gun-lethal
-      state: lethal
-      shotType: Hitscan
+      visualState: lethal
+      heldPrefix: lethal
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.EnergyGunFireModeVisuals.State:
-        Firemode:
-          Disabler: { state: mode-disabler }
-          Lethal: { state: mode-lethal }
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunPulseSound]
@@ -1076,17 +1019,15 @@
   - type: HitscanBatteryAmmoProvider
     proto: DisablerBolt
     fireCost: 50
-  - type: EnergyGunFireModes
+  - type: BatteryWeaponFireModes
     fireModes:
-    - hitscanProto: DisablerBolt
+    - proto: DisablerBolt
       fireCost: 50
       name: energy-gun-disable
-      state: base
-      shotType: Hitscan
-    - hitscanProto: RedLaserBeam
+      #state: base
+    - proto: RedLaserBeam
       fireCost: 50
       name: energy-gun-lethal
-      shotType: Hitscan
   - type: MagazineVisuals
     magState: mag
     steps: 5

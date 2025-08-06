@@ -625,7 +625,7 @@
   # name: uplink-minotaur-name
   # description: uplink-minotaur-desc
   productEntity: ClothingBackpackDuffelSyndicateFilledMinotaur
-  icon: { sprite: /Textures/_Starlight/Objects/Weapons/Guns/Guns/Shotguns/minotaur.rsi, state: icon, }
+  icon: { sprite: /Textures/_Starlight/Objects/Weapons/Guns/Shotguns/minotaur.rsi, state: icon, }
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 15

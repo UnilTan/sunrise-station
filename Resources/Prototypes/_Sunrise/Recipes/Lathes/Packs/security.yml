@@ -19,9 +19,9 @@
     - MagazineBoxPistolHP
     - MagazineBoxPistolFMJ
     - MagazineBoxPistolRubber
-    #- MagazineBoxPistol40SP
-    #- MagazineBoxPistol40HP
-    #- MagazineBoxPistol40FMJ
+    - MagazineBoxPistol40SP
+    - MagazineBoxPistol40HP
+    - MagazineBoxPistol40FMJ
     # Rifle
     - MagazineBoxRifleSP
     - MagazineBoxRifleHP
@@ -53,10 +53,10 @@
     - MagazinePistolFMJ
     - MagazinePistolRubber
     - MagazinePistolEmpty
-    #- MagazinePistol40SP
-    #- MagazinePistol40HP
-    #- MagazinePistol40FMJ
-    #- MagazinePistol40Empty
+    - MagazinePistol40SP
+    - MagazinePistol40HP
+    - MagazinePistol40FMJ
+    - MagazinePistol40Empty
     # Pistol High Capacity
     - MagazinePistolHighCapacitySP
     - MagazinePistolHighCapacityHP
