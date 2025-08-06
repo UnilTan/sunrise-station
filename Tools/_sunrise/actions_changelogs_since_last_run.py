@@ -176,7 +176,7 @@ def send_embed_discord(embed: dict) -> None:
 
 
 def split_message(message: str, limit: int = DISCORD_SPLIT_LIMIT) -> list[str]:
-    return wrap(message, width=limit, replace_whitespace=False)
+    return textwrap.wrap(message, width=limit, replace_whitespace=False)
 
 def send_to_discord(entries: Iterable[ChangelogEntry]) -> None:
     if not DISCORD_WEBHOOK_URL:
