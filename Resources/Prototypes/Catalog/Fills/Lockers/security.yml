@@ -99,7 +99,7 @@
         amount: 2
       - id: ClothingOuterHardsuitBrigmedicSunrise  # Sunrise-edit
       - id: BoxSterileMask
-      - id: ClothingHeadHatBeretBrigmedic
+      - id: SecurityMedkit  # Sunrise-edit
       - id: ClothingOuterCoatAMG
       - id: ClothingUniformJumpsuitBrigmedic
       - id: ClothingUniformJumpskirtBrigmedic
