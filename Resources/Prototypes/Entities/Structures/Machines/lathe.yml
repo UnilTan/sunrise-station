@@ -235,6 +235,9 @@
     - SecurityDynamicSunrise # Sunrise-Add
     - SecurityDynamicSunriseClothing # Sunrise-Add
     - SecurityDynamicSunriseMech # Sunrise-Add
+    - MedicalCyberlimbDynamic # Sunrise-Add
+    - MedicalCyberOrgansDynamic # Sunrise-Add
+    - MedicalImplantDynamic # Sunrise-Add
 
 - type: entity
   id: ProtolatheHyperConvection
