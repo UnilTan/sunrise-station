@@ -21,8 +21,6 @@ namespace Content.Server._Sunrise.InteractionsPanel;
 
 public partial class InteractionsPanel
 {
-    private static Dictionary<NetUserId, bool> _emoteVisibilityStatus = new Dictionary<NetUserId, bool>();
-
     [Dependency] private readonly PlayerCacheManager _playerCacheManager = default!;
 
     private void InitializeInteractions()
