@@ -182,7 +182,7 @@ public partial class InteractionsPanel
 
         if (!_playerCacheManager.TryGetCachedEmoteVisibility(userSession.UserId, out var userPref))
             return;
-        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetSession!.UserId, out var targetPref))
+        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetIsPlayer ? targetSession!.UserId : null , out var targetPref))
             return;
 
         var rawMsg = _random.Pick(interactionPrototype.InteractionMessages);
@@ -250,7 +250,7 @@ public partial class InteractionsPanel
     {
         if (!_playerCacheManager.TryGetCachedEmoteVisibility(userSession.UserId, out var userPref))
             return;
-        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetSession!.UserId, out var targetPref))
+        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetIsPlayer ? targetSession!.UserId : null , out var targetPref))
             return;
 
         var msg = FormatInteractionMessage(data.InteractionMessage, user, target);
