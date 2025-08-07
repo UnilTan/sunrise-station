@@ -11,7 +11,7 @@ public sealed class InteractionsPanelSystem : EntitySystem
     public override void Initialize()
     {
         _cfg.OnValueChanged(InteractionsCVars.EmoteVisibility, SendCurrentEmoteStatus);
-        SendCurrentEmoteStatus(_cfg.GetCVar<bool>("interactions.emote"));
+        SendCurrentEmoteStatus(_cfg.GetCVar(InteractionsCVars.EmoteVisibility));
     }
 
     /// <summary>

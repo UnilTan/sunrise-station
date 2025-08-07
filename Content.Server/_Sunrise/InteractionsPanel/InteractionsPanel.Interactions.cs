@@ -184,8 +184,10 @@ public partial class InteractionsPanel
         if (!CheckAllAppearConditions(interactionPrototype, ent.Owner, target.Value))
             return;
 
-        var userPref = _emoteVisibilityStatus[userSession.UserId];
-        var targetPref = !targetIsPlayer || _emoteVisibilityStatus[targetSession!.UserId];
+        if (!_emoteVisibilityStatus.TryGetValue(userSession.UserId, out var userPref))
+            return;
+        if (!_emoteVisibilityStatus.TryGetValue(targetSession!.UserId, out var targetPref))
+            return;
 
         var rawMsg = _random.Pick(interactionPrototype.InteractionMessages);
         var msg = FormatInteractionMessage(rawMsg, ent.Owner, target.Value);
@@ -250,8 +252,10 @@ public partial class InteractionsPanel
         ICommonSession? targetSession,
         bool targetIsPlayer)
     {
-        var userPref = _emoteVisibilityStatus[userSession.UserId];
-        var targetPref = !targetIsPlayer || _emoteVisibilityStatus[targetSession!.UserId];
+        if (!_emoteVisibilityStatus.TryGetValue(userSession.UserId, out var userPref))
+            return;
+        if (!_emoteVisibilityStatus.TryGetValue(targetSession!.UserId, out var targetPref))
+            return;
 
         var msg = FormatInteractionMessage(data.InteractionMessage, user, target);
 
