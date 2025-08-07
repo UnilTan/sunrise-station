@@ -2,6 +2,7 @@
 
 using Robust.Shared.Network;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared._Sunrise.PlayerCache;
 
 namespace Content.Server._Sunrise.PlayerCache;
@@ -60,6 +61,23 @@ public sealed class PlayerCacheManager
             return true;
         }
         pet = "";
+        return false;
+    }
+
+    /// <summary>
+    /// Почему userId нуллабл, а не просто "NetUserId"?
+    /// Потому что иногда ерп панель используется с сущностями, не имеющими хозяина. Например, с макчеловеком на дебаг арене.
+    /// такие случаи надо обрабатывать
+    /// </summary>
+    public bool TryGetCachedEmoteVisibility(NetUserId? userId, out bool visibility)
+    {
+        if (userId.HasValue && _cache.TryGetValue(userId.Value, out var data) && data.EmoteVisibility.HasValue)
+        {
+            visibility = data.EmoteVisibility.Value;
+            return true;
+        }
+
+        visibility = InteractionsCVars.EmoteVisibility.DefaultValue;
         return false;
     }
 }

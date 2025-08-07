@@ -1,4 +1,6 @@
 // © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+
+using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared._Sunrise.PlayerCache;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Robust.Shared.Network;
@@ -25,7 +27,8 @@ public sealed class PlayerCacheManager
         var data = new PlayerCacheData
         {
             GhostTheme = cfg.GetCVar(SunriseCCVars.SponsorGhostTheme),
-            Pet = cfg.GetCVar(SunriseCCVars.SponsorPet)
+            Pet = cfg.GetCVar(SunriseCCVars.SponsorPet),
+            EmoteVisibility = cfg.GetCVar(InteractionsCVars.EmoteVisibility),
         };
         var sync = new MsgPlayerCacheSync { Cache = data };
         _netManager.ClientSendMessage(sync);

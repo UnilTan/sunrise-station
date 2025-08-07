@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Server._Sunrise.PlayerCache;
 using Content.Server.Chat.Systems;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
@@ -22,6 +23,8 @@ public partial class InteractionsPanel
 {
     private static Dictionary<NetUserId, bool> _emoteVisibilityStatus = new Dictionary<NetUserId, bool>();
 
+    [Dependency] private readonly PlayerCacheManager _playerCacheManager = default!;
+
     private void InitializeInteractions()
     {
         Subs.BuiEvents<InteractionsComponent>(InteractionWindowUiKey.Key,
@@ -42,11 +45,6 @@ public partial class InteractionsPanel
             .Bind(ContentKeyFunctions.Interact, new PointerInputCmdHandler(HandleInteract))
             .Bind(ContentKeyFunctions.Interact, InputCmdHandler.FromDelegate(enabled: TryAutoInteraction))
             .Register<InteractionsPanel>();
-
-        SubscribeNetworkEvent<EmoteVisibilityChangedEvent>((msg, args) =>
-        {
-            _emoteVisibilityStatus[args.SenderSession.UserId] = msg.Status;
-        });
     }
 
     private void TryAutoInteraction(ICommonSession? session)
@@ -184,9 +182,9 @@ public partial class InteractionsPanel
         if (!CheckAllAppearConditions(interactionPrototype, ent.Owner, target.Value))
             return;
 
-        if (!_emoteVisibilityStatus.TryGetValue(userSession.UserId, out var userPref))
+        if (!_playerCacheManager.TryGetCachedEmoteVisibility(userSession.UserId, out var userPref))
             return;
-        if (!_emoteVisibilityStatus.TryGetValue(targetSession!.UserId, out var targetPref))
+        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetSession!.UserId, out var targetPref))
             return;
 
         var rawMsg = _random.Pick(interactionPrototype.InteractionMessages);
@@ -252,9 +250,9 @@ public partial class InteractionsPanel
         ICommonSession? targetSession,
         bool targetIsPlayer)
     {
-        if (!_emoteVisibilityStatus.TryGetValue(userSession.UserId, out var userPref))
+        if (!_playerCacheManager.TryGetCachedEmoteVisibility(userSession.UserId, out var userPref))
             return;
-        if (!_emoteVisibilityStatus.TryGetValue(targetSession!.UserId, out var targetPref))
+        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetSession!.UserId, out var targetPref))
             return;
 
         var msg = FormatInteractionMessage(data.InteractionMessage, user, target);
