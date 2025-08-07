@@ -14,8 +14,6 @@
     sprite: Clothing/OuterClothing/Armor/security.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/security.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor #Based on /tg/ but slightly compensated to fit the fact that armor stacks in SS14.
     modifiers:
       coefficients:
@@ -25,25 +23,26 @@
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 0.90
-  # Sunrise-Start
+  # SUNRISE EDIT
   - type: Tag
     tags:
     - Vest
     - NudeBottom # INTERACTIONS
     - WhitelistChameleon
-  - type: ArmorSparkEffect #starlight
-  # Sunrise-End
+  # SUNRISE EDIT
 
 #Standard armor vest, allowed for security and bartenders
 - type: entity
   parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBase]
   id: ClothingOuterArmorBasic
+  # Sunrise-Start
   components:
   - type: Tag
     tags:
     - Vest
-    - NudeBottom # Sunrise-Add
+    - NudeBottom # INTERACTIONS
     - WhitelistChameleon
+  # Sunrise-End
 
 #Alternate / slim basic armor vest
 - type: entity
@@ -68,8 +67,6 @@
     sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/bulletproof.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -90,8 +87,6 @@
     sprite: Clothing/OuterClothing/Armor/armor_reflec.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/armor_reflec.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -148,8 +143,6 @@
     sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
-  - type: Pierceable
-    level: Metal
 
 - type: entity
   parent: [ClothingOuterArmorBaseCarapace, BaseCentcommContraband]
@@ -253,8 +246,6 @@
       shader: unshaded
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
-  - type: Pierceable
-    level: Rock
   - type: Armor
     modifiers:
       coefficients:
@@ -336,8 +327,6 @@
     sprite: Clothing/OuterClothing/Armor/riot.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/riot.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -367,8 +356,6 @@
     sprite: Clothing/OuterClothing/Armor/cult_armour.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/cult_armour.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -478,8 +465,6 @@
     sprite: Clothing/OuterClothing/Armor/lingarmor.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/lingarmor.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -514,8 +499,6 @@
     sprite: Clothing/OuterClothing/Armor/bone_armor.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/bone_armor.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -551,8 +534,6 @@
     sprite: Clothing/OuterClothing/Armor/podwars_armor.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/podwars_armor.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -581,8 +562,6 @@
     sprite: Changeling/ling_armor.rsi
   - type: Clothing
     sprite: Changeling/ling_armor.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:

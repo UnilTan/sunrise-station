@@ -6,7 +6,9 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    layers:
+    - state: grapeshot
+      shader: unshaded
   - type: Projectile
     deleteOnCollide: false
     damage:
@@ -24,8 +26,10 @@
   parent: BaseBullet
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    sprite: _Sunrise/Objects/Weapons/Projectiles/shrapnel.rsi #Sunrise-Start
+    layers:
+    - state: shrapnel_light
+      shader: unshaded  #Sunrise-end
   - type: Projectile
     deleteOnCollide: false
     damage:
@@ -42,7 +46,9 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot-flare
+    layers:
+    - state: buckshot-flare
+      shader: unshaded
   - type: Projectile
     deleteOnCollide: false
     damage:
@@ -52,24 +58,5 @@
   - type: IgniteOnCollide
     fireStacks: 1
     count: 10
-  - type: TimedDespawn
-    lifetime: 0.25
-
-- type: entity
-  id: PelletClusterLessLethal
-  name: pellet (ball, less lethal)
-  categories: [ HideSpawnMenu ]
-  parent: BaseBullet
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
-  - type: Projectile
-    deleteOnCollide: false
-    damage:
-      types:
-        Piercing: 5
-  - type: StaminaDamageOnCollide # Sunrise-Add
-    damage: 10  # Sunrise-Add
   - type: TimedDespawn
     lifetime: 0.25

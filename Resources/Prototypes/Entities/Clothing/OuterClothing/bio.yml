@@ -11,8 +11,6 @@
     prob: 0.8
   - type: Clothing
     sprite: Clothing/OuterClothing/Bio/general.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:

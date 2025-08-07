@@ -24,6 +24,59 @@
     </ProjectReference>
     <ProjectReference Include="..\Sunrise\Content.Sunrise.Interfaces.Shared\Content.Sunrise.Interfaces.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Starlight\Action\Stasis\" />
+    <Folder Include="_Starlight\Combat\Effects\Components\" />
+    <Folder Include="_Starlight\Combat\Effects\EntitySystems\" />
+    <Folder Include="_Starlight\Combat\Ranged\Pierce\" />
+    <Folder Include="_Starlight\Effects\" />
+    <Folder Include="_Starlight\Implants\Components\" />
+    <Folder Include="_Starlight\Knockback\" />
+    <Folder Include="_Starlight\Medical\Body\" />
+    <Folder Include="_Starlight\Medical\Damage\" />
+    <Folder Include="_Starlight\Medical\Items\Components\" />
+    <Folder Include="_Starlight\Medical\Items\EntitySystems\" />
+    <Folder Include="_Starlight\Medical\Limbs\" />
+    <Folder Include="_Starlight\OnCollide\" />
+    <Folder Include="_Starlight\Utility\" />
+    <Folder Include="_Starlight\Weapon\Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="_Starlight\Combat\Effects\Components\ArmorSparkEffectComponent.cs" />
+    <Compile Remove="_Starlight\Combat\Ranged\Pierce\PierceableComponent.cs" />
+    <Compile Remove="_Starlight\Implants\MagillitisSerumImplantEvent.cs" />
+    <Compile Remove="_Starlight\Knockback\KnockbackByUserTagComponent.cs" />
+    <Compile Remove="_Starlight\Medical\Body\BodyParts.cs" />
+    <Compile Remove="_Starlight\Medical\Items\Components\PatchComponent.cs" />
+    <Compile Remove="_Starlight\Medical\Items\PatchDoAfterEvent.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\BaseLayerIdComponent.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\IImplantable.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\LimbWithItemsComponent.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\SharedLimbSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\ToggleLimbEvent.cs" />
+    <Compile Remove="_Starlight\Utility\EmpProperties.cs" />
+    <Compile Remove="_Starlight\Weapon\Components\HitScanCartridgeAmmoComponent.cs" />
+    <Compile Remove="_Starlight\Weapon\HitScanPierceAttemptEvent.cs" />
+    <Compile Remove="_Starlight\Weapon\HitScanRicochetAttemptEvent.cs" />
+    <Compile Remove="_Starlight\Weapon\SharedWeaponDismantleOnShootSystem.cs" />
+    <Compile Remove="_Starlight\StarlightEntitySystem.cs" />
+    <Compile Remove="_Starlight\StarlightEntitySystem.Singleton.cs" />
+    <Compile Remove="Medical\SharedHealingSystem.cs" />
+    <Compile Remove="Weapons\Melee\Components\InfectOnMeleeComponent.cs" />
+    <Compile Remove="Weapons\Ranged\Components\FireModeCondition.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SharedSurgerySystem.BaseSteps.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\Components\_Parts.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SharedSurgerySystem.Conditions.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\ISurgeryToolComponent.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\Events\SurgeryValidEvent.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\Events\SurgeryDoAfterEvent.cs" />
+    <Compile Remove="_Starlight\ItemSwitch\SharedItemSwitchSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\Components\_Tools.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SharedSurgerySystem.cs" />
+    <Compile Remove="_Starlight\Combat\OnHit\SharedOnHitSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\Components\SurgeryComponent.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SurgeryUI.cs" />
+  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\Robust.CompNetworkGenerator.targets" />
 </Project>

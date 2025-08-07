@@ -42,7 +42,7 @@
     size: Ginormous
   - type: BallisticAmmoProvider
     mayTransfer: True
-    proto: CartridgeRifleSP
+    proto: SunriseCartridgeRifle  # 5.56
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -76,7 +76,7 @@
     mayTransfer: true
     whitelist:
       tags:
-      - CartridgeLightRifle
+      - CartridgeLightRifle  # 5.56
     capacity: 1600
   - type: ClothingSpeedModifier
     walkModifier: 0.5
@@ -169,8 +169,8 @@
     mayTransfer: true
     whitelist:
       tags:
-      - CartridgeLightRifle
-    proto: CartridgeLightRifleSP
+      - CartridgeLightRifle # 762x39
+    proto: SunriseCartridgeLightRifle
     capacity: 1000
   - type: ClothingSpeedModifier
     walkModifier: 0.85

@@ -25,6 +25,23 @@
     <ProjectReference Include="..\Sunrise\Content.Sunrise.Interfaces.Shared\Content.Sunrise.Interfaces.Shared.csproj" />
     <ProjectReference Include="..\Sunrise\Content.Sunrise.Interfaces.Client\Content.Sunrise.Interfaces.Client.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Starlight\Combat\Effects\EntitySystems\" />
+    <Folder Include="_Starlight\ItemSwitch\" />
+    <Folder Include="_Starlight\Knockback\" />
+    <Folder Include="_Starlight\Medical\CrewMonitoring\Brigmedic\" />
+    <Folder Include="_Starlight\Medical\Limbs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="_Starlight\Combat\Effects\EntitySystems\ArmorSparkEffectSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SurgerySystem.cs" />
+    <Compile Remove="Weapons\Ranged\Systems\BatteryWeaponFireModesVisuals.cs" />
+    <Compile Remove="Weapons\Ranged\Systems\BatteryWeaponFireModesVisualSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SurgeryStepButton.xaml.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\CustomLimbVisualizerSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SurgeryBui.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SurgeryWindow.xaml.cs" />
+  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
 </Project>

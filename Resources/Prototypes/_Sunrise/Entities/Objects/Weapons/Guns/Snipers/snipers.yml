@@ -21,6 +21,7 @@
     minAngle: -23
     maxAngle: -44
   - type: Gun
+    projectileSpeed: 55
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -48,11 +49,11 @@
             - MagazineDragunov
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
+        startingItem: CartridgeHeavyLightRifle  # 762x54
         priority: 1
         whitelist:
           tags:
-            - CartridgeLightRifle
+            - CartridgeHeavyRifle  # 762x54
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -68,8 +69,8 @@
     sprintModifier: 0.25
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 14
-    pvsIncrease: 1.65
+    maxOffset: 13
+    pvsIncrease: 1.5
   - type: UseDelay
     delay: 0.5
   - type: GunRequiresWield
@@ -96,12 +97,13 @@
     - 0,0,6,2
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/br-64/tiny.rsi
   - type: GunWieldBonus
-    minAngle: -21
-    maxAngle: -41
+    minAngle: -20
+    maxAngle: -40
   - type: Gun
-    minAngle: 25
-    maxAngle: 46
-    fireRate: 2.25
+    projectileSpeed: 55
+    fireRate: 2
+    minAngle: 28
+    maxAngle: 48
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/SR-64/SR64_shot.ogg
       params:
@@ -112,20 +114,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleHeavyFMJ
+        startingItem: MagazineBR64
         insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineHeavyRifle
+            - MagazineBR64
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavyFMJ
+        startingItem: CartridgeHeavyRifleNT  # 062
         priority: 1
         whitelist:
           tags:
-          - CartridgeHeavyRifle
+          - CartridgeHeavyRifleNT  # 062
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -144,7 +146,7 @@
     sprintModifier: 0.5
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 10
+    maxOffset: 9
     pvsIncrease: 1.25
   - type: ChamberMagazineAmmoProvider
     autoEject: true
@@ -173,12 +175,11 @@
     minAngle: -23
     maxAngle: -43
   - type: Gun
-    pump: true
     projectileSpeed: 55
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    fireRate: 0.75
+    fireRate: 0.65
     minAngle: 24
     maxAngle: 45
     soundGunshot:
@@ -275,7 +276,6 @@
     - 0,0,4,1
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/mosin/tiny.rsi
   - type: Gun
-    pump: true
     fireRate: 0.8
   - type: Wieldable
   - type: UseDelay
@@ -300,7 +300,6 @@
   - type: StaticPrice
     price: 850
   - type: Gun
-    pump: true
     fireRate: 1.35
     selectedMode: SemiAuto
     availableModes:
@@ -312,7 +311,7 @@
       tags:
       - CartridgeMagnum
     capacity: 7
-    proto: CartridgeMagnumFMJ
+    proto: CartridgeMagnum
   - type: Wieldable
   - type: UseDelay
     delay: 0.5
@@ -332,11 +331,11 @@
     shape:
     - 0,0,4,1
   - type: BallisticAmmoProvider
-    capacity: 5
+    capacity: 10
     proto: null
     whitelist:
       tags:
-      - CartridgeHeavyRifleR
+      - CartridgeHeavyRifle
   - type: Lubed
     slipStrength: 3
     slipsLeft: 3

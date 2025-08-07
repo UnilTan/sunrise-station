@@ -4,8 +4,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Pierceable
-    level: Metal
   - type: Transform
     anchored: true
   - type: Clickable

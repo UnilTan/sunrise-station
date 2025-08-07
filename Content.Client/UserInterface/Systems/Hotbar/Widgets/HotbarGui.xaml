@@ -15,14 +15,6 @@
                       HorizontalExpand="True"
                       Margin="10">
         </BoxContainer>
-        <!-- Starlight start -->
-        <hands:HandsContainer
-            Name="FunctionalHandContainer"
-            Access="Public"
-            HorizontalAlignment="Center"
-            HorizontalExpand="False"
-            ColumnLimit="12"/>
-        <!-- Starlight end -->
         <BoxContainer Name="DoubleStorageContainer"
                       Access="Public"
                       HorizontalAlignment="Stretch"

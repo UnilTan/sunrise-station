@@ -245,38 +245,16 @@
   #Sunrise-end
 
 - type: listing
-  id: UplinkGrenadeLauncherM79
-  name: uplink-grenade-launcher-m79-name
-  description: uplink-grenade-launcher-m79-desc
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi, state: base }
-  productEntity: WeaponLauncherM79Biocode
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 8
-  cost:
-    Telecrystal: 12
-  categories:
-  - UplinkWeaponry
-#Sunrise-start
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-#Sunrise-end
-
-- type: listing
-  id: UplinkGrenadeLauncherChinaLake
-  name: uplink-grenade-launcher-china-lake-name
-  description: uplink-grenade-launcher-china-lake-desc
+  id: UplinkGrenadeLauncherBundle
+  name: uplink-grenade-launcher-bundle-name
+  description: uplink-grenade-launcher-bundle-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
-  productEntity: WeaponLauncherChinaLakeBiocode
+  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 14
-  cost:
     Telecrystal: 20
+  cost:
+    Telecrystal: 25
   categories:
   - UplinkWeaponry
 #Sunrise-start
@@ -296,9 +274,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 18 # Sunrise-Edit
+    Telecrystal: 24
   cost:
-    Telecrystal: 25 # Sunrise-Edit
+    Telecrystal: 30
   categories:
   - UplinkWeaponry
 #Sunrise-start
@@ -592,10 +570,10 @@
 
 - type: listing
   id: UplinkPistol9mmMagazine
-  #name: uplink-pistol-magazine-name  # Sunrise-Edit
+  name: uplink-pistol-magazine-name
   description: uplink-pistol-magazine-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
-  productEntity: MagazinePistolHighCapacitySP # Sunrise-Edit
+  productEntity: MagazinePistolHighCapacity
   cost:
     Telecrystal: 1
   categories:
@@ -607,7 +585,7 @@
   name: uplink-pistol-magazine-c20r-name
   description: uplink-pistol-magazine-c20r-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
-  productEntity: MagazinePistolSubMachineGunSP # Sunrise-Edit
+  productEntity: MagazinePistolSubMachineGun
   cost:
     Telecrystal: 2
   categories:
@@ -679,7 +657,7 @@
   id: UplinkMosinAmmo
   name: uplink-mosin-ammo-name
   description: uplink-mosin-ammo-desc
-  productEntity: MagazineBoxRifleMachineFMJ # Sunrise-Edit
+  productEntity: MagazineBoxLightRifle
   cost:
     Telecrystal: 1
   categories:
@@ -719,7 +697,7 @@
   discountDownTo:
     Telecrystal: 15
   cost:
-    Telecrystal: 24 # Sunrise-Edit
+    Telecrystal: 25
   categories:
   - UplinkAmmo
   conditions:

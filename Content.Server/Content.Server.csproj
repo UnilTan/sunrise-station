@@ -28,5 +28,31 @@
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
     <ProjectReference Include="..\Sunrise\Content.Sunrise.Interfaces.Server\Content.Sunrise.Interfaces.Server.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="_Starlight\Actions\Stasis\StasisFrozenSystem.cs" />
+    <Compile Remove="_Starlight\Actions\SLActionSystem.cs" />
+    <Compile Remove="_Starlight\Combat\Ranged\PierceSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\_events.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\CyberLimbSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\CyberLimbSystem.LimbWithItems.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\CyberLimbSystem.Toggleable.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\LimbSystem.cs" />
+    <Compile Remove="_Starlight\Medical\Limbs\LimbSystem.Functional.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\SurgerySystem.Steps.cs" />
+    <Compile Remove="_Starlight\Medical\LimbDamageSystem.cs" />
+    <Compile Remove="_Starlight\SubscribeExtensions.cs" />
+    <Compile Remove="_Starlight\Medical\Surgery\OrganSystem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Weapons\Melee\InfectOnMelee\" />
+    <Folder Include="Weapons\Ranged\Conditions\" />
+    <Folder Include="_Starlight\Actions\Stasis\" />
+    <Folder Include="_Starlight\Combat\Effects\EntitySystems\" />
+    <Folder Include="_Starlight\Combat\Ranged\" />
+    <Folder Include="_Starlight\ItemSwitch\" />
+    <Folder Include="_Starlight\Knockback\" />
+    <Folder Include="_Starlight\Medical\Limbs\" />
+    <Folder Include="_Starlight\OnCollide\" />
+  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
 </Project>

@@ -1139,8 +1139,6 @@
     sprite: Clothing/Head/Hats/melon.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/melon.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -1156,8 +1154,6 @@
     sprite: Clothing/Head/Hats/holyhatmelon.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/holyhatmelon.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:

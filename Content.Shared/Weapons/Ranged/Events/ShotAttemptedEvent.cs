@@ -1,6 +1,5 @@
-using Content.Shared.Inventory;
 using Content.Shared.Weapons.Ranged.Components;
-using Robust.Shared.Timing;
+using Content.Shared.Inventory; // Sunrise-Edit
 
 namespace Content.Shared.Weapons.Ranged.Events;
 

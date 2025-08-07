@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, AmmoBoxSounds] # Sunrise
   id: BaseMagazineBoxRifle
   components:
   - type: BallisticAmmoProvider
@@ -8,7 +8,7 @@
     whitelist:
       tags:
         - CartridgeRifle
-    proto: CartridgeRifleSP
+    proto: CartridgeRifle
     capacity: 50
   - type: Item
     size: Small
@@ -27,81 +27,37 @@
 - type: entity
   parent: BaseMagazineBoxRifle
   id: MagazineBoxRifleBig
-  name: ammunition box (.20 rifle SP)
+  name: ammunition box (.20 rifle)
+  suffix: Big
   components:
   - type: BallisticAmmoProvider
     capacity: 200
-    proto: CartridgeRifleSP
+    proto: SunriseCartridgeRifle #  Sunrise-Edit
   - type: Sprite
     layers:
-    - state: base-b
+    - state: base-big
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
+    - state: mag-big-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
-    magState: magb
+    magState: mag-big
     steps: 4
     zeroVisible: false
   - type: Appearance
 
 - type: entity
   parent: BaseMagazineBoxRifle
-  id: MagazineBoxRifleSP
-  name: ammunition box (.20 rifle SP)
+  id: MagazineBoxRifle
+  name: ammunition box (.20 rifle)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleSP
+    proto: SunriseCartridgeRifle #  Sunrise-Edit
   - type: Sprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: sp
-
-- type: entity
-  parent: BaseMagazineBoxRifle
-  id: MagazineBoxRifleHP
-  name: ammunition box (.20 rifle HP)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-      
-- type: entity
-  parent: BaseMagazineBoxRifle
-  id: MagazineBoxRifleFMJ
-  name: ammunition box (.20 rifle FMJ)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleFMJ
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: fmj
-
-- type: entity
-  parent: BaseMagazineBoxRifle
-  id: MagazineBoxRifleAP
-  name: ammunition box (.20 rifle AP)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleAP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: ap
 
 - type: entity
   parent: BaseMagazineBoxRifle
@@ -109,7 +65,7 @@
   name: ammunition box (.20 rifle practice)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRiflePractice
+    proto: SunriseCartridgeRiflePractice #  Sunrise-Edit
   - type: Sprite
     layers:
     - state: base
@@ -124,7 +80,7 @@
   name: ammunition box (.20 rifle incendiary)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleIncendiary
+    proto: SunriseCartridgeRifleIncendiary #  Sunrise-Edit
   - type: Sprite
     layers:
     - state: base
@@ -139,7 +95,7 @@
   name: ammunition box (.20 rifle uranium)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleUranium
+    proto: SunriseCartridgeRifleUranium #  Sunrise-Edit
   - type: Sprite
     layers:
     - state: base

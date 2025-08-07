@@ -279,7 +279,6 @@
     - "0,0.15"
   - type: Stripping
     useDragDrop: false
-  - type: CyborgSparkEffect
   # Sunrise-end
 
 - type: entity

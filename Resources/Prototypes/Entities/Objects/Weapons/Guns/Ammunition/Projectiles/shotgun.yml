@@ -6,13 +6,13 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: slug
+    layers:
+    - state: slug
   - type: Projectile
     damage:
       types:
         Piercing: 40
         Structural: 15
-
 
 - type: entity
   id: PelletShotgunBeanbag
@@ -22,13 +22,14 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    layers:
+    - state: buckshot
   - type: Projectile
     damage:
       types:
-        Blunt: 10
+        Blunt: 2.5  # Sunrise-Edit
   - type: StaminaDamageOnCollide
-    damage: 40 # 3 hits to stun
+    damage: 15 # 3 hits to stun # Sunrise-Edit
 
 - type: entity
   id: PelletShotgun
@@ -38,7 +39,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    layers:
+    - state: buckshot
   - type: Projectile
     damage:
       types:
@@ -64,12 +66,13 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot-flare
+    layers:
+    - state: buckshot-flare
   - type: Projectile
     damage:
       types:
-        Blunt: 3
-        Heat: 7
+        Blunt: 4 #Sunrise-Start
+        Heat: 3 #Sunrise-End
   - type: IgnitionSource
     ignited: true
 
@@ -91,7 +94,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    layers:
+    - state: buckshot
   - type: Projectile
     damage:
       types:
@@ -115,7 +119,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: shard
+    layers:
+    - state: shard
   - type: Projectile
     damage:
       types:
@@ -140,7 +145,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot
+    layers:
+    - state: buckshot
   - type: Projectile
     damage:
       types:
@@ -179,7 +185,8 @@
           - BulletImpassable
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: buckshot-flare
+    layers:
+    - state: buckshot
   - type: IgnitionSource
     ignited: true
     temperature: 1000
@@ -214,7 +221,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    state: depleted-uranium
+    layers:
+    - state: depleted-uranium
   - type: Projectile
     damage:
       types:
@@ -256,7 +264,7 @@
   components:
   - type: ProjectileSpread
     proto: PelletGrapeshot
-    count: 5
+    count: 10 #Sunrise-Edit
     spread: 40
 
 - type: entity

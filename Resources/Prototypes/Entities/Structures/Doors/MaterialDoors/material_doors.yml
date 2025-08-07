@@ -5,8 +5,6 @@
   abstract: true
   description: A door, where will it lead?
   components:
-  - type: Pierceable
-    level: Metal
   - type: InteractionOutline
   - type: Sprite
     sprite: Structures/Doors/MineralDoors/metal_door.rsi
@@ -85,8 +83,6 @@
   parent: BaseMaterialDoorNavMap
   description: A door, where will it lead?
   components:
-  - type: Pierceable
-    level: Wood
   - type: Sprite
     sprite: Structures/Doors/MineralDoors/wood_door.rsi
     layers:
@@ -124,8 +120,6 @@
   parent: BaseMaterialDoorNavMap
   description: A door, where will it lead?
   components:
-  - type: Pierceable
-    level: Wood
   - type: Sprite
     sprite: Structures/Doors/MineralDoors/paper_door.rsi
     layers:
@@ -230,8 +224,6 @@
   parent: BaseMaterialDoorNavMap
   description: A door, leading to the lands of the spiders... or a spaced room.
   components:
-  - type: Pierceable
-    level: Wood
   - type: Sprite
     sprite: Structures/Doors/web_door.rsi
     layers:

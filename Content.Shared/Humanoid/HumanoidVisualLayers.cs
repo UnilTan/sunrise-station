@@ -31,6 +31,5 @@ namespace Content.Shared.Humanoid
         Fire,
         Back,  // SUNRISE
 
-        Other
     }
 }

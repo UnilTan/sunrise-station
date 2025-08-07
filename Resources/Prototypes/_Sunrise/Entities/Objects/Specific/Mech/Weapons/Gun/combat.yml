@@ -10,14 +10,14 @@
   - type: Gun
     minAngle: -25
     maxAngle: 25
-    fireRate: 12
+    fireRate: 8
     selectedMode: FullAuto
     availableModes:
       - FullAuto
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/HMGs/minigun_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeRifleSP
+    proto: CartridgeRifle
     fireCost: 7
   - type: Appearance
   - type: AmmoCounter
@@ -44,7 +44,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeHeavyRifleRSP
+    proto: CartridgeLightRifle
     fireCost: 8
   - type: Appearance
   - type: AmmoCounter
@@ -64,16 +64,16 @@
     maxAngle: 18
     angleIncrease: 3.5
     angleDecay: 9
-    fireRate: 12
+    fireRate: 10
     shotsPerBurst: 8
-    burstCooldown: 0.65
+    burstCooldown: 0.8
     selectedMode: Burst
     availableModes:
       - Burst
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeRifleSP
+    proto: CartridgeRifle
     fireCost: 8
   - type: Appearance
   - type: AmmoCounter
@@ -91,7 +91,7 @@
   - type: Gun
     minAngle: -10
     maxAngle: 15
-    fireRate: 0.25
+    fireRate: 0.2
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -99,7 +99,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: CannonBall
-    fireCost: 150
+    fireCost: 160
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -118,7 +118,7 @@
   - type: Gun
     minAngle: -10
     maxAngle: 15
-    fireRate: 0.25
+    fireRate: 0.4
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -126,7 +126,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: CannonBallGrapeshot
-    fireCost: 75
+    fireCost: 50
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -145,7 +145,7 @@
   - type: Gun
     minAngle: -10
     maxAngle: 15
-    fireRate: 0.25
+    fireRate: 0.35
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -153,7 +153,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: CannonBallGlassshot
-    fireCost: 75
+    fireCost: 80
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -183,7 +183,7 @@
       params:
         volume: -1
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
+    proto: BulletSyndiPlasmaDouble
     fireCost: 25
   - type: Appearance
   - type: AmmoCounter
@@ -208,7 +208,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: GrenadeFragTimer
+    proto: GrenadeFrag
     fireCost: 250
   - type: Appearance
   - type: AmmoCounter

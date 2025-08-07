@@ -52,14 +52,6 @@
   - type: EmitSoundOnLand
     sound:
       collection: ShotgunsDrop
-  - type: KnockbackByUserTag
-    doestContain:
-      Resomi:
-        knockback: 3
-        staminaMultiplier: 20
-      Felinid:
-        knockback: 1.5
-        staminaMultiplier: 20
   # Sunrise end
 
 - type: entity
@@ -85,7 +77,7 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  #- type: GunRequiresWield #remove when inaccuracy on spreads is fixed # Sunrise-Edit
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 2
     selectedMode: FullAuto
@@ -174,7 +166,6 @@
   - type: Gun
     soundGunshot:
       collection: xm1014 # Sunrise-Edit
-    pump: true # Sunrise-Edit
 
 - type: entity
   parent: WeaponShotgunEnforcer
@@ -208,7 +199,6 @@
     fireRate: 1
     soundGunshot:
       collection: m3 # Sunrise-Edit
-    pump: true # Sunrise-Edit
   - type: GunSpreadModifier
     spread: 0.6
   - type: Tag

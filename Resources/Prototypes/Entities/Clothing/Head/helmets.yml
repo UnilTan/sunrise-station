@@ -74,8 +74,6 @@
     sprite: Clothing/Head/Helmets/swat.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/swat.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor #This is intentionally not spaceproof, when the time comes to port the values from SS13 this should be buffed from what it was.
     modifiers:
       coefficients:
@@ -119,8 +117,6 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/light_riot.rsi
   - type: IngestionBlocker
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -152,8 +148,6 @@
   - type: IngestionBlocker
   - type: ExplosionResistance
     damageCoefficient: 0.9
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -199,8 +193,6 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/cult.rsi
   - type: IngestionBlocker
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -361,8 +353,6 @@
     sprite: Clothing/Head/Helmets/linghelmet.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/linghelmet.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor #admeme item so it should be fine being overpowered while helmets are still intentionally kneecapped.
     modifiers:
       coefficients:
@@ -460,8 +450,6 @@
     sprite: Clothing/Head/Helmets/syndie-raid.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/syndie-raid.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers: #There's gotta be SOME reason to use this over other helmets.
       coefficients:
@@ -614,8 +602,6 @@
     sprite: Changeling/ling_armor_helmet.rsi
   - type: Clothing
     sprite: Changeling/ling_armor_helmet.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:

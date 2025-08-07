@@ -84,8 +84,6 @@
   parent: AllowSuitStorageClothing
   id: ClothingOuterArmorHoS
   components:
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -102,8 +100,6 @@
   parent: AllowSuitStorageClothing
   id: ClothingOuterArmorWarden
   components:
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -159,8 +155,6 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -192,8 +186,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -214,8 +206,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_chem.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_chem.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -236,8 +226,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_viro.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_viro.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -258,8 +246,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_gene.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_gene.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -280,8 +266,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_cmo.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_cmo.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -304,8 +288,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_sci.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_sci.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -326,8 +308,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_robo.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_robo.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -348,8 +328,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_rd.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_rd.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -415,8 +393,6 @@
     sprite: Clothing/OuterClothing/Coats/dogi.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/dogi.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -474,8 +450,6 @@
     sprite: Clothing/OuterClothing/Coats/brigmedic.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/brigmedic.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -495,8 +469,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_senior_researcher.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_senior_researcher.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -517,8 +489,6 @@
     sprite: Clothing/OuterClothing/Coats/labcoat_senior_physician.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/labcoat_senior_physician.rsi
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:

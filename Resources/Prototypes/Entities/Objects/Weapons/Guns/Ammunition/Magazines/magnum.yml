@@ -70,58 +70,25 @@
       - state: inhand-right-mag
 
 - type: entity
-  id: MagazineMagnumRubber
-  name: pistol magazine (.45 magnum rubber)
-  parent: BaseMagazineMagnum
-  description: 7-round single stack pistol magazine. Intended to hold non-lethal kinetic ammunition.
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeMagnumRubber
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#00c1b8"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#00c1b8"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#00c1b8"
-
-- type: entity
   id: MagazineMagnum
   name: pistol magazine (.45 magnum)
   parent: BaseMagazineMagnum
   description: 7-round single stack pistol magazine. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgeMagnum
   - type: Sprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#575EF5"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#575EF5"
       right:
       - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#575EF5"
 
 - type: entity
   id: MagazineMagnumPractice
@@ -165,17 +132,17 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#40F57A"
+      color: "#00cd42"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#40F57A"
+        color: "#00cd42"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#40F57A"
+        color: "#00cd42"
 
 - type: entity
   id: MagazineMagnumAP
@@ -231,7 +198,7 @@
   parent: BaseMagazineMagnumSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumFMJ
+    proto: CartridgeMagnum
   - type: Sprite
     layers:
     - state: base

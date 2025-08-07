@@ -32,9 +32,6 @@ public sealed class HandheldLightStatus : Control
     {
         _parent = parent;
 
-        if (!_parent.NeedsCharge)
-            return;
-
         var wrapper = new BoxContainer
         {
             Orientation = LayoutOrientation.Horizontal,
@@ -60,9 +57,6 @@ public sealed class HandheldLightStatus : Control
         _timer %= TimerCycle;
 
         var level = _parent.Level;
-
-        if (!_parent.NeedsCharge)
-            return;
 
         for (var i = 0; i < _sections.Length; i++)
         {

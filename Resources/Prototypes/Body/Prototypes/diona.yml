@@ -11,7 +11,6 @@
         brain: OrganDionaBrainNymph
         eyes: OrganHumanEyes
         tongue: OrganHumanTongue
-        eye_implant: null
     torso:
       part: TorsoDiona
       connections:

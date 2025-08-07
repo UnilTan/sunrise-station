@@ -28,7 +28,7 @@
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Standard kinetic ammunition is common and useful in most situations.
   components:
   - type: HitScanCartridgeAmmo
-    hitscan: BulletCaselessRifleTrace
+    proto: BulletCaselessRifle
 
 - type: entity
   id: CartridgeCaselessRiflePractice
@@ -37,7 +37,7 @@
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Chalk ammunition is generally non-harmful, used for practice.
   components:
   - type: HitScanCartridgeAmmo
-    hitscan: BulletCaselessRiflePracticeTrace
+    proto: BulletCaselessRiflePractice
   - type: Sprite
     layers:
       - state: base

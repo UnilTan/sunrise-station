@@ -223,10 +223,9 @@
   loadouts:
   - GlockBox
   - ACP14Box
-  - MK58Box
   - WeaponEnergyGunPistolSecurity
   - WeaponDisabler
-#  - WeaponTaser
+  - WeaponTaser
 
 # Security Cadet
 - type: loadoutGroup
@@ -237,7 +236,6 @@
   loadouts:
   - CadetWeaponGlockBox
   - CadetWeaponACP14Box
-  - CadetWeaponMK58Box
   - CadetWeaponEnergyGunPistolSecurity
   - CadetWeaponDisabler
 
@@ -261,16 +259,14 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - GlockBox
-  - MK58Box
-  - ACP14Box
+  - SunriseWeaponPistolG22
+  - SunriseWeaponTaser
   - HeadofSecurityWeapon20h
   - HeadofSecurityWeapon50h
   - HeadofSecurityWeapon50h2
   - HeadofSecurityWeapon100h
-  - HeadofSecurityWeapon100h2
-
 # Medical
+
 - type: loadoutGroup
   id: SeniorPhysicianJumpsuit
   name: loadout-group-senior-physician-jumpsuit

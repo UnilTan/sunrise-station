@@ -5,7 +5,6 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
 using Robust.Shared.Containers;
-using Robust.Shared.Random;
 
 namespace Content.Client.Weapons.Ranged.Systems;
 
@@ -28,10 +27,15 @@ public sealed partial class GunSystem
             return;
         }
 
-        //starlight start
-        var prefix = string.IsNullOrEmpty(component.SelectedPrefix) ? "" : $"_{component.SelectedPrefix}";
-        _sprite.LayerSetRsiState((uid, args.Sprite), boltLayer, boltClosed ? $"base{prefix}" : $"bolt-open{prefix}");
-        //starlight end
+        // Maybe re-using base layer for this will bite me someday but screw you future sloth.
+        if (boltClosed)
+        {
+            _sprite.LayerSetRsiState((uid, args.Sprite), boltLayer, "base");
+        }
+        else
+        {
+            _sprite.LayerSetRsiState((uid, args.Sprite), boltLayer, "bolt-open");
+        }
     }
 
     protected override void OnMagazineSlotChange(EntityUid uid, MagazineAmmoProviderComponent component, ContainerModifiedMessage args)

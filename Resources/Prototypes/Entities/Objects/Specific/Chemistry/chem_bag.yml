@@ -24,12 +24,10 @@
       components:
         - FitsInDispenser
         - Pill
-        - Patch
       tags:
         - Document
         - PillCanister
         - Bottle
         - Syringe
         - Dropper
-        - PatchPack
   - type: Dumpable

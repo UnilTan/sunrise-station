@@ -16,7 +16,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: Pulse # Sunrise-Edit
+    proto: BulletPulse # Sunrise-Edit
     fireCost: 65
   - type: Appearance
   - type: AmmoCounter
@@ -39,7 +39,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: RedHeavyLaser # Sunrise-Edit
+    proto: BulletRedHeavyLaser # Sunrise-Edit
     fireCost: 50
   - type: Appearance
   - type: AmmoCounter
@@ -85,7 +85,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: RedMediumLaser # Sunrise-Edit
+    proto: BulletRedMediumLaser # Sunrise-Edit
     fireCost: 35
   - type: Appearance
   - type: AmmoCounter
@@ -108,7 +108,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
+    proto: BulletRedLaser # Sunrise-Edit
     fireCost: 20
   - type: Appearance
   - type: AmmoCounter
@@ -158,7 +158,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: DisablerBoltSmgSpreadTrace # Sunrise-Edit
+    proto: BulletDisablerSmgSpread
     fireCost: 45
   - type: Appearance
   - type: AmmoCounter
@@ -180,9 +180,9 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: TaserBolt
-    fireCost: 40
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletTaser
+    fireCost: 15
   - type: Appearance
   - type: AmmoCounter
 
@@ -254,7 +254,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/garand/garand.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: CartridgeLightRifleSP
+    proto: CartridgeLightRifle
     fireCost: 10
   - type: Appearance
   - type: AmmoCounter
@@ -279,9 +279,9 @@
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: EmpPulse
-    fireCost: 400
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletEMP
+    fireCost: 200
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
@@ -312,8 +312,8 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: HitscanBatteryAmmoProvider
-    proto: RedLaserBeam
-    fireCost: 20
+    proto: BulletSyndiPlasmaDouble # Sunrise-Edit
+    fireCost: 25
   - type: Appearance
   - type: AmmoCounter
 
@@ -389,7 +389,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: GrenadeBlastContact # Sunrise-Edit
+    proto: GrenadeBlast
     fireCost: 325
   - type: Appearance
   - type: AmmoCounter
