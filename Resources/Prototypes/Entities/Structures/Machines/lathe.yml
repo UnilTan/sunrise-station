@@ -563,6 +563,9 @@
     - Chemistry
     - SurgeryDynamicSunrise # Sunrise-Add
     - MedicalDynamicSunrise # Sunrise-Add
+    - MedicalCyberlimbDynamic # Sunrise-Add
+    - MedicalCyberOrgansDynamic # Sunrise-Add
+    - MedicalImplantDynamic # Sunrise-Add
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget
