@@ -93,13 +93,3 @@ public sealed class InteractionsCVars
     public static readonly CVarDef<int> WindowPosY =
         CVarDef.Create("interactions.window_pos_y", 0, CVar.CLIENTONLY);
 }
-
-/// <summary>
-/// Используется, чтоб сообщить серверу об изменении цвара EmoteVisibility.
-/// Отправляется при присоединении к серверу и когда EmoteVisibility изменяется.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class EmoteVisibilityChangedEvent : EntityEventArgs
-{
-    public bool Status;
-}

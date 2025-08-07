@@ -180,10 +180,8 @@ public partial class InteractionsPanel
         if (!CheckAllAppearConditions(interactionPrototype, ent.Owner, target.Value))
             return;
 
-        if (!_playerCacheManager.TryGetCachedEmoteVisibility(userSession.UserId, out var userPref))
-            return;
-        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetIsPlayer ? targetSession!.UserId : null , out var targetPref))
-            return;
+        var userPref = _playerCacheManager.GetEmoteVisibility(userSession.UserId);
+        var targetPref = _playerCacheManager.GetEmoteVisibility(targetIsPlayer ? targetSession!.UserId : null);
 
         var rawMsg = _random.Pick(interactionPrototype.InteractionMessages);
         var msg = FormatInteractionMessage(rawMsg, ent.Owner, target.Value);
@@ -248,10 +246,8 @@ public partial class InteractionsPanel
         ICommonSession? targetSession,
         bool targetIsPlayer)
     {
-        if (!_playerCacheManager.TryGetCachedEmoteVisibility(userSession.UserId, out var userPref))
-            return;
-        if (!_playerCacheManager.TryGetCachedEmoteVisibility(targetIsPlayer ? targetSession!.UserId : null , out var targetPref))
-            return;
+        var userPref = _playerCacheManager.GetEmoteVisibility(userSession.UserId);
+        var targetPref = _playerCacheManager.GetEmoteVisibility(targetIsPlayer ? targetSession!.UserId : null);
 
         var msg = FormatInteractionMessage(data.InteractionMessage, user, target);
 

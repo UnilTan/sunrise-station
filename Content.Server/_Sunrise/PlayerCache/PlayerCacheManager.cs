@@ -69,15 +69,13 @@ public sealed class PlayerCacheManager
     /// Потому что иногда ерп панель используется с сущностями, не имеющими хозяина. Например, с макчеловеком на дебаг арене.
     /// такие случаи надо обрабатывать
     /// </summary>
-    public bool TryGetCachedEmoteVisibility(NetUserId? userId, out bool visibility)
+    public bool GetEmoteVisibility(NetUserId? userId)
     {
         if (userId.HasValue && _cache.TryGetValue(userId.Value, out var data) && data.EmoteVisibility.HasValue)
         {
-            visibility = data.EmoteVisibility.Value;
-            return true;
+            return data.EmoteVisibility.Value;
         }
 
-        visibility = InteractionsCVars.EmoteVisibility.DefaultValue;
-        return false;
+        return InteractionsCVars.EmoteVisibility.DefaultValue;
     }
 }
