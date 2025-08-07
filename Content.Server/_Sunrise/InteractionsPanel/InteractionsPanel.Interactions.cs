@@ -184,8 +184,8 @@ public partial class InteractionsPanel
         if (!CheckAllAppearConditions(interactionPrototype, ent.Owner, target.Value))
             return;
 
-        var userPref = _netConfigManager.GetClientCVar(userSession.Channel, InteractionsCVars.EmoteVisibility);
-        var targetPref = !targetIsPlayer || _netConfigManager.GetClientCVar(targetSession!.Channel, InteractionsCVars.EmoteVisibility);
+        var userPref = _emoteVisibilityStatus[userSession.UserId];
+        var targetPref = !targetIsPlayer || _emoteVisibilityStatus[targetSession!.UserId];
 
         var rawMsg = _random.Pick(interactionPrototype.InteractionMessages);
         var msg = FormatInteractionMessage(rawMsg, ent.Owner, target.Value);
@@ -250,8 +250,8 @@ public partial class InteractionsPanel
         ICommonSession? targetSession,
         bool targetIsPlayer)
     {
-        var userPref = _netConfigManager.GetClientCVar(userSession.Channel, InteractionsCVars.EmoteVisibility);
-        var targetPref = !targetIsPlayer || _netConfigManager.GetClientCVar(targetSession!.Channel, InteractionsCVars.EmoteVisibility);
+        var userPref = _emoteVisibilityStatus[userSession.UserId];
+        var targetPref = !targetIsPlayer || _emoteVisibilityStatus[targetSession!.UserId];
 
         var msg = FormatInteractionMessage(data.InteractionMessage, user, target);
 
