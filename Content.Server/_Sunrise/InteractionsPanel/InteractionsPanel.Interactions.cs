@@ -12,6 +12,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -19,6 +20,8 @@ namespace Content.Server._Sunrise.InteractionsPanel;
 
 public partial class InteractionsPanel
 {
+    private static Dictionary<NetUserId, bool> _emoteVisibilityStatus = new Dictionary<NetUserId, bool>();
+
     private void InitializeInteractions()
     {
         Subs.BuiEvents<InteractionsComponent>(InteractionWindowUiKey.Key,
@@ -39,6 +42,11 @@ public partial class InteractionsPanel
             .Bind(ContentKeyFunctions.Interact, new PointerInputCmdHandler(HandleInteract))
             .Bind(ContentKeyFunctions.Interact, InputCmdHandler.FromDelegate(enabled: TryAutoInteraction))
             .Register<InteractionsPanel>();
+
+        SubscribeNetworkEvent<EmoteVisibilityChangedEvent>((msg, args) =>
+        {
+            _emoteVisibilityStatus[args.SenderSession.UserId] = msg.Status;
+        });
     }
 
     private void TryAutoInteraction(ICommonSession? session)

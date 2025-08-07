@@ -1,4 +1,5 @@
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.UI;
@@ -75,7 +76,7 @@ public sealed class CustomInteractionData
 public sealed class InteractionsCVars
 {
     public static readonly CVarDef<bool> EmoteVisibility =
-        CVarDef.Create("interactions.emote", true, CVar.CLIENT);
+        CVarDef.Create("interactions.emote", true, CVar.CLIENTONLY);
 
     public static readonly CVarDef<bool> Expand =
         CVarDef.Create("interactions.expand", false, CVar.CLIENTONLY);
@@ -91,4 +92,14 @@ public sealed class InteractionsCVars
 
     public static readonly CVarDef<int> WindowPosY =
         CVarDef.Create("interactions.window_pos_y", 0, CVar.CLIENTONLY);
+}
+
+/// <summary>
+/// Используется, чтоб сообщить серверу об изменении цвара EmoteVisibility.
+/// Отправляется при присоединении к серверу и когда EmoteVisibility изменяется.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class EmoteVisibilityChangedEvent : EntityEventArgs
+{
+    public bool Status;
 }
