@@ -118,6 +118,16 @@
     - GlockBox
 
 - type: loadout
+  id: MK58Box
+  startingGear: MK58Box
+
+- type: startingGear
+  id: MK58Box
+  storage:
+    back:
+    - MK58Box
+
+- type: loadout
   id: ACP14Box
   startingGear: ACP14Box
   effects:

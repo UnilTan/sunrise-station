@@ -614,7 +614,11 @@
     whitelist:
       tags:
         - ShellShotgun
-    capacity: 14
+        - CartridgeMagnum
+        - CartridgePistolImprovised
+        - CartridgeLightRifleImprovised
+        - CartridgeMagnumImprovised
+    capacity: 21 # Sunrise-edit
 
 - type: entity
   parent: ClothingBeltBase
