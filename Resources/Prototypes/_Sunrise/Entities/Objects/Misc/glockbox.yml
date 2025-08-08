@@ -55,3 +55,16 @@
         amount: 1
       - id: MagazinePistolRubber
         amount: 1
+
+- type: entity
+  parent: GlockBox
+  id: MK58GoldBox
+  name: Gold MK58 box
+  description: It contains a Gold MK58 and a rubber magazine for it. Ave Security!
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponPistolGoldenMk58
+        amount: 1
+      - id: MagazinePistolRubber
+        amount: 1
