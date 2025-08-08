@@ -72,7 +72,7 @@ public sealed partial class GunSystem
             return;
 
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-projectile"));
-        
+
         var ArmorMessage = GetArmorPenetrationExplain(component.Hitscan);
 
         args.Message.AddMessage(ArmorMessage);
@@ -83,17 +83,17 @@ public sealed partial class GunSystem
         var msg = new FormattedMessage();
         if (!ProtoManager.TryIndex<HitscanPrototype>(proto,out var entityProto))
             return msg;
-        
+
         if (entityProto.ArmorPenetration == 0) {
             return msg;
         }
         if (entityProto.ArmorPenetration > 0){
             msg.PushNewline();
-            msg.TryAddMarkup(Loc.GetString("damage-examine-penetration-positive",("penetration",entityProto.ArmorPenetration*100)),out var error);
+            msg.TryAddMarkup(Loc.GetString("damage-examine-penetration-positive",("penetration", MathF.Round(entityProto.ArmorPenetration * 100, 1))), out var error);
         }
         if(entityProto.ArmorPenetration < 0) {
             msg.PushNewline();
-            msg.TryAddMarkup(Loc.GetString("damage-examine-penetration-negative",("penetration",entityProto.ArmorPenetration*-100)),out var error);
+            msg.TryAddMarkup(Loc.GetString("damage-examine-penetration-negative",("penetration", MathF.Round(entityProto.ArmorPenetration * -100, 1))), out var error);
         }
         return msg;
     }
@@ -101,7 +101,7 @@ public sealed partial class GunSystem
     private DamageSpecifier? GetHitscanProjectileDamage(string proto) {
         if (!ProtoManager.TryIndex<HitscanPrototype>(proto,out var entityProto))
             return null;
-        
+
         if (entityProto.Damage == null) {
             return null;
         }
@@ -124,5 +124,5 @@ public sealed partial class GunSystem
             args.PushMarkup(Loc.GetString("gun-cartridge-unspent"));
         }
     }
-    
+
 }
