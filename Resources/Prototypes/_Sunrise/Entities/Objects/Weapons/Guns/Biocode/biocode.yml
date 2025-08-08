@@ -197,3 +197,13 @@
     factions:
     - Syndicate
     alertText: Данное оружие биокодировано. Вы не можете его использовать.
+
+- type: entity
+  parent: WeaponShotgunMinotaur
+  id: WeaponShotgunMinotaurBiocode
+  suffix: BIOCODE
+  components:
+  - type: FactionWeaponBlocker
+    factions:
+    - Syndicate
+    alertText: Данное оружие биокодировано. Вы не можете его использовать.

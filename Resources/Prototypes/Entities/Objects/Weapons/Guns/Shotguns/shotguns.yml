@@ -1,7 +1,7 @@
 - type: entity
   name: BaseWeaponShotgun
   parent: BaseItem
-  id: BaseWeaponShotgun
+  id: BaseWeaponShotgunAny
   description: A rooty tooty point and shooty.
   abstract: true
   components:
@@ -28,6 +28,31 @@
       collection: xm1014 # Sunrise-Edit
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: StaticPrice
+    price: 500
+  - type: RestrictByUserTag
+    doestContain:
+    - Abductor
+    messages:
+    - abductor-gun-restricted-1
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 3
+        staminaMultiplier: 20
+      Felinid:
+        knockback: 1.5 #half of what resomi take
+        staminaMultiplier: 20
+
+- type: entity
+  parent: BaseWeaponShotgunAny
+  id: BaseWeaponShotgun
+  abstract: true
+  components:
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -36,31 +61,6 @@
     proto: ShellShotgun
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
-  - type: StaticPrice
-    price: 500
-  # Sunrise start
-  - type: EmitSoundOnPickup
-    sound:
-      collection: ShotgunsPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: ShotgunsDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: ShotgunsDrop
-  - type: KnockbackByUserTag
-    doestContain:
-      Resomi:
-        knockback: 3
-        staminaMultiplier: 20
-      Felinid:
-        knockback: 1.5
-        staminaMultiplier: 20
-  # Sunrise end
 
 - type: entity
   name: Bulldog

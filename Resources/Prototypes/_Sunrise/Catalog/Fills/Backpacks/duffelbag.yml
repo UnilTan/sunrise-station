@@ -22,18 +22,6 @@
       - id: MagazineDragunov
       - id: MagazineDragunov
 
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledMinotaur
-  name: Minotaur bundle
-  description: "Lean and mean: Contains the Minotaur Shotgun, and four 12g buckshot drums."
-  components:
-  - type: StorageFill
-    contents:
-      - id: WeaponShotgunMinotaur
-      - id: MagazineShotgun
-        amount: 4
-
 #ERT_Uplink
 - type: entity
   id: ClothingBackpackDuffelWeaponSubMachineGunMP5Filled
@@ -304,7 +292,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponShotgunMinotaur
+    - id: WeaponShotgunMinotaurBiocode
     - id: MagazineShotgun
     - id: MagazineShotgun
     - id: MagazineShotgun

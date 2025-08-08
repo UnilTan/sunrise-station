@@ -27,19 +27,6 @@
   - type: HeldSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.95
-  - type: KnockbackByUserTag
-    doestContain:
-      Resomi:
-        knockback: 3
-        staminaMultiplier: 20
-      Felinid:
-        knockback: 1.5
-        staminaMultiplier: 20
-  - type: RestrictByUserTag
-    doestContain:
-    - Abductor
-    messages:
-    - abductor-gun-restricted-1
 
 - type: entity
   name: XM1014
