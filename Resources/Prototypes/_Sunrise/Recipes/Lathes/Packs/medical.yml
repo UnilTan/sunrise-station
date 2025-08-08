@@ -44,6 +44,8 @@
   - RightArmCyberReaper
   - LeftArmCyberMechwright
   - RightArmCyberMechwright
+  - LeftArmCyberBulwark
+  - RightArmCyberBulwark
 
 - type: latheRecipePack
   id: MedicalCyberOrgansDynamic
