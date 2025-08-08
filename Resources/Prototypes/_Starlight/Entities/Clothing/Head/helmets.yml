@@ -15,6 +15,10 @@
     sprite: _Starlight/Clothing/Head/Helmets/makeshift.rsi
   - type: Clothing
     sprite: _Starlight/Clothing/Head/Helmets/makeshift.rsi
+    equipSound: /Audio/Effects/metal_scrape2.ogg
+    unequipSound: /Audio/Effects/metal_scrape1.ogg
+    equipDelay: 1.25
+    unequipDelay: 1
   - type: Construction
     graph: ClothingHeadHelmetMakeshiftGraph
     node: helmet
@@ -36,6 +40,10 @@
     sprite: _Starlight/Clothing/Head/Helmets/improvised.rsi
   - type: Clothing
     sprite: _Starlight/Clothing/Head/Helmets/improvised.rsi
+    equipSound: /Audio/Effects/metal_scrape2.ogg
+    unequipSound: /Audio/Effects/metal_scrape1.ogg
+    equipDelay: 1.5
+    unequipDelay: 1
 
 - type: entity
   parent: [ClothingHeadHelmetBase, BaseMinorContraband]
@@ -54,6 +62,10 @@
     sprite: _Starlight/Clothing/Head/Helmets/forged.rsi
   - type: Clothing
     sprite: _Starlight/Clothing/Head/Helmets/forged.rsi
+    equipSound: /Audio/Effects/metal_scrape2.ogg
+    unequipSound: /Audio/Effects/metal_scrape1.ogg
+    equipDelay: 1.25
+    unequipDelay: 1
 
 - type: entity
   parent: [ClothingHeadHelmetBase, BaseMajorContraband]
@@ -72,3 +84,7 @@
     sprite: _Starlight/Clothing/Head/Helmets/paladin.rsi
   - type: Clothing
     sprite: _Starlight/Clothing/Head/Helmets/paladin.rsi
+    equipSound: /Audio/Effects/metal_scrape2.ogg
+    unequipSound: /Audio/Effects/metal_scrape1.ogg
+    equipDelay: 1.25
+    unequipDelay: 1

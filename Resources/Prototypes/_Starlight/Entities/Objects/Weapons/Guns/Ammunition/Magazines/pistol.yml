@@ -57,6 +57,16 @@
     node: shell
 
 - type: entity
+  id: MagazinePistolSubMachineGunImprovisedFilled
+  name: Improvised SMG magazine (.35 auto)
+  parent: MagazinePistolSubMachineGunImprovised
+  suffix: Filled
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolImprovised
+    capacity: 20
+
+- type: entity
   id: MagazinePistolSubMachineGunPPSH
   name: PPSH magazine
   parent: BaseMagazinePistolSubMachineGun
@@ -258,3 +268,12 @@
   - type: Construction
     graph: ImprovisedPistolMagazineGraph
     node: shell
+
+- type: entity
+  id: MagazinePistolImprovisedFilled
+  parent: MagazinePistolImprovised
+  suffix: Filled
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolImprovised
+    capacity: 6
