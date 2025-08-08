@@ -44,6 +44,7 @@
     count: 1
   - type: UseDelay
     delay: 1
+  # - type: GunRequiresWield # Sunrise-TODO: отдельно сделать, добавить требование держать в две руки и прицел. Придумать как станция может его получить как в ЫЫ13
 
 
 - type: entity

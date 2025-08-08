@@ -224,6 +224,7 @@
   - GlockBox
   - ACP14Box
   - MK58Box
+  - MK58GoldBox
   - WeaponEnergyGunPistolSecurity
   - WeaponDisabler
 #  - WeaponTaser
@@ -238,6 +239,7 @@
   - CadetWeaponGlockBox
   - CadetWeaponACP14Box
   - CadetWeaponMK58Box
+  - MK58GoldBox
   - CadetWeaponEnergyGunPistolSecurity
   - CadetWeaponDisabler
 
@@ -264,6 +266,7 @@
   - GlockBox
   - MK58Box
   - ACP14Box
+  - MK58GoldBox
   - HeadofSecurityWeapon20h
   - HeadofSecurityWeapon50h
   - HeadofSecurityWeapon50h2

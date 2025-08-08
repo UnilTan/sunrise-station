@@ -235,3 +235,67 @@
 #     layers:
 #     - state: box_of_doom_big
 #     - state: l6_uranium
+
+
+###### Implants ######
+
+- type: entity
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: CyberEyeThermalBox
+  name: Cyber-Eye "Thermal" box
+  description: A small box safety containing a pare of Cyber Eye. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    layers:
+    - state: box_of_doom
+    - state: writing_of_doom
+  - type: Item
+    size: Normal
+  - type: SpawnItemsOnUse
+    items:
+    - id: CyberEyeThermal
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  # Sunrise edit start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_drop.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_drop.ogg
+  # Sunrise edit end
+
+- type: entity
+  parent: [ CyberEyeThermalBox, BaseSyndicateContraband ]
+  id: CyberEyeNightVisionBox
+  name: Cyber-Eye "Night Vision" box
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: CyberEyeNightVision
+
+- type: entity
+  parent: [BoxCardboard, BaseSyndicateContraband]
+  id: MantisBladeArmsKit
+  name: suspicious box #Mantis-Blade kit #No meta(
+  components:
+  - type: Storage
+    grid:
+    - 0,0,1,3
+  - type: StorageFill
+    contents:
+    - id: RightArmCyberMantisBlade
+    - id: LeftArmCyberMantisBlade
+    - id: RightHandCyber
+    - id: LeftHandCyber
+  - type: Sprite
+    layers:
+    - state: box_of_doom_big
+    - state: implant

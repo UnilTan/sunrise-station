@@ -21,9 +21,9 @@
   - type: Sprite
     state: eye_implant_welding
   - type: FunctionalOrgan
-    comps: 
+    comps:
     - type: EyeProtection
-    
+
 # needs arguments system
 #- type: entity
 #  id: EyeImplantDiagnostic
@@ -34,7 +34,7 @@
 #  - type: Sprite
 #    state: eye_implant_diagnostic
 #  - type: FunctionalOrgan
-#    comps: 
+#    comps:
 #    - type: ShowHealthBars
 #      damageContainers:
 #      - Inorganic
@@ -44,25 +44,27 @@
   id: EyeImplantMedical
   name: Medical Implant
   description: Enables you to see information about humanoids without medical glasses.
-  parent: BaseEntityEyeImplant
+  parent: [BaseEntityEyeImplant, BaseSecurityContraband]
   components:
   - type: Sprite
     state: eye_implant_medical
   - type: FunctionalOrgan
-    comps: 
+    comps:
     - type: ShowHealthBars
     - type: ShowHealthIcons
-    
+  - type: Contraband
+    allowedDepartments: [ Science, Medical ]
+
 - type: entity
   id: EyeImplantSecurity
   name: Security Implant
   description: Enables you to see information about station crew without security glasses.
-  parent: BaseEntityEyeImplant
+  parent: [BaseEntityEyeImplant, BaseSecurityContraband]
   components:
   - type: Sprite
     state: eye_implant_security
   - type: FunctionalOrgan
-    comps: 
+    comps:
     - type: ShowJobIcons
     - type: ShowMindShieldIcons
     - type: ShowCriminalRecordIcons
@@ -71,12 +73,12 @@
   id: EyeImplantSyndie
   name: Syndie Implant
   description: Enables you to see information about station crew, humanoids and syndie without any glasses.
-  parent: BaseEntityEyeImplant
+  parent: [BaseEntityEyeImplant, BaseSyndicateContraband]
   components:
   - type: Sprite
     state: eye_implant_syndicate
   - type: FunctionalOrgan
-    comps: 
+    comps:
     - type: ShowHealthBars
     - type: ShowHealthIcons
     - type: ShowJobIcons
