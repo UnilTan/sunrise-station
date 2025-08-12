@@ -139,7 +139,7 @@
     types:
       Piercing: 28 #- 20%
   armorPenetration: 0.25
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.80
   pierceLevel: Metal
@@ -158,7 +158,7 @@
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
       state: practice
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.48
 
@@ -170,7 +170,7 @@
     types:
       Blunt: 3
       Heat: 32
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.48
   bullet:
@@ -185,7 +185,7 @@
     types:
       Radiation: 15
       Piercing: 20
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.80
   pierceLevel: HardenedMetal
@@ -264,7 +264,7 @@
     types:
       Piercing: 12 #- 20%
   armorPenetration: 0.25
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.2
   ricochetChance: 0.80
   pierceLevel: Wood
@@ -283,7 +283,7 @@
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
       state: practice
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.2
   ricochetChance: 0.48
 
@@ -295,7 +295,7 @@
     types:
       Blunt: 2
       Heat: 14
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.2
   ricochetChance: 0.48
   bullet:
@@ -310,7 +310,7 @@
     types:
       Radiation: 6
       Piercing: 10
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.2
   ricochetChance: 0.80
   pierceLevel: HardenedMetal
@@ -491,7 +491,7 @@
     types:
       Piercing: 15 #- 20%
   armorPenetration: 0.25
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.80
   pierceLevel: Metal
@@ -526,7 +526,7 @@
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
       state: practice
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.48
 
@@ -538,7 +538,7 @@
     types:
       Blunt: 3
       Heat: 16
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.48
   bullet:
@@ -553,7 +553,7 @@
     types:
       Radiation: 9
       Piercing: 10
-  pierceChance: 0.50
+  pierceChance: 0.69
   derivation: 0.05
   ricochetChance: 0.80
   pierceLevel: HardenedMetal
@@ -598,7 +598,7 @@
     types:
       Piercing: 14 #- 20%
   armorPenetration: 0.25
-  pierceChance: 0.50
+  pierceChance: 0.69
   ricochetChance: 0.80
   pierceLevel: Metal
   bullet:
@@ -631,7 +631,7 @@
     sprite:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
       state: practice
-  pierceChance: 0.50
+  pierceChance: 0.69
   ricochetChance: 0.48
 
 - type: hitscan
@@ -642,7 +642,7 @@
     types:
       Blunt: 2
       Heat: 15
-  pierceChance: 0.50
+  pierceChance: 0.69
   ricochetChance: 0.48
   bullet:
     sprite:
@@ -656,7 +656,7 @@
     types:
       Radiation: 7
       Piercing: 8
-  pierceChance: 0.50
+  pierceChance: 0.69
   ricochetChance: 0.80
   pierceLevel: HardenedMetal
   bullet:
