@@ -110,8 +110,6 @@
       id: blinking
       interpolate: Nearest
       maxDuration: 1.0
-      minValue: 0.1
-      maxValue: 2.0
       isLooped: true
   - type: ToggleableLightVisuals
     spriteLayer: light
@@ -207,10 +205,6 @@
       fireCost: 40
       magState: disable
       visualState: disable-unshaded
-    - proto: TaserBolt
-      fireCost: 100
-      magState: stun
-      visualState: stun-unshaded
     - proto: RedLaserBeam
       fireCost: 75
       magState: kill
