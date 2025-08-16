@@ -31,6 +31,7 @@ public sealed class PaperSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
+    private static readonly Vector2 DefaultImageScale = new (1f, 1f);
 
     private EntityQuery<PaperComponent> _paperQuery;
 
@@ -306,7 +307,7 @@ public sealed class PaperSystem : EntitySystem
     }
 
     // Sunrise-Start
-    public void SetImageContent(Entity<PaperComponent> entity, SpriteSpecifier content, Vector2 scale = default)
+    public void SetImageContent(Entity<PaperComponent> entity, SpriteSpecifier content, Vector2? scale = null)
     {
         entity.Comp.ImageContent = content;
         entity.Comp.ImageScale = scale;

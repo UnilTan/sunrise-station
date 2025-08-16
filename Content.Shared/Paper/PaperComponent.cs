@@ -43,7 +43,7 @@ public sealed partial class PaperComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier? ImageContent { get; set; }
     [DataField, AutoNetworkedField]
-    public Vector2 ImageScale { get; set; } = new(1f, 1f);
+    public Vector2? ImageScale { get; set; }
     // Sunrise-End
 
     [Serializable, NetSerializable]
@@ -55,10 +55,10 @@ public sealed partial class PaperComponent : Component
         // Sunrise-Start
         public readonly Color DefaultColor;
         public readonly SpriteSpecifier? ImageContent; // Sunrise-edit
-        public readonly Vector2 ImageScale; // Sunrise-edit
+        public readonly Vector2? ImageScale; // Sunrise-edit
         // Sunrise-End
 
-        public PaperBoundUserInterfaceState(string text, Color defaultColor, List<StampDisplayInfo> stampedBy, PaperAction mode = PaperAction.Read, SpriteSpecifier? imageContent = null, Vector2 imageScale = default) // Sunrise-edit
+        public PaperBoundUserInterfaceState(string text, Color defaultColor, List<StampDisplayInfo> stampedBy, PaperAction mode = PaperAction.Read, SpriteSpecifier? imageContent = null, Vector2? imageScale = null) // Sunrise-edit
         {
             Text = text;
             StampedBy = stampedBy;
