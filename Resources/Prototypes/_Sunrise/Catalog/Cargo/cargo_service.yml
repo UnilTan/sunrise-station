@@ -1,7 +1,7 @@
 - type: cargoProduct
   id: ServiceCopyMachineMachine
   icon:
-    sprite: _Sunrise/Structures/Machines/printer.rsi
+    sprite: _Sunrise/Structures/Machines/copy_machine.rsi
     state: icon
   product: CrateServiceCopyMachine
   cost: 2000
