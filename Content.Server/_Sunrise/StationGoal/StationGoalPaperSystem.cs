@@ -123,6 +123,8 @@ namespace Content.Server._Sunrise.StationGoal
                 return printed;
 
             _paperSystem.SetContent((printed, paper), printout.Content);
+            if (printout.ImageContent != null)
+                _paperSystem.SetImageContent((printed, paper), printout.ImageContent, printout.ImageScale);
 
             if (printout.StampState == null)
                 return printed;

@@ -176,14 +176,14 @@ public sealed partial class FaxPrintout
     [DataField]
     public SpriteSpecifier? ImageContent { get; set; }
     [DataField]
-    public Vector2 ImageScale { get; set; } = new(1f, 1f);
+    public Vector2? ImageScale { get; set; }
     // Sunrise-End
 
     private FaxPrintout()
     {
     }
 
-    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false, SpriteSpecifier? imageContent = null, Vector2 imageScale = default)
+    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false, SpriteSpecifier? imageContent = null, Vector2? imageScale = null)
     {
         Content = content;
         Name = name;

@@ -294,7 +294,8 @@ namespace Content.Client.Paper.UI
             if (state.ImageContent != null)
             {
                 ImageContent.Texture = sprite.Frame0(state.ImageContent);
-                ImageContent.TextureScale = state.ImageScale;
+                if (state.ImageScale != null)
+                    ImageContent.TextureScale = state.ImageScale.Value;
                 BlankPaperIndicator.Visible = false;
             }
             // Sunrise-End
