@@ -25,6 +25,7 @@ using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
+using Content.Shared.Storage.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -449,6 +450,12 @@ public sealed partial class ChatUIController : UIController
         if (!EntityManager.EntityExists(ent))
         {
             _sawmill.Debug("Got local chat message with invalid sender entity: {0}", msg.SenderEntity);
+            return;
+        }
+
+        // Don't show speech bubbles for entities inside storage (lockers, cabinets, etc.)
+        if (EntityManager.HasComponent<InsideEntityStorageComponent>(ent))
+        {
             return;
         }
 
