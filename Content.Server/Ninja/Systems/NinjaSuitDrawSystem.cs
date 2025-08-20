@@ -4,6 +4,7 @@ using Content.Shared.Clothing;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Ninja.Systems;
 
@@ -15,6 +16,7 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
 {
     [Dependency] private readonly SpaceNinjaSystem _ninja = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -38,7 +40,7 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
             if (!comp.Enabled)
                 continue;
 
-            if (Timing.CurTime < comp.NextUpdateTime)
+            if (_timing.CurTime < comp.NextUpdateTime)
                 continue;
 
             comp.NextUpdateTime += comp.Delay;
@@ -143,4 +145,5 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
 /// <summary>
 /// Event raised when ninja suit power is empty for equipment that depends on it.
 /// </summary>
-public sealed record struct NinjaSuitPowerEmptyEvent;
+[ByRefEvent]
+public readonly record struct NinjaSuitPowerEmptyEvent;

@@ -20,20 +20,7 @@ public abstract class SharedNinjaSuitDrawSystem : EntitySystem
     /// </summary>
     private void OnComponentShutdown(Entity<NinjaSuitDrawComponent> ent, ref ComponentShutdown args)
     {
-        // Use explicit cast to resolve overload ambiguity
-        SetEnabled((Entity<NinjaSuitDrawComponent>)ent, false);
-    }
-
-    /// <summary>
-    /// Enable or disable power drawing for this entity.
-    /// </summary>
-    public void SetEnabled(Entity<NinjaSuitDrawComponent?> ent, bool enabled)
-    {
-        if (!Resolve(ent, ref ent.Comp) || ent.Comp.Enabled == enabled)
-            return;
-
-        ent.Comp.Enabled = enabled;
-        Dirty(ent, ent.Comp);
+        SetEnabled(ent, false);
     }
 
     /// <summary>
