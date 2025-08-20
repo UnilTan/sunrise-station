@@ -27,6 +27,7 @@ using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Station.Components;
+using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -272,6 +273,13 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendCollectiveMindChat(source, modMessage, channel);
                 return;
             }
+        }
+        // Sunrise-End
+
+        // Sunrise-Start: Hide chat bubble if player is inside entity storage
+        if (HasComp<InsideEntityStorageComponent>(source) && range == ChatTransmitRange.Normal)
+        {
+            range = ChatTransmitRange.HideChat;
         }
         // Sunrise-End
 
@@ -569,6 +577,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
 
+        // Sunrise-Start: Hide chat bubble if player is inside entity storage
+        if (HasComp<InsideEntityStorageComponent>(source) && range == ChatTransmitRange.Normal)
+        {
+            range = ChatTransmitRange.HideChat;
+        }
+        // Sunrise-End
+
         var message = TransformSpeech(source, originalMessage);
 
         if (message.Length == 0)
@@ -642,6 +657,13 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
+
+        // Sunrise-Start: Hide chat bubble if player is inside entity storage
+        if (HasComp<InsideEntityStorageComponent>(source) && range == ChatTransmitRange.Normal)
+        {
+            range = ChatTransmitRange.HideChat;
+        }
+        // Sunrise-End
 
         var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage));
         if (message.Length == 0)
@@ -733,6 +755,13 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         if (!_actionBlocker.CanEmote(source) && !ignoreActionBlocker)
             return;
+
+        // Sunrise-Start: Hide chat bubble if player is inside entity storage
+        if (HasComp<InsideEntityStorageComponent>(source) && range == ChatTransmitRange.Normal)
+        {
+            range = ChatTransmitRange.HideChat;
+        }
+        // Sunrise-End
 
         // get the entity's apparent name (if no override provided).
         var ent = Identity.Entity(source, EntityManager);
