@@ -52,7 +52,7 @@ namespace Content.Server._Sunrise.FleshCult
             }
         };
 
-        public SoundSpecifier BloodAbsorbSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
+        public SoundSpecifier BloodAbsorbSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg", AudioParams.Default.WithMaxDistance(3f));
 
         public EntProtoId BulletAcidSpawnId = "BulletSplashAcid";
 
@@ -60,9 +60,9 @@ namespace Content.Server._Sunrise.FleshCult
 
         public EntProtoId HuggerMobSpawnId = "MobFleshHugger";
 
-        public SoundSpecifier SoundBulletAcid = new SoundPathSpecifier("/Audio/_Sunrise/FleshCult/flesh_cultist_mutation.ogg");
+        public SoundSpecifier SoundBulletAcid = new SoundPathSpecifier("/Audio/_Sunrise/FleshCult/flesh_cultist_mutation.ogg", AudioParams.Default.WithMaxDistance(4f));
 
-        public SoundSpecifier SoundMutation = new SoundPathSpecifier("/Audio/_Sunrise/FleshCult/flesh_cultist_mutation.ogg");
+        public SoundSpecifier SoundMutation = new SoundPathSpecifier("/Audio/_Sunrise/FleshCult/flesh_cultist_mutation.ogg", AudioParams.Default.WithMaxDistance(4f));
 
         public SoundSpecifier? SoundThrowHugger = new SoundPathSpecifier("/Audio/_Sunrise/FleshCult/throw_worm.ogg");
     }

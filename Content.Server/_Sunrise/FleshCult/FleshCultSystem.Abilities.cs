@@ -376,7 +376,7 @@ public sealed partial class FleshCultSystem
             return;
         }
 
-        _audioSystem.PlayPvs(component.BloodAbsorbSound, uid);
+        _audioSystem.PlayPvs(component.BloodAbsorbSound, uid, AudioParams.Default.WithMaxDistance(3f));
         _popup.PopupEntity(Loc.GetString("flesh-cultist-absorb-puddle", ("Entity", uid)),
             uid, uid, PopupType.Large);
 
