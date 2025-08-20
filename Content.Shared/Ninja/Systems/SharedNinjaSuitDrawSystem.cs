@@ -20,7 +20,8 @@ public abstract class SharedNinjaSuitDrawSystem : EntitySystem
     /// </summary>
     private void OnComponentShutdown(Entity<NinjaSuitDrawComponent> ent, ref ComponentShutdown args)
     {
-        SetEnabled(ent, false);
+        // Use explicit cast to resolve overload ambiguity
+        SetEnabled((Entity<NinjaSuitDrawComponent>)ent, false);
     }
 
     /// <summary>

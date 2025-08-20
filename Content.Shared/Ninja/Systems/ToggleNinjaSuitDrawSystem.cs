@@ -24,7 +24,9 @@ public sealed class ToggleNinjaSuitDrawSystem : EntitySystem
 
     private void OnMapInit(Entity<ToggleNinjaSuitDrawComponent> ent, ref MapInitEvent args)
     {
-        _suitDraw.SetEnabled(ent.Owner, _toggle.IsActivated(ent.Owner));
+        var uid = ent.Owner;
+        var draw = Comp<NinjaSuitDrawComponent>(uid);
+        _suitDraw.SetEnabled((uid, draw), _toggle.IsActivated(uid));
     }
 
     private void OnActivateAttempt(Entity<ToggleNinjaSuitDrawComponent> ent, ref ItemToggleActivateAttemptEvent args)
