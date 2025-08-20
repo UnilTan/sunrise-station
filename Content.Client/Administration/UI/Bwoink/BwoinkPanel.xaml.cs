@@ -20,6 +20,8 @@ namespace Content.Client.Administration.UI.Bwoink
         // Sunrise-Start
         private DateTime? _lastDateHeader;
         public bool LoadDb { get; set; }
+        private DateTime _cooldownEnd = DateTime.MinValue;
+        private Timer? _cooldownTimer;
         // Sunrise-End
 
         public BwoinkPanel(Action<string> messageSender)
@@ -47,6 +49,10 @@ namespace Content.Client.Administration.UI.Bwoink
         private void Input_OnTextEntered(LineEdit.LineEditEventArgs args)
         {
             if (string.IsNullOrWhiteSpace(args.Text))
+                return;
+
+            // Check if we're still on cooldown
+            if (DateTime.Now < _cooldownEnd)
                 return;
 
             _messageSender.Invoke(args.Text);
@@ -124,11 +130,37 @@ namespace Content.Client.Administration.UI.Bwoink
             UpdateTypingIndicator();
         }
 
+        public void OnCooldownReceived(SharedBwoinkSystem.BwoinkCooldownMessage message)
+        {
+            // Set cooldown end time
+            _cooldownEnd = DateTime.Now.Add(message.RemainingCooldown);
+            
+            // Disable input field and show feedback
+            SenderLineEdit.Editable = false;
+            SenderLineEdit.PlaceholderText = Loc.GetString("bwoink-cooldown-message", 
+                ("seconds", $"{message.RemainingCooldown.TotalSeconds:F1}"));
+            
+            // Clean up existing timer
+            _cooldownTimer?.Cancel();
+            
+            // Set timer to re-enable input
+            _cooldownTimer = Timer.Spawn(message.RemainingCooldown, () =>
+            {
+                if (Disposed)
+                    return;
+                    
+                SenderLineEdit.Editable = true;
+                SenderLineEdit.PlaceholderText = Loc.GetString("bwoink-input-placeholder");
+            });
+        }
+
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
 
             InputTextChanged = null;
+            _cooldownTimer?.Cancel();
+            _cooldownTimer = null;
         }
     }
 }
