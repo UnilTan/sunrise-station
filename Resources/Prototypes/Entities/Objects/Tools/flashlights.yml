@@ -74,6 +74,13 @@
     quickEquip: false
     slots:
       - Belt
+  - type: ConfigurableFlashlight
+  - type: ActivatableUI
+    key: enum.ConfigurableFlashlightUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ConfigurableFlashlightUiKey.Key:
+        type: ConfigurableFlashlightBoundUserInterface
 
 - type: entity
   name: seclite
@@ -125,6 +132,13 @@
     quickEquip: false
     slots:
       - Belt
+  - type: ConfigurableFlashlight
+  - type: ActivatableUI
+    key: enum.ConfigurableFlashlightUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ConfigurableFlashlightUiKey.Key:
+        type: ConfigurableFlashlightBoundUserInterface
 
 - type: entity
   parent: FlashlightLantern
