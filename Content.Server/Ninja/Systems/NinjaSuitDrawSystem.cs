@@ -54,13 +54,19 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
             if (_ninja.GetNinjaBattery(user, out var batteryEnt, out var battery))
             {
                 var powerToDraw = comp.DrawRate * (float)comp.Delay.TotalSeconds;
-                _ninja.TryUseCharge(user, powerToDraw);
+                if (!_ninja.TryUseCharge(user, powerToDraw))
+                {
+                    var ev = new NinjaSuitPowerEmptyEvent();
+                    RaiseLocalEvent(uid, ref ev);
+                    comp.Enabled = false;
+                }
             }
             else
             {
                 // No ninja suit battery available
                 var ev = new NinjaSuitPowerEmptyEvent();
                 RaiseLocalEvent(uid, ref ev);
+                comp.Enabled = false;
             }
         }
     }
@@ -102,6 +108,11 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
             var canUse = ent.Comp.UseRate <= 0f || battery.CurrentCharge >= ent.Comp.UseRate;
             var canDraw = ent.Comp.DrawRate <= 0f || battery.CurrentCharge > 0f;
             SetPowerStatus(ent, canDraw, canUse);
+            if (!canUse)
+            {
+                var ev = new NinjaSuitPowerEmptyEvent();
+                RaiseLocalEvent(ent, ref ev);
+            }
         }
         else
         {
@@ -137,7 +148,7 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
         if (!_ninja.IsNinja(user))
             return false;
 
-        return _ninja.GetNinjaBattery(user, out _, out var battery) && 
+        return _ninja.GetNinjaBattery(user, out _, out var battery) &&
                (ent.Comp.UseRate <= 0f || battery.CurrentCharge >= ent.Comp.UseRate);
     }
 }

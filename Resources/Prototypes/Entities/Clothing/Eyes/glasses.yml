@@ -320,8 +320,7 @@
     soundFailToActivate:
       path: /Audio/Machines/button.ogg
   - type: NinjaSuitDraw
-    drawRate: 3.5
-    useRate: 20
+    drawRate: 0.5
   - type: ToggleNinjaSuitDraw
   # Sunrise-End
 
