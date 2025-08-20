@@ -3,5 +3,3 @@ ent-MMI = мозго-машинный интерфейс
 ent-MMIFilled = { ent-MMI }
     .suffix = Заполненный
     .desc = { ent-MMI.desc }
-ent-PositronicBrain = позитронный мозг
-    .desc = Загадочный мозг, способный к нейронной активности. Не гниет и не страеет.

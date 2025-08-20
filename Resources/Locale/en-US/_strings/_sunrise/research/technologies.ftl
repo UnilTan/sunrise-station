@@ -1,5 +1,4 @@
 research-discipline-biochemical = Biochemical
-
 research-technology-basic-surgery = Basic surgery
 research-technology-basic-cyberlimbs = Basic cyberlimbs
 research-technology-bluespace-ammo = Bluespace Syringegun Ammo
@@ -13,7 +12,11 @@ research-technology-secmelee-cyberlimbs = Security melee Cyberlimbs
 research-technology-secrange-cyberlimbs = Security range Cyberlimbs
 research-technology-nightvision-eyes = Nightvision Eye Implants
 research-technology-thermalvision-eyes = Thermalvision Eye Implants
-
 research-technology-handcraft-nvd = Кустарные ПНВ
 research-technology-basic-nvd = Продвинутое ПНВ
 research-technology-basic-thermals = Thermal Scanners
+research-technology-extended-amunitions = Расширенные магазины
+research-technology-phazon = Фазон
+research-technology-cargo-bluespace-equipment = Блюспейс экипировка карго
+research-technology-medical-hyposprays = Гипоспреи
+research-technology-armor-penetration = Пробитие брони

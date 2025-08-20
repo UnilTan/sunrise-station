@@ -4,7 +4,6 @@ ntuplink-mech-teleporter-heavy-name = Teleporter Heavy Mech.
 ntuplink-mech-teleporter-heavy-desc = contains crate with Marauder.
 ntuplink-mech-teleporter-eliteheavy-name = Teleporter Heavy Elite Mech.
 ntuplink-mech-teleporter-eliteheavy-desc = contains crate with Seraph. for high command only!
-
 ntuplink-mech-powercage-nanotrasen-name = NanoTrasen power cage
 ntuplink-mech-powercage-nanotrasen-desc = A rechargeable power cage for big devices. Increased capacity for increased power levels. Immune to EMP.
 ntuplink-deathrattle-implant-desc = A box containing enough deathrattle implants for the whole squad. Relays a message containing your position to the Centcomm channel when you go into a critical state or die.
@@ -30,3 +29,4 @@ ntuplink-gun-bundlehristov-name = Bundle Hristov
 ntuplink-gun-bundlexm1014-name = Bundle XM1014
 ntuplink-gun-bundlelaw12-name = Bundle Law-12
 ntuplink-gun-minigun-desc = When one barrel isn’t enough. A rotary beast built for situations where accuracy is replaced by volume. Requires resolve, strong arms, and a healthy spine.
+ntuplink-engineering-powercellnt-desc = Высокотехнологичная батарея NanoTrasen, имеет огромный запас в двое больший чем запас высокоёмкой батареи а так же имеет защитное покрытие от ЭМИ воздействия.

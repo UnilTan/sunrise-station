@@ -81,3 +81,7 @@ research-technology-honk-weapons = Бананиумное вооружение
 research-technology-advanced-spray = Продвинутые спреи
 research-technology-quantum-fiber-weaving = Плетение квантового волокна
 research-technology-bluespace-cargo-transport = Блюспейс-транспортировка грузов
+research-technology-optimized-microgalvanism = Optimized Microgalvanism
+research-technology-dual-wielding-technology = Dual Wielding Technology
+research-technology-launcher-syringe = Syringe Gun
+research-technology-clowning-utilities = Clowning Utilities

@@ -7,6 +7,7 @@ from file import FluentFile
 from fluentast import FluentAstAbstract
 from fluentformatter import FluentFormatter
 from file_cleanup import FileCleanup
+from locale_validator import LocaleValidator, CrossLanguageSynchronizer
 from project import Project
 from fluent.syntax import ast, FluentParser, FluentSerializer
 
@@ -214,11 +215,20 @@ created_files = files_finder.execute()
 if len(created_files):
     print('Форматирование созданных файлов ...')
     FluentFormatter.format(created_files)
+
 print('Проверка актуальности ключей ...')
 changed_files = key_finder.execute()
 if len(changed_files):
     print('Форматирование изменённых файлов ...')
     FluentFormatter.format(changed_files)
+
+# Advanced functionality: Cross-language synchronization
+print('Синхронизация строковых локалей между языками...')
+synchronizer = CrossLanguageSynchronizer(project)
+sync_results = synchronizer.synchronize_strings_locales()
+print(f"Синхронизация: EN→RU {sync_results['en_to_ru']} записей, "
+      f"RU→EN {sync_results['ru_to_en']} записей, "
+      f"обработано {sync_results['files_processed']} файлов")
 
 # File cleanup phase
 print('Выполнение очистки файлов и директорий...')

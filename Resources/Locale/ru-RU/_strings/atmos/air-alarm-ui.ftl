@@ -66,3 +66,15 @@ air-alarm-ui-thresholds-upper-warning-bound = Верхняя тревожная 
 air-alarm-ui-thresholds-lower-warning-bound = Нижняя тревожная граница
 air-alarm-ui-thresholds-copy = Копирование пороговых значений на все устройства
 air-alarm-ui-thresholds-copy-tooltip = Копирует пороговые значения датчиков этого устройства на все устройства в этой вкладке воздушной тревоги.
+air-alarm-ui-title = Air Alarm
+air-alarm-ui-window-mode-select-locked-label = [bold][color=red] Mode selector failure! [/color][/bold]
+air-alarm-ui-pump-direction-siphoning = Siphoning
+air-alarm-ui-pump-direction-scrubbing = Scrubbing
+air-alarm-ui-pump-direction-releasing = Releasing
+air-alarm-ui-pressure-bound-nobound = No Bound
+air-alarm-ui-pressure-bound-internalbound = Internal Bound
+air-alarm-ui-pressure-bound-externalbound = External Bound
+air-alarm-ui-pressure-bound-both = Both
+air-alarm-ui-widget-gas-filters = Gas Filters
+air-alarm-ui-scrubber-select-all-gases-label = Select all
+air-alarm-ui-scrubber-deselect-all-gases-label = Deselect all

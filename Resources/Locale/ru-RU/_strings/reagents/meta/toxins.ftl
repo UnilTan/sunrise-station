@@ -56,3 +56,5 @@ reagent-name-mechanotoxin = механотоксин
 reagent-desc-mechanotoxin = Нейротоксин, используемый в качестве яда некоторыми видами пауков. При накоплении в организме затрудняет передвижение.
 reagent-desc-nitrokill = Очень мощное удобрение, стимулирует быстрый рост, но сильно вредит растению.
 reagent-name-nitrokill = нитрокилл
+reagent-name-toxintrash = trash
+reagent-desc-toxintrash = An awful-smelling fluid. Deadly to non-vox.

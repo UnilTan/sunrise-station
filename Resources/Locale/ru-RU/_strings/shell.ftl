@@ -55,3 +55,7 @@ shell-argument-number-invalid = Аргумент { $index } должен быт�
 # Hints
 shell-argument-username-hint = <username>
 shell-argument-username-optional-hint = [username]
+shell-must-have-body = You must have a body to run this command.
+shell-need-exactly-zero-arguments = This command takes zero arguments.
+shell-missing-required-permission = You need { $perm } for this command!
+shell-entity-target-lacks-component = Target entity doesn't have { INDEFINITE($componentName) } { $componentName } component

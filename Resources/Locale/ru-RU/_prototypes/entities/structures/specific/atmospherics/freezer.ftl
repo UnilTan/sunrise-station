@@ -7,6 +7,3 @@ ent-GasVentPumpFreezer = { ent-AirSensorFreezerBase }
     .desc = { ent-AirSensorFreezerBase.desc }
 ent-GasVentScrubberFreezer = { ent-AirSensorFreezerBase }
     .desc = { ent-AirSensorFreezerBase.desc }
-ent-AirAlarmFreezer = { ent-AirAlarm }
-    .suffix = Freezer Atmosphere, auto mode disabled
-    .desc = { ent-AirAlarm.desc }

@@ -80,3 +80,4 @@ ban-panel-role-selection-antag = Антагонист
 ban-panel-role-selection-antag-all-option = Все
 # Kick on ban
 ban-kick-reason = You have been banned
+cmd-banlist-hint = <name/user ID>

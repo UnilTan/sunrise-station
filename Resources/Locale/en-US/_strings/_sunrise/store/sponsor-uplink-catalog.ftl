@@ -257,3 +257,6 @@ uplink-sunrise-mob-mothroach-name = Mothroach
 uplink-sunrise-player-borg-generic-name = Borg
 uplink-sunrise-boombox-name = Boombox
 uplink-sunrise-tape-player-name = Tape player
+uplink-sunrise-rcd-ammo-name = Картридж РСУ
+uplink-sunrise-rcd-name = РСУ
+uplink-sunrise-holographic-paper-name = Голо-планшет

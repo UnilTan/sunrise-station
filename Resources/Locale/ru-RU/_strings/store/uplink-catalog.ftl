@@ -154,10 +154,8 @@ uplink-radio-implanter-desc = Вживляемое радио Синдиката
 # Cybernetics
 uplink-nightvision-eyes = Кибер-глаза ночного видения
 uplink-nightvision-eyes-desc = Позволяют видеть в темноте, но делают вас более уязвимым к светошумовым гранатам. (Внимание: Требуется помощь хирурга.)
-
 uplink-thermalvision-eyes = Кибер-глаза с тепловым зрением
 uplink-thermalvision-eyes-desc = Позволяют видеть в темноте и обнаруживать существ сквозь стены, но делают вас более уязвимым к светошумовым гранатам. (Внимание: Требуется помощь хирурга.)
-
 uplink-mantis-blade-arms-name = Набор с клинками-богомолами
 uplink-mantis-blade-arms-desc = Изначально использовались как простой строительный инструмент, теперь превращены в скрытые клинки, которые могут выдвигаться из руки, сохраняя при этом способность к разрушительному вскрытию конструкций. Поистине впечатляющее зрелище. (Внимание: Требуется помощь хирурга.)
 # Bundles
@@ -345,3 +343,21 @@ uplink-fake-mindshield-name = Имитатор защиты разума
 uplink-fake-mindshield-desc = Переключаемый имплант, воспроизводящий сигнатуры настоящего щита. Обманывает сканеры командования, создавая ложное присутствие защиты. (Имплантер NT не включён в поставку.)
 uplink-handcuffs-name = Наручники
 uplink-handcuffs-desc = Используется для удержания жертв.
+uplink-estoc-bundle-name = Estoc DMR bundle
+uplink-estoc-bundle-desc = A designated marksman rifle, fitted with a mid-range optic for longer-range combat. Bundled with two rifle magazines (.20 rifle).
+uplink-gloves-knuckleduster-name = Syndicate Knuckle Dusters
+uplink-gloves-knuckleduster-desc = A pair of plastitanium knuckle dusters that let you punch hard enough to break the captains jaw into pieces.
+uplink-estoc-ammo-name = Rifle magazine (.20 rifle)
+uplink-estoc-ammo-desc = A rifle magazine with 25 cartridges. Compatible with the Estoc DMR.
+uplink-grenade-launcher-bundle-name = China-Lake Bundle
+uplink-grenade-launcher-bundle-desc = An old China-Lake grenade launcher bundled with 11 rounds of varying destructive capability.
+uplink-starter-kit-name = Basic Operative Bundle
+uplink-starter-kit-desc = Contains 40 telecrystals of basic operative gear. For those operatives who just don't know what they should buy.
+uplink-saw-advanced-name = Advanced Circular Saw
+uplink-saw-advanced-desc = A bleeding-edge surgical implement designed to cut through flesh and bone alike.
+uplink-clothing-chameleon-thieving-gloves-name = Chameleon Thieving Gloves
+uplink-clothing-chameleon-thieving-gloves-desc = Discreetly steal from pockets and improve your thieving technique with these fancy new gloves. They can change appearance to match any pair of gloves!
+uplink-contraband-lighter-name = Contraband Lighter box
+uplink-contraband-lighter-desc = A mystery box guaranteed to contain a syndicate branded lighter. No fuel required
+uplink-acolyte-armor-name = Acolyte Armor
+uplink-acolyte-armor-desc = The must have of any self respecting cult leader. An evil looking piece of armor, made of bones, and surprisingly resistant to damage.

@@ -68,3 +68,4 @@ chat-emote-msg-monkeyscreeches = кричит
 chat-emote-msg-yawn = зевает
 chat-emote-msg-snore = храпит
 chat-emote-msg-whines = скулит!
+chat-emote-msg-deathgasp-scurret = lets out a final 'wa' and falls still...

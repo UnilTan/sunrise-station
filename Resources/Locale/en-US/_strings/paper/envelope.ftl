@@ -8,4 +8,4 @@ envelope-torn-examine = [color=yellow]{CAPITALIZE(THE($envelope))} is torn and u
 
 envelope-default-message = TO: 
   
-  FROM: 
+  FROM:

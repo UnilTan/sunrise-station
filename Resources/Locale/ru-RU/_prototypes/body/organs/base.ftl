@@ -1,5 +1,3 @@
-ent-BaseOrganBrain = { "" }
-    .desc = { "" }
 ent-BaseOrganEyes = { "" }
     .desc = { "" }
 ent-BaseOrganTongue = { "" }

@@ -18,3 +18,5 @@ chat-radio-handheld = Портативный
 chat-radio-binary = Двоичный
 # Sunrise-Edit
 chat-radio-no-id = Без ID
+chat-radio-xenoborg = Xenoborg
+chat-radio-mothership = Mothership

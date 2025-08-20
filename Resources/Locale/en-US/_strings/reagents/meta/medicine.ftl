@@ -154,4 +154,3 @@ reagent-name-dexalin-plus-saline = dexalin plus-saline
 
 reagent-name-hemostatic-powder = hemostatic powder
 reagent-desc-hemostatic-powder = Hemostatic powder based on a mixture of tranexamic acid and iron silicide. When overdosed, it severely poisons the body with toxins.
-

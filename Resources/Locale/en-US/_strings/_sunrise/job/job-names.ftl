@@ -79,3 +79,7 @@ JobNtrGuard = оперативник ИСН
 JobNtrLeadGuard = командир ИСН
 JobNtrOfficer = офицер ИСН
 JobMailCarrier = почтальон
+job-name-mining-borg = шахтёрский киборг
+JobUSSPCaptain = капитан СССП
+JobBarber = парикмахер
+JobAdjutant = адъютант

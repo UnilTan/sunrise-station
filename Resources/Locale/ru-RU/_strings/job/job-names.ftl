@@ -122,3 +122,4 @@ JobWarden = смотритель
 JobVisitor = посетитель
 JobBoxer = боксёр
 JobZookeeper = зоотехник
+job-name-cluwne = Cluwne

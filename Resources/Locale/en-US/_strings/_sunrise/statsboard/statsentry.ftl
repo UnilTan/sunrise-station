@@ -54,3 +54,5 @@ statsentry-total-absorbed-puddle = Игроками было убрано [color
 statsentry-player-with-most-puddle-absorb = Больше всего луж было убрано благодаря [color=white]{ $name }[/color]{ $username } - [color=white]{ $count }[/color].
 statsentry-total-captain-card-interacted = Карта капитана побывала у [color=white]{ $count }[/color] игроков.
 statsentry-total-electrocuted-count = Игроки были шокированы [color=white]{ $count }[/color] раз.
+statsentry-bank-balance-total = Общий баланс станции: [color=white]{ $balance }[/color] кредитов.
+statsentry-bank-balance-account = Баланс аккаунта [color=white]{ $account }[/color]: [color=white]{ $balance }[/color] кредитов.

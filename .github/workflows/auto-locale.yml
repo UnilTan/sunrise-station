@@ -44,6 +44,11 @@ jobs:
           python ./Tools/_sunrise/yamlextractor.py
           echo "Script exited with code $?"
 
+      - name: Advanced Locale Processing
+        run: |
+          python ./Tools/_sunrise/advanced_locale_processing.py
+          echo "Script exited with code $?"
+
       - name: Git status before commit
         run: |
           git status

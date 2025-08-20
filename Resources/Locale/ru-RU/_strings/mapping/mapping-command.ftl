@@ -14,3 +14,6 @@ cmd-mapping-nullspace = Вы не можете загрузиться на ка�
 cmd-hint-mapping-id = [MapID]
 cmd-hint-mapping-path = [Path]
 cmd-mapping-exists = Карта { $mapId } уже существует.
+cmd-mapping-try-grid = Failed to load the file as a map. Attempting to load the file as a grid...
+cmd-mapping-success-load-grid = Loaded uninitialized grid from file { $path } onto a new map with id { $mapId }.
+cmd-mapping-hint-grid = [Grid]

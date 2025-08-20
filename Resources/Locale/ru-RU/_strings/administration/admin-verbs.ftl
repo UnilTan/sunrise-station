@@ -16,3 +16,5 @@ admin-verbs-erase-description =
 toolshed-verb-mark = Отметить
 toolshed-verb-mark-description = Помещает данную сущность в переменную $marked, заменяя её предыдущее значение.
 export-entity-verb-get-data-text = Экспорт спрайта
+admin-verbs-camera = Open Camera
+admin-verbs-camera-description = Open a camera window that follows the selected entity.

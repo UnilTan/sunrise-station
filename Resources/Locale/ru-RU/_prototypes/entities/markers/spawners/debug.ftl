@@ -1,15 +1,6 @@
 ent-SpawnMobHuman = спавнер Урист
     .suffix = ДЕБАГ
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobHumanBasicArmor = спавнер Урист
-    .suffix = ДЕБАГ, Базовая Броня
-    .desc = { ent-MarkerBase.desc }
-ent-SpawnMobHumanBulletproof = спавнер Урист
-    .suffix = ДЕБАГ, Пуленепробиваемый
-    .desc = { ent-MarkerBase.desc }
-ent-SpawnMobHumanSWAT = спавнер Урист
-    .suffix = ДЕБАГ, SWAT
-    .desc = { ent-MarkerBase.desc }
 ent-SpawnMobHumanAgentGear = спавнер Урист
     .suffix = ДЕБАГ, Разгрузка
     .desc = { ent-MarkerBase.desc }

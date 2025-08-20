@@ -1,17 +1,9 @@
-ent-CultPylon = пилон
-    .desc = Мистическая конструкция.
 ent-AltarTome = архивы
     .desc = Стол, заваленный тайными рукописями и книгами на неизвестных языках.
 ent-CultBloodAltar = алтарь
     .desc = Кровавый алтарь, посвященный какому-то существу.
 ent-CultForge = кузница
     .desc = Кузница, в которой изготавливается нечестивое оружие.
-ent-NarsieCultPylon = пилон Нарси
-    .desc = Мистическая конструкция.
-ent-NarbeeCultPylon = пилон Нарби
-    .desc = Мистическая конструкция.
-ent-ReaperCultPylon = пилон Жнеца
-    .desc = Мистическая конструкция.
 ent-NarsieAltarTome = Архивы Нарси
     .desc = { ent-AltarTome.desc }
 ent-NarbeeAltarTome = Архивы Нарби

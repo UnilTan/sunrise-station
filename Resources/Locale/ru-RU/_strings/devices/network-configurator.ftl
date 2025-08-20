@@ -51,3 +51,11 @@ network-configurator-examine-switch-modes = Нажмите { $key } чтобы �
 network-configurator-item-status-label =
     Режим: { $mode }
     Переключить: { $keybinding }
+network-configurator-text-set = Set
+network-configurator-text-add = Add
+network-configurator-text-clear = Clear
+network-configurator-text-copy = Copy
+network-configurator-text-show = Show
+# command
+cmd-clearnetworklinkoverlays-desc = Clear all network link overlays.
+cmd-clearnetworklinkoverlays-help = Usage: clearnetworklinkoverlays

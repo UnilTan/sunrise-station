@@ -37,3 +37,6 @@ id-card-access-level-wizard = Волшебник
 id-card-access-level-station-ai = Искусственный Интеллект
 id-card-access-level-borg = Киборг
 id-card-access-level-basic-silicon = Робот
+id-card-access-level-genpop-enter = Enter Genpop
+id-card-access-level-genpop-leave = Leave Genpop
+id-card-access-level-basic-xenoborg = Xenoborg

@@ -12,3 +12,4 @@ upgradeaction-command-entity-does-not-exist = Эта сущность не су�
 upgradeaction-command-entity-is-not-action = У этой сущности нет компонента улучшения действия, поэтому её нельзя повысить в уровне.
 upgradeaction-command-cannot-level-up = Это действие не может быть повышено в уровне.
 upgradeaction-command-description = Повышает уровень действия на один, либо до указанного уровня, если это возможно.
+upgradeaction-command-help = Usage: upgradeaction <entityUid> [level]

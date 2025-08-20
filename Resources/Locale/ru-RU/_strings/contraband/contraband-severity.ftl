@@ -11,3 +11,4 @@ contraband-examinable-verb-text = Легальность
 contraband-examinable-verb-message = Проверить легальность этого предмета.
 contraband-department-plural = { $department }
 contraband-job-plural = { MAKEPLURAL($job) }
+contraband-examine-text-Highly-Illegal = [color=red]This item is highly illegal contraband![/color]

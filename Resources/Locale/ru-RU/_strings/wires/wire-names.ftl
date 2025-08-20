@@ -71,3 +71,5 @@ wire-name-bomb-bolt = БОЛТ
 wire-name-speech = ДНМК
 wire-name-listen = МИКР
 wire-name-log = ЛОГ
+wires-board-name-weapon-energy-turret = Sentry turret
+wires-board-name-turret-controls = Sentry turret control panel

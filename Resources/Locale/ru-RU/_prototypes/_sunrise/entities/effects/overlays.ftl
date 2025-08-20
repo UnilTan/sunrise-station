@@ -1,5 +1,3 @@
-ent-EffectNightVision = ночное зрение
-    .desc = { "" }
 ent-EffectNightVisionGreen = ночное зрение
     .desc = { "" }
 ent-EffectNightVisioSpecies = ночное зрение

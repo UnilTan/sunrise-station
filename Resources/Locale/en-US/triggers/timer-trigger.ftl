@@ -1,4 +1,3 @@
-
 timer-trigger-verb-set = {$time} Seconds
 timer-trigger-verb-set-current = {$time} Seconds (current)
 timer-trigger-verb-cycle = Cycle Time Delay

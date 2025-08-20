@@ -9,4 +9,4 @@ animations-fall-on-neck = Fall On Neck
 animations-msg-flip = does a flip
 animations-msg-jump = jumps
 animations-msg-dance = dances
-animations-msg-fall-on-neck = falls on neck 
+animations-msg-fall-on-neck = falls on neck

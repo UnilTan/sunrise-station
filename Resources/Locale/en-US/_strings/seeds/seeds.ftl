@@ -2,7 +2,6 @@
 # Nouns
 seeds-noun-seeds = seeds
 seeds-noun-spores = spores
-
 # Seeds
 seeds-wheat-name = wheat
 seeds-wheat-display-name = wheat stalks
@@ -144,3 +143,9 @@ seeds-anomaly-berry-name = anomaly berry
 seeds-anomaly-berry-display-name = anomaly berries
 seeds-bloonion-name = bloonion
 seeds-bloonion-display-name = bloonion bulbs
+seeds-explosive-banana-name = буман
+seeds-explosive-banana-display-name = бумановый куст
+seeds-coffee-arabica-name = кофе арабика
+seeds-coffee-arabica-display-name = куст кофе арабики
+seeds-coffee-robust-name = кофе робаст
+seeds-coffee-robust-display-name = куст кофе робаста

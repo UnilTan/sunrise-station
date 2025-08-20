@@ -1,5 +1,3 @@
-ent-Crayon = мелок
-    .desc = Красочный мелок. Выглядит аппетитно. Мммм...
 ent-CrayonWhite = белый мелок
     .desc = { ent-Crayon.desc }
 ent-CrayonMime = мимский мелок

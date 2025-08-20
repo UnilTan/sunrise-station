@@ -93,3 +93,5 @@ petting-success-tesla = Вы гладите { $target }, попутно нару
 petting-failure-tesla = Вы тянетесь погладить { $target }, но разряд заставляет вас отдёрнуть руку.
 petting-success-mail-teleporter = Вы гладите { THE($target) } по { POSS-ADJ($target) } исполнительной, холодной поверхности.
 petting-failure-mail-teleporter = Вы тянетесь погладить { THE($target) }, но { SUBJECT($target) } { CONJUGATE-BE($target) } занят сортировкой почты!
+petting-success-scurret = You pet { THE($target) } on { POSS-ADJ($target) } legally distinct head.
+petting-failure-scurret = You reach out to pet { THE($target) }, but { SUBJECT($target) } does a backflip!

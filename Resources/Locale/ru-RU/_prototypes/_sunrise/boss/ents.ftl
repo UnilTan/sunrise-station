@@ -4,6 +4,3 @@ ent-ComputerBossTravel = алтарь битвы с боссом
     .desc = { ent-AltarFangs.desc }
 ent-HellSpawnCultist = { ent-MobHuman }
     .desc = { ent-MobHuman.desc }
-ent-BulletSkyFlare = шар пламени
-    .suffix = Босс
-    .desc = { ent-BaseBulletIncendiary.desc }

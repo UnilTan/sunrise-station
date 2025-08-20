@@ -59,3 +59,5 @@ signal-port-description-logic-input = Входной порт, который п
 signal-port-description-logic-memory-input = Сигнал для загрузки в ячейку памяти, когда включено.
 signal-port-name-logic-enable = Включить
 signal-port-description-logic-enable = Загружает сигнал ввода в ячейку памяти только при HIGH.
+signal-port-name-trigger-receiver = Trigger
+signal-port-description-trigger-receiver = Triggers some mechanism on the device.

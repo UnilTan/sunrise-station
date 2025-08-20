@@ -20,3 +20,7 @@ reagent-name-cellulose = целлюлозные волокна
 reagent-desc-cellulose = Кристаллический полимер полидекстрозы, растения дорожат этим веществом.
 reagent-name-rororium = рориум
 reagent-desc-rororium = Странное вещество, которое наполняет ядра хивелордов, бродящих по астероиду. Считается, что это источник их регенеративных способностей.
+reagent-name-artifact-glue = artifact glue
+reagent-desc-artifact-glue = Mixture of glue and artifexium. It can restore durability of nodes in artifact on touch.
+reagent-name-lye = lye
+reagent-desc-lye = A translucent, orange, alkaline solution used in traditional soap production.

@@ -57,7 +57,5 @@ ent-MailCarrierIDCard = ID карта почтальона
     .desc = { ent-IDCardStandard.desc }
 ent-MiningIDCard = mining ID card
     .desc = { ent-IDCardStandard.desc }
-ent-AbductorIDCard = abductor ID card
-    .desc = { ent-IDCardStandard.desc }
 ent-BlueShieldIDCard = ID карта офицера «Синий щит»
     .desc = { ent-IDCardStandard.desc }

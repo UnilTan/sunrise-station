@@ -11,3 +11,4 @@ ninja-research-steal-success =
        *[other] новых технологий
     } из { $server }.
 ninja-criminal-records-hack-announcement = ОШИБКА: В криминальных записях обнаружена [УДАЛЕНО] ошибка #*;"
+ninja-download-fail = Server has no research data...

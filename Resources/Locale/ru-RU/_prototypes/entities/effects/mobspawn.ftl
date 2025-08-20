@@ -1,7 +1,5 @@
 ent-MobSpawnCrabQuartz = спавнер моб рудокраб кварц
     .desc = { "" }
-ent-MobSpawnCrabIron = спавнер моб рудокраб железо
-    .desc = { ent-MobSpawnCrabQuartz.desc }
 ent-MobSpawnCrabCoal = спавнер моб рудокраб уголь
     .desc = { ent-MobSpawnCrabQuartz.desc }
 ent-MobSpawnCrabSilver = спавнер моб рудокраб серебро

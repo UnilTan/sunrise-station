@@ -31,3 +31,4 @@ lathe-menu-no-materials-message = Материалы не загружены
 lathe-menu-fabricating-message = Производится...
 lathe-menu-materials-title = Материалы
 lathe-menu-queue-title = Очередь производства
+lathe-menu-silo-linked-message = Silo Linked

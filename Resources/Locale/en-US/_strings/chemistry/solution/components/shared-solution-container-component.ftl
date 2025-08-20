@@ -1,11 +1,10 @@
-shared-solution-container-component-on-examine-main-text = It contains {INDEFINITE($desc)} [color={$color}]{$desc}[/color] { $chemCount ->
-    [1] chemical.
-   *[other] mixture of chemicals.
+shared-solution-container-component-on-examine-main-text =
+    It contains { INDEFINITE($desc) } [color={ $color }]{ $desc }[/color] { $chemCount ->
+        [1] chemical.
+       *[other] mixture of chemicals.
     }
-
-examinable-solution-has-recognizable-chemicals = You can recognize {$recognizedString} in the solution.
-examinable-solution-recognized = [color={$color}]{$chemical}[/color]
-
+examinable-solution-has-recognizable-chemicals = You can recognize { $recognizedString } in the solution.
+examinable-solution-recognized = [color={ $color }]{ $chemical }[/color]
 examinable-solution-on-examine-volume = The contained solution is { $fillLevel ->
     [exact] holding [color=white]{$current}/{$max}u[/color].
    *[other] [bold]{ -solution-vague-fill-level(fillLevel: $fillLevel) }[/bold].
@@ -16,16 +15,16 @@ examinable-solution-on-examine-volume-no-max = The contained solution is { $fill
    *[other] [bold]{ -solution-vague-fill-level(fillLevel: $fillLevel) }[/bold].
 }
 
-examinable-solution-on-examine-volume-puddle = The puddle is { $fillLevel ->
-    [exact] [color=white]{$current}u[/color].
-    [full] huge and overflowing!
-    [mostlyfull] huge and overflowing!
-    [halffull] deep and flowing.
-    [halfempty] very deep.
-   *[mostlyempty] pooling together.
-    [empty] forming multiple small pools.
-}
-
+examinable-solution-on-examine-volume-puddle =
+    The puddle is { $fillLevel ->
+        [exact] [color=white]{ $current }u[/color].
+        [full] huge and overflowing!
+        [mostlyfull] huge and overflowing!
+        [halffull] deep and flowing.
+        [halfempty] very deep.
+       *[mostlyempty] pooling together.
+        [empty] forming multiple small pools.
+    }
 -solution-vague-fill-level =
     { $fillLevel ->
         [full] [color=white]Full[/color]
@@ -35,3 +34,9 @@ examinable-solution-on-examine-volume-puddle = The puddle is { $fillLevel ->
         [mostlyempty] [color=#A4A4A4]Mostly Empty[/color]
        *[empty] [color=gray]Empty[/color]
     }
+shared-solution-container-component-on-examine-empty-container = Не содержит вещества.
+shared-solution-container-component-on-examine-worded-amount-one-reagent = вещество.
+shared-solution-container-component-on-examine-worded-amount-multiple-reagents = смесь веществ.
+examinable-solution-recognized-first = [color={ $color }]{ $chemical }[/color]
+examinable-solution-recognized-next = , [color={ $color }]{ $chemical }[/color]
+examinable-solution-recognized-last = и [color={ $color }]{ $chemical }[/color]

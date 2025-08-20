@@ -26,5 +26,3 @@ ent-ClothingHeadHelmetHardsuitPirateCapSun = космический шлем к�
 ent-ClothingHeadHelmetHardsuitPirateSun = пиратский космический шлем
     .desc = Специальный шлем для скафандра, чтобы брать всех на абордаж.
     .suffix = Пират, Рассвет
-ent-ClothingHeadHelmetHardsuitInfiltration = шлем скафандра для инфильтрации Синдиката
-    .desc = { ent-ClothingHeadHardsuitBase.desc }

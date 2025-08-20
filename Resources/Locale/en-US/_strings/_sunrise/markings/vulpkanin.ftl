@@ -59,3 +59,5 @@ marking-VulpTailWag = Хвост Вульпканина (Виляющий)
 marking-VulpTailWagTip = Хвост Вульпканина (Виляющий, Кончик)
 marking-VulpPointsFeet = Лапы Вульпканина
 marking-VulpPointsHands = Руки Вульпканина
+marking-VulpEarJackalAlt = Уши Вульпканина (Шакал, Альтернативный)
+marking-VulpTailFluffyAlt = Хвост Вульпканина (Пушистый, Альтернативный)

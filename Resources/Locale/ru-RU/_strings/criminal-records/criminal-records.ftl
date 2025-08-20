@@ -53,3 +53,5 @@ criminal-records-dna-filter = ДНК
 
 criminal-records-console-auto-history = АРЕСТОВАН: { $reason }
 criminal-records-console-unspecified-reason = <причина не указана>
+criminal-records-job-filter = Job
+criminal-records-species-filter = Species

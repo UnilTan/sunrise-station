@@ -9,3 +9,11 @@ credits-window-contributors-section-title = Контрибьюторы Space Sta
 credits-window-codebases-section-title = Код Space Station 13
 credits-window-original-remake-team-section-title = Команда ремейка оригинальной Space Station 13
 credits-window-special-thanks-section-title = Особая благодарность
+credits-window-attributions-tab = Attributions
+credits-window-immortals-title = In Memoriam
+credits-window-attributions-directory = [color=white]Directory:[/color] { $directory }
+credits-window-attributions-files = [color=white]Files:[/color] { $files }
+credits-window-attributions-copyright = [color=white]Copyright:[/color] { $copyright }
+credits-window-attributions-license = [color=white]License:[/color] { $license }
+credits-window-attributions-source = [color=white]Source:[/color] { $source }
+credits-window-attributions-failed = [color=red]Failed to read file:[/color] { $file }

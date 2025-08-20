@@ -46,3 +46,5 @@ AntagInitialInfected = Нулевой заражённый
 JobNinja = Космический ниндзя
 AntagDragon = Космический дракон
 AntagSubvertedSilicon = Враждебный силикон
+roles-antag-nuclear-operative-agent-name = Nuclear operative medic
+roles-antag-nuclear-operative-agent-objective = Like default operative, the team's treatment will have priority.

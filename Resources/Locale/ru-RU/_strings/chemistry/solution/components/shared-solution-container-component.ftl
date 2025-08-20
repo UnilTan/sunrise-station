@@ -6,3 +6,14 @@ examinable-solution-has-recognizable-chemicals = В этом растворе в
 examinable-solution-recognized-first = [color={ $color }]{ $chemical }[/color]
 examinable-solution-recognized-next = , [color={ $color }]{ $chemical }[/color]
 examinable-solution-recognized-last = и [color={ $color }]{ $chemical }[/color]
+examinable-solution-recognized = [color={ $color }]{ $chemical }[/color]
+examinable-solution-on-examine-volume-puddle =
+    The puddle is { $fillLevel ->
+        [exact] [color=white]{ $current }u[/color].
+        [full] huge and overflowing!
+        [mostlyfull] huge and overflowing!
+        [halffull] deep and flowing.
+        [halfempty] very deep.
+       *[mostlyempty] pooling together.
+        [empty] forming multiple small pools.
+    }

@@ -1,4 +1,3 @@
-
 ### Interaction Messages
 
 # Shown when player tries to replace light, but there is no lights left

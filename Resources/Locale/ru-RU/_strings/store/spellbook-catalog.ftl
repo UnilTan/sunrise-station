@@ -61,3 +61,5 @@ spellbook-upgrade-fireball-name = Улучшение Огненного шара
 spellbook-upgrade-fireball-description = Позволяет улучшить Огненный шар до максимального 3-го уровня!
 spellbook-upgrade-jaunt-name = Улучшение Эфирной прогулки
 spellbook-upgrade-jaunt-description = Позволяет улучшить Эфирную прогулку до максимального 3-го уровня!
+spellbook-knock-name = Knock
+spellbook-knock-desc = Opens all airlocks, crates and lockers nearby.

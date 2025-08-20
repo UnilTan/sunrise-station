@@ -80,3 +80,9 @@ alerts-changeling-chemicals-name = Химикаты
 alerts-changeling-chemicals-desc = Расходуйте химические вещества для использования своих способностей. Медленно регенерируются.
 alerts-changeling-biomass-name = Биомасса
 alerts-changeling-biomass-desc = Это ваше здоровье. Если оно достигнет 0 - это [color=red]конец игры[/color]. Поглощайте гуманоидов, чтобы восстановить часть его.
+alerts-knockdown-name = [color=yellow]Knocked Down[/color]
+alerts-knockdown-desc = You're [color=yellow]Knocked Down[/color]! Something has slipped or pushed you over, encumbering your movement.
+alerts-rooted-name = Rooted
+alerts-rooted-desc = You are attached to the ground. You can't slip, but you absorb fluids under you.
+alerts-stealthy-name = Pickpocketing
+alerts-stealthy-desc = Whether you are currently pickpocketing. Click to toggle.

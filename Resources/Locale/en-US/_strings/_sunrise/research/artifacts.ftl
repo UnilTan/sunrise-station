@@ -54,4 +54,4 @@ artifact-effect-description-rare-material-silver = Spawns silver ore
 artifact-effect-description-rare-material-plasma = Spawns plasma ore
 artifact-effect-description-rare-material-gold = Spawns gold ore
 artifact-effect-description-rare-material-uranium = Spawns uranium ore
-artifact-effect-description-angry-carp-spawn = Spawns aggressive space carp 
+artifact-effect-description-angry-carp-spawn = Spawns aggressive space carp

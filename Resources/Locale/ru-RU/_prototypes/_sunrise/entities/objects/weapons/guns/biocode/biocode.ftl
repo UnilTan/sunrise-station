@@ -1,9 +1,6 @@
 ent-WeaponRevolverPythonAPBiocode = { ent-WeaponRevolverPythonAP }
     .desc = { ent-WeaponRevolverPythonAP.desc }
     .suffix = БИОКОД
-ent-WeaponRevolverPythonBiocode = { ent-WeaponRevolverPython }
-    .desc = { ent-WeaponRevolverPython.desc }
-    .suffix = БИОКОД
 ent-WeaponShotgunBulldogBiocode = { ent-WeaponShotgunBulldog }
     .desc = { ent-WeaponShotgunBulldog.desc }
     .suffix = БИОКОД

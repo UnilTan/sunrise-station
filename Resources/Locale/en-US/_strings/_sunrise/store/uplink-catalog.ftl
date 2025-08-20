@@ -19,6 +19,7 @@ uplink-magazine-bulldog-uraniumslug-desc = Shotgun magazine with 8 shells filled
 uplink-magazine-bulldog-uranium-desc = Shotgun magazine with 8 shells filled with uranium pellet. Compatible with the Bulldog.
 uplink-pistol-magnum-magazine-name = Магазин для Deagle
 uplink-pistol-magnum-magazine-desc = 7-зарядный однорядный магазин для пистолета. Содержит патроны SP. Совместим с "Диглом".
+
 ## Misc
 
 uplink-music-boombox-name = Музыкальный набор синдиката
@@ -75,57 +76,95 @@ uplink-clothing-glasses-nvg-name = NVG Sun Glasses
 uplink-clothing-glasses-nvg-desc = Quality made sunglasses, manufactured by Gorlax Security. Uses modular parts to improve visibility in low light conditions. Warning: The glasses will not protect your eyes from direct flashes.
 
 ## Implats
+
 uplink-smoke-screen-implanter-name = Smoke Screen Implanter
 uplink-smoke-screen-implanter-desc = Creates a small cloud of smoke for you to slip away in. Can be used up to three times before you run out of gas.
-
 uplink-creepy-laugh-implanter-name = Creepy Laugh Implanter
 uplink-creepy-laugh-implanter-desc = An audio implant that plays the signature laugh of a Syndicate cyborg. Annoying, intimidating, and undeniably stylish.
-
 uplink-cluster-mini-bomb-name = Cluster Minibomb
 uplink-cluster-mini-bomb-desc = If you don't care about accuracy, then this choice is for you.
-
 uplink-mech-teleporter-heavy-name = Heavy Mech teleporter
 uplink-mech-teleporter-heavy-desc = Contains Cybersan heavy armored mech with integrated chainsword, Ultra AC-2, LBX AC 10 "Scattershot", BRM-6 Missile Rack and P-X Tesla Cannon.
-
 uplink-mech-teleporter-assault-name = Assault Mech teleporter
 uplink-mech-teleporter-assault-desc = Contains Cybersan lightly armored mech with integrated chainsword, LBX AC 10 "Scattershot", SRM-8 Light Missile Rack and P-X Tesla Cannon.
-
-
 uplink-ammo-crate-ammokit-bundle-name = Syndicate super ammo bundle
 uplink-ammo-crate-ammokit-bundle-desc = Reloading! Reloading! Reloading! Contains various ammo kit except for big gun.
-
 uplink-ammo-caselesskit-name = Caseless Ammo Kit
 uplink-ammo-caselesskit-desc = Reloading! Contains 3 extended magazines and 3 base caseless magazine for the Siar-52.
-
 uplink-ammo-smgkit-name = SMG Ammo Kit
 uplink-ammo-smgkit-desc = Reloading! Contains 8 magazines for the C-20r.
-
 uplink-ammo-smgincendiarykit-name = SMG incendiary Ammo Kit
 uplink-ammo-smgincendiarykit-desc = Reloading! Contains 8 incendiary magazines for the C-20r.
-
 uplink-ammo-smguraniumkit-name = SMG uranium Ammo Kit
 uplink-ammo-smguraniumkit-desc = Reloading! Contains 8 uranium magazines for the C-20r.
-
 uplink-ammo-shotgunkit-name = Shotgun Ammo Kit
 uplink-ammo-shotgunkit-desc = Reloading! Contains 5 pellet magazines and 3 slug magazine for the Bulldog.
-
 uplink-ammo-shotgunincendiarykit-name = Shotgun incendiary Ammo Kit
 uplink-ammo-shotgunincendiarykit-desc = Reloading! Contains 8 incendiary magazines for the Bulldog.
-
 uplink-ammo-shotgunuraniumkit-name = Shotgun uranium Ammo Kit
 uplink-ammo-shotgunuraniumkit-desc = Reloading! Contains 8 uranium magazines for the Bulldog.
-
 uplink-ammo-lmgkit-name = LMG Ammo Kit
 uplink-ammo-lmgkit-desc = Reloading! Contains 8 magazines for the L6 Saw or DL6902.
-
 uplink-ammo-lmgincendiarykit-name = LMG incendiary Ammo Kit
 uplink-ammo-lmgincendiarykit-desc = Reloading! Contains 8 incendiary magazines for the L6 Saw or DL6902.
-
 uplink-ammo-lmguraniumkit-name = LMG uranium Ammo Kit
 uplink-ammo-lmguraniumkit-desc = Reloading! Contains 8 uranium magazines for the L6 Saw or DL6902.
-
 uplink-energy-dome-name = Personal energy dome
 uplink-energy-dome-desc = A personal shield generator that protects the wearer from lasers and bullets but prevents from using ranged weapons himself. Comes with a small power cell.
-
 uplink-syndicate-teleporter-name = Hand syndicate teleporter
 uplink-syndicate-teleporter-desc = An experimental hand teleporting device. Teleports its owner forward in a small area. Be careful not to end up in the wall.
+uplink-grenade-frag-timer-name = безконтактная Осколочная граната
+uplink-grenade-frag-timer-desc = Осколочная граната. Совместима с "China-Lake" и "GL-79". Взрывается через 2 секунды после выстрела.
+uplink-grenade-blast-timer-name = безконтактная Фугасная граната
+uplink-grenade-blast-timer-desc = Фугасная граната. Совместима с "China-Lake" и "GL-79". Взрывается через 2 секунды после выстрела.
+uplink-grenade-emp-timer-name = безконтактная ЭМИ граната
+uplink-grenade-emp-timer-desc = ЭМИ граната. Совместима с "China-Lake" и "GL-79". Взрывается через 2 секунды после выстрела.
+uplink-grenade-frag-contact-name = контактная Осколочная граната
+uplink-grenade-frag-contact-desc = Осколочная граната. Совместима с "China-Lake" и "GL-79". Взрывается при контакте с целью.
+uplink-grenade-blast-contact-name = контактная Фугасная граната
+uplink-grenade-blast-contact-desc = Фугасная граната. Совместима с "China-Lake" и "GL-79". Взрывается при контакте с целью.
+uplink-grenade-emp-contact-name = контактная ЭМИ граната
+uplink-grenade-emp-contact-desc = ЭМИ граната. Совместима с "China-Lake" и "GL-79". Взрывается при контакте с целью.
+uplink-magazine-bauer127-extended-name = расширенный магазин Bauer127 (.60 антиматериальные)
+uplink-magazine-bauer127-extended-desc = Магазин для Bauer127. Содержит 15 патронов калибра .60 антиматериальный.
+uplink-magazine-dl6902-name = Короб-магазин DL6902 (7,62мм)
+uplink-magazine-dl6902-desc = Магазин для Dl6902. Содержит 200 патронов калибра 7,62х39мм.
+uplink-magazine-dragunov-desc = Магазин для Драгунова. Содержит 10 патронов калибра 7,62х54R.
+uplink-magazine-dragunov-extended-desc = Магазин для Драгунова. Содержит 20 патронов калибра 7,62х54R.
+uplink-syndie-diagnostic-hud-name = визор МЕХ-пилота синдиката
+uplink-syndie-diagnostic-hud-desc = Профессиональный визор анализирующий в реальном времени состояние МЕХа.
+uplink-energy-dome-personal-name = Поясной Энергетический барьер
+uplink-energy-dome-personal-desc = Генератор малого щита, защищающий владельца от лазеров и пуль, но не позволяющий самому использовать оружие дальнего боя. Использует батареи.
+uplink-energy-dome-backpack-name = Наспинный Энергетический барьер
+uplink-energy-dome-backpack-desc = Генератор большого барьера, защищающий владельца от лазеров и пуль, но не позволяющий самому использовать оружие дальнего боя. Использует батареи.
+uplink-armoured-jumpsuit-name = бронированный черный адвокатский костюм
+uplink-armoured-jumpsuit-desc = Казалось бы, простой деловой костюм... пока не отлетела пуля...
+uplink-syndicate-rapier-name = Рапира Синдиката
+uplink-syndicate-rapier-desc = Элегантная рапира из пластитана с алмазным наконечником. Рапира поставляется в собственных ножнах и способна пробить практически любую защиту если бить точно.
+uplink-weapon-bauer-127-name = винтовка Bauer SR-127
+uplink-weapon-dragunov-name = Набор Драгунов
+uplink-weapon-dragunov-desc = Культовая снайперская винтовка и два магазина на 10 патронов, известная своей меткостью и стрельбой на дальние дистанции. Использует винтовочные патроны калибра 7.62x54R.
+uplink-mech-equipment-immolation-gun-name = пушка-испепелитель ZFI
+uplink-mech-equipment-immolation-gun-desc = Оружие для боевых мехов, стреляющее высокотемпературными лучами.
+uplink-mech-equipment-tesla-cannon-name = тесла-пушка P-X
+uplink-mech-equipment-tesla-cannon-desc = Оружие для боевых мехов, стреляющее энергетическими шарами, основанное на принципе экспериментального двигателя Теслы.
+uplink-mech-equipment-shotgun-name = LBX AC 10 "Залп"
+uplink-mech-equipment-shotgun-desc = Навесной нелетальный электрошокер, позволяющий оглушить злоумышленников.
+uplink-mech-equipment-shotgun-incendiary-name = карабин FNX-99 "Аид"
+uplink-mech-equipment-shotgun-incendiary-desc = Навесной карабин, стреляющий зажигательными патронами.
+uplink-mech-equipment-ultra-rifle-name = AC-2 "Ультра"
+uplink-mech-equipment-ultra-rifle-desc = Навесной карабин, стреляющий зажигательными патронами.
+uplink-mech-equipment-ion-name = ионная тяжёлая пушка М-4
+uplink-mech-equipment-ion-desc = Навесное ионное орудие, действующее по тому же принципу, что и ручной ионный карабин. Чрезвычайно эффективно против синтетиков, роботов и других мехов.
+uplink-mech-equipment-amlg90-name = AMLG-90
+uplink-mech-equipment-amlg90-desc = Лазерный навесной пулемёт.
+uplink-mech-equipment-vindictor-name = Устанавливаемый MG-100 Vindicator Minigun
+uplink-mech-equipment-vindictor-desc = Тяжёлое оружие массового поражения.
+uplink-mech-equipment-uvm31-name = UVM-31 "Дрейк"
+uplink-mech-equipment-uvm31-desc = Тяжёлое оружие массового поражения разработанное Cybersun на основе минигана. теперь на прочном штативе позволяющем вести огонь прямо из МЕХа!
+uplink-mech-teleporter-medium-name = Телепорт среднего меха
+uplink-mech-teleporter-medium-desc = Содержит среднебронированный мех Cybersan с AC-2 "Ультра" и ракетной установкой BRM-8.
+uplink-launcher-cream-pie-fake-name = Фальшивый пирогомёт
+uplink-launcher-cream-pie-fake-desc = Пирогомёт использующий микрореакторную батарею для генерации новых пирогов! Страхование от ЭМИ в цену не входит.
+uplink-syndicate-law-name = Плата законов (Синдикат)
+uplink-syndicate-law-desc = Электронная плата, содержащая набор законов Синдиката.

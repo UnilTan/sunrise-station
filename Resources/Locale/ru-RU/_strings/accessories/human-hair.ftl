@@ -196,3 +196,7 @@ marking-HumanHairVeryshortovereyealternate = Очень короткая (Чер
 marking-HumanHairVlongfringe = Очень короткая (Чёлка)
 marking-HumanHairVolaju = Воладзю
 marking-HumanHairWisp = Пряди
+marking-HumanHairBaby = Baby
+marking-HumanHairCube = Cube
+marking-HumanHairBAlt = Shoulder-length Hair (Over eye)
+marking-HumanHairLongWithBangs = Long With Bangs

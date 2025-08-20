@@ -34,4 +34,3 @@ recipe-YellowLightBulb-name = жёлтая { recipe-CrystalLightBlub }
 recipe-YellowLightBulb-description = { recipe-ColorLight-description }
 recipe-YellowLight-name = жёлтая { recipe-CrystalLightTube }
 recipe-YellowLight-description = { recipe-ColorLight-description }
-

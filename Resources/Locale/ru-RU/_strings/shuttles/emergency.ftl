@@ -51,3 +51,9 @@ emergency-shuttle-ui-remaining = Осталось: { $remaining }
 # Map Misc.
 map-name-centcomm = Центральное командование
 map-name-terminal = Терминал прибытия
+cmd-delayroundend-desc = Stops the timer that ends the round when the emergency shuttle exits hyperspace.
+cmd-delayroundend-help = Usage: delayroundend
+cmd-dockemergencyshuttle-desc = Calls the emergency shuttle and docks it to the station... if it can.
+cmd-dockemergencyshuttle-help = Usage: dockemergencyshuttle
+cmd-launchemergencyshuttle-desc = Early launches the emergency shuttle if possible.
+cmd-launchemergencyshuttle-help = Usage: launchemergencyshuttle

@@ -176,3 +176,7 @@ uplink-syndicate-teleporter-desc = Экспериментальное устро
 
 uplink-syndicate-law-name = Плата законов (Синдикат)
 uplink-syndicate-law-desc = Электронная плата, содержащая набор законов Синдиката.
+uplink-grenade-frag-name = Осколочная граната
+uplink-grenade-frag-desc = Осколочная граната. Совместима с "China-Lake".
+uplink-grenade-blast-name = Фугасная граната
+uplink-grenade-blast-desc = Фугасная граната. Совместима с "China-Lake".

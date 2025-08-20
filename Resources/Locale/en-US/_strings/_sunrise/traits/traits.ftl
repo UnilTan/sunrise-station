@@ -1,5 +1,18 @@
 trait-colorblindness-name = Color blindness
 trait-colorblindness-desc = You see the world differently than everyone else
-
 trait-OwOAccent-name = OwO accent
 trait-OwOAccent-desc = You just want to UwU
+trait-category-height = Рост
+trait-category-vocal = Голос
+trait-noemotions-name = Крепкий орешек
+trait-noemotions-desc = Вы настолько очерствели, что физическая боль не вызывает у вас произвольных звуков.
+trait-ss13-accent-name = SS13 акцент
+trait-ss13-accent-desc = Для тру ценителей олдскула.
+trait-ukrainian-accent-name = Украинский акцент
+trait-ukrainian-accent-desc = Заробiтчани вже навiть у космосi.
+trait-russian-accent-name = Русский акцент
+trait-russian-accent-desc = Товарищ, это не ваше а наше.
+trait-transliteration-accent-name = Транслитерированный акцент
+trait-transliteration-accent-desc = Ds ujdjhbnt nhfyckbnjv.
+trait-felinid-vocal-name = мурлыкание
+trait-felinid-vocal-desc = Заменяет ваши звуки эмоций фелинидскими. Ня!

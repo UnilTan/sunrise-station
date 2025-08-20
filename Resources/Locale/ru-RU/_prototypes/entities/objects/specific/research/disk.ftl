@@ -9,6 +9,3 @@ ent-ResearchDiskDebug = диск исследовательских очков
     .suffix = ДЕБАГ, НЕ МАППИТЬ
 ent-TechnologyDisk = технологический диск
     .desc = Диск для сервера РНД, содержащий исследованную технологию.
-ent-TechnologyDiskRare = { ent-TechnologyDisk }
-    .suffix = Редкий
-    .desc = { ent-TechnologyDisk.desc }

@@ -1,5 +1,3 @@
-ent-ClothingHeadHatAnimalCat = шапка серого кота
-    .desc = Милая и пушистая серая кошка вам на голову.
 ent-ClothingHeadHatAnimalCatBrown = шапка коричневого кота
     .desc = Милая и пушистая коричневая кошка вам на голову.
 ent-ClothingHeadHatAnimalCatBlack = шапка черного кота

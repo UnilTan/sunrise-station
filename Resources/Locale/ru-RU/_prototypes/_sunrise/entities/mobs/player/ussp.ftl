@@ -10,6 +10,3 @@ ent-MobHumanUSSPOfficerSoldier = USSP Officer Soldier
 ent-MobHumanUSSPSoldier = Солдат СССП
     .suffix = СССП | АНТАГ
     .desc = { ent-MobHuman.desc }
-ent-MobHumanUSSPCaptain = Капитан СССП
-    .suffix = СССП
-    .desc = { ent-MobHuman.desc }

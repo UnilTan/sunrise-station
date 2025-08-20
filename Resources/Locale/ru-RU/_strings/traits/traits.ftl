@@ -43,3 +43,5 @@ trait-painnumbness-name = Оцепенение
 trait-painnumbness-desc = Вы не чувствуете боли, не осознавая, насколько вам больно.
 trait-moldovan-name = Молдавский диалект
 trait-moldovan-desc = Цыгания дам ын спацию космик!
+trait-monochromacy-name = Monochromacy
+trait-monochromacy-desc = You are fully colorblind, everything you perceive ranges from blacks to whites.

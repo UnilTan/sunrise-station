@@ -6,3 +6,5 @@ node-scanner-artifact-state-ready = Артефак готов к взаимод�
 node-scanner-artifact-state-unlocking = Артефакт резонирует с вашими действиями
 node-scanner-artifact-state-cooldown = Артефакт отдыхает
 node-scanner-artifact-scanned-time-none = Просканируйте артефакт, чтобы увидеть его состояние
+node-scanner-artifact-connected = Scanning artifact
+node-scanner-artifact-non-connected = Artifact not found or out of range

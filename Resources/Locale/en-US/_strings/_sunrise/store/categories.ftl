@@ -36,3 +36,5 @@ store-category-ntmechs = Mechs
 store-category-ntexplosive = Explosive
 store-category-ntammo = Ammo
 store-category-ntequipment = Equipment Экипировка
+store-category-mechs = Мехи
+store-category-cybernetics = Кибернетика

@@ -7,6 +7,7 @@ from file import YAMLFile, FluentFile
 from fluentast import FluentSerializedMessage, FluentAstAttributeFactory
 from fluentformatter import FluentFormatter
 from file_cleanup import FileCleanup
+from locale_validator import LocaleValidator, CrossLanguageSynchronizer
 from project import Project
 from tqdm import tqdm
 
@@ -54,6 +55,14 @@ class YAMLExtractor:
         logging.debug(f'Удален дублирующийся элемент {entry_id} из {rel_path}')
 
     def execute(self):
+        # Advanced functionality: Clean untranslated prototype locales before processing
+        logging.info("Удаление непереведенных локалей из прототипов...")
+        validator = LocaleValidator(project)
+        ru_cleanup_results = validator.clean_untranslated_prototype_locales('ru-RU')
+        logging.info(f"Очистка RU прототипов: обработано {ru_cleanup_results['files_processed']} файлов, "
+                    f"удалено {ru_cleanup_results['entries_removed']} непереведенных записей, "
+                    f"удалено {ru_cleanup_results['files_removed']} пустых файлов")
+
         self.scan_existing_locale_files()
 
         for yaml_file in tqdm(self.yaml_files, desc="Обработка YAML файлов"):
@@ -78,6 +87,14 @@ class YAMLExtractor:
         if self.entries_to_remove:
             for path, entry_id in tqdm(self.entries_to_remove, desc="Удаление дублей"):
                 self.remove_entry_from_file(path, entry_id)
+
+        # Advanced functionality: Cross-language synchronization for _strings
+        logging.info("Синхронизация строковых локалей между языками...")
+        synchronizer = CrossLanguageSynchronizer(project)
+        sync_results = synchronizer.synchronize_strings_locales()
+        logging.info(f"Синхронизация: EN→RU {sync_results['en_to_ru']} записей, "
+                    f"RU→EN {sync_results['ru_to_en']} записей, "
+                    f"обработано {sync_results['files_processed']} файлов")
 
         # Cleanup phase: remove empty files and directories
         logging.info("Выполнение очистки файлов и директорий...")

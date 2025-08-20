@@ -1,5 +1,3 @@
-ent-BarberRazor = электробритва
-    .desc = Используется парикмахерами для изменения причесок.
 ent-BaseBarberHairDye = { ent-BaseItem }
     .desc = Используется парикмахерами для изменения цвета прически.
 ent-BarberHairDyeBlue = синяя краска для волос

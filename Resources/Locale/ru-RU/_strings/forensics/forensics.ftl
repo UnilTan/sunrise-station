@@ -26,3 +26,5 @@ forensics-verb-text = Счистить улики
 forensics-verb-message = Счистить отпечатки пальцев и остатки ДНК с объекта!
 forensics-cleaning = Вы начинаете счищать улики с { $target }...
 forensics-cleaning-cannot-clean = Ничего нельзя счистить с { $target }!
+forensic-pad-no-access-due = Can't access the fingerprint due to { THE($entity) }.
+forensic-pad-no-access = Can't access the fingerprint.

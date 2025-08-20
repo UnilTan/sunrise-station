@@ -91,3 +91,4 @@ guide-entry-lust-rule-4-3 = ERP полиция
 guide-entry-lust-rule-4-4 = Приватность
 guide-entry-lust-rule-4-4-1 = Распространение
 guide-entry-lust-rule-4-5 = ЕРП ради ЕРП
+guide-entry-sr-rule-excep-3-7 = Исключение/прецедент 3.7

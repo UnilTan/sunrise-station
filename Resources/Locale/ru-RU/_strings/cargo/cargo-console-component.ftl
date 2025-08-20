@@ -45,3 +45,66 @@ cargo-shuttle-console-station-unknown = Неизвестно
 cargo-shuttle-console-shuttle-not-found = Не найден
 cargo-no-shuttle = Грузовой шаттл не найден!
 cargo-shuttle-console-organics = На шаттле обнаружены органические формы жизни
+cargo-console-menu-account-name-format = [bold][color={ $color }]{ $name }[/color][/bold] [font="Monospace"]\[{ $code }\][/font]
+cargo-console-menu-tab-title-orders = Orders
+cargo-console-menu-tab-title-funds = Transfers
+cargo-console-menu-account-action-transfer-limit = [bold]Transfer Limit:[/bold] ${ $limit }
+cargo-console-menu-account-action-transfer-limit-unlimited-notifier = [color=gold](Unlimited)[/color]
+cargo-console-menu-account-action-select = [bold]Account Action:[/bold]
+cargo-console-menu-account-action-amount = [bold]Amount:[/bold] $
+cargo-console-menu-account-action-button = Transfer
+cargo-console-menu-toggle-account-lock-button = Toggle Transfer Limit
+cargo-console-menu-account-action-option-withdraw = Withdraw Cash
+cargo-console-menu-account-action-option-transfer = Transfer Funds to { $code }
+cargo-console-fund-withdraw-broadcast = [bold]{ $name } withdrew { $amount } spesos from { $name1 } \[{ $code1 }\]
+cargo-console-fund-transfer-broadcast = [bold]{ $name } transferred { $amount } spesos from { $name1 } \[{ $code1 }\] to { $name2 } \[{ $code2 }\][/bold]
+cargo-console-fund-transfer-user-unknown = Unknown
+cargo-console-paper-reason-default = None
+cargo-console-paper-approver-default = Self
+# Funding allocation console
+cargo-funding-alloc-console-menu-title = Funding Allocation Console
+cargo-funding-alloc-console-label-account = [bold]Account[/bold]
+cargo-funding-alloc-console-label-code = [bold] Code [/bold]
+cargo-funding-alloc-console-label-balance = [bold] Balance [/bold]
+cargo-funding-alloc-console-label-cut = [bold] Revenue Division (%) [/bold]
+cargo-funding-alloc-console-label-primary-cut = Cargo's cut of funds from non-lockbox sources (%):
+cargo-funding-alloc-console-label-lockbox-cut = Cargo's cut of funds from lockbox sales (%):
+cargo-funding-alloc-console-label-help-non-adjustible = Cargo receives { $percent }% of profits from non-lockbox sales. The rest is split as specified below:
+cargo-funding-alloc-console-label-help-adjustible = Remaining funds from non-lockbox sources are distributed as specified below:
+cargo-funding-alloc-console-button-save = Save Changes
+cargo-funding-alloc-console-label-save-fail =
+    [bold]Revenue Divisions Invalid![/bold] [color=red]({ $pos ->
+        [1] +
+       *[-1] -
+    }{ $val }%)[/color]
+
+# Slip template
+
+cargo-acquisition-slip-body =
+    [head=3]Asset Detail[/head]
+    { "[bold]Product:[/bold]" } { $product }
+    { "[bold]Description:[/bold]" } { $description }
+    { "[bold]Unit cost:[/bold" }] ${ $unit }
+    { "[bold]Amount:[/bold]" } { $amount }
+    { "[bold]Cost:[/bold]" } ${ $cost }
+    
+    { "[head=3]Purchase Detail[/head]" }
+    { "[bold]Orderer:[/bold]" } { $orderer }
+    { "[bold]Reason:[/bold]" } { $reason }
+cargo-funding-alloc-console-label-save-fail =
+    [bold]Revenue Divisions Invalid![/bold] [color=red]({ $pos ->
+        [1] +
+       *[-1] -
+    }{ $val }%)[/color]
+# Slip template
+cargo-acquisition-slip-body =
+    [head=3]Asset Detail[/head]
+    { "[bold]Product:[/bold]" } { $product }
+    { "[bold]Description:[/bold]" } { $description }
+    { "[bold]Unit cost:[/bold" }] ${ $unit }
+    { "[bold]Amount:[/bold]" } { $amount }
+    { "[bold]Cost:[/bold]" } ${ $cost }
+    
+    { "[head=3]Purchase Detail[/head]" }
+    { "[bold]Orderer:[/bold]" } { $orderer }
+    { "[bold]Reason:[/bold]" } { $reason }
