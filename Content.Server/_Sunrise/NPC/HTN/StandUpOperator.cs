@@ -44,7 +44,6 @@ public sealed partial class StandUpOperator : HTNOperator
             return;
 
         _entManager.Dirty(owner, standing);
-        _standing.Down(owner);
         _standing.Stand(owner, standing);
     }
 
@@ -61,7 +60,6 @@ public sealed partial class StandUpOperator : HTNOperator
             return HTNOperatorStatus.Continuing;
 
         _entManager.Dirty(owner, standing);
-        _standing.Down(owner);
         _standing.Stand(owner, standing);
 
         return HTNOperatorStatus.Continuing;
