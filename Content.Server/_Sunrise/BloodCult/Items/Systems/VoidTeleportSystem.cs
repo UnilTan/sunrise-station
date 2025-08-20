@@ -70,6 +70,8 @@ public sealed class VoidTeleportSystem : EntitySystem
 
         EntityCoordinates coords = default;
         var attempts = 10;
+        var validLocationFound = false;
+        
         //Repeat until proper place for tp is found
         while (attempts > 0)
         {
@@ -89,7 +91,15 @@ public sealed class VoidTeleportSystem : EntitySystem
             if (_turf.IsTileBlocked(tile.Value, CollisionGroup.AllMask))
                 continue;
 
+            validLocationFound = true;
             break;
+        }
+
+        // If no valid location was found, show error and don't teleport
+        if (!validLocationFound)
+        {
+            _popup.PopupEntity(Loc.GetString("void-teleport-blocked"), args.User, args.User);
+            return;
         }
 
         CreatePulse(uid, component);
