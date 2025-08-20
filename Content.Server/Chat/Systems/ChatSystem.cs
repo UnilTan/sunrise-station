@@ -27,6 +27,7 @@ using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Station.Components;
+using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -601,7 +602,11 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("fontSize", speech.FontSize),
             ("message", isFormatted ? message : FormattedMessage.EscapeText(message))); //sunrise-edit
 
-        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        // Sunrise-Start: Hide speech bubbles for players inside entity storage
+        var actualRange = HasComp<InsideEntityStorageComponent>(source) ? ChatTransmitRange.HideChat : range;
+        // Sunrise-End
+        
+        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, actualRange);
 
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null);
         RaiseLocalEvent(source, ev, true);
@@ -674,6 +679,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", isFormatted ? obfuscatedMessage : FormattedMessage.EscapeText(obfuscatedMessage))); //sunrise-edit
 
+        // Sunrise-Start: Hide speech bubbles for players inside entity storage
+        var hideChat = HasComp<InsideEntityStorageComponent>(source);
+        // Sunrise-End
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
@@ -687,13 +695,13 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
             if (data.Range <= WhisperClearRange || data.Observer)
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, hideChat, session.Channel);
             //If listener is too far, they only hear fragments of the message
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, hideChat, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedUnknownMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedUnknownMessage, source, hideChat, session.Channel);
         }
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
@@ -748,6 +756,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             !TryEmoteChatInput(source, action))
             return;
 
+        // Sunrise-Start: Hide speech bubbles for players inside entity storage  
+        var hideChat = HasComp<InsideEntityStorageComponent>(source);
+        // Sunrise-End
+
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             EntityUid listener;
@@ -762,7 +774,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (_examineSystem.InRangeUnOccluded(source, listener, VoiceRange))
             {
-                _chatManager.ChatMessageToOne(ChatChannel.Emotes, action, wrappedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Emotes, action, wrappedMessage, source, hideChat, session.Channel);
             }
         } // sunrise-end
         if (!hideLog)
