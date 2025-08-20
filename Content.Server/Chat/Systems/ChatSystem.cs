@@ -27,6 +27,7 @@ using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Station.Components;
+using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -874,12 +875,15 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// </summary>
     public void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null, Color? color = null)
     {
+        // Check if the source entity is inside storage (locker, cabinet, etc.)
+        var isInsideStorage = HasComp<InsideEntityStorageComponent>(source);
+        
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
                 continue;
-            var entHideChat = entRange == MessageRangeCheckResult.HideChat;
+            var entHideChat = entRange == MessageRangeCheckResult.HideChat || isInsideStorage;
             _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author, colorOverride: color);
         }
 
