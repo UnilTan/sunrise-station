@@ -1,5 +1,9 @@
+ent-LeavesCannabis = cannabis leaves
+    .desc = Recently legalized in most galaxies.
 ent-LeavesCannabisDried = сушёные листья конопли
     .desc = Высушенные листья конопли, готовые к измельчению.
+ent-GroundCannabis = ground cannabis
+    .desc = Ground cannabis, ready to take you on a trip.
 ent-LeavesCannabisRainbow = листья радужной конопли
     .desc = Она и должна так светиться...?
 ent-LeavesCannabisRainbowDried = сушёные листья радужной конопли

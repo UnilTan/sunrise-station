@@ -1,5 +1,7 @@
 ent-PaladinShield = паладинский щит
     .desc = Щит для настоящего паладина! Хорошо отражает удары мечей и поглощает удары бит, но мало что еще.
+ent-PaladinShieldGreat = paladin greatshield
+    .desc = You're up against the wall and I! AM! THE! FUCKING! WALL!
 ent-ForgedShieldBuckler = кованый баклер
     .desc = Сделан из лучшей пластали, которую могли предложить приливные кузнецы. Достойный универсал, однако то, что он сделан из цельного металла, заставляет его быстро нагреваться.
 ent-ForgedShieldTower = кованый башенный щит

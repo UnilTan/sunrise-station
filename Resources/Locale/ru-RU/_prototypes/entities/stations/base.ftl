@@ -1,3 +1,5 @@
+ent-BaseStation = { "" }
+    .desc = { "" }
 ent-BaseStationCargo = { "" }
     .desc = { "" }
 ent-BaseStationJobsSpawning = { "" }
@@ -9,6 +11,8 @@ ent-BaseStationArrivals = { "" }
 ent-BaseStationGateway = { "" }
     .desc = { "" }
 ent-BaseStationShuttles = { "" }
+    .desc = { "" }
+ent-BaseStationEvacuation = { "" }
     .desc = { "" }
 ent-BaseStationAlertLevels = { "" }
     .desc = { "" }

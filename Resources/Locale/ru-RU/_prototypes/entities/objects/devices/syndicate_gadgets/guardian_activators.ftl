@@ -1,3 +1,7 @@
+ent-HoloparasiteInjector = holoparasite injector
+    .desc = A complex artwork of handheld machinery allowing the user to host a holoparasite guardian.
+ent-HoloClownInjector = holoclown injector
+    .desc = A complex artwork of handheld machinery allowing the user to host a holoclown guardian.
 ent-MagicalLamp = магическая лампа
     .desc = Федерации магов пришлось как-то сократить расходы после скандала с товарами джиннов.
 ent-BoxHoloparasite = коробка с голопаразитом

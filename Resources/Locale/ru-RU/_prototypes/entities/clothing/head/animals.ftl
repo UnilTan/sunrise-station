@@ -1,3 +1,5 @@
+ent-ClothingHeadHatAnimalCat = grey cat hat
+    .desc = A cute and fluffy head of a grey cat.
 ent-ClothingHeadHatAnimalCatBrown = шапка коричневого кота
     .desc = Милая и пушистая коричневая кошка вам на голову.
 ent-ClothingHeadHatAnimalCatBlack = шапка черного кота

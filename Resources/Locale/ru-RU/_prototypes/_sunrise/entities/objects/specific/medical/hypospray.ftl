@@ -1,3 +1,5 @@
+ent-MedipenCombatInjector = Combat medi-injector
+    .desc = A sterile injector for 4-use. Containing chemicals that regenerate most types of damage.
 ent-HyposprayERT = гипоспрей ОБР
     .desc = Стерильный инжектор для быстрого введения лекарств пациентам.
 ent-HyposprayMedical = медицинский гипоспрей

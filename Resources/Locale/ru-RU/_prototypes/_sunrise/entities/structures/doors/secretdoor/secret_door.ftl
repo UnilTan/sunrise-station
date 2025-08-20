@@ -1,4 +1,9 @@
+ent-BaseReinforcedSecretDoor = reinforced wall
+    .desc = Keeps the air in and the greytide out.
+    .suffix = secret door
 ent-ReinforcedSecretDoorAssembly = каркас укрепленной секретной двери
     .desc = Оно пока что не открывается и не закрывается. Но определенно сможет вас раздавить.
+ent-ReinforcedSecretDoor = reinforced wall
+    .desc = { ent-BaseSecretDoor.desc }
 ent-BaseReinforcedSecretDoorAssembly = каркас укрепленной потайной двери
     .desc = Он открывается, он закрывается, и он может вас раздавить.

@@ -78,6 +78,7 @@ cargo-funding-alloc-console-label-save-fail =
        *[-1] -
     }{ $val }%)[/color]
 
+
 # Slip template
 
 cargo-acquisition-slip-body =
@@ -96,7 +97,9 @@ cargo-funding-alloc-console-label-save-fail =
         [1] +
        *[-1] -
     }{ $val }%)[/color]
+
 # Slip template
+
 cargo-acquisition-slip-body =
     [head=3]Asset Detail[/head]
     { "[bold]Product:[/bold]" } { $product }

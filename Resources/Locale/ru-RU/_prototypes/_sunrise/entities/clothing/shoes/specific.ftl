@@ -1,3 +1,5 @@
+ent-ClothingShoesGreenLizardskin = green lizardskin shoes
+    .desc = They may have lost some of their lustre over the years, but these green lizardskin shoes fit you perfectly.
 ent-ClothingShoesAerostatic = аэростатические ботинки
     .desc = Удобные, чистые ботинки для длительной работы в напряжённом ритме.
 ent-ClothingShoesCentcomBlack = обувь офицера специальных операций

@@ -1,5 +1,13 @@
+ent-CarvedPumpkin = carved pumpkin
+    .desc = A traditional spooky decoration.
 ent-PumpkinLantern = тыквенный фонарик
     .desc = Вырезанная тыква, излучающая жутковатое свечение.
+ent-CarvedPumpkinSmall = { ent-CarvedPumpkin }
+    .suffix = Small
+    .desc = { ent-CarvedPumpkin.desc }
+ent-CarvedPumpkinLarge = { ent-CarvedPumpkin }
+    .suffix = Large
+    .desc = { ent-CarvedPumpkin.desc }
 ent-PumpkinLanternSmall = { ent-PumpkinLantern }
     .suffix = Маленький
     .desc = { ent-PumpkinLantern.desc }

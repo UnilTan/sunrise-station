@@ -1,3 +1,5 @@
+ent-ClothingShoesBootsMagCombat = combat magboots
+    .desc = Combat magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle.
 ent-ClothingShoesBootsMagPirate = магнитные ботинки пирата
     .desc = Боевые магнитки перекрашенные в пирацкие цвета
 ent-ClothingShoesBootsMagSec = магнитные ботинки СБ

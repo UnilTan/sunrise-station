@@ -6,3 +6,5 @@ ent-ClothingShoesBootsPrisonerGrey = ботинки заключённого
     .desc = Почему не оранжевые?
 ent-ClothingShoesUSSPBlack = кожаные ботинки СССП
     .desc = Старая вещица, прямиком из СССП.
+ent-ClothingShoesEliteCaptain = captain's boots
+    .desc = The boots design has a cushioning effect that gives captain's level comfort.

@@ -62,7 +62,8 @@ plant-analyzer-potency-ludicrous = нелепо большое
 plant-analyzer-potency-immeasurable = немерено большое
 plant-analyzer-print = Печать
 plant-analyzer-printout-missing = Н/Д
-plant-analyzer-printout = [color=#9FED58][head=2]Отчет анализатора растений[/head][/color]{ $nl }──────────────────────────────{ $nl }[bullet/] Вид: { $seedName }{ $nl }{ $indent }[bullet/] Пригодность: { $viable ->
+plant-analyzer-printout =
+    [color=#9FED58][head=2]Отчет анализатора растений[/head][/color]{ $nl }──────────────────────────────{ $nl }[bullet/] Вид: { $seedName }{ $nl }{ $indent }[bullet/] Пригодность: { $viable ->
         [no] [color=red]Нет[/color]
         [yes] [color=green]Да[/color]
        *[other] { LOC("plant-analyzer-printout-missing") }

@@ -1,9 +1,15 @@
 ent-Bible = библия
     .desc = Новая межзвёздная версия 2340.
+ent-BibleNecronomicon = necronomicon
+    .desc = There's a note: Klatuu, Verata, Nikto -- Don't forget it again!
+ent-ActionBibleSummon = Summon familiar
+    .desc = Summon a familiar that will aid you and gain humanlike intelligence once inhabited by a soul.
 ent-BibleTanakh = танах
     .desc = Для избранных Богом членов экипажа
 ent-BibleDruid = скрижаль друидов
     .desc = Это тайна друидов!
+ent-BibleCommunistManifesto = communist manifesto
+    .desc = Remove the mask of humanity from Capital.
 ent-BibleSatanic = сатанинская библия
     .desc = Что тут может пойти не так?
 ent-BibleNanoTrasen = кодекс НаноТрейзимус

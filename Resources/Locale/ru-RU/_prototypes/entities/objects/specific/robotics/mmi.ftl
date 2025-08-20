@@ -3,3 +3,5 @@ ent-MMI = мозго-машинный интерфейс
 ent-MMIFilled = { ent-MMI }
     .suffix = Заполненный
     .desc = { ent-MMI.desc }
+ent-PositronicBrain = positronic brain
+    .desc = An artificial brain capable of spontaneous neural activity.

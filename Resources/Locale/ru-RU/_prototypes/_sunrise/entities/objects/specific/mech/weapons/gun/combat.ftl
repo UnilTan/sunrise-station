@@ -1,9 +1,15 @@
+ent-WeaponMechCombatVindictor = Mounted MG-100 Vindicator Minigun
+    .suffix = Mech Weapon, Gun, Combat, Minigun
+    .desc = { ent-BaseMechWeaponRange.desc }
 ent-WeaponMechCombatMaxim = Устанавливаемый Кардашев-Максим
     .desc = Древний тяжёлый пулемёт, получивший новую жизнь в качестве оружия для меха
     .suffix = Оружие мехов, Боевое, СССП
 ent-WeaponMechCombatMG = Устанавливаемый MG
     .desc = Древний тяжёлый пулемёт, получивший новую жизнь в качестве оружия для меха
     .suffix = Оружие мехов, Боевое
+ent-WeaponMechCombatPirateCannon = Mounted PirateCannon
+    .desc = An ancient heavy gun given new life as a mech-mounted gun
+    .suffix = Mech Weapon, Gun, Combat, Pirate
 ent-WeaponMechCombatPirateGrapeshot = Устанавливаемый пиратский картечный выстрел
     .desc = Древнее тяжёлое орудие, получившее новую жизнь в качестве оружия для меха
     .suffix = Оружие мехов, Пушка, Боевое, Пиратское

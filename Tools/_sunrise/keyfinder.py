@@ -1,10 +1,5 @@
 import typing
 import logging
-import os
-import sys
-
-# Add localization directory to path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'localization'))
 
 from pydash import py_
 
@@ -139,8 +134,10 @@ class KeyFinder:
             ru_message_analog_idx = py_.find_index(ru_file_parsed.body, lambda ru_message: self.find_duplicate_message_id_name(ru_message, en_message))
             have_changes = False
 
-            # Attributes
-            if getattr(en_message, 'attributes', None) and ru_message_analog_idx != -1:
+            # Attributes - check if ru_message is actually a Message type
+            if (getattr(en_message, 'attributes', None) and 
+                ru_message_analog_idx != -1 and 
+                isinstance(ru_file_parsed.body[ru_message_analog_idx], ast.Message)):
                 if not ru_file_parsed.body[ru_message_analog_idx].attributes:
                     ru_file_parsed.body[ru_message_analog_idx].attributes = en_message.attributes
                     have_changes = True

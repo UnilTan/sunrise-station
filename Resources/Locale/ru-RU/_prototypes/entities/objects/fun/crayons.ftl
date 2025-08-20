@@ -1,3 +1,5 @@
+ent-Crayon = crayon
+    .desc = A colourful crayon. Looks tasty. Mmmm...
 ent-CrayonWhite = белый мелок
     .desc = { ent-Crayon.desc }
 ent-CrayonMime = мимский мелок

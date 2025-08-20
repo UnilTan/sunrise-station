@@ -34,3 +34,7 @@ ent-ClothingOuterHardsuitPirateSun = пиратский скафандр
 ent-ClothingOuterHardsuitPirateCapSun = капитанский пиратский скафнадр
     .desc = Древний бронированный скафандр, идеально подходящий для защиты от космической цинги и негодяев с ящиками с инструментами.
     .suffix = Pirate, Sunrise
+ent-ClothingOuterHardsuitChameleon = syndicate chameleon
+    .desc = Looking at his material, Sci-fi images inadvertently pop up in your head.
+ent-ClothingOuterHardsuitInfiltration = syndicate infiltration hardsuit
+    .desc = The Syndicate's Special Operations' hardsuit of choice, this hardsuit, as well as durability, has been built with stealth in mind.

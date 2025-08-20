@@ -1,3 +1,5 @@
+ent-HolosignWetFloor = wet floor sign
+    .desc = The words flicker as if they mean nothing.
 ent-HoloFan = атмосферный барьер
     .desc = Барьер из твёрдого света, который блокирует воздух, и ничего более.
 ent-HoloPeel = голокожура

@@ -1,3 +1,5 @@
+ent-CrateSecurityArmor = armor crate
+    .desc = Contains three bulletproof vests. Requires Security access to open.
 ent-CrateSecurityHelmet = ящик со шлемами
     .desc = Содержит три стандартных ведра для мозгов. Чтобы открыть необходим уровень доступа Служба безопасности.
 ent-CrateSecurityNonlethal = ящик нелетального снаряжения

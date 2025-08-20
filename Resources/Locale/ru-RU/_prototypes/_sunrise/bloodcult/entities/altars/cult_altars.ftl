@@ -1,9 +1,17 @@
+ent-CultPylon = pylon
+    .desc = A mysterious structure.
 ent-AltarTome = архивы
     .desc = Стол, заваленный тайными рукописями и книгами на неизвестных языках.
 ent-CultBloodAltar = алтарь
     .desc = Кровавый алтарь, посвященный какому-то существу.
 ent-CultForge = кузница
     .desc = Кузница, в которой изготавливается нечестивое оружие.
+ent-NarsieCultPylon = pylon
+    .desc = A mysterious structure.
+ent-NarbeeCultPylon = pylon
+    .desc = A mysterious structure.
+ent-ReaperCultPylon = pylon
+    .desc = A mysterious structure.
 ent-NarsieAltarTome = Архивы Нарси
     .desc = { ent-AltarTome.desc }
 ent-NarbeeAltarTome = Архивы Нарби

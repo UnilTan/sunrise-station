@@ -10,5 +10,7 @@ ent-FoodNoodlesMeatball = спагетти с фрикадельками
     .desc = Вот это отличные фрикадельки!
 ent-FoodNoodlesSpesslaw = законпаста
     .desc = Любимое блюдо адвокатов.
+ent-FoodNoodlesChowmein = chow mein
+    .desc = A nice mix of noodles and fried vegetables.
 ent-FoodNoodlesButter = сливочная лапша
     .desc = Лапша, покрытая сливочным маслом. Просто и скользко, но вкусно.

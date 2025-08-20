@@ -10,3 +10,7 @@ ent-FoodPlatePlastic = пластиковая тарелка
     .desc = Большая синяя пластиковая тарелка, отлично подходит для праздничного торта.
 ent-FoodPlateSmallPlastic = пластиковая тарелка
     .desc = Синяя пластиковая тарелка, отлично подходит для кусков праздничного торта.
+ent-FoodPlateTin = pie tin
+    .desc = A cheap foil tin for pies.
+ent-FoodPlateMuffinTin = muffin tin
+    .desc = A cheap foil tin for muffins.

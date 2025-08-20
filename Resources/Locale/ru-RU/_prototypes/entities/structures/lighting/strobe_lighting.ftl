@@ -10,3 +10,6 @@ ent-PoweredStrobeLightPolice = { ent-PoweredStrobeLightEmpty }
 ent-PoweredStrobeLightSiren = { ent-PoweredStrobeLightEmpty }
     .suffix = Пустой, Сирена
     .desc = { ent-PoweredStrobeLightEmpty.desc }
+ent-PoweredStrobeLightEpsilon = { ent-PoweredStrobeLightEmpty }
+    .suffix = Empty, epsilon
+    .desc = { ent-PoweredStrobeLightEmpty.desc }

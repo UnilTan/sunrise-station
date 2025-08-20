@@ -28,5 +28,7 @@ ent-ClothingUniformJumpsuitColorLightBrown = светло-коричневый �
     .desc = Обычный светло-коричневый комбинезон без знаков различия.
 ent-ClothingUniformJumpsuitColorBrown = коричневый комбинезон
     .desc = Обычный коричневый комбинезон без знаков различия.
+ent-ClothingUniformJumpsuitColorMaroon = maroon jumpsuit
+    .desc = A generic maroon jumpsuit with no rank markings.
 ent-ClothingUniformColorRainbow = радужный комбинезон
     .desc = Разноцветный комбинезон!

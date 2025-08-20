@@ -8,3 +8,5 @@ ent-SurgeryStepSawSkull = Распилить череп
     .desc = { ent-SurgeryStepBase.desc }
 ent-SurgeryStepInciseCartilage = Надрезать хрящ
     .desc = { ent-SurgeryStepBase.desc }
+ent-SurgeryStepHeadFinalizeSeparation = Finalize Separation
+    .desc = { ent-SurgeryStepSawSkull.desc }

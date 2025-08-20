@@ -3,3 +3,6 @@ ent-CryogenicSleepUnit = капсула криогенного сна
 ent-CryogenicSleepUnitSpawner = { ent-CryogenicSleepUnit }
     .suffix = Спавнер, Начало раунда, Все должности
     .desc = { ent-CryogenicSleepUnit.desc }
+ent-CryogenicSleepUnitSpawnerLateJoin = { ent-CryogenicSleepUnit }
+    .suffix = Spawner, LateJoin
+    .desc = { ent-CryogenicSleepUnit.desc }

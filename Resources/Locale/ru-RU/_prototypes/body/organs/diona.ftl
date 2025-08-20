@@ -1,5 +1,7 @@
 ent-BaseDionaOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
+ent-OrganDionaBrain = brain
+    .desc = The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body.
 ent-OrganDionaEyes = глаза
     .desc = Я тебя вижу!
 ent-OrganDionaStomach = желудок
@@ -12,6 +14,9 @@ ent-OrganDionaStomachNymph = желудок
     .desc = Мерзость. Не перевариваю его.
 ent-OrganDionaLungsNymph = лёгкие
     .desc = Фильтруют кислород из атмосферы, который затем поступает в кровь для использования в качестве переносчика электронов.
+ent-OrganDionaNymphBrain = diona nymph
+    .desc = Contains the brain of a formerly fully-formed Diona. Killing this would kill the Diona forever. You monster.
+    .suffix = Brain
 ent-OrganDionaNymphStomach = нимфа дионы
     .desc = Содержит желудок дионы, которая ещё недавно была полностью сформированной. Вкус от этого лучше не становится.
     .suffix = Желудок

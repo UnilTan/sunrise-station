@@ -8,5 +8,7 @@ ent-FlashSlowdownStatusEffect = замедление от вспышки
     .desc = { ent-StatusEffectSlowdown.desc }
 ent-StatusEffectStaminaLow = низкая выносливость
     .desc = { ent-StatusEffectSlowdown.desc }
+ent-StatusEffectFriction = friction
+    .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectStunned = оглушение
     .desc = { ent-MobStatusEffectDebuff.desc }

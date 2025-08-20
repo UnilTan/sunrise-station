@@ -1,3 +1,6 @@
+ent-ClothingBackpackChameleon = backpack
+    .desc = You wear this on your back and put items into it.
+    .suffix = Chameleon
 ent-ClothingBackpackWaterTank = ранцевый водяной резервуар
     .desc = Вмещает большое количество жидкости. Для разбрызгивания возьмите в руки форсунок.
 ent-ClothingBagPet = сумка для питомцев

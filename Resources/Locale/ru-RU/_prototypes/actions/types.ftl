@@ -1,3 +1,13 @@
+ent-BaseAction = { "" }
+    .desc = { "" }
+ent-BaseMentalAction = { ent-BaseAction }
+    .desc = { ent-BaseAction.desc }
+ent-BaseSuicideAction = { "" }
+    .desc = { "" }
+ent-BaseImplantAction = { ent-BaseAction }
+    .desc = { ent-BaseAction.desc }
+ent-BaseToggleAction = { ent-BaseAction }
+    .desc = { ent-BaseAction.desc }
 ent-ActionScream = Крикнуть
     .desc = ААААААААААААААААААААААААА
 ent-ActionTurnUndead = Обратиться в зомби
@@ -54,6 +64,8 @@ ent-ActionToggleEyes = Открыть/закрыть глаза
     .desc = Закройте глаза, чтобы защитить их, или откройте, чтобы насладиться яркими цветами.
 ent-ActionToggleWagging = Махать хвостом
     .desc = Начать или прекратить махать хвостом.
+ent-FakeMindShieldToggleAction = [color=green]Toggle Fake Mindshield[/color]
+    .desc = Turn the Fake Mindshield implant's transmission on/off
 ent-ActionToggleParamedicSiren = Переключить сирену парамедика
     .desc = Включает или выключает сирену парамедика.
 ent-ActionGravityJump = Прыжок

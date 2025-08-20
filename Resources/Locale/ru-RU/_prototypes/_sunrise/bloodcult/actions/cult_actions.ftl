@@ -1,3 +1,5 @@
+ent-ActionCultTwistedConstruction = { "" }
+    .desc = { "" }
 ent-InstantActionBloodMagic = Кровавая магия
     .desc = Позволяет использовать кровь для подготовки магических заклинаний.
 ent-InstantActionBloodRitual = Кровавые обряды

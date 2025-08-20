@@ -1,3 +1,5 @@
+ent-WeaponMinigunMG100 = MG-100 Vindicator Minigun
+    .desc = { ent-BaseItem.desc }
 ent-PowerpackMinigunMG100 = силовой агрегат (5,56мм)
     .desc = { ent-BaseItem.desc }
 ent-BasePowerpackMG100 = { ent-BaseItem }

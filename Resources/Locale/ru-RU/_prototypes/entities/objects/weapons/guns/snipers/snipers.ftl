@@ -1,5 +1,7 @@
 ent-BaseWeaponSniper = Стандартная Винтовка
     .desc = Дерзай — налетай, целься и стреляй.
+ent-WeaponSniperMosin = Kardashev-Mosin
+    .desc = A true relic, the Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Loads 10 rounds of .30 rifle.
 ent-WeaponSniperHristov = Христов
     .desc = Портативная крупнокалиберная снайперская винтовка. Стреляет мощными бронебойными патронами, калибра .60 антиматериальный.
     .suffix = Винтовка

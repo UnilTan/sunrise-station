@@ -1,3 +1,9 @@
+ent-WeaponMeleeMoltenAmputator = molten amputator
+    .desc = { ent-BaseItem.desc }
+ent-WeaponArcMoltenAmputator = { ent-WeaponArcStatic }
+    .desc = { ent-WeaponArcStatic.desc }
+ent-WeaponProjectileMoltenAmputator = { ent-BaseBullet }
+    .desc = { ent-BaseBullet.desc }
 ent-WeaponMeleeMoltenCollider = Расплавленный коллайдер
     .desc = Как он до сих пор не застыл?
 ent-WeaponArcMeleeMoltenCollider = { ent-WeaponArcStatic }

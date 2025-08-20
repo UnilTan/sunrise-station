@@ -1,3 +1,5 @@
+ent-ClothingOuterWinterCoat = winter coat
+    .desc = A heavy jacket made from 'synthetic' animal furs.
 ent-ClothingOuterWinterCoatToggleable = зимняя куртка с капюшоном
     .desc = { ent-ClothingOuterWinterCoat.desc }
 ent-ClothingOuterWinterAtmos = зимняя куртка атмос-техника

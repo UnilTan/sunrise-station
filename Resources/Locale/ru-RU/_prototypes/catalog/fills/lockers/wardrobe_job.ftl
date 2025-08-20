@@ -1,3 +1,6 @@
+ent-WardrobePrisonFilled = { ent-WardrobePrison }
+    .desc = Contains a selection of nice orange clothes for people enjoying their stay in the brig.
+    .suffix = Filled
 ent-ClosetWallWardrobePrisonFilled = { ent-ClosetWallOrange }
     .suffix = Заполненный
     .desc = { ent-ClosetWallOrange.desc }
@@ -19,6 +22,9 @@ ent-WardrobeScienceFilled = { ent-WardrobeScience }
 ent-WardrobeBotanistFilled = { ent-WardrobeBotanist }
     .desc = Скройтесь среди людей-растений с помощью этой, на 100% экологичной одежды растительного происхождения.
     .suffix = Заполненный
+ent-WardrobeMedicalDoctorFilled = { ent-WardrobeMedicalDoctor }
+    .desc = We've all played doctor before, now practice medicine.
+    .suffix = Filled
 ent-WardrobeChapelFilled = { ent-WardrobeChapel }
     .desc = Вы должны выглядеть пристойно для своей паствы.
     .suffix = Заполненный

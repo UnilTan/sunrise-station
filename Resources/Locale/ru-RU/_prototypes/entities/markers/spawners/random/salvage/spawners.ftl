@@ -1,3 +1,9 @@
+ent-SalvageSpawnerScrapCommon = Salvage Scrap Spawner
+    .suffix = Common, 50%
+    .desc = { ent-MarkerBase.desc }
+ent-SalvageSpawnerScrapCommon75 = { ent-SalvageSpawnerScrapCommon }
+    .suffix = Common, 75%
+    .desc = { ent-SalvageSpawnerScrapCommon.desc }
 ent-SalvageSpawnerScrapValuable = Спавнер металлолома
     .suffix = Ценный, 50%
     .desc = { ent-MarkerBase.desc }

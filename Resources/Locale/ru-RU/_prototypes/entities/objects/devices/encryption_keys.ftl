@@ -1,11 +1,15 @@
 ent-EncryptionKey = ключ шифрования
     .desc = Небольшой шифрующий чип для гарнитуры.
+ent-EncryptionKeyCommon = common encryption key
+    .desc = An encryption key used by anyone.
 ent-EncryptionKeyCargo = ключ шифрования отдела снабжения
     .desc = Ключ шифрования, используемый сотрудниками отдела снабжения.
 ent-EncryptionKeyCentCom = ключ шифрования центрального командования
     .desc = Ключ шифрования, используемый боссами капитана.
 ent-EncryptionKeyStationMaster = ключ шифрования руководства станции
     .desc = Ключ шифрования, используемый боссами станции.
+ent-EncryptionKeyCommand = command encryption key
+    .desc = An encryption key used by crew's bosses.
 ent-EncryptionKeyEngineering = ключ шифрования инженерного отдела
     .desc = Ключ шифрования, используемый инженерами.
 ent-EncryptionKeyMedical = ключ шифрования медицинского отдела

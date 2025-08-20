@@ -10,3 +10,5 @@ ent-MagazineGrenadeFlash = картридж светошумовых грана�
     .desc = { ent-BaseMagazineGrenade.desc }
 ent-MagazineGrenadeBlast = картридж фугасных гранат
     .desc = { ent-BaseMagazineGrenade.desc }
+ent-MagazineGrenadeBaton = baton grenade cartridge
+    .desc = { ent-BaseMagazineGrenade.desc }
