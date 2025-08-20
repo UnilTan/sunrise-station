@@ -36,6 +36,18 @@ public abstract class SharedNinjaSuitDrawSystem : EntitySystem
     }
 
     /// <summary>
+    /// Enable or disable power drawing for this entity.
+    /// </summary>
+    public void SetEnabled(Entity<NinjaSuitDrawComponent> ent, bool enabled)
+    {
+        if (ent.Comp.Enabled == enabled)
+            return;
+
+        ent.Comp.Enabled = enabled;
+        Dirty(ent, ent.Comp);
+    }
+
+    /// <summary>
     /// Check if the entity can draw power from the ninja suit.
     /// </summary>
     public virtual bool CanDrawPower(Entity<NinjaSuitDrawComponent> ent)
