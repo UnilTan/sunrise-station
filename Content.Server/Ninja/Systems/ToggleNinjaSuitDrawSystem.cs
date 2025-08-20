@@ -3,7 +3,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
 
-namespace Content.Shared.Ninja.Systems;
+namespace Content.Server.Ninja.Systems;
 
 /// <summary>
 /// Handles events to integrate NinjaSuitDraw with ItemToggle
@@ -11,7 +11,7 @@ namespace Content.Shared.Ninja.Systems;
 public sealed class ToggleNinjaSuitDrawSystem : EntitySystem
 {
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedNinjaSuitDrawSystem _suitDraw = default!;
+    [Dependency] private readonly NinjaSuitDrawSystem _suitDraw = default!;
 
     public override void Initialize()
     {
