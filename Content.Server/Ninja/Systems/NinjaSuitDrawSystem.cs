@@ -1,5 +1,6 @@
 using Content.Server.Ninja.Events;
 using Content.Server.Power.Components;
+using Content.Shared.Clothing;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
@@ -21,6 +22,10 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
 
         SubscribeLocalEvent<NinjaSuitDrawComponent, NinjaBatteryChangedEvent>(OnBatteryChanged);
         SubscribeLocalEvent<ToggleNinjaSuitDrawComponent, NinjaSuitPowerEmptyEvent>(OnPowerEmpty);
+
+        // Listen for clothing events to update power status when ninja suit is equipped/unequipped
+        SubscribeLocalEvent<NinjaSuitDrawComponent, ClothingGotEquippedEvent>(OnClothingEquipped);
+        SubscribeLocalEvent<NinjaSuitDrawComponent, ClothingGotUnequippedEvent>(OnClothingUnequipped);
     }
 
     public override void Update(float frameTime)
@@ -66,6 +71,16 @@ public sealed class NinjaSuitDrawSystem : SharedNinjaSuitDrawSystem
     private void OnPowerEmpty(Entity<ToggleNinjaSuitDrawComponent> ent, ref NinjaSuitPowerEmptyEvent args)
     {
         _toggle.TryDeactivate(ent.Owner);
+    }
+
+    private void OnClothingEquipped(Entity<NinjaSuitDrawComponent> ent, ref ClothingGotEquippedEvent args)
+    {
+        UpdatePowerStatus(ent);
+    }
+
+    private void OnClothingUnequipped(Entity<NinjaSuitDrawComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        UpdatePowerStatus(ent);
     }
 
     /// <summary>
