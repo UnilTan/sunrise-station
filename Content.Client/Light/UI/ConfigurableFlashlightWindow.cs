@@ -9,7 +9,7 @@ namespace Content.Client.Light.UI;
 public sealed class ConfigurableFlashlightWindow : DefaultWindow
 {
     private readonly LineEdit _hexInput;
-    private readonly ColorPreview _colorPreview;
+    private readonly ColorSelectorSliders _colorSelector;
     private readonly Button _resetButton;
     private readonly Button _applyButton;
 
@@ -18,14 +18,22 @@ public sealed class ConfigurableFlashlightWindow : DefaultWindow
 
     public ConfigurableFlashlightWindow()
     {
-        MinSize = (300, 150);
+        MinSize = (350, 250);
         Title = Loc.GetString("configurable-flashlight-window-title");
 
         var vbox = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            SeparationOverride = 5
+            SeparationOverride = 10
         };
+
+        // Color selector
+        _colorSelector = new ColorSelectorSliders
+        {
+            Color = Color.White,
+            VerticalExpand = true
+        };
+        _colorSelector.OnColorChanged += OnColorSelectorChanged;
 
         // HEX input section
         var hexSection = new BoxContainer
@@ -43,22 +51,13 @@ public sealed class ConfigurableFlashlightWindow : DefaultWindow
         _hexInput = new LineEdit
         {
             PlaceholderText = Loc.GetString("configurable-flashlight-hex-placeholder"),
-            MinSize = (120, 0)
+            HorizontalExpand = true
         };
 
         _hexInput.OnTextChanged += OnHexInputChanged;
 
         hexSection.AddChild(hexLabel);
         hexSection.AddChild(_hexInput);
-
-        // Color preview
-        _colorPreview = new ColorPreview
-        {
-            MinSize = (60, 30),
-            Color = Color.White
-        };
-
-        hexSection.AddChild(_colorPreview);
 
         // Buttons section
         var buttonSection = new BoxContainer
@@ -81,8 +80,10 @@ public sealed class ConfigurableFlashlightWindow : DefaultWindow
         _applyButton.OnPressed += OnApplyButtonPressed;
 
         buttonSection.AddChild(_resetButton);
+        buttonSection.AddChild(new Control { HorizontalExpand = true }); // Spacer
         buttonSection.AddChild(_applyButton);
 
+        vbox.AddChild(_colorSelector);
         vbox.AddChild(hexSection);
         vbox.AddChild(buttonSection);
 
@@ -92,15 +93,29 @@ public sealed class ConfigurableFlashlightWindow : DefaultWindow
     public void UpdateState(ConfigurableFlashlightBuiState state)
     {
         var currentColor = state.CustomColor ?? state.OriginalColor ?? Color.White;
-        _colorPreview.Color = currentColor;
+        
+        _colorSelector.OnColorChanged -= OnColorSelectorChanged; // Temporarily disable to avoid loop
+        _colorSelector.Color = currentColor;
+        _colorSelector.OnColorChanged += OnColorSelectorChanged; // Re-enable
+        
         _hexInput.Text = ColorToHex(currentColor);
+        _hexInput.ModulateSelfOverride = null; // Reset to normal color
+    }
+
+    private void OnColorSelectorChanged(Color color)
+    {
+        // Update hex input when color selector changes
+        _hexInput.Text = ColorToHex(color);
+        _hexInput.ModulateSelfOverride = null; // Reset input color
     }
 
     private void OnHexInputChanged(LineEdit.LineEditEventArgs args)
     {
         if (TryParseHex(args.Text, out var color))
         {
-            _colorPreview.Color = color;
+            _colorSelector.OnColorChanged -= OnColorSelectorChanged; // Temporarily disable to avoid loop
+            _colorSelector.Color = color;
+            _colorSelector.OnColorChanged += OnColorSelectorChanged; // Re-enable
             _hexInput.ModulateSelfOverride = null; // Reset to normal color
         }
         else
@@ -111,10 +126,7 @@ public sealed class ConfigurableFlashlightWindow : DefaultWindow
 
     private void OnApplyButtonPressed(Button.ButtonEventArgs args)
     {
-        if (TryParseHex(_hexInput.Text, out var color))
-        {
-            OnColorChanged?.Invoke(color);
-        }
+        OnColorChanged?.Invoke(_colorSelector.Color);
     }
 
     private void OnResetButtonPressed(Button.ButtonEventArgs args)
@@ -155,16 +167,5 @@ public sealed class ConfigurableFlashlightWindow : DefaultWindow
     {
         var srgb = color.ToSrgb();
         return $"#{srgb.R:X2}{srgb.G:X2}{srgb.B:X2}";
-    }
-
-    private sealed class ColorPreview : Control
-    {
-        public Color Color { get; set; } = Color.White;
-
-        protected override void Draw(DrawingHandleScreen handle)
-        {
-            handle.DrawRect(PixelSizeBox, Color);
-            handle.DrawRect(PixelSizeBox, Color.Black, filled: false);
-        }
     }
 }
