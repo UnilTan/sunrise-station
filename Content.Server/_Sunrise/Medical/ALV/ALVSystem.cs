@@ -10,80 +10,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
-
-namespace Content.Server._Sunrise.Medical.ALV;
-
-/// <summary>
-/// Handles artificial lung ventilation (ALV) procedures
-/// Система искусственной вентиляции легких (ИВЛ)
-/// </summary>
-public sealed class ALVSystem : EntitySystem
-{
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-
-    private const float UpdateFrequency = 1.0f; // Update every second
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MobStateComponent, GetVerbsEvent<InteractionVerb>>(AddALVVerb);
-        SubscribeLocalEvent<ALVComponent, ALVDoAfterEvent>(OnALVDoAfter);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<ALVComponent>();
-        while (query.MoveNext(out var uid, out var alvComp))
-        {
-            if (alvComp.Performer == null || alvComp.Target == null)
-            {
-                RemCompDeferred<ALVComponent>(uid);
-                continue;
-            }
-
-            // Check if target still needs ALV
-            if (!NeedsALV(alvComp.Target.Value))
-            {
-                StopALV(uid, alvComp);
-                continue;
-            }
-
-            // Check if performer is still valid
-            if (!CanPerformALV(alvComp.Performer.Value, alvComp.Target.Value))
-            {
-                StopALV(uid, alvComp);
-                continue;
-            }
-
-            // Apply healing and damage effects every second
-            ApplyALVEffects(alvComp.Target.Value, alvComp);
-        }
-    }
-
-using Content.Server.DoAfter;
-using Content.Server.Popups;
-using Content.Shared._Sunrise.Medical.ALV;
-using Content.Shared.Damage;
-using Content.Shared.DoAfter;
-using Content.Shared.Interaction;
-using Content.Shared.Inventory;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Verbs;
-using Robust.Shared.Audio.Systems;
+using Robust.Shared.Localization;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
