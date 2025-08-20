@@ -676,6 +676,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", isFormatted ? obfuscatedMessage : FormattedMessage.EscapeText(obfuscatedMessage))); //sunrise-edit
 
 
+        // Check if the source entity is inside storage (locker, cabinet, etc.)
+        var isInsideStorage = HasComp<InsideEntityStorageComponent>(source);
+
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
             EntityUid listener;
@@ -688,13 +691,13 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
             if (data.Range <= WhisperClearRange || data.Observer)
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, isInsideStorage, session.Channel);
             //If listener is too far, they only hear fragments of the message
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, isInsideStorage, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedUnknownMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedUnknownMessage, source, isInsideStorage, session.Channel);
         }
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
@@ -749,6 +752,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             !TryEmoteChatInput(source, action))
             return;
 
+        // Check if the source entity is inside storage (locker, cabinet, etc.)
+        var isInsideStorage = HasComp<InsideEntityStorageComponent>(source);
+
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             EntityUid listener;
@@ -763,7 +769,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (_examineSystem.InRangeUnOccluded(source, listener, VoiceRange))
             {
-                _chatManager.ChatMessageToOne(ChatChannel.Emotes, action, wrappedMessage, source, false, session.Channel);
+                _chatManager.ChatMessageToOne(ChatChannel.Emotes, action, wrappedMessage, source, isInsideStorage, session.Channel);
             }
         } // sunrise-end
         if (!hideLog)
