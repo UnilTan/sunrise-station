@@ -1,5 +1,4 @@
 using Content.Server.Ninja.Events;
-using Content.Server.Power.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Ninja.Components;
