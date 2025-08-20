@@ -124,7 +124,7 @@ public sealed class VoidTeleportSystemTest
             Assert.That(Vector2.Distance(originalPos, currentPos), Is.GreaterThan(PositionComparisonTolerance));
             
             // Uses should be decremented
-            Assert.That(voidTeleportComponent.UsesLeft, Is.EqualTo(3)); // Started with 4, used 1
+            Assert.That(voidTeleportComponent.UsesLeft, Is.EqualTo(initialUses - 1)); // Should decrement by 1
         });
         
         await pair.CleanReturnAsync();
