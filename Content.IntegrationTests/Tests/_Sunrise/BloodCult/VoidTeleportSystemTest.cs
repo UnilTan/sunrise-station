@@ -121,7 +121,7 @@ public sealed class VoidTeleportSystemTest
             var currentPos = currentTransform.Coordinates.Position;
             
             // Position should be different from original
-            Assert.That(Vector2.Distance(originalPos, currentPos), Is.GreaterThan(0.1f));
+            Assert.That(Vector2.Distance(originalPos, currentPos), Is.GreaterThan(PositionComparisonTolerance));
             
             // Uses should be decremented
             Assert.That(voidTeleportComponent.UsesLeft, Is.EqualTo(3)); // Started with 4, used 1
