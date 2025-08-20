@@ -18,7 +18,14 @@ class File:
         return file_data
 
     def save_data(self, file_data: typing.AnyStr):
+        # Ensure directory exists
         os.makedirs(os.path.dirname(self.full_path), exist_ok=True)
+        
+        # Apply formatting improvements before saving
+        if isinstance(file_data, str):
+            # Ensure exactly one trailing newline
+            file_data = file_data.rstrip() + '\n'
+        
         file = open(self.full_path, 'w', encoding='utf8')
         file.write(file_data)
         file.close()

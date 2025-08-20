@@ -26,21 +26,29 @@ class FluentFormatter:
 
         serialized_data = FluentSerializer(with_junk=True).serialize(parsed_data)
         
+        # Preserve indentation and spacing - only process multiline tags
         lines = serialized_data.split('\n')
         formatted_lines = []
+        
         for line in lines:
+            # Handle multiline locales starting with tags - add zero-width space for escaping
             if (line.strip().startswith('[color=') or 
                 line.strip().startswith('[bold]') or 
                 line.strip().startswith('[font') or
                 line.strip().startswith('**')):
-                if formatted_lines:
-                    formatted_lines[-1] += ' ' + line.strip()
-                else:
-                    formatted_lines.append(line)
+                # Add zero-width space (U+200B) for escaping if this starts a value
+                if formatted_lines and not formatted_lines[-1].strip().endswith('='):
+                    # This is a continuation of a multiline value starting with tags
+                    line = '\u200B' + line.strip()
+                formatted_lines.append(line)
             else:
                 formatted_lines.append(line)
         
-        return '\n'.join(formatted_lines)
+        # Ensure proper line ending (only at the very end)
+        result = '\n'.join(formatted_lines)
+        result = result.rstrip() + '\n'
+        
+        return result
 
 
 

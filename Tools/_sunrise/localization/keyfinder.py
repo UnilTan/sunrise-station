@@ -6,6 +6,7 @@ from pydash import py_
 from file import FluentFile
 from fluentast import FluentAstAbstract
 from fluentformatter import FluentFormatter
+from file_cleanup import FileCleanup
 from project import Project
 from fluent.syntax import ast, FluentParser, FluentSerializer
 
@@ -218,3 +219,19 @@ changed_files = key_finder.execute()
 if len(changed_files):
     print('Форматирование изменённых файлов ...')
     FluentFormatter.format(changed_files)
+
+# File cleanup phase
+print('Выполнение очистки файлов и директорий...')
+cleanup = FileCleanup(project.base_dir_path)
+
+# Clean up both locales
+for locale in ['en-US', 'ru-RU']:
+    locale_path = getattr(project, f'{locale.split("-")[0]}_locale_dir_path')
+    results = cleanup.process_locale_files(locale_path)
+    
+    print(f"Очистка {locale}: обработано {results['processed']} файлов, "
+          f"удалено {len(results['removed_empty'])} пустых файлов, "
+          f"удалено {len(results['removed_dirs'])} пустых директорий")
+    
+    if results['failed'] > 0:
+        print(f"ВНИМАНИЕ: Не удалось обработать {results['failed']} файлов в {locale}")

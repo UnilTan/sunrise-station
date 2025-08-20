@@ -6,6 +6,7 @@ from fluent.syntax.serializer import FluentSerializer
 from file import YAMLFile, FluentFile
 from fluentast import FluentSerializedMessage, FluentAstAttributeFactory
 from fluentformatter import FluentFormatter
+from file_cleanup import FileCleanup
 from project import Project
 from tqdm import tqdm
 
@@ -77,6 +78,22 @@ class YAMLExtractor:
         if self.entries_to_remove:
             for path, entry_id in tqdm(self.entries_to_remove, desc="Удаление дублей"):
                 self.remove_entry_from_file(path, entry_id)
+
+        # Cleanup phase: remove empty files and directories
+        logging.info("Выполнение очистки файлов и директорий...")
+        cleanup = FileCleanup(project.base_dir_path)
+        
+        # Clean up both locales
+        for locale in ['en-US', 'ru-RU']:
+            locale_path = os.path.join(project.locales_dir_path, locale)
+            results = cleanup.process_locale_files(locale_path)
+            
+            logging.info(f"Очистка {locale}: обработано {results['processed']} файлов, "
+                        f"удалено {len(results['removed_empty'])} пустых файлов, "
+                        f"удалено {len(results['removed_dirs'])} пустых директорий")
+            
+            if results['failed'] > 0:
+                logging.warning(f"Не удалось обработать {results['failed']} файлов в {locale}")
 
     def get_serialized_fluent_from_yaml_elements(self, yaml_elements):
         fluent_serialized_messages = []
