@@ -5,10 +5,20 @@ paper-ui-blank-page-message = Данная страница оставлена �
 paper-component-examine-detail-has-words = На листе что-то написано.
 # Shown when paper with stamps examined
 paper-component-examine-detail-stamped-by = На { CAPITALIZE($paper) } имеются следующие печати: { $stamps }.
+# Shown when paper with signatures examined
+paper-component-examine-detail-signed-by = { CAPITALIZE($paper) } подписан: { $signatures }.
 paper-component-illiterate = Вы не умеете писать.
 paper-component-illiterate-mime = Ваш обет запрещает вам писать.
 paper-component-action-stamp-paper-other = { CAPITALIZE($user) } ставит печать на { $target } с помощью { $stamp }.
 paper-component-action-stamp-paper-self = Вы ставите печать на { $target } с помощью { $stamp }.
+
+# Signature actions
+paper-action-sign-paper = Подписать
+paper-action-sign-paper-already-signed = Уже подписано
+paper-action-sign-paper-already-signed-message = Вы уже подписали этот документ.
+paper-action-sign-paper-other = { CAPITALIZE($user) } подписывает { $target }.
+paper-action-sign-paper-self = Вы подписываете { $target }.
+
 # Indicator to show how full a paper is
 paper-ui-fill-level = { $currentLength }/{ $maxLength }
 paper-ui-save-button = Сохранить ({ $keybind })

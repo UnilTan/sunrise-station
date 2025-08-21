@@ -116,6 +116,9 @@ namespace Content.Client.Paper.UI
             // Randomize the placement of any stamps based on the entity UID
             // so that there's some variety in different papers.
             StampDisplay.PlacementSeed = (int)entity;
+            // Sunrise-Start: Also randomize signature placement 
+            SignatureDisplay.PlacementSeed = (int)entity + 1000; // Different seed for signatures
+            // Sunrise-End
 
             // Initialize the background:
             PaperBackground.ModulateSelfOverride = visuals.BackgroundModulate;
@@ -280,7 +283,7 @@ namespace Content.Client.Paper.UI
                 Input.InsertAtCursor(state.Text);
             }
 
-            for (var i = 0; i <= state.StampedBy.Count * 3 + 1; i++)
+            for (var i = 0; i <= state.StampedBy.Count * 3 + state.SignedBy.Count * 2 + 1; i++) // Sunrise-edit: Account for signatures too
             {
                 msg.AddMarkupPermissive("\r\n");
             }
@@ -309,6 +312,15 @@ namespace Content.Client.Paper.UI
             {
                 StampDisplay.AddStamp(new StampWidget{ StampInfo = stamper });
             }
+
+            // Sunrise-Start: Handle signatures
+            SignatureDisplay.RemoveAllChildren();
+            SignatureDisplay.RemoveSignatures();
+            foreach(var signature in state.SignedBy)
+            {
+                SignatureDisplay.AddSignature(new SignatureWidget{ SignatureInfo = signature });
+            }
+            // Sunrise-End
         }
 
         /// <summary>

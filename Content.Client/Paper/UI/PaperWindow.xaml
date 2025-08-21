@@ -29,6 +29,7 @@
                         <TextureButton Name="FooterImage" HorizontalAlignment="Center" VerticalAlignment="Top" MouseFilter="Ignore"/>
                     </BoxContainer>
                     <paper:StampCollection Name="StampDisplay" VerticalAlignment="Bottom" Margin="6"/>
+                    <paper:SignatureCollection Name="SignatureDisplay" VerticalAlignment="Bottom" Margin="6"/>
 
                 </PanelContainer>
             </ScrollContainer>

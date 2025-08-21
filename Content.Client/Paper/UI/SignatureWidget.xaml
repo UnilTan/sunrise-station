@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:SignatureWidget xmlns="https://spacestation14.io" 
+                   xmlns:c="clr-namespace:Content.Client.Paper.UI"
+                   Margin="2 2">
+    <PanelContainer>
+        <c:SignatureLabel Name="SignatureLabel" />
+    </PanelContainer>
+</c:SignatureWidget>

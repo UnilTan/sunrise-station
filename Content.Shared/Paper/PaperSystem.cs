@@ -7,12 +7,14 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Verbs; // Sunrise-add: For signature system
 using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Robust.Shared.Timing; // Sunrise-add: For timestamp
 
 namespace Content.Shared.Paper;
 
@@ -28,6 +30,7 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IGameTiming _timing = default!; // Sunrise-add: For signature timestamps
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
@@ -45,6 +48,9 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<PaperComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PaperComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
+        // Sunrise-Start: Signature system
+        SubscribeLocalEvent<PaperComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
+        // Sunrise-End
 
         SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
 
@@ -110,8 +116,87 @@ public sealed class PaperSystem : EntitySystem
                         ("stamps", commaSeparated))
                 );
             }
+
+            // Sunrise-Start: Signature examination
+            if (entity.Comp.SignedBy.Count > 0)
+            {
+                var signatures = string.Join(", ", entity.Comp.SignedBy.Select(s => s.SignerName));
+                args.PushMarkup(
+                    Loc.GetString(
+                        "paper-component-examine-detail-signed-by",
+                        ("paper", entity),
+                        ("signatures", signatures))
+                );
+            }
+            // Sunrise-End
         }
     }
+
+    // Sunrise-Start: Signature system
+    private void OnGetAltVerbs(Entity<PaperComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var user = args.User;
+        
+        // Check if user already signed this paper
+        var userName = Name(user);
+        var alreadySigned = entity.Comp.SignedBy.Any(s => s.SignerName == userName);
+
+        args.Verbs.Add(new AlternativeVerb()
+        {
+            Text = Loc.GetString(alreadySigned ? "paper-action-sign-paper-already-signed" : "paper-action-sign-paper"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/plus.svg.192dpi.png")),
+            Disabled = alreadySigned,
+            Message = alreadySigned ? Loc.GetString("paper-action-sign-paper-already-signed-message") : null,
+            Act = () =>
+            {
+                TrySignPaper(entity, user);
+            },
+        });
+    }
+
+    private void TrySignPaper(Entity<PaperComponent> entity, EntityUid signer)
+    {
+        var signerName = Name(signer);
+        
+        // Check if already signed
+        if (entity.Comp.SignedBy.Any(s => s.SignerName == signerName))
+        {
+            _popupSystem.PopupClient(Loc.GetString("paper-action-sign-paper-already-signed-message"), entity, signer);
+            return;
+        }
+
+        // Create signature
+        var currentTime = _timing.CurTime;
+        var timeString = currentTime.ToString("HH:mm:ss");
+        
+        var signature = new SignatureDisplayInfo
+        {
+            SignerName = signerName,
+            SignerColor = Color.DarkBlue, // Could be made configurable per player
+            Timestamp = timeString
+        };
+
+        entity.Comp.SignedBy.Add(signature);
+        Dirty(entity);
+
+        // Show feedback
+        var signPaperSelfMessage = Loc.GetString("paper-action-sign-paper-self", ("target", entity));
+        _popupSystem.PopupClient(signPaperSelfMessage, signer, signer);
+
+        var signPaperOtherMessage = Loc.GetString("paper-action-sign-paper-other", 
+            ("user", signer), ("target", entity));
+        _popupSystem.PopupEntity(signPaperOtherMessage, signer, 
+            Filter.PvsExcept(signer, entityManager: EntityManager), true);
+
+        _adminLogger.Add(LogType.Action, LogImpact.Low,
+            $"{ToPrettyString(signer):player} signed {ToPrettyString(entity):entity}");
+
+        UpdateUserInterface(entity);
+    }
+    // Sunrise-End
 
     private void OnInteractUsing(Entity<PaperComponent> entity, ref InteractUsingEvent args)
     {
@@ -318,7 +403,7 @@ public sealed class PaperSystem : EntitySystem
 
     private void UpdateUserInterface(Entity<PaperComponent> entity)
     {
-        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.DefaultColor, entity.Comp.StampedBy, entity.Comp.Mode, entity.Comp.ImageContent, entity.Comp.ImageScale)); // Sunrise-edit
+        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.DefaultColor, entity.Comp.StampedBy, entity.Comp.Mode, entity.Comp.ImageContent, entity.Comp.ImageScale, entity.Comp.SignedBy)); // Sunrise-edit
     }
 }
 

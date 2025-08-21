@@ -24,6 +24,11 @@ public sealed partial class PaperComponent : Component
     [DataField("stampedBy"), AutoNetworkedField]
     public List<StampDisplayInfo> StampedBy { get; set; } = new();
 
+    // Sunrise-Start: Signature system
+    [DataField("signedBy"), AutoNetworkedField]
+    public List<SignatureDisplayInfo> SignedBy { get; set; } = new();
+    // Sunrise-End
+
     /// <summary>
     ///     Stamp to be displayed on the paper, state from bureaucracy.rsi
     /// </summary>
@@ -56,9 +61,10 @@ public sealed partial class PaperComponent : Component
         public readonly Color DefaultColor;
         public readonly SpriteSpecifier? ImageContent; // Sunrise-edit
         public readonly Vector2? ImageScale; // Sunrise-edit
+        public readonly List<SignatureDisplayInfo> SignedBy; // Sunrise-edit
         // Sunrise-End
 
-        public PaperBoundUserInterfaceState(string text, Color defaultColor, List<StampDisplayInfo> stampedBy, PaperAction mode = PaperAction.Read, SpriteSpecifier? imageContent = null, Vector2? imageScale = null) // Sunrise-edit
+        public PaperBoundUserInterfaceState(string text, Color defaultColor, List<StampDisplayInfo> stampedBy, PaperAction mode = PaperAction.Read, SpriteSpecifier? imageContent = null, Vector2? imageScale = null, List<SignatureDisplayInfo>? signedBy = null) // Sunrise-edit
         {
             Text = text;
             StampedBy = stampedBy;
@@ -67,6 +73,7 @@ public sealed partial class PaperComponent : Component
             DefaultColor = defaultColor;
             ImageContent = imageContent;
             ImageScale = imageScale;
+            SignedBy = signedBy ?? new List<SignatureDisplayInfo>();
             // Sunrise-End
         }
     }

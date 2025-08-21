@@ -24,6 +24,25 @@ public partial struct StampDisplayInfo
     public Color StampedColor;
 };
 
+// Sunrise-Start: Signature system
+/// <summary>
+///     Set of required information to draw a signature in UIs.
+///     Stores player character name and signature timestamp.
+/// </summary>
+[DataDefinition, Serializable, NetSerializable]
+public partial struct SignatureDisplayInfo
+{
+    [DataField("signerName")]
+    public string SignerName;
+
+    [DataField("signerColor")] 
+    public Color SignerColor;
+
+    [DataField("timestamp")]
+    public string Timestamp;
+}
+// Sunrise-End
+
 [RegisterComponent]
 public sealed partial class StampComponent : Component
 {
