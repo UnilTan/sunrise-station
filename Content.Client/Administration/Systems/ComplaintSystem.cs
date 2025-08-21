@@ -19,13 +19,13 @@ namespace Content.Client.Administration.Systems
         {
             base.Initialize();
 
-            SubscribeNetworkEvent<ComplaintTextMessage>(OnComplaintTextMessageReceived);
+            SubscribeNetworkEvent<ComplaintTextMessage>(OnReceiveComplaintTextMessage);
             SubscribeNetworkEvent<ComplaintCreatedResponse>(OnComplaintCreatedResponseReceived);
             SubscribeNetworkEvent<ComplaintHistoryResponse>(OnComplaintHistoryResponseReceived);
             SubscribeNetworkEvent<ComplaintListUpdated>(OnComplaintListUpdatedReceived);
         }
 
-        protected override void OnComplaintTextMessage(ComplaintTextMessage message, EntitySessionEventArgs eventArgs)
+        private void OnReceiveComplaintTextMessage(ComplaintTextMessage message, EntitySessionEventArgs eventArgs)
         {
             OnComplaintTextMessageReceived?.Invoke(this, message);
         }

@@ -7,12 +7,12 @@
         <Control MinSize="0 10" />
         
         <Label Text="{Loc 'complaint-create-reason-label'}" />
-        <LineEdit Name="ReasonLineEdit" Access="Public" MaxLength="100" />
+        <LineEdit Name="ReasonLineEdit" Access="Public" PlaceHolder="{Loc 'complaint-create-reason-placeholder'}" />
         
         <Control MinSize="0 10" />
         
         <Label Text="{Loc 'complaint-create-description-label'}" />
-        <TextEdit Name="DescriptionTextEdit" Access="Public" MaxLength="1000" MinSize="0 100" VerticalExpand="True" />
+        <TextEdit Name="DescriptionTextEdit" Access="Public" MinSize="0 100" VerticalExpand="True" />
         
         <Control MinSize="0 10" />
         

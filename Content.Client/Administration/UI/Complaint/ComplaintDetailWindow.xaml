@@ -1,0 +1,46 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+            Title="Complaint Details"
+            SetSize="700 500">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <!-- Header with complaint info -->
+        <BoxContainer Orientation="Vertical" SeparationOverride="5">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="10">
+                <Label Name="ComplaintIdLabel" Access="Public" Text="#1" StyleClasses="LabelBig" />
+                <Label Name="StatusLabel" Access="Public" Text="Open" />
+                <Control HorizontalExpand="True" />
+                <Button Name="WindowCloseButton" Access="Public" Text="Close" />
+            </BoxContainer>
+            
+            <Label Name="ParticipantsLabel" Access="Public" Text="Complainant vs Against" StyleClasses="LabelHeading" />
+            <Label Name="ReasonLabel" Access="Public" Text="Reason: " />
+            <Label Name="DescriptionLabel" Access="Public" Text="Description: " />
+            <Label Name="CreatedLabel" Access="Public" Text="Created: " />
+            
+            <!-- Admin controls -->
+            <BoxContainer Name="AdminControls" Access="Public" Orientation="Horizontal" SeparationOverride="10" Visible="False">
+                <Label Text="Status:" />
+                <OptionButton Name="StatusOption" Access="Public" />
+                <Button Name="UpdateStatusButton" Access="Public" Text="Update Status" />
+            </BoxContainer>
+        </BoxContainer>
+        
+        <Control MinSize="0 10" />
+        
+        <!-- Message history -->
+        <Label Text="Messages:" StyleClasses="LabelHeading" />
+        <ScrollContainer VerticalExpand="True">
+            <BoxContainer Name="MessageContainer" Access="Public" Orientation="Vertical" />
+        </ScrollContainer>
+        
+        <Control MinSize="0 10" />
+        
+        <!-- Send message -->
+        <BoxContainer Orientation="Vertical" SeparationOverride="5">
+            <Label Text="Send Message:" />
+            <TextEdit Name="MessageInput" Access="Public" MinSize="0 60" />
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="SendButton" Access="Public" Text="Send Message" StyleClasses="ButtonColorGreen" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

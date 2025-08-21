@@ -174,9 +174,81 @@ namespace Content.Server.Administration.Systems
             var senderSession = eventArgs.SenderSession;
             var isAdmin = _adminManager.GetAdminData(senderSession)?.HasFlag(AdminFlags.Adminhelp) ?? false;
             
-            // TODO: Verify sender has access to this complaint
-            // TODO: Save message to database
-            // TODO: Relay to relevant participants
+            // Verify sender has access to this complaint
+            Task.Run(async () => await HandleComplaintMessage(message, senderSession, isAdmin));
+        }
+
+        private async Task HandleComplaintMessage(ComplaintTextMessage message, ICommonSession senderSession, bool isAdmin)
+        {
+            try
+            {
+                // Get the complaint to verify access
+                var complaint = await _dbManager.GetComplaintAsync(message.ComplaintId);
+                if (complaint == null)
+                {
+                    _sawmill.Warning($"User {senderSession.Name} tried to send message to non-existent complaint {message.ComplaintId}");
+                    return;
+                }
+
+                // Verify sender has access to this complaint
+                var hasAccess = isAdmin || 
+                               complaint.ComplainantUserId == senderSession.UserId ||
+                               complaint.AgainstUserId == senderSession.UserId;
+                
+                if (!hasAccess)
+                {
+                    _sawmill.Warning($"User {senderSession.Name} tried to send message to complaint {message.ComplaintId} without access");
+                    return;
+                }
+
+                // Save message to database
+                await _dbManager.AddComplaintMessageAsync(message.ComplaintId, senderSession.UserId, message.Text, isAdmin);
+
+                _sawmill.Info($"Complaint message: {senderSession.Name} -> Complaint #{message.ComplaintId}");
+
+                // Create the message with proper timestamp for relay
+                var relayMessage = new ComplaintTextMessage(
+                    message.ComplaintId, 
+                    senderSession.UserId, 
+                    message.Text, 
+                    DateTime.UtcNow, 
+                    isAdmin);
+
+                // Relay to relevant participants
+                await RelayComplaintMessage(relayMessage, complaint);
+            }
+            catch (Exception ex)
+            {
+                _sawmill.Error($"Failed to handle complaint message: {ex}");
+            }
+        }
+
+        private async Task RelayComplaintMessage(ComplaintTextMessage message, SharedComplaintSystem.ComplaintInfo complaint)
+        {
+            var recipients = new List<INetChannel>();
+
+            // Add complainant if online
+            var complainantSession = _playerManager.Sessions.FirstOrDefault(s => s.UserId == complaint.ComplainantUserId);
+            if (complainantSession != null)
+                recipients.Add(complainantSession.Channel);
+
+            // Add against user if online  
+            var againstSession = _playerManager.Sessions.FirstOrDefault(s => s.UserId == complaint.AgainstUserId);
+            if (againstSession != null)
+                recipients.Add(againstSession.Channel);
+
+            // Add all admins with adminhelp permission
+            var adminChannels = GetTargetAdmins();
+            recipients.AddRange(adminChannels);
+
+            // Remove duplicates
+            recipients = recipients.Distinct().ToList();
+
+            // Send to all recipients
+            foreach (var channel in recipients)
+            {
+                RaiseNetworkEvent(message, channel);
+            }
         }
 
         private async Task NotifyAdminsOfNewComplaint(int complaintId, NetUserId complainantId, NetUserId againstId, string reason)

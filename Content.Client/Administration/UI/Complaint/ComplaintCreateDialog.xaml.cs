@@ -8,6 +8,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 
 namespace Content.Client.Administration.UI.Complaint
 {
@@ -37,8 +38,7 @@ namespace Content.Client.Administration.UI.Complaint
             SubmitButton.OnPressed += OnSubmitPressed;
             CancelButton.OnPressed += OnCancelPressed;
 
-            ReasonLineEdit.PlaceholderText = Loc.GetString("complaint-create-reason-placeholder");
-            DescriptionTextEdit.PlaceholderText = Loc.GetString("complaint-create-description-placeholder");
+            // Don't set placeholder text - not available in this UI framework
 
             _complaintSystem.OnComplaintCreatedResponse += OnComplaintCreatedResponse;
         }
@@ -55,38 +55,38 @@ namespace Content.Client.Administration.UI.Complaint
         private void OnSubmitPressed(BaseButton.ButtonEventArgs args)
         {
             var reason = ReasonLineEdit.Text.Trim();
-            var description = DescriptionTextEdit.Text.Trim();
+            var description = DescriptionTextEdit.TextRope?.ToString()?.Trim() ?? "";
 
             if (string.IsNullOrWhiteSpace(reason))
             {
                 StatusLabel.Text = Loc.GetString("complaint-create-error-reason-required");
-                StatusLabel.ModulateOverride = Color.Red;
+                StatusLabel.Modulate = Color.Red;
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(description))
             {
                 StatusLabel.Text = Loc.GetString("complaint-create-error-description-required");
-                StatusLabel.ModulateOverride = Color.Red;
+                StatusLabel.Modulate = Color.Red;
                 return;
             }
 
             if (reason.Length > 100)
             {
                 StatusLabel.Text = Loc.GetString("complaint-create-error-reason-too-long");
-                StatusLabel.ModulateOverride = Color.Red;
+                StatusLabel.Modulate = Color.Red;
                 return;
             }
 
             if (description.Length > 1000)
             {
                 StatusLabel.Text = Loc.GetString("complaint-create-error-description-too-long");
-                StatusLabel.ModulateOverride = Color.Red;
+                StatusLabel.Modulate = Color.Red;
                 return;
             }
 
             StatusLabel.Text = Loc.GetString("complaint-create-submitting");
-            StatusLabel.ModulateOverride = Color.Yellow;
+            StatusLabel.Modulate = Color.Yellow;
             SubmitButton.Disabled = true;
 
             _complaintSystem.CreateComplaint(_againstUserId, reason, description);
@@ -102,15 +102,15 @@ namespace Content.Client.Administration.UI.Complaint
             if (response.Success)
             {
                 StatusLabel.Text = Loc.GetString("complaint-create-success", ("id", response.ComplaintId));
-                StatusLabel.ModulateOverride = Color.Green;
+                StatusLabel.Modulate = Color.Green;
                 
                 // Close dialog after a short delay
-                Timer.Spawn(2000, Close);
+                Timer.Spawn(TimeSpan.FromSeconds(2), Close);
             }
             else
             {
                 StatusLabel.Text = response.ErrorMessage ?? Loc.GetString("complaint-create-error-unknown");
-                StatusLabel.ModulateOverride = Color.Red;
+                StatusLabel.Modulate = Color.Red;
                 SubmitButton.Disabled = false;
             }
         }

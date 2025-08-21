@@ -74,10 +74,10 @@ namespace Content.Client.Administration.Systems
             if (!HasComp<MindContainerComponent>(args.Target))
                 return;
 
-            if (!_playerManager.LocalSession.HasValue)
+            if (_playerManager.LocalSession == null)
                 return;
 
-            var localSession = _playerManager.LocalSession.Value;
+            var localSession = _playerManager.LocalSession;
 
             // Don't allow complaining against yourself
             if (args.Target == args.User)

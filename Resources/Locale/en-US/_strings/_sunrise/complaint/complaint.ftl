@@ -30,3 +30,7 @@ complaint-status-closed = Closed
 
 complaint-verb-file = File Complaint
 complaint-verb-file-desc = File a complaint against this player
+
+# Console Commands
+cmd-complaints-desc = Open the complaints management window
+cmd-complaints-help = Usage: complaints

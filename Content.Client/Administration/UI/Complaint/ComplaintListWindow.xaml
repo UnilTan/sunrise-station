@@ -1,0 +1,29 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+            Title="{Loc 'complaint-menu-title'}"
+            SetSize="800 600">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <!-- Header with refresh and create buttons -->
+        <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Button Name="RefreshButton" Access="Public" Text="Refresh" />
+                <Control MinSize="10 0" />
+                <Button Name="MyComplaintsButton" Access="Public" Text="{Loc 'complaint-menu-my-complaints'}" />
+                <Control MinSize="10 0" />
+                <Button Name="AllComplaintsButton" Access="Public" Text="{Loc 'complaint-menu-admin-complaints'}" Visible="False" />
+            </BoxContainer>
+            <Button Name="CloseButton" Access="Public" Text="Close" HorizontalAlignment="Right" />
+        </BoxContainer>
+        
+        <Control MinSize="0 10" />
+        
+        <!-- Status label -->
+        <Label Name="StatusLabel" Access="Public" Text="Loading..." HorizontalAlignment="Center" />
+        
+        <Control MinSize="0 10" />
+        
+        <!-- Complaint list -->
+        <ScrollContainer VerticalExpand="True">
+            <BoxContainer Name="ComplaintContainer" Access="Public" Orientation="Vertical" />
+        </ScrollContainer>
+    </BoxContainer>
+</DefaultWindow>

@@ -30,3 +30,7 @@ complaint-status-closed = Закрыта
 
 complaint-verb-file = Подать жалобу
 complaint-verb-file-desc = Подать жалобу на этого игрока
+
+# Консольные команды
+cmd-complaints-desc = Открыть окно управления жалобами
+cmd-complaints-help = Использование: complaints
