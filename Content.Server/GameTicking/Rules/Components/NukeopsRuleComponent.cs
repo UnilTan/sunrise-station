@@ -113,6 +113,12 @@ public sealed partial class NukeopsRuleComponent : Component
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? MissionStartTime;
+
+    /// <summary>
+    /// Set of warning thresholds (in minutes) that have already been announced
+    /// </summary>
+    [DataField]
+    public HashSet<int> TimerWarningsGiven = new();
     // Sunrise-End
 
     /// <summary>

@@ -107,11 +107,18 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             if (nukeops.MissionStartTime.HasValue)
             {
                 var timeElapsed = Timing.CurTime - nukeops.MissionStartTime.Value;
-                if (timeElapsed >= nukeops.MissionTimeLimit)
+                var timeRemaining = nukeops.MissionTimeLimit - timeElapsed;
+                
+                if (timeRemaining <= TimeSpan.Zero)
                 {
                     // Mission time limit exceeded - operatives fail
                     nukeops.WinConditions.Add(WinCondition.AllNukiesDead);
                     SetWinType((uid, nukeops), WinType.CrewMajor);
+                }
+                else
+                {
+                    // Send periodic warnings
+                    CheckMissionTimeWarnings((uid, nukeops), timeRemaining);
                 }
             }
         }
@@ -799,6 +806,34 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         
         // TODO: Add UI notification that mission timer started
         // TODO: Add localization for mission timer announcements
+    }
+
+    private void CheckMissionTimeWarnings(Entity<NukeopsRuleComponent> ent, TimeSpan timeRemaining)
+    {
+        var nukeops = ent.Comp;
+        
+        // Define warning thresholds (in minutes)
+        var warningThresholds = new[] { 30, 20, 10, 5, 3, 1 };
+        
+        foreach (var threshold in warningThresholds)
+        {
+            var thresholdTime = TimeSpan.FromMinutes(threshold);
+            
+            // Check if we've crossed this threshold and haven't warned about it yet
+            if (timeRemaining <= thresholdTime && !nukeops.TimerWarningsGiven.Contains(threshold))
+            {
+                nukeops.TimerWarningsGiven.Add(threshold);
+                
+                // Send warning announcement
+                var message = Loc.GetString("nukeops-mission-timer-warning", 
+                    ("minutes", threshold));
+                
+                // TODO: Send station-wide announcement
+                // For now, just log it
+                Log.Info($"Nuclear operative mission timer warning: {threshold} minutes remaining");
+                break; // Only send one warning per update
+            }
+        }
     }
     // Sunrise-End
 }

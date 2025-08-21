@@ -7,6 +7,9 @@ store-purchase-limit-reached = You have reached the purchase limit for {$item} (
 
 # Communications jammer
 comms-jammer-shuttle-call-blocked = Emergency shuttle call has been blocked by communications interference.
+
+# Nuclear operative mission timer
+nukeops-mission-timer-warning = ATTENTION: Nuclear operative mission timer - {$minutes} minutes remaining until mission failure.
 store-currency-display-debugdollar = {$amount ->
     [one] Debug Dollar
     *[other] Debug Dollars
