@@ -47,11 +47,14 @@
         type: SurgeryBui
       enum.VampireMutationUiKey.Key:
         type: VampireMutationBoundUserInterface
+      enum.SlimeAppearanceModifierKey.Key:
+        type: SlimeAppearanceBoundUserInterface
       # Sunrise-end
   - type: UseDelay
     delay: 0.5
   - type: HumanoidAppearance
     species: SlimePerson
+  - type: SlimeAppearance
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
