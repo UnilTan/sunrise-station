@@ -17,3 +17,6 @@ code-lock-status-locked-out = [color=red]БЛОКИРОВКА[/color] ({$time}с
 code-lock-access-denied = Доступ запрещён - неверный код.
 code-lock-access-granted = Доступ разрешён.
 code-lock-locked-out = Слишком много неудачных попыток. Система заблокирована для безопасности.
+
+## Department Code Assignment
+department-code-assignment = [color=green][bold]Код безопасности отдела[/bold][/color]: Код вашего шкафчика {$job} ({$locker}): [color=yellow][bold]{$code}[/bold][/color]

@@ -700,3 +700,150 @@
     stateBaseClosed: hop
     stateDoorOpen: hop_open
     stateDoorClosed: representative_door
+
+# Head Department Lockers with Code Locks
+# These variants use numeric codes instead of access cards
+
+- type: entity
+  id: LockerCaptainCodeLock
+  parent: LockerBaseSecure
+  name: captain's secure locker
+  description: The captain's personal locker, secured with a numeric code.
+  suffix: Code Lock
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: cap
+    stateDoorOpen: cap_open
+    stateDoorClosed: cap_door
+  - type: CodeLock
+    codeLength: 4
+    unlockDuration: 30.0
+    maxFailedAttempts: 3
+    lockoutDuration: 60.0
+  - type: DepartmentCodeLock
+    targetJob: Captain
+  - type: UserInterface
+    interfaces:
+      enum.CodeLockUiKey.Key:
+        type: CodeLockBoundUserInterface
+
+- type: entity
+  id: LockerHeadOfPersonnelCodeLock
+  parent: LockerBaseSecure
+  name: head of personnel's secure locker
+  description: The head of personnel's personal locker, secured with a numeric code.
+  suffix: Code Lock
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: hop
+    stateDoorOpen: hop_open
+    stateDoorClosed: hop_door
+  - type: CodeLock
+    codeLength: 4
+    unlockDuration: 30.0
+    maxFailedAttempts: 3
+    lockoutDuration: 60.0
+  - type: DepartmentCodeLock
+    targetJob: HeadOfPersonnel
+  - type: UserInterface
+    interfaces:
+      enum.CodeLockUiKey.Key:
+        type: CodeLockBoundUserInterface
+
+- type: entity
+  id: LockerChiefEngineerCodeLock
+  parent: LockerBaseSecure
+  name: chief engineer's secure locker
+  description: The chief engineer's personal locker, secured with a numeric code.
+  suffix: Code Lock
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: ce
+    stateDoorOpen: ce_open
+    stateDoorClosed: ce_door
+  - type: CodeLock
+    codeLength: 4
+    unlockDuration: 30.0
+    maxFailedAttempts: 3
+    lockoutDuration: 60.0
+  - type: DepartmentCodeLock
+    targetJob: ChiefEngineer
+  - type: UserInterface
+    interfaces:
+      enum.CodeLockUiKey.Key:
+        type: CodeLockBoundUserInterface
+
+- type: entity
+  id: LockerChiefMedicalOfficerCodeLock
+  parent: LockerBaseSecure
+  name: chief medical officer's secure locker
+  description: The chief medical officer's personal locker, secured with a numeric code.
+  suffix: Code Lock
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: cmo
+    stateDoorOpen: cmo_open
+    stateDoorClosed: cmo_door
+  - type: CodeLock
+    codeLength: 4
+    unlockDuration: 30.0
+    maxFailedAttempts: 3
+    lockoutDuration: 60.0
+  - type: DepartmentCodeLock
+    targetJob: ChiefMedicalOfficer
+  - type: UserInterface
+    interfaces:
+      enum.CodeLockUiKey.Key:
+        type: CodeLockBoundUserInterface
+
+- type: entity
+  id: LockerResearchDirectorCodeLock
+  parent: LockerBase
+  name: research director's secure locker
+  description: The research director's personal locker, secured with a numeric code.
+  suffix: Code Lock
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: rd
+    stateDoorOpen: rd_open
+    stateDoorClosed: rd_door
+  - type: CodeLock
+    codeLength: 4
+    unlockDuration: 30.0
+    maxFailedAttempts: 3
+    lockoutDuration: 60.0
+  - type: DepartmentCodeLock
+    targetJob: ResearchDirector
+  - type: UserInterface
+    interfaces:
+      enum.CodeLockUiKey.Key:
+        type: CodeLockBoundUserInterface
+
+- type: entity
+  id: LockerHeadOfSecurityCodeLock
+  parent: LockerBaseSecure
+  name: head of security's secure locker
+  description: The head of security's personal locker, secured with a numeric code.
+  suffix: Code Lock
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: hos
+    stateDoorOpen: hos_open
+    stateDoorClosed: hos_door
+  - type: CodeLock
+    codeLength: 4
+    unlockDuration: 30.0
+    maxFailedAttempts: 3
+    lockoutDuration: 60.0
+  - type: DepartmentCodeLock
+    targetJob: HeadOfSecurity
+  - type: UserInterface
+    interfaces:
+      enum.CodeLockUiKey.Key:
+        type: CodeLockBoundUserInterface

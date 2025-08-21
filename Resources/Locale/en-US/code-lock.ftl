@@ -17,3 +17,6 @@ code-lock-status-locked-out = [color=red]LOCKED OUT[/color] ({$time}s)
 code-lock-access-denied = Access denied - incorrect code.
 code-lock-access-granted = Access granted.
 code-lock-locked-out = Too many failed attempts. System locked for security.
+
+## Department Code Assignment
+department-code-assignment = [color=green][bold]Department Security Code[/bold][/color]: Your {$job} locker ({$locker}) code is: [color=yellow][bold]{$code}[/bold][/color]
