@@ -507,6 +507,7 @@
     baseWalkSpeed: 2.5
     baseSprintSpeed: 4.5
   - type: Carriable
+  - type: WeakEntityRecoil
 
 - type: entity
   save: false

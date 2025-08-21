@@ -77,6 +77,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly WeakEntityRecoilSystem _weakEntityRecoil = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -474,26 +475,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gunUid, ref shotEv);
 
-        // Apply special mechanics for felinids and resomi when weapon recoil is high
-        if (gun.WeaponRecoil > 0.2f)
-        {
-            // Check if the user has Felinid or Resomi tag
-            if (TagSystem.HasTag(user, "Felinid") || TagSystem.HasTag(user, "Resomi"))
-            {
-                // Stun the entity
-                _statusEffects.TryAddStatusEffect(user, "Stun", TimeSpan.FromSeconds(2), true);
-                
-                // Apply knockback force (10 * weapon recoil)
-                var knockbackForce = 10f * gun.WeaponRecoil;
-                var direction = (fromCoordinates.Position - toCoordinates.Value.Position).Normalized();
-                
-                if (TryComp<PhysicsComponent>(user, out var physics))
-                {
-                    var impulse = direction * knockbackForce;
-                    Physics.ApplyLinearImpulse(user, impulse, body: physics);
-                }
-            }
-        }
+        // Apply special mechanics for weak entities when weapon recoil is high
+        _weakEntityRecoil.ProcessWeakEntityRecoil(user, gun.WeaponRecoil, fromCoordinates, toCoordinates.Value);
 
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
             return;
