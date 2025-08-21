@@ -1,6 +1,8 @@
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Station.Systems;
+using Content.Shared.Chat;
 using Content.Shared.CodeLock;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
@@ -20,7 +22,7 @@ public sealed class DepartmentCodeAssignmentSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
 
     /// <summary>
     /// Tracks department codes that have been assigned this round.
@@ -111,10 +113,9 @@ public sealed class DepartmentCodeAssignmentSystem : EntitySystem
             ("locker", lockerName), 
             ("code", code));
 
-        _chatSystem.DispatchGlobalAnnouncement(message, colorOverride: Color.Green);
-        
-        // TODO: Instead of announcing to all, we should send this as a private message
-        // or add it to the character's notes/PDA. For now, this allows testing.
+        // Send the code privately to the specific player
+        _chatManager.ChatMessageToOne(ChatChannel.Server,
+            message, message, EntityUid.Invalid, false, player.Channel, Color.Green);
     }
 
     /// <summary>
