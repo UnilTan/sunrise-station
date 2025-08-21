@@ -38,7 +38,7 @@ public sealed partial class ALVComponent : Component
     /// Sound played during ALV procedure
     /// </summary>
     [DataField("alvSound")]
-    public SoundSpecifier? ALVSound = new SoundPathSpecifier("/Audio/Effects/breathing.ogg");
+    public SoundSpecifier? ALVSound = new SoundPathSpecifier("/Audio/Items/Medical/healthscanner.ogg");
 
     /// <summary>
     /// Tracks when we last applied ALV effects
