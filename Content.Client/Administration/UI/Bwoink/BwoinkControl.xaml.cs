@@ -203,6 +203,12 @@ namespace Content.Client.Administration.UI.Bwoink
             {
                 uiController.PopOut();
             };
+
+            AdminWho.OnPressed += _ =>
+            {
+                var adminWhoWindow = new AdminWhoWindow();
+                adminWhoWindow.OpenCentered();
+            };
         }
 
         public void OnBwoink(NetUserId channel)

@@ -41,6 +41,13 @@ namespace Content.Client.Administration.UI.Bwoink
             };
             SenderLineEdit.OnTextEntered += Input_OnTextEntered;
             SenderLineEdit.OnTextChanged += Input_OnTextChanged;
+            
+            AdminWhoButton.OnPressed += _ =>
+            {
+                var adminWhoWindow = new AdminWhoWindow();
+                adminWhoWindow.OpenCentered();
+            };
+            
             UpdateTypingIndicator();
         }
 
