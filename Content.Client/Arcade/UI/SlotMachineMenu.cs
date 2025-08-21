@@ -1,12 +1,14 @@
-using Content.Client.UserInterface.Controls;
+using System;
+using System.Numerics;
+using Content.Client.Arcade.UI;
 using Content.Shared.Arcade;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Localization;
 
 namespace Content.Client.Arcade.UI;
 
-public sealed class SlotMachineMenu : FancyWindow
+public sealed class SlotMachineMenu : DefaultWindow
 {
     private readonly SlotMachineBoundUserInterface _owner;
     
@@ -14,11 +16,10 @@ public sealed class SlotMachineMenu : FancyWindow
     private readonly Label _lastBetLabel;
     private readonly Label _statusLabel;
     
-    private readonly SpinBox _betSpinBox;
+    private readonly FloatSpinBox _betSpinBox;
     private readonly Button _spinButton;
     private readonly Button _cashOutButton;
     
-    private readonly Container _slotsContainer;
     private readonly Label[] _slotLabels = new Label[3];
     
     private SlotMachineMessages.SlotMachineState _currentState = SlotMachineMessages.SlotMachineState.Idle;
@@ -28,108 +29,86 @@ public sealed class SlotMachineMenu : FancyWindow
     {
         _owner = owner;
         
+        MinSize = SetSize = new Vector2(400, 300);
         Title = Loc.GetString("slot-machine-window-title");
-        SetSize = (400, 300);
         
-        Contents.AddChild(new VBoxContainer
+        var grid = new GridContainer { Columns = 1 };
+        
+        // Credits info
+        var creditsGrid = new GridContainer { Columns = 2 };
+        creditsGrid.AddChild(new Label { Text = Loc.GetString("slot-machine-credits-label") });
+        _creditsLabel = new Label { Text = "0" };
+        creditsGrid.AddChild(_creditsLabel);
+        
+        creditsGrid.AddChild(new Label { Text = Loc.GetString("slot-machine-last-bet-label") });
+        _lastBetLabel = new Label { Text = "0" };
+        creditsGrid.AddChild(_lastBetLabel);
+        
+        grid.AddChild(creditsGrid);
+        
+        // Status
+        _statusLabel = new Label 
+        { 
+            Text = Loc.GetString("slot-machine-status-idle"),
+            Align = Label.AlignMode.Center 
+        };
+        grid.AddChild(_statusLabel);
+        
+        // Slot display
+        var slotsGrid = new GridContainer { Columns = 3 };
+        for (int i = 0; i < 3; i++)
         {
-            Children =
-            {
-                new HBoxContainer
-                {
-                    Children =
-                    {
-                        new Label { Text = Loc.GetString("slot-machine-credits-label") },
-                        (_creditsLabel = new Label { Text = "0" })
-                    }
-                },
-                new HBoxContainer
-                {
-                    Children =
-                    {
-                        new Label { Text = Loc.GetString("slot-machine-last-bet-label") },
-                        (_lastBetLabel = new Label { Text = "0" })
-                    }
-                },
-                (_statusLabel = new Label 
-                { 
-                    Text = Loc.GetString("slot-machine-status-idle"),
-                    HorizontalAlignment = Control.HAlignment.Center 
-                }),
-                new HSeparator(),
-                (_slotsContainer = new HBoxContainer
-                {
-                    HorizontalAlignment = Control.HAlignment.Center,
-                    Children =
-                    {
-                        (_slotLabels[0] = new Label 
-                        { 
-                            Text = "🍒", 
-                            StyleClasses = { "LabelBig" },
-                            Margin = new Thickness(10)
-                        }),
-                        (_slotLabels[1] = new Label 
-                        { 
-                            Text = "🍒", 
-                            StyleClasses = { "LabelBig" },
-                            Margin = new Thickness(10)
-                        }),
-                        (_slotLabels[2] = new Label 
-                        { 
-                            Text = "🍒", 
-                            StyleClasses = { "LabelBig" },
-                            Margin = new Thickness(10)
-                        })
-                    }
-                }),
-                new HSeparator(),
-                new HBoxContainer
-                {
-                    Children =
-                    {
-                        new Label { Text = Loc.GetString("slot-machine-bet-label") },
-                        (_betSpinBox = new SpinBox
-                        {
-                            Value = 1,
-                            MinValue = 1,
-                            MaxValue = 100,
-                            Step = 1
-                        })
-                    }
-                },
-                new HBoxContainer
-                {
-                    HorizontalAlignment = Control.HAlignment.Center,
-                    Children =
-                    {
-                        (_spinButton = new Button 
-                        { 
-                            Text = Loc.GetString("slot-machine-spin-button") 
-                        }),
-                        (_cashOutButton = new Button 
-                        { 
-                            Text = Loc.GetString("slot-machine-cash-out-button") 
-                        })
-                    }
-                },
-                new Label
-                {
-                    Text = Loc.GetString("slot-machine-insert-money-hint"),
-                    HorizontalAlignment = Control.HAlignment.Center,
-                    StyleClasses = { "LabelSubText" }
-                }
-            }
+            _slotLabels[i] = new Label 
+            { 
+                Text = "🍒", 
+                Align = Label.AlignMode.Center,
+                StyleClasses = { "LabelBig" }
+            };
+            slotsGrid.AddChild(_slotLabels[i]);
+        }
+        
+        var slotsCenterContainer = new CenterContainer();
+        slotsCenterContainer.AddChild(slotsGrid);
+        grid.AddChild(slotsCenterContainer);
+        
+        // Bet controls
+        var betGrid = new GridContainer { Columns = 2 };
+        betGrid.AddChild(new Label { Text = Loc.GetString("slot-machine-bet-label") });
+        _betSpinBox = new FloatSpinBox { Value = 1 };
+        betGrid.AddChild(_betSpinBox);
+        grid.AddChild(betGrid);
+        
+        // Action buttons
+        var buttonGrid = new GridContainer { Columns = 2 };
+        
+        _spinButton = new Button { Text = Loc.GetString("slot-machine-spin-button") };
+        _spinButton.OnPressed += OnSpinPressed;
+        buttonGrid.AddChild(_spinButton);
+        
+        _cashOutButton = new Button { Text = Loc.GetString("slot-machine-cash-out-button") };
+        _cashOutButton.OnPressed += OnCashOutPressed;
+        buttonGrid.AddChild(_cashOutButton);
+        
+        var buttonCenterContainer = new CenterContainer();
+        buttonCenterContainer.AddChild(buttonGrid);
+        grid.AddChild(buttonCenterContainer);
+        
+        // Help text
+        grid.AddChild(new Label
+        {
+            Text = Loc.GetString("slot-machine-insert-money-hint"),
+            Align = Label.AlignMode.Center,
+            StyleClasses = { "LabelSubText" }
         });
         
-        _spinButton.OnPressed += OnSpinPressed;
-        _cashOutButton.OnPressed += OnCashOutPressed;
+        Contents.AddChild(grid);
         
         UpdateUI();
     }
 
     private void OnSpinPressed(BaseButton.ButtonEventArgs args)
     {
-        if (_currentState != SlotMachineMessages.SlotMachineState.Idle || _currentCredits < _betSpinBox.Value)
+        if (_currentState != SlotMachineMessages.SlotMachineState.Idle || _currentCredits < (int)_betSpinBox.Value)
             return;
             
         _owner.SendMessage(new SlotMachineMessages.SlotMachinePlayerActionMessage(
@@ -187,12 +166,11 @@ public sealed class SlotMachineMenu : FancyWindow
 
     private void UpdateUI()
     {
-        var canSpin = _currentState == SlotMachineMessages.SlotMachineState.Idle && _currentCredits >= _betSpinBox.Value;
+        var canSpin = _currentState == SlotMachineMessages.SlotMachineState.Idle && _currentCredits >= (int)_betSpinBox.Value;
         var canCashOut = _currentCredits > 0;
         
         _spinButton.Disabled = !canSpin;
         _cashOutButton.Disabled = !canCashOut;
-        _betSpinBox.Editable = _currentState == SlotMachineMessages.SlotMachineState.Idle;
         
         // Animate slots when spinning
         if (_currentState == SlotMachineMessages.SlotMachineState.Spinning)

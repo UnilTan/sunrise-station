@@ -1,5 +1,6 @@
 using Content.Shared.Arcade;
 using Robust.Client.UserInterface;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Arcade.UI;
 
@@ -16,18 +17,17 @@ public sealed class SlotMachineBoundUserInterface : BoundUserInterface
     {
         base.Open();
 
-        _menu = this.CreateWindow<SlotMachineMenu>();
+        _menu = new SlotMachineMenu(this);
+        _menu.OnClose += Close;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
-        switch (state)
+        if (state is SlotMachineMessages.SlotMachineUpdateStateMessage updateMsg)
         {
-            case SlotMachineMessages.SlotMachineUpdateStateMessage updateMsg:
-                _menu?.UpdateState(updateMsg);
-                break;
+            _menu?.UpdateState(updateMsg);
         }
     }
 
@@ -39,9 +39,6 @@ public sealed class SlotMachineBoundUserInterface : BoundUserInterface
         {
             case SlotMachineMessages.SlotMachineSpinResultMessage resultMsg:
                 _menu?.UpdateSpinResult(resultMsg);
-                break;
-            case SlotMachineMessages.SlotMachineUpdateStateMessage updateMsg:
-                _menu?.UpdateState(updateMsg);
                 break;
         }
     }

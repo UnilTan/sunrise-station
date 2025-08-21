@@ -33,7 +33,7 @@ namespace Content.Shared.Arcade
         }
 
         [Serializable, NetSerializable]
-        public sealed class SlotMachineUpdateStateMessage : BoundUserInterfaceMessage
+        public sealed class SlotMachineUpdateStateMessage : BoundUserInterfaceState
         {
             public readonly SlotMachineState State;
             public readonly int PlayerCredits;
