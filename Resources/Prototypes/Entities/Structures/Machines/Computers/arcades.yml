@@ -233,15 +233,18 @@
   parent: ArcadeBase
   components:
   - type: Sprite
-    sprite: Structures/Machines/arcade.rsi
+    sprite: _Sunrise/Structures/Machines/slots.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: arcade
+      state: slots
     - map: ["computerLayerScreen"]
-      state: screen_invaders # TODO: Add proper slot machine screen sprite
+      state: slots_screen
     - map: ["enum.WiresVisualLayers.MaintenancePanel"]
       state: panel
       visible: false
+  - type: Icon
+    sprite: _Sunrise/Structures/Machines/slots.rsi
+    state: slots
   - type: PointLight
     color: "#ff6b35"
   - type: SlotMachine
