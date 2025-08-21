@@ -39,5 +39,5 @@ admin-who-header = Currently Online Administrators
 admin-who-refresh = Refresh
 admin-who-close = Close
 admin-who-no-admins = No administrators are currently online.
-admin-who-console-message = The adminwho command has been executed - check the console for the list of online administrators.
+admin-who-loading = Loading administrators...
 admin-who-info = This feature displays which administrators are currently online and available to help with any issues you may have.
