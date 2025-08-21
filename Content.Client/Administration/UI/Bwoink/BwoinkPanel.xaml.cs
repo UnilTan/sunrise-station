@@ -4,6 +4,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Threading;
 
 namespace Content.Client.Administration.UI.Bwoink
 {
@@ -21,7 +22,7 @@ namespace Content.Client.Administration.UI.Bwoink
         private DateTime? _lastDateHeader;
         public bool LoadDb { get; set; }
         private DateTime _cooldownEnd = DateTime.MinValue;
-        private Timer? _cooldownTimer;
+        private CancellationTokenSource? _cooldownCancellationTokenSource;
         // Sunrise-End
 
         public BwoinkPanel(Action<string> messageSender)
@@ -130,28 +131,29 @@ namespace Content.Client.Administration.UI.Bwoink
             UpdateTypingIndicator();
         }
 
-        public void OnCooldownReceived(SharedBwoinkSystem.BwoinkCooldownMessage message)
+        public void OnCooldownReceived(BwoinkCooldownMessage message)
         {
             // Set cooldown end time
             _cooldownEnd = DateTime.Now.Add(message.RemainingCooldown);
             
             // Disable input field and show feedback
             SenderLineEdit.Editable = false;
-            SenderLineEdit.PlaceholderText = Loc.GetString("bwoink-cooldown-message", 
+            SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-message", 
                 ("seconds", $"{message.RemainingCooldown.TotalSeconds:F1}"));
             
             // Clean up existing timer
-            _cooldownTimer?.Cancel();
+            _cooldownCancellationTokenSource?.Cancel();
+            _cooldownCancellationTokenSource = new CancellationTokenSource();
             
             // Set timer to re-enable input
-            _cooldownTimer = Timer.Spawn(message.RemainingCooldown, () =>
+            Timer.Spawn(message.RemainingCooldown, () =>
             {
                 if (Disposed)
                     return;
                     
                 SenderLineEdit.Editable = true;
-                SenderLineEdit.PlaceholderText = Loc.GetString("bwoink-input-placeholder");
-            });
+                SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-input-placeholder");
+            }, _cooldownCancellationTokenSource.Token);
         }
 
         protected override void Dispose(bool disposing)
@@ -159,8 +161,8 @@ namespace Content.Client.Administration.UI.Bwoink
             base.Dispose(disposing);
 
             InputTextChanged = null;
-            _cooldownTimer?.Cancel();
-            _cooldownTimer = null;
+            _cooldownCancellationTokenSource?.Cancel();
+            _cooldownCancellationTokenSource = null;
         }
     }
 }
