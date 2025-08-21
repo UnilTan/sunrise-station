@@ -611,7 +611,28 @@ public sealed class FaxSystem : EntitySystem
         var printout = component.PrintingQueue.Dequeue();
 
         var entityToSpawn = printout.PrototypeId.Length == 0 ? component.PrintPaperId.ToString() : printout.PrototypeId;
-        var printed = Spawn(entityToSpawn, Transform(uid).Coordinates);
+        
+        EntityUid printed;
+        
+        // Check if fax machine is in a container and try to spawn the paper in the same container
+        if (_container.TryGetContainingContainer((uid, Transform(uid)), out var container))
+        {
+            // If fax is in a container, try to spawn the paper in the same container
+            if (!EntityManager.TrySpawnInContainer(entityToSpawn, container.Owner, container.ID, out var containedPaper))
+            {
+                // If spawning in container fails, fall back to spawning at fax coordinates
+                printed = Spawn(entityToSpawn, Transform(uid).Coordinates);
+            }
+            else
+            {
+                printed = containedPaper.Value;
+            }
+        }
+        else
+        {
+            // If fax is not in a container, spawn normally at fax coordinates
+            printed = Spawn(entityToSpawn, Transform(uid).Coordinates);
+        }
 
         if (TryComp<PaperComponent>(printed, out var paper))
         {
