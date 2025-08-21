@@ -14,7 +14,6 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Humanoid;
 using Content.Shared.Input;
 using Content.Shared.Mech.Components;
 using Content.Shared.Popups;
@@ -475,13 +474,13 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gunUid, ref shotEv);
 
-        // Apply special mechanics for felinids and similar species when weapon recoil is high
-        if (gun.WeaponRecoil > 0.2f && TryComp<HumanoidAppearanceComponent>(user, out var humanoid))
+        // Apply special mechanics for felinids and resomi when weapon recoil is high
+        if (gun.WeaponRecoil > 0.2f)
         {
-            // Check if the user is a felinid or resomi (add resomi when implemented)
-            if (humanoid.Species == "Felinid")
+            // Check if the user has Felinid or Resomi tag
+            if (TagSystem.HasTag(user, "Felinid") || TagSystem.HasTag(user, "Resomi"))
             {
-                // Stun the felinid
+                // Stun the entity
                 _statusEffects.TryAddStatusEffect(user, "Stun", TimeSpan.FromSeconds(2), true);
                 
                 // Apply knockback force (10 * weapon recoil)
