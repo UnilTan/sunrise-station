@@ -1136,6 +1136,19 @@
   - UplinkDisruption
 
 - type: listing
+  id: UplinkNukeOpsCommJammer
+  name: uplink-nukeops-comm-jammer-name
+  description: uplink-nukeops-comm-jammer-desc
+  productEntity: NukeOpsCommJammer
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 10
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkDisruption
+
+- type: listing
   id: UplinkSyndicateWeaponModule
   name: uplink-syndicate-weapon-module-name
   description: uplink-syndicate-weapon-module-desc

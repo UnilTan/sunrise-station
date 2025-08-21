@@ -4,6 +4,9 @@ store-currency-inserted-implant = {CAPITALIZE(THE($used))} is inserted into your
 
 store-currency-free = Free
 store-purchase-limit-reached = You have reached the purchase limit for {$item} ({$limit} max).
+
+# Communications jammer
+comms-jammer-shuttle-call-blocked = Emergency shuttle call has been blocked by communications interference.
 store-currency-display-debugdollar = {$amount ->
     [one] Debug Dollar
     *[other] Debug Dollars

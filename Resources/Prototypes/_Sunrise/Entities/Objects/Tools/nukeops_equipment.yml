@@ -1,0 +1,50 @@
+- type: entity
+  name: communications jammer
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: NukeOpsCommJammer
+  description: A powerful device that disrupts all radio communications, fax transmissions, announcements, and emergency response calls when deployed on a station and powered. Essential for stealth operations.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/jammer.rsi
+    layers:
+    - state: jammer
+    - state: jammer_high_charge
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+      visible: false
+  - type: NukeOpsCommJammer
+    powerRequirement: 5000
+    range: 0 # Station-wide
+    requiresStationPlacement: true
+  - type: PowerReceiver
+    powerLoad: 5000
+  - type: ApcPowerReceiver
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
+  - type: Anchorable
+  - type: Pullable
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 25
+        mask:
+        - ItemMask
+        layer:
+        - ItemLayer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: True }
+          False: { visible: False }
+  - type: StaticPrice
+    price: 15000 # Expensive due to powerful capabilities
+  - type: StealTarget
+    stealGroup: NukeOpsCommJammer
