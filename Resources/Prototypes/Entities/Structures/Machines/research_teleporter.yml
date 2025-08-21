@@ -1,10 +1,58 @@
 # Research Teleportation Machines
 
 - type: entity
-  id: TelepadMachine
+  id: TeleporterTransmitter
   parent: [ BaseMachinePowered, ConstructibleMachine ]
-  name: research telepad
-  description: A telepad for teleporting objects and entities. Can be linked to other telepads via device link.
+  name: teleporter transmitter
+  description: A one-way teleporter that can send entities to linked teleporter receivers. Supports button activation.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    sprite: Structures/Machines/teleporter.rsi
+    layers:
+    - state: icon
+      map: [ "enum.TeleporterLayers.Base" ]
+    - state: panel
+      map: [ "enum.TeleporterLayers.Panel" ]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - TeleportActivate
+  - type: DeviceLinkSource
+    ports:
+      - TeleportOutput
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: ResearchTeleporter
+    mode: Transmit
+  - type: Machine
+    board: TeleporterTransmitterMachineCircuitboard
+  - type: Appearance
+  - type: CollideOnAnchor
+  - type: NameIdentifier
+    group: ResearchTeleporters
+  - type: Activatable
+    key: R
+  - type: UseDelay
+    delay: 2
+
+- type: entity
+  id: TeleporterReceiver
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: teleporter receiver
+  description: A one-way teleporter that receives entities from linked teleporter transmitters.
   components:
   - type: InteractionOutline
   - type: Physics
@@ -48,20 +96,21 @@
       - TeleportTrigger
   - type: ApcPowerReceiver
     powerLoad: 2000
-  - type: ResearchTelepad
+  - type: ResearchTeleporter
+    mode: Receive
   - type: Machine
-    board: TelepadMachineCircuitboard
+    board: TeleporterReceiverMachineCircuitboard
   - type: Appearance
   - type: CollideOnAnchor
   - type: NameIdentifier
-    group: ResearchTelepads
+    group: ResearchTeleporters
   - type: AnimationPlayer
 
 - type: entity
-  id: TeleporterMachine
+  id: TeleporterBidirectional
   parent: [ BaseMachinePowered, ConstructibleMachine ]
-  name: research teleporter
-  description: A teleporter machine that can send entities to linked telepads. Requires high power consumption.
+  name: bidirectional teleporter
+  description: An advanced teleporter that can both send and receive entities. Requires advanced teleportation technology.
   components:
   - type: InteractionOutline
   - type: Physics
@@ -76,6 +125,7 @@
       map: [ "enum.TeleporterLayers.Base" ]
     - state: panel
       map: [ "enum.TeleporterLayers.Panel" ]
+      color: "#FFD700"
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
@@ -87,16 +137,22 @@
   - type: DeviceLinkSink
     ports:
       - TeleportActivate
+      - TeleportTarget
   - type: DeviceLinkSource
     ports:
       - TeleportOutput
+      - TeleportTrigger
   - type: ApcPowerReceiver
-    powerLoad: 5000
+    powerLoad: 7500
   - type: ResearchTeleporter
-    teleportRange: 50
+    mode: Bidirectional
   - type: Machine
-    board: TeleporterMachineCircuitboard
+    board: TeleporterBidirectionalMachineCircuitboard
   - type: Appearance
   - type: CollideOnAnchor
   - type: NameIdentifier
     group: ResearchTeleporters
+  - type: Activatable
+    key: R
+  - type: UseDelay
+    delay: 2

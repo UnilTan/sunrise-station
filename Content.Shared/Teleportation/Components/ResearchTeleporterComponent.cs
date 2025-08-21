@@ -2,30 +2,24 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Teleportation.Components;
 
-/// <summary>
-/// A telepad that can receive teleported entities from linked teleporters.
-/// </summary>
-[RegisterComponent, NetworkedComponent]
-public sealed partial class ResearchTelepadComponent : Component
+public enum TeleporterMode
 {
-    /// <summary>
-    /// Whether this telepad is currently active and can receive teleports.
-    /// </summary>
-    [DataField]
-    public bool Active = true;
+    Transmit,
+    Receive,
+    Bidirectional
 }
 
 /// <summary>
-/// A teleporter that can send entities to linked telepads.
+/// A teleporter that can send and/or receive entities via device linking.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ResearchTeleporterComponent : Component
 {
     /// <summary>
-    /// Maximum range for teleportation in tiles.
+    /// The mode of this teleporter (Transmit, Receive, or Bidirectional).
     /// </summary>
     [DataField]
-    public float TeleportRange = 50f;
+    public TeleporterMode Mode = TeleporterMode.Transmit;
 
     /// <summary>
     /// Whether this teleporter is currently active.
@@ -38,4 +32,16 @@ public sealed partial class ResearchTeleporterComponent : Component
     /// </summary>
     [DataField]
     public float TeleportPowerCost = 10000f;
+
+    /// <summary>
+    /// Cooldown time between teleportations in seconds.
+    /// </summary>
+    [DataField]
+    public float CooldownTime = 3f;
+
+    /// <summary>
+    /// Time when the teleporter will be ready for next use.
+    /// </summary>
+    [DataField]
+    public TimeSpan NextUseTime;
 }

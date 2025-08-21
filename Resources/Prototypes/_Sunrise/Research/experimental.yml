@@ -16,21 +16,36 @@
   - IndustrialEngineering
 
 - type: technology
-  id: TeleportationTechnology
-  name: research-technology-teleportation
+  id: BasicTeleportation
+  name: research-technology-basic-teleportation
   icon:
     sprite: Objects/Devices/hand_teleporter.rsi
     state: icon
   discipline: Experimental
   tier: 2
-  cost: 10000
+  cost: 7500
   recipeUnlocks:
-  - TeleporterMachineCircuitboard
-  - TelepadMachineCircuitboard
+  - TeleporterTransmitterMachineCircuitboard
+  - TeleporterReceiverMachineCircuitboard
   technologyPrerequisites:
   - BluespaceStorage
 
 # Tier 3
+
+- type: technology
+  id: AdvancedTeleportation
+  name: research-technology-advanced-teleportation
+  icon:
+    sprite: Objects/Devices/hand_teleporter.rsi
+    state: icon
+  discipline: Experimental
+  tier: 3
+  cost: 15000
+  recipeUnlocks:
+  - TeleporterBidirectionalMachineCircuitboard
+  - ChargedHandTeleporter
+  technologyPrerequisites:
+  - BasicTeleportation
 
 - type: technology
   id: Phazon

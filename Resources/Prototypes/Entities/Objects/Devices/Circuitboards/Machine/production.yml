@@ -1338,14 +1338,16 @@
 
 - type: entity
   parent: BaseMachineCircuitboard
-  id: TeleporterMachineCircuitboard
-  name: teleporter machine board
-  description: A machine printed circuit board for a research teleporter.
+  - type: entity
+  parent: BaseMachineCircuitboard
+  id: TeleporterTransmitterMachineCircuitboard
+  name: teleporter transmitter machine board
+  description: A machine printed circuit board for a research teleporter transmitter.
   components:
   - type: Sprite
     state: science
   - type: MachineBoard
-    prototype: TeleporterMachine
+    prototype: TeleporterTransmitter
     stackRequirements:
       Manipulator: 2
       Cable: 3
@@ -1354,16 +1356,32 @@
 
 - type: entity
   parent: BaseMachineCircuitboard
-  id: TelepadMachineCircuitboard
-  name: telepad machine board
-  description: A machine printed circuit board for a research telepad.
+  id: TeleporterReceiverMachineCircuitboard
+  name: teleporter receiver machine board
+  description: A machine printed circuit board for a research teleporter receiver.
   components:
   - type: Sprite
     state: science
   - type: MachineBoard
-    prototype: TelepadMachine
+    prototype: TeleporterReceiver
     stackRequirements:
       Manipulator: 2
       Cable: 2
       Glass: 1
       Plasma: 1
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: TeleporterBidirectionalMachineCircuitboard
+  name: bidirectional teleporter machine board
+  description: A machine printed circuit board for an advanced bidirectional teleporter.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: TeleporterBidirectional
+    stackRequirements:
+      Manipulator: 3
+      Cable: 4
+      Glass: 3
+      Plasma: 2
