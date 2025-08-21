@@ -1,4 +1,5 @@
 ﻿using Content.Server._Sunrise.BloodCult;
+using Content.Shared._Sunrise.AssaultOps;
 using Content.Shared._Sunrise.Ghost;
 using Content.Shared.Zombies;
 
@@ -24,6 +25,13 @@ public sealed class GhostPanelAntagonistMarkerPinSystem : EntitySystem
 
         SubscribeLocalEvent<PentagramComponent, ComponentInit>(OnCultistAscent);
         SubscribeLocalEvent<PentagramComponent, ComponentRemove>(OnCultistDescent);
+
+        #endregion
+
+        #region Assault Ops
+
+        SubscribeLocalEvent<AssaultOperativeComponent, ComponentInit>(OnAssaultOperativeInit);
+        SubscribeLocalEvent<AssaultOperativeComponent, ComponentRemove>(OnAssaultOperativeRemove);
 
         #endregion
     }
@@ -57,6 +65,26 @@ public sealed class GhostPanelAntagonistMarkerPinSystem : EntitySystem
     }
 
     private void OnCultistDescent(Entity<PentagramComponent> ent, ref ComponentRemove args)
+    {
+        RemComp<GhostPanelAntagonistMarkerComponent>(ent);
+    }
+
+    #endregion
+
+    #region Assault Ops
+
+    private void OnAssaultOperativeInit(Entity<AssaultOperativeComponent> ent, ref ComponentInit args)
+    {
+        var marker = EnsureComp<GhostPanelAntagonistMarkerComponent>(ent);
+
+        marker.Name = "ghost-panel-antagonist-assault-operative-name";
+        marker.Description = "ghost-panel-antagonist-assault-operative-description";
+        marker.Priority = 10;
+
+        Dirty(ent.Owner, marker);
+    }
+
+    private void OnAssaultOperativeRemove(Entity<AssaultOperativeComponent> ent, ref ComponentRemove args)
     {
         RemComp<GhostPanelAntagonistMarkerComponent>(ent);
     }
