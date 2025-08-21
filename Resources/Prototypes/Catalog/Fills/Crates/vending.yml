@@ -212,6 +212,16 @@
       - id: VendingMachineRestockTankDispenser
 
 - type: entity
+  id: CrateVendingMachineRestockEVASuitDispenserFilled
+  parent: CratePlastic
+  name: EVA suit dispenser restock crate
+  description: Contains a restock box for an EVA suit dispenser.
+  components:
+  - type: StorageFill
+    contents:
+      - id: VendingMachineRestockEVASuitDispenser
+
+- type: entity
   id: CrateVendingMachineRestockHappyHonkFilled
   parent: CratePlastic
   name: Happy Honk restock crate

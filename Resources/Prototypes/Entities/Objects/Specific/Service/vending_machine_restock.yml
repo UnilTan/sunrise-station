@@ -418,6 +418,7 @@
     canRestock:
     - TankDispenserEVAInventory
     - TankDispenserEngineeringInventory
+    - EVASuitDispenserInventory
   - type: Sprite
     layers:
     - state: base
@@ -488,3 +489,19 @@
     - state: green_bit
       shader: unshaded
     - state: refill_medical
+
+- type: entity
+  parent: BaseVendingMachineRestock
+  id: VendingMachineRestockEVASuitDispenser  
+  name: EVA suit dispenser restock box
+  description: A box filled with EVA suits and helmets for emergency situations. Load it into an EVA suit dispenser to begin.
+  components:
+  - type: VendingMachineRestock
+    canRestock:
+    - EVASuitDispenserInventory
+  - type: Sprite
+    layers:
+    - state: base
+    - state: green_bit
+      shader: unshaded
+    - state: refill_engineering
