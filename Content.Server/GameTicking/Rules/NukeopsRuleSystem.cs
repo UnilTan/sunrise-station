@@ -33,8 +33,10 @@ using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Ghost.Roles; // Sunrise-Edit: For ghost role spawning
 using Content.Server.Ghost.Roles.Components; // Sunrise-Edit: For ghost role components
+using Content.Server.Ghost.Roles.Events; // Sunrise-Edit: For GhostRoleSpawnerUsedEvent
 using Content.Shared.Ghost.Roles; // Sunrise-Edit: For ghost role shared
 using Content.Shared.Ghost.Roles.Components; // Sunrise-Edit: For GhostRoleMobSpawnerComponent
+using Content.Server._Sunrise.NukeOps; // Sunrise-Edit: For NukeOpsCommanderSpawnerComponent
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -78,6 +80,10 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
+        
+        // Sunrise-Start: Handle commander spawning for centralized uplinks
+        SubscribeLocalEvent<GhostRoleComponent, GhostRoleSpawnerUsedEvent>(OnGhostRoleSpawned);
+        // Sunrise-End
     }
 
     // Sunrise-Start: Add Update method for delayed spawning
@@ -433,6 +439,48 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         }
     }
 
+    // Sunrise-Start: Handle ghost role spawning for centralized uplink
+    private void OnGhostRoleSpawned(EntityUid uid, GhostRoleComponent component, GhostRoleSpawnerUsedEvent args)
+    {
+        // Check if this is a nuclear operative commander spawner
+        if (!TryComp<NukeOpsCommanderSpawnerComponent>(uid, out var commanderSpawner))
+            return;
+
+        if (commanderSpawner.AssociatedRule == null)
+            return;
+
+        // Set up the centralized uplink for the commander
+        if (TryComp<NukeopsRuleComponent>(commanderSpawner.AssociatedRule.Value, out var nukeops))
+        {
+            SetupCentralizedUplink(args.Spawned, nukeops);
+        }
+    }
+
+    private void SetupCentralizedUplink(EntityUid commander, NukeopsRuleComponent nukeops)
+    {
+        // Calculate total TCs for the team
+        var totalTCs = nukeops.WarTcAmountPerNukie * 4; // Assume 4 operatives max
+
+        // Find or create uplink on commander
+        var uplink = SetupUplink(commander, nukeops);
+        if (uplink == null)
+            return;
+
+        // Add the calculated TCs
+        var store = EnsureComp<StoreComponent>(uplink.Value);
+        _store.TryAddCurrency(
+            new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, totalTCs } },
+            uplink.Value,
+            store);
+
+        // Add purchase limits component
+        EnsureComp<NukeOpsPurchaseLimitsComponent>(uplink.Value);
+
+        // Store reference for later use
+        nukeops.UplinkEnt = uplink.Value;
+    }
+    // Sunrise-End
+
     #endregion Event Handlers
 
     /// <summary>
@@ -715,6 +763,10 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         var spawner = EnsureComp<GhostRoleMobSpawnerComponent>(spawnPoint);
         // For now, use a simple approach - we'll improve this later
         spawner.Prototype = "MobHuman";
+
+        // Mark this as the commander spawner
+        var commanderMarker = EnsureComp<NukeOpsCommanderSpawnerComponent>(spawnPoint);
+        commanderMarker.AssociatedRule = ent.Owner;
     }
 
     private void CreateOperativeGhostRole(Entity<NukeopsRuleComponent> ent, EntityUid spawnPoint, bool isMedic)
