@@ -66,16 +66,42 @@ public sealed class SpawnPointSystem : EntitySystem
             }
         }
 
-        // Sunrise-Start
+        // Sunrise-Start: Improved fallback logic for spawn points
         if (possiblePositions.Count == 0)
         {
-            var points3 = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
-            while (points3.MoveNext(out var uid, out var spawnPoint, out var xform))
+            // First fallback: Try to find job spawners for the same job on ANY station
+            if (args.Job != null)
             {
-                if (spawnPoint.SpawnType != SpawnPointType.LateJoin)
-                    continue;
-                if (_stationSystem.GetOwningStation(uid, xform) == args.Station)
-                    possiblePositions.Add(xform.Coordinates);
+                var points2 = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+                while (points2.MoveNext(out var uid, out var spawnPoint, out var xform))
+                {
+                    if (spawnPoint.SpawnType == SpawnPointType.Job && spawnPoint.Job == args.Job)
+                        possiblePositions.Add(xform.Coordinates);
+                }
+            }
+            
+            // Second fallback: Try to find any job spawners on the target station
+            if (possiblePositions.Count == 0 && args.Station != null)
+            {
+                var points3 = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+                while (points3.MoveNext(out var uid, out var spawnPoint, out var xform))
+                {
+                    if (spawnPoint.SpawnType == SpawnPointType.Job && 
+                        _stationSystem.GetOwningStation(uid, xform) == args.Station)
+                        possiblePositions.Add(xform.Coordinates);
+                }
+            }
+            
+            // Final fallback: Use LateJoin spawners on the target station
+            if (possiblePositions.Count == 0)
+            {
+                var points4 = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+                while (points4.MoveNext(out var uid, out var spawnPoint, out var xform))
+                {
+                    if (spawnPoint.SpawnType == SpawnPointType.LateJoin &&
+                        (args.Station == null || _stationSystem.GetOwningStation(uid, xform) == args.Station))
+                        possiblePositions.Add(xform.Coordinates);
+                }
             }
         }
         // Sunrise-End
