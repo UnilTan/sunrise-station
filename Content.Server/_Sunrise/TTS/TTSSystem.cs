@@ -57,6 +57,7 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
+        SubscribeLocalEvent<CollectiveMindSpokeEvent>(OnCollectiveMindSpokeEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
 
         SubscribeNetworkEvent<RequestPreviewTTSEvent>(OnRequestPreviewTTS);
@@ -111,6 +112,34 @@ public sealed partial class TTSSystem : EntitySystem
         var message = accentEvent.Text;
 
         HandleRadio(args.Receivers, message, protoVoice);
+    }
+
+    private void OnCollectiveMindSpokeEvent(CollectiveMindSpokeEvent args)
+    {
+        if (!_isEnabled || args.Message.Length > MaxMessageChars)
+            return;
+
+        if (!TryComp(args.Source, out TTSComponent? senderComponent))
+            return;
+
+        var voiceId = senderComponent.VoicePrototypeId;
+        if (voiceId == null)
+            return;
+
+        var voiceEv = new TransformSpeakerVoiceEvent(args.Source, voiceId);
+        RaiseLocalEvent(args.Source, voiceEv);
+        voiceId = voiceEv.VoiceId;
+
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
+        {
+            return;
+        }
+
+        var accentEvent = new TTSSanitizeEvent(args.Message);
+        RaiseLocalEvent(args.Source, accentEvent);
+        var message = accentEvent.Text;
+
+        HandleCollectiveMind(args.Receivers, message, protoVoice);
     }
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
@@ -232,6 +261,15 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         RaiseNetworkEvent(new PlayTTSEvent(soundData, null, true), Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
+    }
+
+    private async void HandleCollectiveMind(EntityUid[] uids, string message, TTSVoicePrototype voicePrototype)
+    {
+        var soundData = await GenerateTTS(message, voicePrototype);
+        if (soundData is null)
+            return;
+
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
     }
 
     // ReSharper disable once InconsistentNaming

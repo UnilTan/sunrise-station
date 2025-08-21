@@ -508,6 +508,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // Sunrise added end
 
         var clients = Filter.Empty();
+        var receivers = new List<EntityUid>();
         var mindQuery = EntityQueryEnumerator<CollectiveMindComponent, ActorComponent>();
         while (mindQuery.MoveNext(out var uid, out var collectMindComp, out var actorComp))
         {
@@ -517,6 +518,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (collectMindComp.Minds.Contains(collectiveMind.ID))
             {
                 clients.AddPlayer(actorComp.PlayerSession);
+                receivers.Add(uid);
             }
         }
 
@@ -553,6 +555,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             true,
             admins,
             collectiveMind.Color);
+
+        // Raise event for TTS
+        RaiseLocalEvent(new CollectiveMindSpokeEvent(source, message, receivers.ToArray()));
     }
     // Sunrise-End
 
@@ -1184,6 +1189,13 @@ public sealed class AnnouncementSpokeEvent(
 }
 
 public sealed class RadioSpokeEvent(EntityUid source, string message, EntityUid[] receivers) : EntityEventArgs
+{
+    public readonly EntityUid Source = source;
+    public readonly string Message = message;
+    public readonly EntityUid[] Receivers = receivers;
+}
+
+public sealed class CollectiveMindSpokeEvent(EntityUid source, string message, EntityUid[] receivers) : EntityEventArgs
 {
     public readonly EntityUid Source = source;
     public readonly string Message = message;
