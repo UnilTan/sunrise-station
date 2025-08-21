@@ -67,6 +67,14 @@ public sealed partial class GunComponent : Component
     [DataField]
     public TimeSpan LastFire = TimeSpan.Zero;
 
+    /// <summary>
+    /// Weapon recoil intensity from 0 to 1.
+    /// Affects screen shake and special mechanics for certain species.
+    /// 0 = no recoil (lasers), 1 = maximum recoil (shotguns)
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float WeaponRecoil = 0f;
+
     [DataField]
     public bool Pump = false;
 

@@ -445,7 +445,7 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             if (throwItems)
             {
-                Recoil(user, direction, gun.CameraRecoilScalarModified);
+                Recoil(user, direction, gun.CameraRecoilScalarModified * gun.WeaponRecoil);
                 if (IsClientSide(ent!.Value))
                     Del(ent.Value);
                 else
@@ -462,7 +462,7 @@ public sealed partial class GunSystem : SharedGunSystem
                         SetCartridgeSpent(ent!.Value, cartridge, true);
                         MuzzleFlash(gunUid, cartridge, worldAngle, user);
                         Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
-                        Recoil(user, direction, gun.CameraRecoilScalarModified);
+                        Recoil(user, direction, gun.CameraRecoilScalarModified * gun.WeaponRecoil);
                     }
                     else
                     {
@@ -481,7 +481,7 @@ public sealed partial class GunSystem : SharedGunSystem
                         SetCartridgeSpent(ent!.Value, cartridge, true);
                         MuzzleFlash(gunUid, cartridge, worldAngle, user);
                         Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
-                        Recoil(user, direction, gun.CameraRecoilScalarModified);
+                        Recoil(user, direction, gun.CameraRecoilScalarModified * gun.WeaponRecoil);
                         // TODO: Can't predict entity deletions.
                         //if (cartridge.DeleteOnSpawn)
                         //    Del(cartridge.Owner);
@@ -499,7 +499,7 @@ public sealed partial class GunSystem : SharedGunSystem
                 case AmmoComponent newAmmo:
                     MuzzleFlash(gunUid, newAmmo, worldAngle, user);
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
-                    Recoil(user, direction, gun.CameraRecoilScalarModified);
+                    Recoil(user, direction, gun.CameraRecoilScalarModified * gun.WeaponRecoil);
                     if (IsClientSide(ent!.Value))
                         Del(ent.Value);
                     else
@@ -507,7 +507,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     break;
                 case HitscanPrototype:
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
-                    Recoil(user, direction, gun.CameraRecoilScalarModified);
+                    Recoil(user, direction, gun.CameraRecoilScalarModified * gun.WeaponRecoil);
                     break;
             }
         }
@@ -518,7 +518,7 @@ public sealed partial class GunSystem : SharedGunSystem
         if (!Timing.IsFirstTimePredicted || user == null || recoil == Vector2.Zero || recoilScalar == 0)
             return;
 
-        _recoil.KickCamera(user.Value, recoil.Normalized() * 0.5f * recoilScalar);
+        _recoil.KickCamera(user.Value, recoil.Normalized() * recoilScalar);
     }
 
     protected override void Popup(string message, EntityUid? uid, EntityUid? user)

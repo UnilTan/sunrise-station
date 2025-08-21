@@ -14,10 +14,12 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Humanoid;
 using Content.Shared.Input;
 using Content.Shared.Mech.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.StatusEffect;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
@@ -75,6 +77,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -471,6 +474,27 @@ public abstract partial class SharedGunSystem : EntitySystem
         Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out var userImpulse, user, throwItems: attemptEv.ThrowItems);
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gunUid, ref shotEv);
+
+        // Apply special mechanics for felinids and similar species when weapon recoil is high
+        if (gun.WeaponRecoil > 0.2f && TryComp<HumanoidAppearanceComponent>(user, out var humanoid))
+        {
+            // Check if the user is a felinid or resomi (add resomi when implemented)
+            if (humanoid.Species == "Felinid")
+            {
+                // Stun the felinid
+                _statusEffects.TryAddStatusEffect(user, "Stun", TimeSpan.FromSeconds(2), true);
+                
+                // Apply knockback force (10 * weapon recoil)
+                var knockbackForce = 10f * gun.WeaponRecoil;
+                var direction = (fromCoordinates.Position - toCoordinates.Value.Position).Normalized();
+                
+                if (TryComp<PhysicsComponent>(user, out var physics))
+                {
+                    var impulse = direction * knockbackForce;
+                    Physics.ApplyLinearImpulse(user, impulse, body: physics);
+                }
+            }
+        }
 
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
             return;
