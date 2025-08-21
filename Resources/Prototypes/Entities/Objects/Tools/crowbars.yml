@@ -29,6 +29,9 @@
   - type: StaticPrice
     price: 22
   - type: Prying
+    speedModifier: 1000  # Makes prying effectively instant (5.0 / 1000 = 0.005 seconds)
+  - type: UseDelay
+    delay: 0.5  # 0.5 second delay to prevent spam
   - type: Sprite
     sprite: Objects/Tools/crowbar.rsi
   - type: Clothing

@@ -6,6 +6,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
+using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
@@ -22,6 +23,7 @@ public sealed class PryingSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -70,6 +72,12 @@ public sealed class PryingSystem : EntitySystem
 
         if (!comp.Enabled)
             return false;
+
+        // Check if the tool has a use delay and is currently delayed
+        if (_useDelay.IsDelayed(tool))
+        {
+            return true; // Mark as handled but don't show a message
+        }
 
         if (!CanPry(target, user, out var message, comp))
         {
@@ -171,6 +179,9 @@ public sealed class PryingSystem : EntitySystem
         if (args.Used != null && comp != null)
         {
             _audioSystem.PlayPredicted(comp.UseSound, args.Used.Value, args.User);
+            
+            // Reset use delay for the prying tool to prevent spam
+            _useDelay.TryResetDelay(args.Used.Value);
         }
 
         var ev = new PriedEvent(args.User);
