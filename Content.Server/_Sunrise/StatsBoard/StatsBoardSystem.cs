@@ -1,5 +1,7 @@
 using System.Linq;
+using Content.Server.AlertLevel;
 using Content.Server.Cargo.Components;
+using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Station.Systems;
@@ -7,6 +9,8 @@ using Content.Server.Store.Systems;
 using Content.Shared._Sunrise.StatsBoard;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Cargo.Components;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Clumsy;
 using Content.Shared.Construction;
 using Content.Shared.Cuffs.Components;
@@ -24,6 +28,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Slippery;
 using Content.Shared.Tag;
+using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -48,6 +53,18 @@ public sealed class StatsBoardSystem : EntitySystem
     private (EntityUid? clown, TimeSpan? time) _clownCuffed = (null, null);
     private readonly Dictionary<EntityUid, StatisticEntry> _statisticEntries = new();
 
+    // New tracking fields for requested statistics
+    private readonly Dictionary<string, (TimeSpan duration, int count)> _alertLevelStats = new();
+    private string? _currentAlertLevel = null;
+    private TimeSpan _alertLevelStartTime = TimeSpan.Zero;
+    private readonly Dictionary<NetUserId, int> _profanityCount = new();
+    private readonly HashSet<string> _profanityWords = new() { "сука", "блядь", "пиздец" };
+    private int _felinidThrowCount = 0;
+    private (int alcohol, int chemicals) _spilledLiquids = (0, 0);
+    private (int received, int spent) _cargoMoney = (0, 0);
+    private int _ahelpCount = 0;
+    private readonly Dictionary<string, int> _plantGrowthCount = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -64,6 +81,12 @@ public sealed class StatsBoardSystem : EntitySystem
         SubscribeLocalEvent<ActorComponent, ItemConstructionCreated>(OnCraftedEvent);
         SubscribeLocalEvent<ActorComponent, AbsorberPudleEvent>(OnAbsorbedPuddleEvent);
         SubscribeLocalEvent<ActorComponent, MindAddedMessage>(OnMindAdded);
+
+        // New event subscriptions for requested statistics
+        SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+        SubscribeLocalEvent<EntitySpokeEvent>(OnEntitySpoke);
+        SubscribeLocalEvent<ThrownEvent>(OnThrown);
+        SubscribeLocalEvent<SolutionContainerOverflowEvent>(OnLiquidSpill);
     }
 
     private void OnMindAdded(EntityUid uid, ActorComponent comp, MindAddedMessage ev)
@@ -82,6 +105,113 @@ public sealed class StatsBoardSystem : EntitySystem
         _jointCreated = 0;
         _clownCuffed = (null, TimeSpan.Zero);
         _statisticEntries.Clear();
+        
+        // Clean new tracking fields
+        _alertLevelStats.Clear();
+        _currentAlertLevel = null;
+        _alertLevelStartTime = TimeSpan.Zero;
+        _profanityCount.Clear();
+        _felinidThrowCount = 0;
+        _spilledLiquids = (0, 0);
+        _cargoMoney = (0, 0);
+        _ahelpCount = 0;
+        _plantGrowthCount.Clear();
+    }
+
+    private void OnAlertLevelChanged(AlertLevelChangedEvent args)
+    {
+        var currentTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
+        
+        // Record duration of previous alert level
+        if (_currentAlertLevel != null)
+        {
+            var duration = currentTime - _alertLevelStartTime;
+            if (_alertLevelStats.TryGetValue(_currentAlertLevel, out var stats))
+            {
+                _alertLevelStats[_currentAlertLevel] = (stats.duration + duration, stats.count);
+            }
+        }
+        
+        // Set up tracking for new alert level
+        _currentAlertLevel = args.AlertLevel;
+        _alertLevelStartTime = currentTime;
+        
+        // Increment count for this alert level
+        if (_alertLevelStats.TryGetValue(args.AlertLevel, out var alertStats))
+        {
+            _alertLevelStats[args.AlertLevel] = (alertStats.duration, alertStats.count + 1);
+        }
+        else
+        {
+            _alertLevelStats[args.AlertLevel] = (TimeSpan.Zero, 1);
+        }
+    }
+
+    private void OnEntitySpoke(EntitySpokeEvent args)
+    {
+        if (string.IsNullOrEmpty(args.Message)) return;
+        
+        // Get the player's user ID
+        if (!_mindSystem.TryGetMind(args.Source, out var mindId, out var mind) || mind.UserId == null)
+            return;
+            
+        var message = args.Message.ToLowerInvariant();
+        var userId = mind.UserId.Value;
+        
+        foreach (var word in _profanityWords)
+        {
+            if (message.Contains(word))
+            {
+                _profanityCount.TryGetValue(userId, out var count);
+                _profanityCount[userId] = count + 1;
+                break; // Only count once per message to avoid double-counting
+            }
+        }
+    }
+
+    private void OnThrown(ref ThrownEvent args)
+    {
+        // Check if the thrown entity is a felinid by looking for humanoid appearance with felinid species
+        if (TryComp<HumanoidAppearanceComponent>(args.Thrown, out var humanoid))
+        {
+            if (_prototypeManager.TryIndex<SpeciesPrototype>(humanoid.Species, out var species) && 
+                species.ID == "Felinid")
+            {
+                _felinidThrowCount++;
+            }
+        }
+    }
+
+    private void OnLiquidSpill(ref SolutionContainerOverflowEvent args)
+    {
+        // Simple categorization: if it contains ethanol or similar, it's alcohol; otherwise chemicals
+        var solution = args.Overflow;
+        var containsAlcohol = false;
+        
+        foreach (var reagent in solution.Contents)
+        {
+            // Check for common alcoholic reagents
+            var reagentId = reagent.Reagent.Prototype;
+            if (reagentId.Contains("ethanol", StringComparison.OrdinalIgnoreCase) ||
+                reagentId.Contains("beer", StringComparison.OrdinalIgnoreCase) ||
+                reagentId.Contains("wine", StringComparison.OrdinalIgnoreCase) ||
+                reagentId.Contains("vodka", StringComparison.OrdinalIgnoreCase) ||
+                reagentId.Contains("rum", StringComparison.OrdinalIgnoreCase))
+            {
+                containsAlcohol = true;
+                break;
+            }
+        }
+        
+        var spillAmount = (int)solution.Volume;
+        if (containsAlcohol)
+        {
+            _spilledLiquids.alcohol += spillAmount;
+        }
+        else
+        {
+            _spilledLiquids.chemicals += spillAmount;
+        }
     }
 
     private void OnAbsorbedPuddleEvent(EntityUid uid, ActorComponent comp, ref AbsorberPudleEvent ev)
@@ -742,6 +872,84 @@ public sealed class StatsBoardSystem : EntitySystem
             result += Loc.GetString("statsentry-total-electrocuted-count", ("count", totalElectrocutedCount)) + "\n";
         }
 
+        // New statistics from issue requirements
+        
+        // Alert level duration and count statistics
+        if (_alertLevelStats.Count > 0)
+        {
+            result += "\n" + Loc.GetString("statsentry-alert-level-header") + "\n";
+            
+            // Handle current alert level duration if round is still active
+            if (_currentAlertLevel != null)
+            {
+                var currentTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
+                var currentDuration = currentTime - _alertLevelStartTime;
+                if (_alertLevelStats.TryGetValue(_currentAlertLevel, out var currentStats))
+                {
+                    _alertLevelStats[_currentAlertLevel] = (currentStats.duration + currentDuration, currentStats.count);
+                }
+            }
+            
+            foreach (var (level, stats) in _alertLevelStats)
+            {
+                result += Loc.GetString("statsentry-alert-level-entry", 
+                    ("level", level), 
+                    ("duration", stats.duration.ToString("hh\\:mm\\:ss")), 
+                    ("count", stats.count)) + "\n";
+            }
+        }
+
+        // Profanity statistics
+        if (_profanityCount.Count > 0)
+        {
+            var totalProfanity = _profanityCount.Values.Sum();
+            result += Loc.GetString("statsentry-total-profanity", ("count", totalProfanity)) + "\n";
+            
+            var mostProfanePlayer = _profanityCount.OrderByDescending(x => x.Value).First();
+            if (mostProfanePlayer.Value > 1)
+            {
+                var playerName = GetPlayerName(mostProfanePlayer.Key);
+                result += Loc.GetString("statsentry-most-profane-player", 
+                    ("name", playerName), 
+                    ("count", mostProfanePlayer.Value)) + "\n";
+            }
+        }
+
+        // Felinid throwing statistics
+        if (_felinidThrowCount > 0)
+        {
+            result += Loc.GetString("statsentry-felinid-throws", ("count", _felinidThrowCount)) + "\n";
+        }
+
+        // Liquid spill statistics
+        if (_spilledLiquids.alcohol > 0 || _spilledLiquids.chemicals > 0)
+        {
+            result += Loc.GetString("statsentry-spilled-alcohol", ("count", _spilledLiquids.alcohol)) + "\n";
+            result += Loc.GetString("statsentry-spilled-chemicals", ("count", _spilledLiquids.chemicals)) + "\n";
+        }
+
+        // Cargo money breakdown
+        if (_cargoMoney.received > 0 || _cargoMoney.spent > 0)
+        {
+            result += Loc.GetString("statsentry-cargo-money-received", ("amount", _cargoMoney.received)) + "\n";
+            result += Loc.GetString("statsentry-cargo-money-spent", ("amount", _cargoMoney.spent)) + "\n";
+        }
+
+        // Admin help counter
+        if (_ahelpCount > 0)
+        {
+            result += Loc.GetString("statsentry-ahelp-count", ("count", _ahelpCount)) + "\n";
+        }
+
+        // Most grown plant
+        if (_plantGrowthCount.Count > 0)
+        {
+            var mostGrown = _plantGrowthCount.OrderByDescending(x => x.Value).First();
+            result += Loc.GetString("statsentry-most-grown-plant", 
+                ("plant", mostGrown.Key), 
+                ("count", mostGrown.Value)) + "\n";
+        }
+
         //убрал пробельчик, так как всё равно он есть при добавлении ласт строчки
 
         return result;
@@ -768,6 +976,15 @@ public sealed class StatsBoardSystem : EntitySystem
             return metaDataComponent.EntityName;
 
         return "Кто это блядь?";
+    }
+    
+    private string GetPlayerName(NetUserId userId)
+    {
+        if (_player.TryGetSessionById(userId, out var session))
+        {
+            return session.Name;
+        }
+        return "Unknown Player";
     }
 }
 

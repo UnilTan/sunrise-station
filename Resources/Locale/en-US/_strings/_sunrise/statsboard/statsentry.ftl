@@ -54,3 +54,18 @@ statsentry-total-absorbed-puddle = Игроками было убрано [color
 statsentry-player-with-most-puddle-absorb = Больше всего луж было убрано благодаря [color=white]{ $name }[/color]{ $username } - [color=white]{ $count }[/color].
 statsentry-total-captain-card-interacted = Карта капитана побывала у [color=white]{ $count }[/color] игроков.
 statsentry-total-electrocuted-count = Игроки были шокированы [color=white]{ $count }[/color] раз.
+
+# New statistics from issue #1698
+statsentry-alert-level-header = [bold]Статистика кодов тревоги:[/bold]
+statsentry-alert-level-entry = [color=white]{ $level }[/color] код длился [color=yellow]{ $duration }[/color] и был установлен [color=white]{ $count }[/color] раз.
+statsentry-total-profanity = Всего было произнесено [color=white]{ $count }[/color] бранных слов.
+statsentry-most-profane-player = Самым матерящимся игроком был [color=white]{ $name }[/color] с [color=white]{ $count }[/color] бранными словами.
+statsentry-felinid-throws = Фелинидов было кинуто как баскетбольных мячиков [color=white]{ $count }[/color] раз.
+statsentry-spilled-alcohol = Было пролито [color=white]{ $count }[/color] единиц алкоголя.
+statsentry-spilled-chemicals = Было пролито [color=white]{ $count }[/color] единиц химикатов.
+statsentry-cargo-money-received = Карго получило всего [color=white]{ $amount }[/color] кредитов.
+statsentry-cargo-money-spent = Карго потратило всего [color=white]{ $amount }[/color] кредитов.
+statsentry-ahelp-count = Было подано [color=white]{ $count }[/color] запросов помощи администрации.
+statsentry-most-grown-plant = Больше всего было выращено [color=white]{ $plant }[/color] - [color=white]{ $count }[/color] единиц.
+statsentry-bank-balance-total = Под конец смены общий баланс карго составил [color=white]{ $balance }[/color] кредитов.
+statsentry-bank-balance-account = [color=white]{ $account }[/color]: [color=white]{ $balance }[/color] кредитов.
