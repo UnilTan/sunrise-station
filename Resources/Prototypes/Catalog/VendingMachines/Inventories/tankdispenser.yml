@@ -10,3 +10,10 @@
     PlasmaTankFilled: 10
     NitrogenTankFilled: 10
     OxygenTankFilled: 10
+
+- type: vendingMachineInventory
+  id: EVASuitDispenserInventory
+  startingInventory:
+    ClothingOuterHardsuitEVA: 4
+    ClothingHeadHelmetEVA: 4
+    ClothingOuterSuitEmergency: 6

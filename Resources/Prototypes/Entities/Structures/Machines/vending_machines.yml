@@ -2207,6 +2207,8 @@
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/tankdispenser.rsi #TODO add visualiser for remaining tanks as layers
     state: dispenser
+  - type: PlayerCountDependentStock  # Sunrise-vend
+    coefficient: 0.3
 
 - type: entity
   parent: VendingMachine
@@ -2228,6 +2230,28 @@
     layers:
     - state: dispenser
     - state: dispensereng
+  - type: PlayerCountDependentStock  # Sunrise-vend
+    coefficient: 0.3
+
+# EVA Suit Dispenser
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineEVASuitDispenser
+  name: EVA suit dispenser
+  description: A vendor for dispensing EVA suits and helmets for emergency use.
+  components:
+  - type: VendingMachine
+    pack: EVASuitDispenserInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/tankdispenser.rsi
+    state: dispenser
+  - type: PlayerCountDependentStock  # Sunrise-vend
+    coefficient: 0.5
 
 - type: entity
   parent: VendingMachine
