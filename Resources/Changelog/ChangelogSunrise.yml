@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: copilot
-  changes:
-  - message: "Добавлена возможность настройки цвета фонариков через интерфейс"
-    type: Add
-  - message: "Фонарики теперь можно перекрасить через ПКМ -> 'Настроить цвет'"
-    type: Add
-  id: 1377
-  time: '2025-08-20T23:56:23.259883+00:00'
 - author: VigersRay
   changes:
   - message: "\u0414\u043E\u0431\u0430\u0432\u0438\u043B \u0432\u0443\u043B\u044C\u043F\
