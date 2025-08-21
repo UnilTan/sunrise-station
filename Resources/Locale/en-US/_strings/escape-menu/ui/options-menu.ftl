@@ -6,6 +6,7 @@ ui-options-tab-admin = Admin
 ui-options-tab-graphics = Graphics
 ui-options-tab-controls = Controls
 ui-options-tab-audio = Audio
+ui-options-tab-tts = TTS
 ui-options-tab-network = Network
 ui-options-tab-misc = General
 
@@ -40,6 +41,10 @@ ui-options-event-music = Event Music
 ui-options-admin-sounds = Play Admin Sounds
 ui-options-bwoink-sound = Play AHelp Notification Sound
 ui-options-volume-label = Volume
+
+## TTS menu
+
+ui-options-tts-label = Text-to-Speech
 
 ## Graphics menu
 

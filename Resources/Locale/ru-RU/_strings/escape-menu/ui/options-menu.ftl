@@ -6,6 +6,7 @@ ui-options-tab-admin = Админ
 ui-options-tab-graphics = Графика
 ui-options-tab-controls = Управление
 ui-options-tab-audio = Аудио
+ui-options-tab-tts = TTS
 ui-options-tab-network = Сеть
 ui-options-tab-misc = Основные
 ui-options-apply = Сохранить и применить
@@ -38,6 +39,10 @@ ui-options-event-music = Музыка событий
 ui-options-admin-sounds = Музыка админов
 ui-options-bwoink-sound = Воспроизводить звук уведомления АХелп
 ui-options-volume-label = Громкость
+
+## TTS menu
+
+ui-options-tts-label = Озвучка текста
 
 ## Graphics menu
 
