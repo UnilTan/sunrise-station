@@ -40,6 +40,12 @@ wifi-gate-receiving = приём
 wifi-gate-transmitting = передача
 wifi-gate-channel-changed = Переключён канал: {$channel}
 
+# Силовое реле
+power-relay-examine = Статус: {$state}, Макс. мощность: {$max-power}Вт
+power-relay-active = активно
+power-relay-inactive = неактивно
+power-relay-toggle = Реле переключено в: {$state}
+
 power-sensor-examine =
     Сейчас проверяется  { $output ->
         [true] выход

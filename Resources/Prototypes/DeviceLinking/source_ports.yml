@@ -168,3 +168,29 @@
   name: signal-port-name-item-detected
   description: signal-port-description-item-detected
   defaultLinks: [ Toggle, Trigger, Timer ]
+
+# Power Relay Component
+- type: sourcePort
+  id: StateOutput
+  name: signal-port-name-state-output
+  description: signal-port-description-state-output
+
+- type: sourcePort
+  id: SignalOutputA
+  name: signal-port-name-signal-output-a
+  description: signal-port-description-signal-output-a
+
+- type: sourcePort
+  id: SignalOutputB
+  name: signal-port-name-signal-output-b
+  description: signal-port-description-signal-output-b
+
+- type: sourcePort
+  id: LoadOutput
+  name: signal-port-name-load-output
+  description: signal-port-description-load-output
+
+- type: sourcePort
+  id: PowerOutput
+  name: signal-port-name-power-output
+  description: signal-port-description-power-output

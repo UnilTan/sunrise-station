@@ -100,6 +100,17 @@
       - material: Steel
         amount: 2
         doAfter: 1
+    - to: power_relay
+      steps:
+      - material: Cable
+        amount: 4
+        doAfter: 1
+      - material: Steel
+        amount: 3
+        doAfter: 1
+      - material: Manipulator
+        amount: 1
+        doAfter: 1
   - node: logic_gate
     entity: LogicGateOr
     edges:
@@ -243,3 +254,20 @@
       - !type:SpawnPrototype
         prototype: CableApcStack1
         amount: 3
+  - node: power_relay
+    entity: PowerRelay
+    edges:
+    - to: empty
+      steps:
+      - tool: Prying
+        doAfter: 2
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 3
+      - !type:SpawnPrototype
+        prototype: MicroManipulatorStockPart
+        amount: 1
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 4

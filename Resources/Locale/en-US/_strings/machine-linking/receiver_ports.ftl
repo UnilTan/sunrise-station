@@ -93,3 +93,13 @@ signal-port-description-lock-state = Controls whether the component accepts inpu
 
 signal-port-name-set-target = Set Target
 signal-port-description-set-target = Sets the target signal for comparison in WiFi components.
+
+# Power Relay Component
+signal-port-name-set-state = Set State
+signal-port-description-set-state = Directly sets the relay state (1 = active, other = inactive).
+
+signal-port-name-signal-input-a = Signal Input A
+signal-port-description-signal-input-a = First signal input that will be routed to output A when relay is active.
+
+signal-port-name-signal-input-b = Signal Input B
+signal-port-description-signal-input-b = Second signal input that will be routed to output B when relay is active.

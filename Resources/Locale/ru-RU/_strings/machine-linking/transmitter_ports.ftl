@@ -46,3 +46,19 @@ signal-port-name-power-charging = Зарядка
 signal-port-description-power-charging = Этот порт задействуется с высоким уровнем сигнала когда батарея заряжается, и с низким когда нет.
 signal-port-name-power-discharging = Разрядка
 signal-port-description-power-discharging = Этот порт задействуется с высоким уровнем сигнала когда батарея разряжается, и с низким когда нет.
+
+# Компонент силового реле
+signal-port-name-state-output = Выход состояния
+signal-port-description-state-output = Выводит текущее состояние реле (1 = активно, 0 = неактивно).
+
+signal-port-name-signal-output-a = Сигнальный выход A
+signal-port-description-signal-output-a = Выводит сигнал со входа A когда реле активно, пусто когда неактивно.
+
+signal-port-name-signal-output-b = Сигнальный выход B
+signal-port-description-signal-output-b = Выводит сигнал со входа B когда реле активно, пусто когда неактивно.
+
+signal-port-name-load-output = Выход нагрузки
+signal-port-description-load-output = Выводит общую потребность в энергии подключённых устройств в ваттах.
+
+signal-port-name-power-output = Выход мощности
+signal-port-description-power-output = Выводит фактическую мощность, поставляемую через реле в ваттах.

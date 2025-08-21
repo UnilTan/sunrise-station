@@ -138,3 +138,19 @@
   id: SetTarget
   name: signal-port-name-set-target
   description: signal-port-description-set-target
+
+# Power Relay Component
+- type: sinkPort
+  id: SetState
+  name: signal-port-name-set-state
+  description: signal-port-description-set-state
+
+- type: sinkPort
+  id: SignalInputA
+  name: signal-port-name-signal-input-a
+  description: signal-port-description-signal-input-a
+
+- type: sinkPort
+  id: SignalInputB
+  name: signal-port-name-signal-input-b
+  description: signal-port-description-signal-input-b

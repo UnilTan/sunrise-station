@@ -41,6 +41,12 @@ wifi-gate-receiving = receiving
 wifi-gate-transmitting = transmitting
 wifi-gate-channel-changed = Switched to channel: {$channel}
 
+# Power Relay
+power-relay-examine = Status: {$state}, Max Power: {$max-power}W
+power-relay-active = active
+power-relay-inactive = inactive
+power-relay-toggle = Relay switched to: {$state}
+
 power-sensor-examine = It is currently checking the network's {$output ->
     [true] output
     *[false] input

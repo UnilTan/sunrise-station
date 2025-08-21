@@ -436,3 +436,42 @@
     - Output
     lastSignals:
       Output: false
+
+- type: entity
+  parent: BaseLogicItem
+  id: PowerRelay
+  name: power relay
+  description: Controls both power flow and signal routing. Can limit power to 1000W maximum.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: logic
+    - state: relay
+  - type: PowerRelay
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+    - SetState
+    - SignalInputA
+    - SignalInputB
+  - type: DeviceLinkSource
+    ports:
+    - StateOutput
+    - SignalOutputA
+    - SignalOutputB
+    - LoadOutput
+    - PowerOutput
+    lastSignals:
+      StateOutput: false
+      SignalOutputA: false
+      SignalOutputB: false
+      LoadOutput: false
+      PowerOutput: false
+  # Power components for relay functionality
+  - type: PowerConsumer
+    voltage: Medium
+    priority: Low
+  - type: PowerSupplier
+    supplyRate: 1000
+    voltage: Medium

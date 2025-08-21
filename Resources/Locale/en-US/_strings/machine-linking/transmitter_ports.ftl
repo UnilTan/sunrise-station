@@ -75,3 +75,19 @@ signal-port-description-power-discharging = This port is invoked with HIGH when 
 
 signal-port-name-item-detected = Detected
 signal-port-description-item-detected = This port is invoked whenever the transmitter detects an item.
+
+# Power Relay Component
+signal-port-name-state-output = State Output
+signal-port-description-state-output = Outputs the current relay state (1 = active, 0 = inactive).
+
+signal-port-name-signal-output-a = Signal Output A
+signal-port-description-signal-output-a = Outputs the signal from Input A when relay is active, empty when inactive.
+
+signal-port-name-signal-output-b = Signal Output B
+signal-port-description-signal-output-b = Outputs the signal from Input B when relay is active, empty when inactive.
+
+signal-port-name-load-output = Load Output
+signal-port-description-load-output = Outputs the total power demand of connected devices in watts.
+
+signal-port-name-power-output = Power Output
+signal-port-description-power-output = Outputs the actual power being supplied through the relay in watts.

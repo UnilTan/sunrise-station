@@ -93,3 +93,11 @@
   targetNode: wifi_gate
   category: construction-category-tools
   objectType: Item
+
+- type: construction
+  id: PowerRelay
+  graph: LogicGate
+  startNode: start
+  targetNode: power_relay
+  category: construction-category-tools
+  objectType: Item
