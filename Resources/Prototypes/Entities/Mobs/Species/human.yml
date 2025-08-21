@@ -547,6 +547,7 @@
   # Sunrise-Start
   - type: FootprintEmitter
   - type: Carriable
+  - type: HandToHandTransfer
   # Sunrise-End
 
 
