@@ -1,0 +1,17 @@
+# Helper entity for providing airtight blocking on additional tiles for multi-tile entities
+
+- type: entity
+  id: AirtightHelper
+  name: airtight helper
+  description: A helper entity that provides atmosphere blocking for multi-tile structures.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: Sprite
+    visible: false  # This is invisible - it's just for atmosphere blocking
+  # No physics component - this is purely for atmosphere blocking
+  # No other components needed - this is a minimal helper
+  placement:
+    mode: SnapgridCenter
