@@ -371,3 +371,68 @@
     - Output
     lastSignals:
       Output: false
+
+- type: entity
+  parent: BaseLogicItem
+  id: DelayGate
+  name: delay gate
+  description: Delays signals by a specified time. Can be configured for impulse or smoothing modes.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: logic
+    - state: delay
+  - type: DelayGate
+  - type: DeviceLinkSink
+    ports:
+    - Input
+  - type: DeviceLinkSource
+    ports:
+    - Output
+    lastSignals:
+      Output: false
+
+- type: entity
+  parent: BaseLogicItem
+  id: ArithmeticGate
+  name: arithmetic gate
+  description: Performs arithmetic operations on signals. Use screwdriver to change operation.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: logic
+    - state: arithmetic
+  - type: ArithmeticGate
+  - type: DeviceLinkSink
+    ports:
+    - InputA
+    - InputB
+  - type: DeviceLinkSource
+    ports:
+    - Output
+    lastSignals:
+      Output: false
+
+- type: entity
+  parent: BaseLogicItem
+  id: WifiGate
+  name: wifi gate
+  description: Transmits and receives wireless signals on configurable channels.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: logic
+    - state: wifi
+  - type: WifiGate
+  - type: DeviceLinkSink
+    ports:
+    - Input
+    - SetTarget
+  - type: DeviceLinkSource
+    ports:
+    - Output
+    lastSignals:
+      Output: false

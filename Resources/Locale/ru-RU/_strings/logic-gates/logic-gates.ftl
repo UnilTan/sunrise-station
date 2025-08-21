@@ -12,6 +12,34 @@ enhanced-memory-accepting = принимает ввод
 enhanced-memory-locked = заблокирован
 enhanced-memory-manual-edit = Используйте отвёртку для редактирования сохранённого значения
 
+# Компонент задержки
+delay-gate-examine = Задержка: {$delay}с, Сброс при сигнале: {$reset-signal}, Сброс при изменении: {$reset-change}
+delay-gate-mode-changed = Переключён режим: {$mode}
+delay-gate-mode-normal = Обычная задержка
+delay-gate-mode-reset-signal = Сброс при сигнале (импульс)
+delay-gate-mode-reset-change = Сброс при изменении (сглаживание)
+delay-gate-mode-both = Оба режима сброса
+
+# Арифметический компонент
+arithmetic-gate-examine = Текущая операция: {$operation}
+arithmetic-gate-operation-changed = Переключена операция: {$operation}
+arithmetic-operation-add = Сложение
+arithmetic-operation-subtract = Вычитание
+arithmetic-operation-multiply = Умножение
+arithmetic-operation-divide = Деление
+arithmetic-operation-sin = Синус
+arithmetic-operation-cos = Косинус
+arithmetic-operation-sqrt = Квадратный корень
+arithmetic-operation-abs = Абсолютное значение
+arithmetic-operation-floor = Округление вниз
+arithmetic-operation-ceil = Округление вверх
+
+# WiFi компонент
+wifi-gate-examine = Режим: {$mode}, Канал: {$channel}, Цель: "{$target}"
+wifi-gate-receiving = приём
+wifi-gate-transmitting = передача
+wifi-gate-channel-changed = Переключён канал: {$channel}
+
 power-sensor-examine =
     Сейчас проверяется  { $output ->
         [true] выход

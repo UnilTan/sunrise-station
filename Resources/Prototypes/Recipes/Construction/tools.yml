@@ -69,3 +69,27 @@
   targetNode: enhanced_memory
   category: construction-category-tools
   objectType: Item
+
+- type: construction
+  id: DelayGate
+  graph: LogicGate
+  startNode: start
+  targetNode: delay_gate
+  category: construction-category-tools
+  objectType: Item
+
+- type: construction
+  id: ArithmeticGate
+  graph: LogicGate
+  startNode: start
+  targetNode: arithmetic_gate
+  category: construction-category-tools
+  objectType: Item
+
+- type: construction
+  id: WifiGate
+  graph: LogicGate
+  startNode: start
+  targetNode: wifi_gate
+  category: construction-category-tools
+  objectType: Item

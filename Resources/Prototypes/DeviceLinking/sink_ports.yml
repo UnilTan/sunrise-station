@@ -133,3 +133,8 @@
   id: LockState
   name: signal-port-name-lock-state
   description: signal-port-description-lock-state
+
+- type: sinkPort
+  id: SetTarget
+  name: signal-port-name-set-target
+  description: signal-port-description-set-target

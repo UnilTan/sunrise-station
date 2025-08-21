@@ -90,3 +90,6 @@ signal-port-description-logic-enable = Only loads the input signal into the memo
 # Advanced Logic Components
 signal-port-name-lock-state = Lock State
 signal-port-description-lock-state = Controls whether the component accepts input signals (1 = accept, other = ignore, empty = no change).
+
+signal-port-name-set-target = Set Target
+signal-port-description-set-target = Sets the target signal for comparison in WiFi components.

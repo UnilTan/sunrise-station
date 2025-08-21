@@ -76,6 +76,30 @@
       - material: Cable
         amount: 3
         doAfter: 1
+    - to: delay_gate
+      steps:
+      - material: Cable
+        amount: 2
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 1
+    - to: arithmetic_gate
+      steps:
+      - material: Cable
+        amount: 2
+        doAfter: 1
+      - material: Manipulator
+        amount: 1
+        doAfter: 1
+    - to: wifi_gate
+      steps:
+      - material: Cable
+        amount: 3
+        doAfter: 1
+      - material: Steel
+        amount: 2
+        doAfter: 1
   - node: logic_gate
     entity: LogicGateOr
     edges:
@@ -177,3 +201,45 @@
       - !type:SpawnPrototype
         prototype: CableApcStack1
         amount: 2
+  - node: delay_gate
+    entity: DelayGate
+    edges:
+    - to: empty
+      steps:
+      - tool: Prying
+        doAfter: 2
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 1
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 2
+  - node: arithmetic_gate
+    entity: ArithmeticGate
+    edges:
+    - to: empty
+      steps:
+      - tool: Prying
+        doAfter: 2
+      completed:
+      - !type:SpawnPrototype
+        prototype: MicroManipulatorStockPart
+        amount: 1
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 2
+  - node: wifi_gate
+    entity: WifiGate
+    edges:
+    - to: empty
+      steps:
+      - tool: Prying
+        doAfter: 2
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 3
