@@ -225,3 +225,35 @@
     dataset: BlockGameAds
   - type: SpeakOnUIClosed
     pack: BlockGameGoodbyes
+
+- type: entity
+  id: SlotMachine
+  description: A gambling machine that accepts spesos. Pull the lever and try your luck!
+  name: slot machine
+  parent: ArcadeBase
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/arcade.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: arcade
+    - map: ["computerLayerScreen"]
+      state: screen_invaders # TODO: Add proper slot machine screen sprite
+    - map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      state: panel
+      visible: false
+  - type: PointLight
+    color: "#ff6b35"
+  - type: SlotMachine
+  - type: ActivatableUI
+    key: enum.SlotMachineUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: StationAiWhitelist
+  - type: UserInterface
+    interfaces:
+      enum.SlotMachineUiKey.Key:
+        type: SlotMachineBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: SpaceVillainArcadeComputerCircuitboard # TODO: Add proper slot machine circuit board
