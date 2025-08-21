@@ -1,6 +1,7 @@
 #nullable enable
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
+using Content.Shared.Database;
 
 namespace Content.Shared.Administration
 {
@@ -183,32 +184,5 @@ namespace Content.Shared.Administration
         public string Message { get; set; } = string.Empty;
         public DateTime SentAt { get; set; }
         public bool IsStaffOnly { get; set; }
-    }
-
-    /// <summary>
-    /// Status values for mentor help tickets (shared enum)
-    /// </summary>
-    [Serializable, NetSerializable]
-    public enum MentorHelpTicketStatus
-    {
-        /// <summary>
-        /// Ticket is open and awaiting assignment or response
-        /// </summary>
-        Open = 0,
-        
-        /// <summary>
-        /// Ticket has been claimed by a mentor/admin
-        /// </summary>
-        Assigned = 1,
-        
-        /// <summary>
-        /// Ticket has been responded to, awaiting player response
-        /// </summary>
-        AwaitingResponse = 2,
-        
-        /// <summary>
-        /// Ticket has been resolved/closed
-        /// </summary>
-        Closed = 3
     }
 }

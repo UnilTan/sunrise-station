@@ -377,6 +377,19 @@ namespace Content.Server.Database
         public Task<List<AHelpMessage>> GetAHelpMessagesByReceiverAsync(Guid receiverUserId);
 
         #endregion
+
+        #region MentorHelp
+
+        Task AddMentorHelpTicketAsync(MentorHelpTicket ticket);
+        Task<MentorHelpTicket?> GetMentorHelpTicketAsync(int ticketId);
+        Task UpdateMentorHelpTicketAsync(MentorHelpTicket ticket);
+        Task<List<MentorHelpTicket>> GetMentorHelpTicketsByPlayerAsync(Guid playerId);
+        Task<List<MentorHelpTicket>> GetOpenMentorHelpTicketsAsync();
+        Task<List<MentorHelpTicket>> GetAssignedMentorHelpTicketsAsync(Guid mentorId);
+        Task AddMentorHelpMessageAsync(MentorHelpMessage message);
+        Task<List<MentorHelpMessage>> GetMentorHelpMessagesByTicketAsync(int ticketId);
+
+        #endregion
         // Sunrise-End
     }
 
@@ -1091,6 +1104,50 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.GetAHelpMessagesByReceiverAsync(receiverUserId));
+        }
+
+        // MentorHelp implementations
+        public Task AddMentorHelpTicketAsync(MentorHelpTicket ticket)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddMentorHelpTicketAsync(ticket));
+        }
+
+        public Task<MentorHelpTicket?> GetMentorHelpTicketAsync(int ticketId)
+        {
+            return RunDbCommand(() => _db.GetMentorHelpTicketAsync(ticketId));
+        }
+
+        public Task UpdateMentorHelpTicketAsync(MentorHelpTicket ticket)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateMentorHelpTicketAsync(ticket));
+        }
+
+        public Task<List<MentorHelpTicket>> GetMentorHelpTicketsByPlayerAsync(Guid playerId)
+        {
+            return RunDbCommand(() => _db.GetMentorHelpTicketsByPlayerAsync(playerId));
+        }
+
+        public Task<List<MentorHelpTicket>> GetOpenMentorHelpTicketsAsync()
+        {
+            return RunDbCommand(() => _db.GetOpenMentorHelpTicketsAsync());
+        }
+
+        public Task<List<MentorHelpTicket>> GetAssignedMentorHelpTicketsAsync(Guid mentorId)
+        {
+            return RunDbCommand(() => _db.GetAssignedMentorHelpTicketsAsync(mentorId));
+        }
+
+        public Task AddMentorHelpMessageAsync(MentorHelpMessage message)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddMentorHelpMessageAsync(message));
+        }
+
+        public Task<List<MentorHelpMessage>> GetMentorHelpMessagesByTicketAsync(int ticketId)
+        {
+            return RunDbCommand(() => _db.GetMentorHelpMessagesByTicketAsync(ticketId));
         }
 
         public void SubscribeToNotifications(Action<DatabaseNotification> handler)

@@ -241,7 +241,7 @@ binds:
 - function: OpenGuidebook
   type: State
   key: NumpadNum0
-- function: OpenAHelp
+- function: OpenHelpChoice
   type: State
   key: F1
 - function: OpenInventoryMenu
