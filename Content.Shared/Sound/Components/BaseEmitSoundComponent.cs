@@ -20,4 +20,12 @@ public abstract partial class BaseEmitSoundComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Positional;
+
+    /// <summary>
+    /// Whether this is a loud sound that can be heard through walls.
+    /// Loud sounds (gunshots, explosions, screams) use NoOcclusion flag.
+    /// Quiet sounds (whispers, interactions) use reduced range and normal occlusion.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool LoudSound;
 }

@@ -5,12 +5,16 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/component_pickup.ogg
+    # Machine components make quiet sounds that should be blocked by walls
+    loudSound: false
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/_Sunrise/Items/Handling/component_drop.ogg
+    loudSound: false
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_Sunrise/Items/Handling/component_drop.ogg
+    loudSound: false
 
 - type: entity
   id: MultitoolSounds
@@ -21,16 +25,20 @@
       path: /Audio/_Sunrise/Items/Handling/multitool_pickup.ogg
       params:
         volume: -2
+    # Multitool handling is quiet and should be blocked by walls
+    loudSound: false
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/Items/multitool_drop.ogg
       params:
         volume: -2
+    loudSound: false
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/multitool_drop.ogg
       params:
         volume: -2
+    loudSound: false
 
 - type: entity
   id: DiskSounds
@@ -53,15 +61,21 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/ammobox_pickup.ogg
+    # Ammo box handling is quiet
+    loudSound: false
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/_Sunrise/Items/Handling/ammobox_drop.ogg
+    loudSound: false
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_Sunrise/Items/Handling/ammobox_drop.ogg
+    loudSound: false
   - type: EmitSoundOnCollide
     sound:
       path: /Audio/_Sunrise/Items/Handling/ammobox_drop.ogg
+    # Collision might be a bit louder but still quiet
+    loudSound: false
 
 - type: entity
   id: HelmetSounds
@@ -168,3 +182,19 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_Sunrise/Items/Handling/Cases/drop.ogg
+
+# Example of loud sounds that should be heard through walls
+- type: entity
+  id: LoudSounds
+  abstract: true
+  components:
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Effects/explosion.ogg
+    # Explosions and other loud sounds should be heard through walls
+    loudSound: true
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Effects/bang.ogg
+    # Loud bangs should be heard through walls
+    loudSound: true

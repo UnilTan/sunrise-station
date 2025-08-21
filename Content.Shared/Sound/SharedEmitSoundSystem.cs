@@ -146,22 +146,36 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         if (component.Sound == null)
             return;
 
+        // Configure audio parameters based on whether this is a loud sound
+        AudioParams audioParams;
+        if (component.LoudSound)
+        {
+            // Loud sounds (gunshots, explosions, screams) should be heard through walls
+            audioParams = AudioParams.Default;
+        }
+        else
+        {
+            // Quiet sounds (whispers, interactions, blood magic) should be blocked by walls
+            // Reduce max distance to make occlusion more effective
+            audioParams = AudioParams.Default.WithMaxDistance(5f);
+        }
+
         if (component.Positional)
         {
             var coords = Transform(uid).Coordinates;
             if (predict)
-                _audioSystem.PlayPredicted(component.Sound, coords, user);
+                _audioSystem.PlayPredicted(component.Sound, coords, user, audioParams);
             else if (_netMan.IsServer)
                 // don't predict sounds that client couldn't have played already
-                _audioSystem.PlayPvs(component.Sound, coords);
+                _audioSystem.PlayPvs(component.Sound, coords, audioParams);
         }
         else
         {
             if (predict)
-                _audioSystem.PlayPredicted(component.Sound, uid, user);
+                _audioSystem.PlayPredicted(component.Sound, uid, user, audioParams);
             else if (_netMan.IsServer)
                 // don't predict sounds that client couldn't have played already
-                _audioSystem.PlayPvs(component.Sound, uid);
+                _audioSystem.PlayPvs(component.Sound, uid, audioParams);
         }
     }
 
