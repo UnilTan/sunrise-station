@@ -94,7 +94,7 @@ namespace Content.Server.Atmos.EntitySystems
                 var rotatedOffset = RotateOffset(offset, xform.LocalRotation);
                 
                 // Calculate the world position for this additional tile
-                var currentTilePos = _transform.GetGridTilePositionOrDefault(entity, grid);
+                var currentTilePos = _transform.GetGridTilePositionOrDefault((uid, xform), grid);
                 var targetTilePos = currentTilePos + rotatedOffset;
 
                 // Check if there's already an airtight entity on this tile
