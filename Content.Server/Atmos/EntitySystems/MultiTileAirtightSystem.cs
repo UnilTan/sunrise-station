@@ -90,9 +90,12 @@ namespace Content.Server.Atmos.EntitySystems
 
             foreach (var offset in comp.AdditionalTiles)
             {
+                // Rotate the offset based on the entity's current rotation
+                var rotatedOffset = RotateOffset(offset, xform.LocalRotation);
+                
                 // Calculate the world position for this additional tile
                 var currentTilePos = _transform.GetGridTilePositionOrDefault(entity, grid);
-                var targetTilePos = currentTilePos + offset;
+                var targetTilePos = currentTilePos + rotatedOffset;
 
                 // Check if there's already an airtight entity on this tile
                 if (HasAirtightEntityOnTile(xform.GridUid.Value, targetTilePos))
@@ -171,6 +174,21 @@ namespace Content.Server.Atmos.EntitySystems
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Rotates a tile offset based on the given angle.
+        /// </summary>
+        private Vector2i RotateOffset(Vector2i offset, Angle angle)
+        {
+            if (angle == Angle.Zero)
+                return offset;
+
+            // Convert to floating point for rotation
+            var rotatedVector = angle.RotateVec(new Vector2(offset.X, offset.Y));
+            
+            // Round to nearest integer and convert back to Vector2i
+            return new Vector2i((int)Math.Round(rotatedVector.X), (int)Math.Round(rotatedVector.Y));
         }
     }
 }
