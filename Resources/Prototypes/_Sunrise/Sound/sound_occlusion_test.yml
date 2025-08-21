@@ -1,0 +1,46 @@
+# Test entities to demonstrate the new sound occlusion system
+# These are debug entities to test that loud/quiet sounds work properly
+
+- type: entity
+  id: SoundOcclusionTestQuiet
+  name: Quiet Sound Test Device
+  description: A test device that makes quiet sounds (blocked by walls)
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/debug.rsi
+    state: icon
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Effects/pop.ogg
+    # Quiet sound - should be blocked by walls
+    loudSound: false
+  - type: ActivatableUI
+    key: enum.ActivatableUIKey.Generic
+  - type: UserInterface
+    interfaces:
+      enum.ActivatableUIKey.Generic:
+        type: EmptyBui
+
+- type: entity
+  id: SoundOcclusionTestLoud
+  name: Loud Sound Test Device  
+  description: A test device that makes loud sounds (audible through walls)
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/debug.rsi
+    state: icon
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Effects/explosion.ogg
+    # Loud sound - should be audible through walls
+    loudSound: true
+  - type: ActivatableUI
+    key: enum.ActivatableUIKey.Generic
+  - type: UserInterface
+    interfaces:
+      enum.ActivatableUIKey.Generic:
+        type: EmptyBui
