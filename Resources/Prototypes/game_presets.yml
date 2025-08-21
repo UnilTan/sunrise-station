@@ -216,7 +216,7 @@
     - nukeops
   name: nukeops-title
   description: nukeops-description
-  showInVote: true # Sunrise-Edit
+  showInVote: false # Sunrise-Edit: Removed from voting as part of nukeops rework
   hide: true # Sunrise-Edit
   minPlayers: 20 # Sunrise-Edit: 20 players for NUKEOPS
   rules:
