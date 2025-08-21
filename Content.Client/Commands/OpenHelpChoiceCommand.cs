@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.UserInterface.Systems.Bwoink;
 using Content.Client.UserInterface.Systems.MentorHelp;
 using Content.Shared.Administration;
@@ -33,7 +34,7 @@ public sealed class OpenHelpChoiceCommand : LocalizedCommands
             SetSize = new Vector2(400, 200)
         };
 
-        var container = new VBoxContainer();
+        var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
         dialog.Contents.AddChild(container);
 
         // Title label
@@ -45,8 +46,9 @@ public sealed class OpenHelpChoiceCommand : LocalizedCommands
         container.AddChild(titleLabel);
 
         // Button container
-        var buttonContainer = new HBoxContainer
+        var buttonContainer = new BoxContainer
         {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
             HorizontalAlignment = Control.HAlignment.Center,
             SeparationOverride = 20
         };
