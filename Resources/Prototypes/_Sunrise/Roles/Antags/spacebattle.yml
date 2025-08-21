@@ -1,0 +1,83 @@
+- type: antag
+  id: SpaceBattleCaptain
+  name: roles-antag-space-battle-captain-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-space-battle-captain-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 72000 # 20h
+  - !type:DepartmentTimeRequirement
+    department: Command
+    time: 36000 # 10h
+  guides: [ SpaceBattle ]
+
+- type: antag
+  id: SpaceBattleGunner
+  name: roles-antag-space-battle-gunner-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-space-battle-gunner-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 36000 # 10h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 18000 # 5h
+  guides: [ SpaceBattle ]
+
+- type: antag
+  id: SpaceBattleEngineer
+  name: roles-antag-space-battle-engineer-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-space-battle-engineer-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 36000 # 10h
+  - !type:DepartmentTimeRequirement
+    department: Engineering
+    time: 18000 # 5h
+  guides: [ SpaceBattle ]
+
+- type: antag
+  id: SpaceBattlePilot
+  name: roles-antag-space-battle-pilot-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-space-battle-pilot-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 36000 # 10h
+  - !type:RoleTimeRequirement
+    role: JobPilot
+    time: 18000 # 5h
+  guides: [ SpaceBattle ]
+
+- type: antag
+  id: SpaceBattleMedical
+  name: roles-antag-space-battle-medical-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-space-battle-medical-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 36000 # 10h
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 18000 # 5h
+  guides: [ SpaceBattle ]
+
+- type: antag
+  id: SpaceBattleMarine
+  name: roles-antag-space-battle-marine-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-space-battle-marine-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 18000 # 5h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 9000 # 2.5h
+  guides: [ SpaceBattle ]

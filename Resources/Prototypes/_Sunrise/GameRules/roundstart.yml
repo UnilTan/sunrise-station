@@ -25,3 +25,17 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: PlanetPrisonRule
+
+- type: entity
+  id: SpaceBattle
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GameRule
+    minPlayers: 20
+  - type: LoadMapRule
+    mapPath: /Maps/_Sunrise/event/no_spawn_cosmic_battle.yml
+  - type: SpaceBattleRule
+    minPlayers: 20
+    maxPlayersPerFaction: 15
+    mothershipDefeatThreshold: 0.7
