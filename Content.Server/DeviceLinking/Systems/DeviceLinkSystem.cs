@@ -110,6 +110,61 @@ public sealed class DeviceLinkSystem : SharedDeviceLinkSystem
     }
 
     /// <summary>
+    /// Helper function that invokes a port with a string signal.
+    /// </summary>
+    public void SendSignal(EntityUid uid, string port, string signal, DeviceLinkSourceComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        var signalData = LogicSignalData.String(signal);
+        InvokePort(uid, port, signalData.ToNetworkPayload(), comp);
+
+        comp.LastSignals[port] = signalData.GetBooleanValue();
+    }
+
+    /// <summary>
+    /// Helper function that invokes a port with a numeric signal.
+    /// </summary>
+    public void SendSignal(EntityUid uid, string port, float signal, DeviceLinkSourceComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        var signalData = LogicSignalData.Numeric(signal);
+        InvokePort(uid, port, signalData.ToNetworkPayload(), comp);
+
+        comp.LastSignals[port] = signalData.GetBooleanValue();
+    }
+
+    /// <summary>
+    /// Helper function that invokes a port with a LogicSignalData signal.
+    /// </summary>
+    public void SendSignal(EntityUid uid, string port, LogicSignalData signal, DeviceLinkSourceComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        InvokePort(uid, port, signal.ToNetworkPayload(), comp);
+
+        comp.LastSignals[port] = signal.GetBooleanValue();
+    }
+
+    /// <summary>
+    /// Helper function that sends an empty signal (no signal).
+    /// </summary>
+    public void SendEmptySignal(EntityUid uid, string port, DeviceLinkSourceComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        var signalData = LogicSignalData.Empty();
+        InvokePort(uid, port, signalData.ToNetworkPayload(), comp);
+
+        comp.LastSignals.Remove(port);
+    }
+
+    /// <summary>
     /// Clears the last signals state for linking.
     /// This is not to be confused with sending a low signal, this is the complete absence of anything.
     /// Use if the device is in an invalid state and has no reasonable output signal.

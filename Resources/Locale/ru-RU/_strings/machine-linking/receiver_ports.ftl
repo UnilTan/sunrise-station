@@ -59,3 +59,7 @@ signal-port-description-logic-input = Входной порт, который п
 signal-port-description-logic-memory-input = Сигнал для загрузки в ячейку памяти, когда включено.
 signal-port-name-logic-enable = Включить
 signal-port-description-logic-enable = Загружает сигнал ввода в ячейку памяти только при HIGH.
+
+# Усовершенствованные логические компоненты
+signal-port-name-lock-state = Состояние блокировки
+signal-port-description-lock-state = Управляет принятием входных сигналов компонентом (1 = принимать, другое = игнорировать, пусто = не изменять).

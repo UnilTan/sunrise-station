@@ -127,3 +127,9 @@
   id: SetParticleSigma
   name: signal-port-name-set-particle-sigma
   description: signal-port-description-set-particle-sigma
+
+# Advanced Logic Components
+- type: sinkPort
+  id: LockState
+  name: signal-port-name-lock-state
+  description: signal-port-description-lock-state

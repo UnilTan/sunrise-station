@@ -37,3 +37,35 @@
   targetNode: memory_cell
   category: construction-category-tools
   objectType: Item
+
+- type: construction
+  id: EqualsGate
+  graph: LogicGate
+  startNode: start
+  targetNode: equals_gate
+  category: construction-category-tools
+  objectType: Item
+
+- type: construction
+  id: NotGate
+  graph: LogicGate
+  startNode: start
+  targetNode: not_gate
+  category: construction-category-tools
+  objectType: Item
+
+- type: construction
+  id: TextScreen
+  graph: LogicGate
+  startNode: start
+  targetNode: text_screen
+  category: construction-category-tools
+  objectType: Item
+
+- type: construction
+  id: EnhancedMemory
+  graph: LogicGate
+  startNode: start
+  targetNode: enhanced_memory
+  category: construction-category-tools
+  objectType: Item

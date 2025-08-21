@@ -13,6 +13,21 @@ namespace Content.Shared.DeviceNetwork
         /// </summary>
         public const string LogicState = "logic_state";
 
+        /// <summary>
+        /// Used by advanced logic components to transmit string data
+        /// </summary>
+        public const string LogicStringData = "logic_string_data";
+
+        /// <summary>
+        /// Used by advanced logic components to transmit numeric data
+        /// </summary>
+        public const string LogicNumericData = "logic_numeric_data";
+
+        /// <summary>
+        /// Used by advanced logic components to indicate if the signal is empty/null
+        /// </summary>
+        public const string LogicEmpty = "logic_empty";
+
         #region Commands
 
         /// <summary>

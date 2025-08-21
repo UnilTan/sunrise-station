@@ -86,3 +86,7 @@ signal-port-description-logic-memory-input = Signal to load into the memory cell
 
 signal-port-name-logic-enable = Enable
 signal-port-description-logic-enable = Only loads the input signal into the memory cell when HIGH.
+
+# Advanced Logic Components
+signal-port-name-lock-state = Lock State
+signal-port-description-lock-state = Controls whether the component accepts input signals (1 = accept, other = ignore, empty = no change).

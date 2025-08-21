@@ -291,3 +291,83 @@
     - Output
   - type: Construction
     node: memory_cell
+
+# New Advanced Logic Components
+- type: entity
+  parent: BaseLogicItem
+  id: EqualsGate
+  name: equals gate
+  description: Compares two signals and outputs success or failure. Based on the Russian specification.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: logic
+    - state: equals
+  - type: EqualsGate
+  - type: DeviceLinkSink
+    ports:
+    - InputA
+    - InputB
+  - type: DeviceLinkSource
+    ports:
+    - Output
+    lastSignals:
+      Output: false
+
+- type: entity
+  parent: BaseLogicItem
+  id: NotGate
+  name: not gate
+  description: Inverts the input signal. Can be configured to treat empty signals as false or null.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: logic
+    - state: not
+  - type: NotGate
+  - type: DeviceLinkSink
+    ports:
+    - Input
+  - type: DeviceLinkSource
+    ports:
+    - Output
+    lastSignals:
+      Output: false
+
+- type: entity
+  parent: BaseLogicItem
+  id: TextScreen
+  name: text screen
+  description: Displays the received signal value. Does not update for empty signals.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: text_screen
+  - type: TextScreen
+  - type: DeviceLinkSink
+    ports:
+    - Input
+
+- type: entity
+  parent: BaseLogicItem
+  id: EnhancedMemory
+  name: enhanced memory
+  description: Stores signal values with locking capability. Always outputs its stored value.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: enhanced_memory
+  - type: EnhancedMemory
+  - type: DeviceLinkSink
+    ports:
+    - MemoryInput
+    - LockState
+  - type: DeviceLinkSource
+    ports:
+    - Output
+    lastSignals:
+      Output: false
