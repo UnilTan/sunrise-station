@@ -16,6 +16,26 @@
     stealGroup: HandTeleporter
 
 - type: entity
+  id: ChargedHandTeleporter
+  parent: BaseItem
+  name: charged hand teleporter
+  description: "A hand teleporter with limited charges that randomly teleports the user within a 30 tile radius. Recharges over time."
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Devices/hand_teleporter.rsi
+    layers:
+    - state: icon
+      color: "#4169E1"
+  - type: ChargedTeleporter
+    charges: 3
+    maxCharges: 3
+    rechargeTime: 120
+    teleportRange: 30
+  - type: Tag
+    tags:
+    - HighRiskItem
+
+- type: entity
   id: HandTeleporterAdmeme
   suffix: Admeme
   parent: BaseItem

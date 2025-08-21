@@ -1,5 +1,10 @@
 using System.Linq;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
+using Content.Shared.Hands.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
@@ -30,6 +35,8 @@ public abstract class SharedPortalSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     private const string PortalFixture = "portalFixture";
     private const string ProjectileFixture = "projectile";
@@ -207,6 +214,15 @@ public abstract class SharedPortalSystem : EntitySystem
 
         LogTeleport(portal, subject, Transform(subject).Coordinates, target);
 
+        // Check for bluespace items before teleporting
+        if (!_netMan.IsClient && HasBluespaceItems(subject))
+        {
+            // Kill the entity if they have bluespace items
+            KillEntityFromBluespaceIntolerance(subject);
+            _popup.PopupEntity(Loc.GetString("bluespace-teleport-death-message"), subject, 
+                Filter.Pvs(subject, entityMan: EntityManager), true);
+        }
+
         _transform.SetCoordinates(subject, target);
 
         if (!playSound)
@@ -240,5 +256,35 @@ public abstract class SharedPortalSystem : EntitySystem
     protected virtual void LogTeleport(EntityUid portal, EntityUid subject, EntityCoordinates source,
         EntityCoordinates target)
     {
+    }
+
+    /// <summary>
+    /// Checks if an entity has any bluespace items on them (in hands or inventory slots).
+    /// </summary>
+    public bool HasBluespaceItems(EntityUid entity)
+    {
+        // Check hands and inventory for bluespace items
+        foreach (var item in _inventory.GetHandOrInventoryEntities((entity, null, null)))
+        {
+            if (HasComp<BluespaceItemComponent>(item))
+                return true;
+        }
+        
+        return false;
+    }
+
+    /// <summary>
+    /// Kills an entity due to bluespace item incompatibility during teleportation.
+    /// </summary>
+    public void KillEntityFromBluespaceIntolerance(EntityUid entity)
+    {
+        if (!TryComp<DamageableComponent>(entity, out var damageable))
+            return;
+
+        // Set damage high enough to kill most entities
+        var lethalDamage = new DamageSpecifier();
+        lethalDamage.DamageDict.Add("Cellular", FixedPoint2.New(300)); // Cellular damage represents bluespace interference
+
+        _damageable.TryChangeDamage(entity, lethalDamage, ignoreResistances: true, damageable);
     }
 }

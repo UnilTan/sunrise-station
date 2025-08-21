@@ -264,6 +264,7 @@
     solutions:
       beaker:
         maxVol: 1000
+  - type: BluespaceItem
 
 - type: entity
   name: dropper
@@ -497,6 +498,7 @@
     tags:
     - Syringe
     - Trash
+  - type: BluespaceItem
 
 - type: entity
   id: SyringeCryostasis

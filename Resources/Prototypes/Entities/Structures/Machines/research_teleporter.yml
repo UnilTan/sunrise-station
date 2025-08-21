@@ -1,0 +1,102 @@
+# Research Teleportation Machines
+
+- type: entity
+  id: TelepadMachine
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: research telepad
+  description: A telepad for teleporting objects and entities. Can be linked to other telepads via device link.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.00"
+        density: 190
+        mask:
+          - MachineMask
+  - type: Sprite
+    sprite: Structures/cargo_telepad.rsi
+    drawdepth: HighFloorObjects
+    layers:
+    - state: offline
+      map: [ "enum.CargoTelepadLayers.Base" ]
+    - state: idle
+      map: [ "enum.CargoTelepadLayers.Beam" ]
+      shader: unshaded
+      color: "#4169E1"
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - TeleportTarget
+  - type: DeviceLinkSource
+    ports:
+      - TeleportTrigger
+  - type: ApcPowerReceiver
+    powerLoad: 2000
+  - type: ResearchTelepad
+  - type: Machine
+    board: TelepadMachineCircuitboard
+  - type: Appearance
+  - type: CollideOnAnchor
+  - type: NameIdentifier
+    group: ResearchTelepads
+  - type: AnimationPlayer
+
+- type: entity
+  id: TeleporterMachine
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: research teleporter
+  description: A teleporter machine that can send entities to linked telepads. Requires high power consumption.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    sprite: Structures/Machines/teleporter.rsi
+    layers:
+    - state: icon
+      map: [ "enum.TeleporterLayers.Base" ]
+    - state: panel
+      map: [ "enum.TeleporterLayers.Panel" ]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - TeleportActivate
+  - type: DeviceLinkSource
+    ports:
+      - TeleportOutput
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: ResearchTeleporter
+    teleportRange: 50
+  - type: Machine
+    board: TeleporterMachineCircuitboard
+  - type: Appearance
+  - type: CollideOnAnchor
+  - type: NameIdentifier
+    group: ResearchTeleporters

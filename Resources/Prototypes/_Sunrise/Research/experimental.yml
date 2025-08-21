@@ -15,6 +15,21 @@
   - BasicRobotics
   - IndustrialEngineering
 
+- type: technology
+  id: TeleportationTechnology
+  name: research-technology-teleportation
+  icon:
+    sprite: Objects/Devices/hand_teleporter.rsi
+    state: icon
+  discipline: Experimental
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - TeleporterMachineCircuitboard
+  - TelepadMachineCircuitboard
+  technologyPrerequisites:
+  - BluespaceStorage
+
 # Tier 3
 
 - type: technology

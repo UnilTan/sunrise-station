@@ -13,6 +13,7 @@ research-technology-secmelee-cyberlimbs = Security melee Cyberlimbs
 research-technology-secrange-cyberlimbs = Security range Cyberlimbs
 research-technology-nightvision-eyes = Nightvision Eye Implants
 research-technology-thermalvision-eyes = Thermalvision Eye Implants
+research-technology-teleportation = Teleportation Technology
 
 research-technology-handcraft-nvd = Кустарные ПНВ
 research-technology-basic-nvd = Продвинутое ПНВ
