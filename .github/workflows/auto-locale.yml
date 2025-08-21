@@ -32,17 +32,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pyyaml PyGithub pydash fluent
+          pip install pyyaml PyGithub pydash fluent tqdm
 
-      - name: Find Locale Keys
+      - name: Enhanced Locale Processing
         run: |
-          python ./Tools/_sunrise/keyfinder.py
-          echo "Script exited with code $?"
-
-      - name: Update Yaml Locale Keys
-        run: |
-          python ./Tools/_sunrise/yamlextractor.py
-          echo "Script exited with code $?"
+          python ./Tools/_sunrise/localization/enhanced_processor.py --verbose
+          echo "Enhanced processing exited with code $?"
 
       - name: Git status before commit
         run: |

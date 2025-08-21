@@ -166,4 +166,3 @@ accent-ukraininan-words-85 = беда
 accent-ukraininan-words-replace-85 = халепа
 accent-ukraininan-words-86 = сука
 accent-ukraininan-words-replace-86 = блядина
-

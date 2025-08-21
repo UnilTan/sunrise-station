@@ -1,6 +1,5 @@
 artifact-trigger-hint-health-analyzer = Сканирование
 artifact-effect-hint-data-deleted = ██████████ █████
-
 # Artifact Effect Descriptions
 artifact-effect-description-wandering = Causes the artifact to move randomly around the area
 artifact-effect-description-heal = Heals nearby living beings
@@ -27,7 +26,6 @@ artifact-effect-description-swap = Swaps nearby entities
 artifact-effect-description-random-transformation = Randomly transforms nearby objects
 artifact-effect-description-magnet-ultra = Creates powerful magnetic fields
 artifact-effect-description-shifted-ascii = Makes speech completely incoherent and incomprehensible
-
 # Additional Vanilla Effect Descriptions
 artifact-effect-description-solution-storage = Creates internal storage for chemicals
 artifact-effect-description-speed-up = Increases movement speed when held
@@ -54,4 +52,4 @@ artifact-effect-description-rare-material-silver = Spawns silver ore
 artifact-effect-description-rare-material-plasma = Spawns plasma ore
 artifact-effect-description-rare-material-gold = Spawns gold ore
 artifact-effect-description-rare-material-uranium = Spawns uranium ore
-artifact-effect-description-angry-carp-spawn = Spawns aggressive space carp 
+artifact-effect-description-angry-carp-spawn = Spawns aggressive space carp

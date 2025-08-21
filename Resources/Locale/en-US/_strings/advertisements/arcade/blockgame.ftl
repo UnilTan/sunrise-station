@@ -11,7 +11,6 @@ advertisement-block-game-10 = Nanotrasen Block Game IS what TetrISN'T!
 advertisement-block-game-11 = Now with blast processing!
 advertisement-block-game-12 = Our lawyers are standing by!
 advertisement-block-game-13 = Hallelujah, it's raining blocks!
-
 thankyou-block-game-1 = Play again soon!
 thankyou-block-game-2 = Well played!
 thankyou-block-game-3 = Just one more game?

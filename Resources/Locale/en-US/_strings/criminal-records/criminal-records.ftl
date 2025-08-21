@@ -16,11 +16,10 @@ criminal-records-status-detained = Detained
 criminal-records-status-suspected = Suspect
 criminal-records-status-discharged = Discharged
 criminal-records-status-paroled = Paroled
-
 criminal-records-console-wanted-reason = Wanted Reason
 criminal-records-console-suspected-reason = Suspected Reason
 criminal-records-console-reason = Reason
-criminal-records-console-reason-placeholder = For example: {$placeholder}
+criminal-records-console-reason-placeholder = For example: { $placeholder }
 
 ## Crime History
 
@@ -29,19 +28,18 @@ criminal-records-history-placeholder = Write the crime here
 criminal-records-no-history = This crewmember's record is spotless.
 criminal-records-add-history = Add
 criminal-records-delete-history = Delete
-
 criminal-records-permission-denied = Permission denied
 
 ## Security channel notifications
 
-criminal-records-console-wanted = {$name} ({$job}) was made wanted by {$officer} for: {$reason}.
-criminal-records-console-not-wanted = {$officer} cleared the wanted status of {$name} ({$job}).
-criminal-records-console-suspected = {$officer} marked {$name} ({$job}) as suspicious because of: {$reason}
-criminal-records-console-not-suspected = {$name} ({$job}) has been cleared of suspicion by {$officer}.
-criminal-records-console-detained = {$name} ({$job}) has been detained by {$officer}.
-criminal-records-console-released = {$name} ({$job}) has been released by {$officer}.
-criminal-records-console-paroled = {$name} ({$job}) has been released on parole by {$officer}.
-criminal-records-console-not-parole = {$officer} cleared the parole status of {$name} ({$job}).
+criminal-records-console-wanted = { $name } ({ $job }) was made wanted by { $officer } for: { $reason }.
+criminal-records-console-not-wanted = { $officer } cleared the wanted status of { $name } ({ $job }).
+criminal-records-console-suspected = { $officer } marked { $name } ({ $job }) as suspicious because of: { $reason }
+criminal-records-console-not-suspected = { $name } ({ $job }) has been cleared of suspicion by { $officer }.
+criminal-records-console-detained = { $name } ({ $job }) has been detained by { $officer }.
+criminal-records-console-released = { $name } ({ $job }) has been released by { $officer }.
+criminal-records-console-paroled = { $name } ({ $job }) has been released on parole by { $officer }.
+criminal-records-console-not-parole = { $officer } cleared the parole status of { $name } ({ $job }).
 criminal-records-console-unknown-officer = <unknown>
 
 ## Filters
@@ -54,5 +52,6 @@ criminal-records-job-filter = Job
 criminal-records-species-filter = Species
 
 ## Arrest auto history lines
-criminal-records-console-auto-history = ARRESTED: {$reason}
+
+criminal-records-console-auto-history = ARRESTED: { $reason }
 criminal-records-console-unspecified-reason = <unspecified reason>

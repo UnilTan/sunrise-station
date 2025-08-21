@@ -15,7 +15,6 @@ wire-name-color-navy = Navy
 wire-name-color-purple = Purple
 wire-name-color-pink = Pink
 wire-name-color-fuchsia = Fuchsia
-
 # letter names
 wire-letter-name-alpha = Alpha
 wire-letter-name-beta = Beta
