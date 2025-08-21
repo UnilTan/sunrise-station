@@ -1,0 +1,9 @@
+# Space Battle Loadouts
+
+- type: loadout
+  id: SpaceBattleLoadout
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackSatchelLeather
+    id: PassengerPDA

@@ -1,0 +1,43 @@
+# Space Battle Spawner Prototypes
+
+- type: entity
+  name: space battle spawner
+  id: SpaceBattleSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+        color: "#FF6600"
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+        color: "#FF6600"
+  - type: Spawner
+    prototypes:
+    - MobHumanSpaceBattle
+
+- type: entity
+  name: space battle NT spawner
+  id: SpaceBattleNTSpawner
+  parent: SpaceBattleSpawner
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+        color: "#0066FF"
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+        color: "#0066FF"
+
+- type: entity
+  name: space battle syndicate spawner
+  id: SpaceBattleSyndicateSpawner
+  parent: SpaceBattleSpawner
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+        color: "#CC0000"
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+        color: "#CC0000"

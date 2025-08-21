@@ -1,0 +1,23 @@
+# Space Battle Humanoid Prototypes
+
+- type: entity
+  name: space battle humanoid
+  id: MobHumanSpaceBattle
+  parent: MobHuman
+  components:
+  - type: Loadout
+    prototypes: [ SpaceBattleLoadout ]
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: Damageable
+    damageContainer: Biological
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      140: Dead

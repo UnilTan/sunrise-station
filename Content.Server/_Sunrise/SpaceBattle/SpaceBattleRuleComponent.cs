@@ -142,3 +142,22 @@ public enum SpaceBattleFaction : byte
     /// </summary>
     Syndicate
 }
+
+/// <summary>
+/// Компонент для отслеживания участников космической битвы
+/// </summary>
+[RegisterComponent]
+public sealed partial class SpaceBattleParticipantComponent : Component
+{
+    /// <summary>
+    /// Фракция участника
+    /// </summary>
+    [DataField]
+    public SpaceBattleFaction Faction;
+
+    /// <summary>
+    /// Роль участника
+    /// </summary>
+    [DataField]
+    public string Role = string.Empty;
+}
