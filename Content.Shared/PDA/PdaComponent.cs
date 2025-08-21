@@ -41,6 +41,8 @@ namespace Content.Shared.PDA
         [ViewVariables] public string? StationName;
         [ViewVariables] public string? StationAlertLevel;
         [ViewVariables] public Color StationAlertColor = Color.White;
+        [ViewVariables] public float StationAlertDelay; // Alert level delay in seconds
+        [ViewVariables] public string? StationAlertReason; // Alert level reason/announcement
         [ViewVariables] public TimeSpan? ShuttleTime; // Sunrise-edit
         [ViewVariables] public EvacShuttleStatus ShuttleStatus; // Sunrise-edit
     }

@@ -16,6 +16,15 @@ comp-pda-ui-menu-title = КПК
 comp-pda-ui-footer = Карманный Персональный Компьютер
 comp-pda-ui-station = Станция: [color=white]{ $station }[/color]
 comp-pda-ui-station-alert-level = Уровень угрозы: [color={ $color }]{ $level }[/color]
+
+comp-pda-ui-station-alert-duration = Длительность кода: [color=white]{ $duration }[/color]
+
+comp-pda-ui-station-alert-duration-none = Без задержки
+
+comp-pda-ui-station-alert-reason = Причина кода: [color=white]{ $reason }[/color]
+
+comp-pda-ui-station-alert-reason-unknown = Причина неизвестна
+
 comp-pda-ui-station-alert-level-instructions = Инструкции: [color=white]{ $instructions }[/color]
 comp-pda-ui-station-time = Время и дата: [color=white]{ $time }, { $date }[/color]
 comp-pda-ui-start-time = Длительность смены: [color=white]{ $time }[/color]

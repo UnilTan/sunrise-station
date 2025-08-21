@@ -30,6 +30,14 @@ comp-pda-ui-station = Station: [color=white]{$station}[/color]
 
 comp-pda-ui-station-alert-level = Alert Level: [color={ $color }]{ $level }[/color]
 
+comp-pda-ui-station-alert-duration = Alert Duration: [color=white]{ $duration }[/color]
+
+comp-pda-ui-station-alert-duration-none = No delay
+
+comp-pda-ui-station-alert-reason = Alert Reason: [color=white]{ $reason }[/color]
+
+comp-pda-ui-station-alert-reason-unknown = Unknown reason
+
 comp-pda-ui-station-alert-level-instructions = Instructions: [color=white]{ $instructions }[/color]
 
 comp-pda-ui-station-time = Date and Time: [color=white]{ $time }, { $date }[/color]

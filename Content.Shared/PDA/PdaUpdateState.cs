@@ -49,6 +49,8 @@ namespace Content.Shared.PDA
         public string? JobTitle;
         public string? StationAlertLevel;
         public Color StationAlertColor;
+        public float StationAlertDelay; // Alert level delay in seconds  
+        public string? StationAlertReason; // Alert level reason/announcement
         public TimeSpan? EvacShuttleTime; // Sunrise-edit
         public EvacShuttleStatus EvacShuttleStatus; // Sunrise-edit
     }

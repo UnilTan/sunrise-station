@@ -225,6 +225,8 @@ namespace Content.Server.PDA
                     JobTitle = id?.LocalizedJobTitle,
                     StationAlertLevel = pda.StationAlertLevel,
                     StationAlertColor = pda.StationAlertColor,
+                    StationAlertDelay = pda.StationAlertDelay,
+                    StationAlertReason = pda.StationAlertReason,
                     EvacShuttleStatus = pda.ShuttleStatus, // Sunrise-edit
                     EvacShuttleTime = pda.ShuttleTime // Sunrise-edit
                 },
@@ -352,8 +354,19 @@ namespace Content.Server.PDA
                 alertComp.AlertLevels == null)
                 return;
             pda.StationAlertLevel = alertComp.CurrentLevel;
+            pda.StationAlertDelay = alertComp.CurrentDelay;
+            
             if (alertComp.AlertLevels.Levels.TryGetValue(alertComp.CurrentLevel, out var details))
+            {
                 pda.StationAlertColor = details.Color;
+                // Store the announcement as the reason - try to localize it if possible
+                var announcement = details.Announcement;
+                if (Loc.TryGetString(details.Announcement, out var locAnnouncement))
+                {
+                    announcement = locAnnouncement;
+                }
+                pda.StationAlertReason = announcement;
+            }
         }
 
         private string? GetDeviceNetAddress(EntityUid uid)

@@ -32,6 +32,8 @@ namespace Content.Client.PDA
         private string _jobTitle = Loc.GetString("comp-pda-ui-unassigned");
         private string _stationName = Loc.GetString("comp-pda-ui-unknown");
         private string _alertLevel = Loc.GetString("comp-pda-ui-unknown");
+        private string _alertDuration = Loc.GetString("comp-pda-ui-unknown");
+        private string _alertReason = Loc.GetString("comp-pda-ui-unknown");
         private string _instructions = Loc.GetString("comp-pda-ui-unknown");
 
         // Sunrise-start
@@ -117,6 +119,16 @@ namespace Content.Client.PDA
             StationAlertLevelButton.OnPressed += _ =>
             {
                 _clipboard.SetText(_alertLevel);
+            };
+
+            StationAlertDurationButton.OnPressed += _ =>
+            {
+                _clipboard.SetText(_alertDuration);
+            };
+
+            StationAlertReasonButton.OnPressed += _ =>
+            {
+                _clipboard.SetText(_alertReason);
             };
 
             StationTimeButton.OnPressed += _ =>
@@ -218,6 +230,8 @@ namespace Content.Client.PDA
 
             var alertLevel = state.PdaOwnerInfo.StationAlertLevel;
             var alertColor = state.PdaOwnerInfo.StationAlertColor;
+            var alertDelay = state.PdaOwnerInfo.StationAlertDelay;
+            var alertReason = state.PdaOwnerInfo.StationAlertReason;
             var alertLevelKey = alertLevel != null ? $"alert-level-{alertLevel}" : "alert-level-unknown";
             _alertLevel = Loc.GetString(alertLevelKey);
 
@@ -226,6 +240,33 @@ namespace Content.Client.PDA
                 ("color", alertColor),
                 ("level", _alertLevel)
             ));
+
+            // Alert duration
+            if (alertDelay > 0)
+            {
+                var duration = TimeSpan.FromSeconds(alertDelay);
+                _alertDuration = duration.ToString(@"mm\:ss");
+                StationAlertDurationLabel.SetMarkup(Loc.GetString(
+                    "comp-pda-ui-station-alert-duration",
+                    ("duration", _alertDuration)
+                ));
+            }
+            else
+            {
+                _alertDuration = Loc.GetString("comp-pda-ui-station-alert-duration-none");
+                StationAlertDurationLabel.SetMarkup(Loc.GetString(
+                    "comp-pda-ui-station-alert-duration",
+                    ("duration", _alertDuration)
+                ));
+            }
+
+            // Alert reason
+            _alertReason = alertReason ?? Loc.GetString("comp-pda-ui-station-alert-reason-unknown");
+            StationAlertReasonLabel.SetMarkup(Loc.GetString(
+                "comp-pda-ui-station-alert-reason",
+                ("reason", _alertReason)
+            ));
+
             _instructions = Loc.GetString($"{alertLevelKey}-instructions");
             StationAlertLevelInstructions.SetMarkup(Loc.GetString(
                 "comp-pda-ui-station-alert-level-instructions",
