@@ -8,7 +8,7 @@ using Content.Shared.Containers.ItemSlots;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Access.Components.AccessOverriderComponent;
-using Content.Shared.Implants.Components;
+using Content.Shared.Medical.SuitSensors;
 namespace Content.Client.Medical.CrewMonitoring.BSO;
 
 public class BSOCrewMonitoringBoundUserInterface : BoundUserInterface
@@ -59,7 +59,7 @@ public class BSOCrewMonitoringBoundUserInterface : BoundUserInterface
                 {
                     //get the client entity
                     var clientEntity = EntMan.GetEntity(sensor.SuitSensorUid);
-                    if (EntMan.TryGetComponent<SubdermalImplantComponent>(clientEntity, out var suitSensor))
+                    if (EntMan.TryGetComponent<SuitSensorComponent>(clientEntity, out var suitSensor) && suitSensor.ActivationContainer == "implant")
                     {
                         commandDepartmentSensors.Add(sensor);
                     }

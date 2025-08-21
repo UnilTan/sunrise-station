@@ -8,6 +8,7 @@ using Content.Shared.Containers.ItemSlots;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Access.Components.AccessOverriderComponent;
+using Content.Shared.Medical.SuitSensors;
 namespace Content.Client.Medical.CrewMonitoring.Brigmedic;
 
 public class BrigmedicCrewMonitoringBoundUserInterface : BoundUserInterface
@@ -51,6 +52,19 @@ public class BrigmedicCrewMonitoringBoundUserInterface : BoundUserInterface
                 var securityDepartmentSensors = st.Sensors
                     .Where(sensor => sensor.JobDepartments.Contains("Security"))
                     .ToList();
+                //also ALWAYS include the trackers for security department
+                //check if sensor is from a tracking implant (activationContainer: "implant")
+                foreach (var sensor in st.Sensors)
+                {
+                    //get the client entity
+                    var clientEntity = EntMan.GetEntity(sensor.SuitSensorUid);
+                    if (EntMan.TryGetComponent<SuitSensorComponent>(clientEntity, out var suitSensor) && suitSensor.ActivationContainer == "implant")
+                    {
+                        securityDepartmentSensors.Add(sensor);
+                    }
+                }
+                //remove duplicates
+                securityDepartmentSensors = securityDepartmentSensors.Distinct().ToList();
                 _menu?.ShowSensors(securityDepartmentSensors, Owner, xform?.Coordinates);
                 break;
         }
