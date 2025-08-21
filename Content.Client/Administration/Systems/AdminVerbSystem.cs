@@ -1,9 +1,12 @@
+using Content.Client.Administration.UI.Complaint;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Mind.Components;
 using Content.Shared.Verbs;
 using Robust.Client.Console;
+using Robust.Client.Player;
 using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Client.Administration.Systems
 {
@@ -15,6 +18,7 @@ namespace Content.Client.Administration.Systems
         [Dependency] private readonly IClientConGroupController _clientConGroupController = default!;
         [Dependency] private readonly IClientConsoleHost _clientConsoleHost = default!;
         [Dependency] private readonly ISharedAdminManager _admin = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
 
         public override void Initialize()
         {
@@ -39,6 +43,9 @@ namespace Content.Client.Administration.Systems
                 args.Verbs.Add(verb);
             }
 
+            // Add complaint verb for players with minds (other players)
+            AddComplaintVerb(args);
+
             if (!_admin.IsAdmin(args.User))
                 return;
 
@@ -56,6 +63,47 @@ namespace Content.Client.Administration.Systems
 
             if (_admin.HasAdminFlag(args.User, AdminFlags.Admin))
                 args.ExtraCategories.Add(VerbCategory.Tricks);
+        }
+
+        private void AddComplaintVerb(GetVerbsEvent<Verb> args)
+        {
+            // Only add complaint verb if:
+            // 1. Target has a mind (is a player)
+            // 2. Target is not the user themselves
+            // 3. User has a player session
+            if (!HasComp<MindContainerComponent>(args.Target))
+                return;
+
+            if (!_playerManager.LocalSession.HasValue)
+                return;
+
+            var localSession = _playerManager.LocalSession.Value;
+
+            // Don't allow complaining against yourself
+            if (args.Target == args.User)
+                return;
+
+            // Find the target player session
+            var targetSession = _playerManager.Sessions.FirstOrDefault(s => s.AttachedEntity == args.Target);
+            if (targetSession == null)
+                return;
+
+            var verb = new Verb()
+            {
+                Text = Loc.GetString("complaint-verb-file"),
+                Message = Loc.GetString("complaint-verb-file-desc"),
+                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/exclamation.svg.192dpi.png")),
+                Act = () =>
+                {
+                    var playerName = targetSession.Name;
+                    var dialog = new ComplaintCreateDialog(targetSession.UserId, playerName);
+                    dialog.OpenCentered();
+                },
+                ClientExclusive = true,
+                Priority = -1 // Lower priority so it appears at bottom of context menu
+            };
+
+            args.Verbs.Add(verb);
         }
     }
 }

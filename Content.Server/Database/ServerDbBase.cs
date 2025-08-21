@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._Sunrise.MarkingEffects;
+using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -1815,6 +1816,163 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
 
             return messages;
+        }
+
+        # endregion
+
+        # region Complaints
+
+        public async Task<int> CreateComplaintAsync(NetUserId complainantUserId, NetUserId againstUserId, string reason, string description)
+        {
+            await using var db = await GetDb();
+            var complaint = new Complaint
+            {
+                ComplainantUserId = complainantUserId.UserId,
+                AgainstUserId = againstUserId.UserId,
+                Reason = reason,
+                Description = description,
+                Status = (int)SharedComplaintSystem.ComplaintStatus.Open,
+                CreatedAt = DateTimeOffset.UtcNow
+            };
+            
+            db.DbContext.Complaints.Add(complaint);
+            await db.DbContext.SaveChangesAsync();
+            return complaint.Id;
+        }
+
+        public async Task<SharedComplaintSystem.ComplaintInfo?> GetComplaintAsync(int complaintId)
+        {
+            await using var db = await GetDb();
+            
+            var complaint = await db.DbContext.Complaints
+                .Include(c => c.Messages)
+                .FirstOrDefaultAsync(c => c.Id == complaintId);
+                
+            if (complaint == null)
+                return null;
+                
+            return await ConvertComplaintToInfo(db, complaint);
+        }
+
+        public async Task<List<SharedComplaintSystem.ComplaintInfo>> GetComplaintsByUserAsync(NetUserId userId)
+        {
+            await using var db = await GetDb();
+            
+            var complaints = await db.DbContext.Complaints
+                .Include(c => c.Messages)
+                .Where(c => c.ComplainantUserId == userId.UserId)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+                
+            var result = new List<SharedComplaintSystem.ComplaintInfo>();
+            foreach (var complaint in complaints)
+            {
+                result.Add(await ConvertComplaintToInfo(db, complaint));
+            }
+            return result;
+        }
+
+        public async Task<List<SharedComplaintSystem.ComplaintInfo>> GetComplaintsAboutUserAsync(NetUserId userId)
+        {
+            await using var db = await GetDb();
+            
+            var complaints = await db.DbContext.Complaints
+                .Include(c => c.Messages)
+                .Where(c => c.AgainstUserId == userId.UserId)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+                
+            var result = new List<SharedComplaintSystem.ComplaintInfo>();
+            foreach (var complaint in complaints)
+            {
+                result.Add(await ConvertComplaintToInfo(db, complaint));
+            }
+            return result;
+        }
+
+        public async Task<List<SharedComplaintSystem.ComplaintInfo>> GetAllComplaintsAsync()
+        {
+            await using var db = await GetDb();
+            
+            var complaints = await db.DbContext.Complaints
+                .Include(c => c.Messages)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+                
+            var result = new List<SharedComplaintSystem.ComplaintInfo>();
+            foreach (var complaint in complaints)
+            {
+                result.Add(await ConvertComplaintToInfo(db, complaint));
+            }
+            return result;
+        }
+
+        public async Task UpdateComplaintStatusAsync(int complaintId, SharedComplaintSystem.ComplaintStatus status, NetUserId? assignedAdminId = null, string? note = null)
+        {
+            await using var db = await GetDb();
+            
+            var complaint = await db.DbContext.Complaints.FirstOrDefaultAsync(c => c.Id == complaintId);
+            if (complaint == null)
+                return;
+                
+            complaint.Status = (int)status;
+            complaint.UpdatedAt = DateTimeOffset.UtcNow;
+            complaint.AssignedAdminId = assignedAdminId?.UserId;
+            complaint.Note = note;
+            
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task AddComplaintMessageAsync(int complaintId, NetUserId senderUserId, string message, bool isAdminMessage = false)
+        {
+            await using var db = await GetDb();
+            
+            var complaintMessage = new ComplaintMessage
+            {
+                ComplaintId = complaintId,
+                SenderUserId = senderUserId.UserId,
+                Message = message,
+                SentAt = DateTimeOffset.UtcNow,
+                IsAdminMessage = isAdminMessage
+            };
+            
+            db.DbContext.ComplaintMessages.Add(complaintMessage);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        private async Task<SharedComplaintSystem.ComplaintInfo> ConvertComplaintToInfo(DbGuard db, Complaint complaint)
+        {
+            // Get player names
+            var complainantPlayer = await db.DbContext.Player.FirstOrDefaultAsync(p => p.UserId == complaint.ComplainantUserId);
+            var againstPlayer = await db.DbContext.Player.FirstOrDefaultAsync(p => p.UserId == complaint.AgainstUserId);
+            var assignedAdmin = complaint.AssignedAdminId.HasValue 
+                ? await db.DbContext.Player.FirstOrDefaultAsync(p => p.UserId == complaint.AssignedAdminId.Value)
+                : null;
+
+            var messages = complaint.Messages.Select(m => new SharedComplaintSystem.ComplaintTextMessage(
+                complaint.Id,
+                new NetUserId(m.SenderUserId),
+                m.Message,
+                m.SentAt.DateTime,
+                m.IsAdminMessage
+            )).ToList();
+
+            return new SharedComplaintSystem.ComplaintInfo
+            {
+                Id = complaint.Id,
+                ComplainantUserId = new NetUserId(complaint.ComplainantUserId),
+                AgainstUserId = new NetUserId(complaint.AgainstUserId),
+                ComplainantName = complainantPlayer?.LastSeenUserName ?? "Unknown",
+                AgainstName = againstPlayer?.LastSeenUserName ?? "Unknown",
+                Reason = complaint.Reason,
+                Description = complaint.Description,
+                Status = (SharedComplaintSystem.ComplaintStatus)complaint.Status,
+                CreatedAt = complaint.CreatedAt.DateTime,
+                UpdatedAt = complaint.UpdatedAt?.DateTime,
+                AssignedAdminId = complaint.AssignedAdminId.HasValue ? new NetUserId(complaint.AssignedAdminId.Value) : null,
+                AssignedAdminName = assignedAdmin?.LastSeenUserName,
+                Messages = messages
+            };
         }
 
         # endregion

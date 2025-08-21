@@ -23,6 +23,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using LogLevel = Robust.Shared.Log.LogLevel;
 using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
+using static Content.Shared.Administration.SharedComplaintSystem;
 
 namespace Content.Server.Database
 {
@@ -375,6 +376,18 @@ namespace Content.Server.Database
         Task AddAHelpMessage(Guid senderSessionUserId, Guid messageUserId, string message, DateTimeOffset sentAt, bool playSound, bool adminOnly);
 
         public Task<List<AHelpMessage>> GetAHelpMessagesByReceiverAsync(Guid receiverUserId);
+
+        #endregion
+
+        #region Complaints
+
+        Task<int> CreateComplaintAsync(NetUserId complainantUserId, NetUserId againstUserId, string reason, string description);
+        Task<ComplaintInfo?> GetComplaintAsync(int complaintId);
+        Task<List<ComplaintInfo>> GetComplaintsByUserAsync(NetUserId userId);
+        Task<List<ComplaintInfo>> GetComplaintsAboutUserAsync(NetUserId userId);
+        Task<List<ComplaintInfo>> GetAllComplaintsAsync();
+        Task UpdateComplaintStatusAsync(int complaintId, ComplaintStatus status, NetUserId? assignedAdminId = null, string? note = null);
+        Task AddComplaintMessageAsync(int complaintId, NetUserId senderUserId, string message, bool isAdminMessage = false);
 
         #endregion
         // Sunrise-End
@@ -1091,6 +1104,48 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.GetAHelpMessagesByReceiverAsync(receiverUserId));
+        }
+
+        public Task<int> CreateComplaintAsync(NetUserId complainantUserId, NetUserId againstUserId, string reason, string description)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.CreateComplaintAsync(complainantUserId, againstUserId, reason, description));
+        }
+
+        public Task<ComplaintInfo?> GetComplaintAsync(int complaintId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetComplaintAsync(complaintId));
+        }
+
+        public Task<List<ComplaintInfo>> GetComplaintsByUserAsync(NetUserId userId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetComplaintsByUserAsync(userId));
+        }
+
+        public Task<List<ComplaintInfo>> GetComplaintsAboutUserAsync(NetUserId userId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetComplaintsAboutUserAsync(userId));
+        }
+
+        public Task<List<ComplaintInfo>> GetAllComplaintsAsync()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllComplaintsAsync());
+        }
+
+        public Task UpdateComplaintStatusAsync(int complaintId, ComplaintStatus status, NetUserId? assignedAdminId = null, string? note = null)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateComplaintStatusAsync(complaintId, status, assignedAdminId, note));
+        }
+
+        public Task AddComplaintMessageAsync(int complaintId, NetUserId senderUserId, string message, bool isAdminMessage = false)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddComplaintMessageAsync(complaintId, senderUserId, message, isAdminMessage));
         }
 
         public void SubscribeToNotifications(Action<DatabaseNotification> handler)

@@ -1,0 +1,29 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+            Title="{Loc 'complaint-create-title'}"
+            SetSize="500 350">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <Label Name="AgainstPlayerLabel" Text="Against Player: {$player}" StyleClasses="LabelHeading" />
+        
+        <Control MinSize="0 10" />
+        
+        <Label Text="{Loc 'complaint-create-reason-label'}" />
+        <LineEdit Name="ReasonLineEdit" Access="Public" MaxLength="100" />
+        
+        <Control MinSize="0 10" />
+        
+        <Label Text="{Loc 'complaint-create-description-label'}" />
+        <TextEdit Name="DescriptionTextEdit" Access="Public" MaxLength="1000" MinSize="0 100" VerticalExpand="True" />
+        
+        <Control MinSize="0 10" />
+        
+        <Label Name="StatusLabel" Access="Public" Text="" HorizontalAlignment="Center" />
+        
+        <Control MinSize="0 10" />
+        
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="CancelButton" Access="Public" Text="{Loc 'complaint-create-cancel'}" />
+            <Control MinSize="10 0" />
+            <Button Name="SubmitButton" Access="Public" Text="{Loc 'complaint-create-submit'}" StyleClasses="ButtonColorGreen" />
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

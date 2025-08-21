@@ -47,6 +47,8 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<AHelpMessage> AHelpMessages { get; set; } = default!;
+        public DbSet<Complaint> Complaints { get; set; } = default!;
+        public DbSet<ComplaintMessage> ComplaintMessages { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1359,5 +1361,59 @@ namespace Content.Server.Database
         [Required, MaxLength(4096)] public string Message { get; set; } = string.Empty;
         public bool PlaySound { get; set; }
         public bool AdminOnly { get; set; }
+    }
+
+    [Table("complaints"), Index(nameof(ComplainantUserId)), Index(nameof(AgainstUserId)), Index(nameof(Status))]
+    public class Complaint
+    {
+        [Key]
+        public int Id { get; set; }
+        
+        [ForeignKey("Player")]
+        public Guid ComplainantUserId { get; set; }
+        
+        [ForeignKey("Player")]
+        public Guid AgainstUserId { get; set; }
+        
+        [Required, MaxLength(100)]
+        public string Reason { get; set; } = string.Empty;
+        
+        [Required, MaxLength(1000)]
+        public string Description { get; set; } = string.Empty;
+        
+        public int Status { get; set; } // Maps to ComplaintStatus enum
+        
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt { get; set; }
+        
+        [ForeignKey("Player")]
+        public Guid? AssignedAdminId { get; set; }
+        
+        [MaxLength(100)]
+        public string? Note { get; set; }
+        
+        public virtual ICollection<ComplaintMessage> Messages { get; set; } = new List<ComplaintMessage>();
+    }
+
+    [Table("complaint_messages"), Index(nameof(ComplaintId)), Index(nameof(SenderUserId))]
+    public class ComplaintMessage
+    {
+        [Key]
+        public int Id { get; set; }
+        
+        [ForeignKey("Complaint")]
+        public int ComplaintId { get; set; }
+        
+        [ForeignKey("Player")]
+        public Guid SenderUserId { get; set; }
+        
+        public DateTimeOffset SentAt { get; set; }
+        
+        [Required, MaxLength(1000)]
+        public string Message { get; set; } = string.Empty;
+        
+        public bool IsAdminMessage { get; set; }
+        
+        public virtual Complaint Complaint { get; set; } = null!;
     }
 }
