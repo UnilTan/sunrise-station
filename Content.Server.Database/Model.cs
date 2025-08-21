@@ -47,6 +47,8 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<AHelpMessage> AHelpMessages { get; set; } = default!;
+        public DbSet<MentorHelpTicket> MentorHelpTickets { get; set; } = default!;
+        public DbSet<MentorHelpMessage> MentorHelpMessages { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1359,5 +1361,140 @@ namespace Content.Server.Database
         [Required, MaxLength(4096)] public string Message { get; set; } = string.Empty;
         public bool PlaySound { get; set; }
         public bool AdminOnly { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a mentor help ticket
+    /// </summary>
+    [Table("mentor_help_tickets"), Index(nameof(PlayerId)), Index(nameof(AssignedToUserId)), Index(nameof(Status))]
+    public class MentorHelpTicket
+    {
+        [Key]
+        public int Id { get; set; }
+        
+        /// <summary>
+        /// The player who created the ticket
+        /// </summary>
+        [ForeignKey("Player")]
+        public Guid PlayerId { get; set; }
+        
+        /// <summary>
+        /// The mentor/admin who claimed this ticket (null if unclaimed)
+        /// </summary>
+        [ForeignKey("Player")]
+        public Guid? AssignedToUserId { get; set; }
+        
+        /// <summary>
+        /// Subject/title of the ticket
+        /// </summary>
+        [Required, MaxLength(512)]
+        public string Subject { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// Initial question/message from the player
+        /// </summary>
+        [Required, MaxLength(4096)]
+        public string InitialMessage { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// Current status of the ticket
+        /// </summary>
+        public MentorHelpTicketStatus Status { get; set; } = MentorHelpTicketStatus.Open;
+        
+        /// <summary>
+        /// When the ticket was created
+        /// </summary>
+        public DateTimeOffset CreatedAt { get; set; }
+        
+        /// <summary>
+        /// When the ticket was last updated
+        /// </summary>
+        public DateTimeOffset UpdatedAt { get; set; }
+        
+        /// <summary>
+        /// When the ticket was closed (null if still open)
+        /// </summary>
+        public DateTimeOffset? ClosedAt { get; set; }
+        
+        /// <summary>
+        /// Who closed the ticket
+        /// </summary>
+        [ForeignKey("Player")]
+        public Guid? ClosedByUserId { get; set; }
+        
+        /// <summary>
+        /// Round ID when the ticket was created
+        /// </summary>
+        public int? RoundId { get; set; }
+        
+        /// <summary>
+        /// Server ID where the ticket was created
+        /// </summary>
+        public int? ServerId { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a message in a mentor help ticket
+    /// </summary>
+    [Table("mentor_help_messages"), Index(nameof(TicketId)), Index(nameof(SentAt))]
+    public class MentorHelpMessage
+    {
+        [Key]
+        public int Id { get; set; }
+        
+        /// <summary>
+        /// The ticket this message belongs to
+        /// </summary>
+        [ForeignKey("MentorHelpTicket")]
+        public int TicketId { get; set; }
+        public MentorHelpTicket Ticket { get; set; } = null!;
+        
+        /// <summary>
+        /// Who sent this message
+        /// </summary>
+        [ForeignKey("Player")]
+        public Guid SenderUserId { get; set; }
+        
+        /// <summary>
+        /// The message content
+        /// </summary>
+        [Required, MaxLength(4096)]
+        public string Message { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// When the message was sent
+        /// </summary>
+        public DateTimeOffset SentAt { get; set; }
+        
+        /// <summary>
+        /// Whether this message is only visible to mentors/admins
+        /// </summary>
+        public bool IsStaffOnly { get; set; } = false;
+    }
+
+    /// <summary>
+    /// Status values for mentor help tickets
+    /// </summary>
+    public enum MentorHelpTicketStatus
+    {
+        /// <summary>
+        /// Ticket is open and awaiting assignment or response
+        /// </summary>
+        Open = 0,
+        
+        /// <summary>
+        /// Ticket has been claimed by a mentor/admin
+        /// </summary>
+        Assigned = 1,
+        
+        /// <summary>
+        /// Ticket has been responded to, awaiting player response
+        /// </summary>
+        AwaitingResponse = 2,
+        
+        /// <summary>
+        /// Ticket has been resolved/closed
+        /// </summary>
+        Closed = 3
     }
 }

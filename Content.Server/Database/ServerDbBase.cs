@@ -1818,6 +1818,74 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
 
         # endregion
+
+        # region MentorHelp
+
+        public async Task AddMentorHelpTicketAsync(MentorHelpTicket ticket)
+        {
+            await using var db = await GetDb();
+            db.DbContext.MentorHelpTickets.Add(ticket);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<MentorHelpTicket?> GetMentorHelpTicketAsync(int ticketId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.MentorHelpTickets
+                .FirstOrDefaultAsync(t => t.Id == ticketId);
+        }
+
+        public async Task UpdateMentorHelpTicketAsync(MentorHelpTicket ticket)
+        {
+            await using var db = await GetDb();
+            db.DbContext.MentorHelpTickets.Update(ticket);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<MentorHelpTicket>> GetMentorHelpTicketsByPlayerAsync(Guid playerId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.MentorHelpTickets
+                .Where(t => t.PlayerId == playerId)
+                .OrderByDescending(t => t.CreatedAt)
+                .ToListAsync();
+        }
+
+        public async Task<List<MentorHelpTicket>> GetOpenMentorHelpTicketsAsync()
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.MentorHelpTickets
+                .Where(t => t.Status != MentorHelpTicketStatus.Closed)
+                .OrderByDescending(t => t.UpdatedAt)
+                .ToListAsync();
+        }
+
+        public async Task<List<MentorHelpTicket>> GetAssignedMentorHelpTicketsAsync(Guid mentorId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.MentorHelpTickets
+                .Where(t => t.AssignedToUserId == mentorId && t.Status != MentorHelpTicketStatus.Closed)
+                .OrderByDescending(t => t.UpdatedAt)
+                .ToListAsync();
+        }
+
+        public async Task AddMentorHelpMessageAsync(MentorHelpMessage message)
+        {
+            await using var db = await GetDb();
+            db.DbContext.MentorHelpMessages.Add(message);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<MentorHelpMessage>> GetMentorHelpMessagesByTicketAsync(int ticketId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.MentorHelpMessages
+                .Where(m => m.TicketId == ticketId)
+                .OrderBy(m => m.SentAt)
+                .ToListAsync();
+        }
+
+        # endregion
         // Sunrise-End
 
         # region IPIntel
