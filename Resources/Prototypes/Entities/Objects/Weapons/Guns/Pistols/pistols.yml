@@ -32,6 +32,7 @@
     availableModes:
       - SemiAuto
       - FullAuto
+    weaponRecoil: 0.15
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: ChamberMagazineAmmoProvider

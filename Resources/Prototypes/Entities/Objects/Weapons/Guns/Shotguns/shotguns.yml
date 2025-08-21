@@ -25,6 +25,7 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
+    weaponRecoil: 1.0
     soundGunshot:
       collection: xm1014 # Sunrise-Edit
     soundEmpty:

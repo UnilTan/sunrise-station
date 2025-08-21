@@ -30,6 +30,7 @@
     selectedMode: FullAuto
     availableModes:
       - FullAuto
+    weaponRecoil: 0.70
     soundGunshot:
       collection: m249 # Sunrise-Edit
     soundEmpty:

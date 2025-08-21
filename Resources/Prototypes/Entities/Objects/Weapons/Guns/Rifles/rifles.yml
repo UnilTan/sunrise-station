@@ -30,6 +30,7 @@
     availableModes:
       - FullAuto
       - SemiAuto
+    weaponRecoil: 0.50
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
   - type: ChamberMagazineAmmoProvider

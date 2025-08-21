@@ -33,6 +33,7 @@
     availableModes:
     - SemiAuto
     - FullAuto
+    weaponRecoil: 0.30
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/smg.ogg
     defaultDirection: 1, 0
