@@ -1,2 +1,10 @@
 ent-BaseMagazineBoxImprovised = improvised ammunition box (.any)
     .desc = This looks suspiciously like a .20 magazine box with a crude bullet drawing on top. Mixing ammo is not advised.
+ent-MagazineBoxImprovisedPistol = ammunition box (.35 auto improvised)
+    .desc = This looks suspiciously like a .20 magazine box with a crude bullet drawing on top. Mixing ammo is not advised.
+ent-MagazineBoxImprovisedRifle = improvised ammunition box (.30 rifle improvised)
+    .desc = This looks suspiciously like a .20 magazine box with a crude bullet drawing on top. Mixing ammo is not advised.
+ent-MagazineBoxImprovisedMagnum = improvised ammunition box (.45 magnum improvised)
+    .desc = This looks suspiciously like a .20 magazine box with a crude bullet drawing on top. Mixing ammo is not advised.
+ent-MagazineBoxImprovisedShotgun = improvised ammunition box (.50 pellet improvised)
+    .desc = This looks suspiciously like a .20 magazine box with a crude bullet drawing on top. Mixing ammo is not advised.

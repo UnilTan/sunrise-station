@@ -1,6 +1,7 @@
 research-discipline-biochemical = Биохимия
 research-technology-basic-surgery = Базовая хирургия
 research-technology-basic-cyberlimbs = Базовые кибер-конечности
+research-technology-bluespace-ammo = Bluespace Syringegun Ammo
 research-technology-implant-extractor = Извлечение имплантов
 research-technology-advanced-surgery = Продвинутая хирургия
 research-technology-mechanized-medical-treatment = Механизированное лечение

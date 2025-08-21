@@ -17,6 +17,7 @@ tts-voice-name-scp-049 = SCP-049
 tts-voice-name-scp-079 = SCP-079
 tts-voice-name-ludvig = [Юбубер] Людвиг А.
 tts-voice-name-icarus-revenge = [Lust-Модератор] IcarusRevenge
+tts-voice-name-heartstone-thrud = [Heartstone] Трад
 tts-voice-name-hearthstone-thrud = [Hearthstone] Трад
 tts-voice-name-kendrick = [SS14] Kendrick
 tts-voice-name-splikzerys = [SUNRISE] SplikZerys

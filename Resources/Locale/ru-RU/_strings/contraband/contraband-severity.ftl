@@ -3,6 +3,7 @@ contraband-examine-text-Restricted = [color=yellow]Этот предмет ог�
 contraband-examine-text-Restricted-department = [color=yellow]Этот предмет ограничен для { $departments }, и может считаться контрабандой.[/color]
 contraband-examine-text-Major = [color=red]Этот предмет считается крупной контрабандой.[/color]
 contraband-examine-text-GrandTheft = [color=red]Этот предмет является ценным объектом для агентов Синдиката![/color]
+contraband-examine-text-Highly-Illegal = [color=red]This item is highly illegal contraband![/color]
 contraband-examine-text-Syndicate = [color=crimson]Этот предмет является высоко нелегальной контрабандой Синдиката![/color]
 contraband-examine-text-Magical = [color=#b337b3]Этот предмет является высоко нелегальной магической контрабандой![/color]
 contraband-examine-text-avoid-carrying-around = [color=red][italic]Вам, вероятно, стоит избегать видимого ношения этого без уважительной причины.[/italic][/color]

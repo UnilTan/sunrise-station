@@ -26,6 +26,7 @@ lathe-category-maints = Обслуживание
 lathe-category-steel = Сталь
 lathe-category-white = Белый
 lathe-category-wood = Дерево
+lathe-category-marble = Marble
 # Science
 lathe-category-mechs = Мехи
 lathe-category-modules = Модули

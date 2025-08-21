@@ -48,9 +48,25 @@ class YAMLExtractor:
         data = fluent_file.read_data()
         parsed = parser.parse(data)
         parsed.body = [e for e in parsed.body if not (isinstance(e, ast.Message) and e.id.name == entry_id)]
-        fluent_file.save_data(serializer.serialize(parsed))
-        rel_path = os.path.relpath(file_path, project.base_dir_path)
-        logging.debug(f'Удален дублирующийся элемент {entry_id} из {rel_path}')
+        
+        # Check if file will be empty after removal
+        has_messages = any(isinstance(e, ast.Message) for e in parsed.body)
+        
+        if not has_messages:
+            # File will be empty, remove it entirely
+            try:
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+                    rel_path = os.path.relpath(file_path, project.base_dir_path)
+                    logging.info(f'Удален пустой файл после удаления элемента {entry_id}: {rel_path}')
+            except Exception as e:
+                rel_path = os.path.relpath(file_path, project.base_dir_path)
+                logging.error(f"Ошибка при удалении пустого файла {rel_path}: {str(e)}")
+        else:
+            # File still has content, save it
+            fluent_file.save_data(serializer.serialize(parsed))
+            rel_path = os.path.relpath(file_path, project.base_dir_path)
+            logging.debug(f'Удален дублирующийся элемент {entry_id} из {rel_path}')
 
     def execute(self):
         self.scan_existing_locale_files()
@@ -77,6 +93,9 @@ class YAMLExtractor:
         if self.entries_to_remove:
             for path, entry_id in tqdm(self.entries_to_remove, desc="Удаление дублей"):
                 self.remove_entry_from_file(path, entry_id)
+
+        # Cleanup empty directories after processing
+        self.cleanup_empty_directories()
 
     def get_serialized_fluent_from_yaml_elements(self, yaml_elements):
         fluent_serialized_messages = []
@@ -171,6 +190,40 @@ class YAMLExtractor:
         # Serialize the merged entries back to the file
         merged_parsed = ast.Resource(body=list(merged_entries.values()))
         fluent_file.save_data(serializer.serialize(merged_parsed))
+
+    def cleanup_empty_directories(self):
+        """Remove empty directories in locale folders"""
+        locale_dirs = [project.en_locale_prototypes_dir_path, project.ru_locale_prototypes_dir_path]
+        
+        for locale_dir in locale_dirs:
+            if os.path.exists(locale_dir):
+                self._remove_empty_dirs_recursive(locale_dir, locale_dir)
+
+    def _remove_empty_dirs_recursive(self, directory, base_dir):
+        """Recursively remove empty directories, but don't remove the base directory itself"""
+        if not os.path.exists(directory):
+            return
+            
+        # First, recursively process subdirectories
+        try:
+            for item in os.listdir(directory):
+                item_path = os.path.join(directory, item)
+                if os.path.isdir(item_path):
+                    self._remove_empty_dirs_recursive(item_path, base_dir)
+        except PermissionError:
+            return
+        
+        # Then check if current directory is empty and can be removed
+        # Don't remove the base locale directory itself (_prototypes)
+        if directory != base_dir:
+            try:
+                if not os.listdir(directory):  # Directory is empty
+                    os.rmdir(directory)
+                    rel_path = os.path.relpath(directory, project.base_dir_path)
+                    logging.info(f"Удалена пустая папка: {rel_path}")
+            except (OSError, PermissionError) as e:
+                rel_path = os.path.relpath(directory, project.base_dir_path)
+                logging.debug(f"Не удалось удалить папку {rel_path}: {e}")
 
 logging.basicConfig(level=logging.INFO)
 project = Project()

@@ -19,6 +19,11 @@ chem-master-window-buffer-label = буфер:
 chem-master-window-buffer-all-amount = Всё
 chem-master-window-buffer-empty-text = Буфер пуст.
 chem-master-window-buffer-low-text = Недостаточно раствора в буфере
+#starlight start
+chem-master-window-beaker-empty-text = The Beaker is empty.
+chem-master-window-beaker-low-text = Not enough solution in the Beaker.
+chem-master-window-beaker-label = Beaker
+#starlight end
 chem-master-window-transfer-button = Перенести
 chem-master-window-discard-button = Уничтожить
 chem-master-window-packaging-text = Упаковка
@@ -26,6 +31,8 @@ chem-master-current-text-label = Метка:
 chem-master-window-pills-label = Таблетка:
 chem-master-window-pill-type-label = Тип таблеток:
 chem-master-window-pills-number-label = Кол-во:
+chem-master-window-patches-label = Patches:
+chem-master-window-patches-number-label = Count:
 chem-master-window-dose-label = Дозировка (ед.):
 chem-master-window-create-button = Создать
 chem-master-window-bottles-label = Бутылочки:

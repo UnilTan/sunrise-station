@@ -29,6 +29,11 @@ network-configurator-ui-count-label =
         [few] устройства
        *[other] устройств
     }.
+network-configurator-text-set = Set
+network-configurator-text-add = Add
+network-configurator-text-clear = Clear
+network-configurator-text-copy = Copy
+network-configurator-text-show = Show
 network-configurator-name-set = Установить
 network-configurator-name-add = Добавить
 network-configurator-name-edit = Изменить
@@ -41,6 +46,9 @@ network-configurator-tooltip-add = Добавление в список целе
 network-configurator-tooltip-edit = Редактирование списка целевых устройств
 network-configurator-tooltip-clear = Очистка списка целевых устройств
 network-configurator-tooltip-copy = Копирование списка целевых устройств в мультитул
+# command
+cmd-clearnetworklinkoverlays-desc = Clear all network link overlays.
+cmd-clearnetworklinkoverlays-help = Usage: clearnetworklinkoverlays
 network-configurator-tooltip-show = Показывать голографическую визуализацию списка целевых устройств
 # examine
 network-configurator-examine-mode-link = [color=red]Соединение[/color]

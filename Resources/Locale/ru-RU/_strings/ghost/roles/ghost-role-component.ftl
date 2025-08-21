@@ -39,6 +39,8 @@ ghost-role-information-mouse-name = Мышь
 ghost-role-information-mouse-description = Голодная и озорная мышь.
 ghost-role-information-mothroach-name = Таракамоль
 ghost-role-information-mothroach-description = Милая озорная таракамоль.
+ghost-role-information-moproach-name = Moproach
+ghost-role-information-moproach-description = A cute mothroach with more cute moplike shoes on its feet.
 ghost-role-information-snail-name = Улитка
 ghost-role-information-snail-description = Маленькая улитка, которая не против немного повисеть в космосе. Просто оставайтесь на сетке!
 ghost-role-information-snailspeed-name = Улитка
@@ -242,6 +244,8 @@ ghost-role-information-gingerbread-description =
     Распространяйте патоку и всем хорошего настроения.
 ghost-role-information-wizard-name = Маг
 ghost-role-information-wizard-desc = ТЫ НАСТОЯЩИЙ МАГ! Покажи станции, на что способна твоя магия.
+ghost-role-information-emotional-support-scurret-name = Emotional Support Scurret
+ghost-role-information-emotional-support-scurret-description = Support the crew, be adorable, say "wa" a lot.
 ghost-role-information-tomatokiller-name = Помидор-Убийца
 ghost-role-information-tomatokiller-description = Этот маленький помидор будет служить ботанику до конца его жизни... то есть, пару минут.
 ghost-role-information-disaster-victim-name = Жертва катастрофы

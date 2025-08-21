@@ -29,5 +29,15 @@ hud-chatbox-channel-Radio = Рация
 hud-chatbox-channel-Notifications = Уведомления
 hud-chatbox-channel-Server = Сервер
 hud-chatbox-channel-Visual = Визуальный
+hud-chatbox-highlights = Highlights:
+hud-chatbox-highlights-button = Submit
+hud-chatbox-highlights-tooltip =
+    The words need to be separated by a newline,
+    if wrapped around " they will be highlighted
+    only if separated by spaces or punctuation.
+hud-chatbox-highlights-placeholder =
+    McHands
+    "Judge"
+    Medical
 hud-chatbox-channel-Damage = Повреждения
 hud-chatbox-channel-Unspecified = Неопределённый

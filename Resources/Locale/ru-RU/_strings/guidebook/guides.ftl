@@ -20,6 +20,7 @@ guide-entry-signalvalve = Сигнальный клапан
 guide-entry-pneumaticvalve = Пневмоклапан
 guide-entry-passivegate = Пассивная заслонка
 guide-entry-mixingandfiltering = Смешивание и фильтрация
+guide-entry-ressureregulator = Pressure Regulator
 guide-entry-gascanisters = Газовые баллоны
 guide-entry-thermomachines = Термомашины
 guide-entry-gascondensing = Конденсация газа

@@ -14,3 +14,7 @@ ent-StatusEffectDrowsiness = сонливость
     .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectSeeingRainbow = галлюцинации
     .desc = { ent-MobStatusEffectDebuff.desc }
+ent-StatusEffectWoozy = woozy
+    .desc = { ent-MobStatusEffectDebuff.desc }
+ent-StatusEffectDrunk = drunk
+    .desc = { ent-StatusEffectWoozy.desc }

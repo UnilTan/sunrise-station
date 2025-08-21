@@ -28,6 +28,8 @@ ui-vote-trusted-users-notice = Вы должны быть призраком в 
 ui-vote-abuse-warning =
     Внимание!
     Злоупотребление системой голосования может привести к бессрочному бану!
+cmd-votemenu-desc = Opens the voting menu.
+cmd-votemenu-help = Usage: votemenu
 ui-vote-fluff = На основе Robust™ СЗИ-НСД
 
 ## Vote menu command

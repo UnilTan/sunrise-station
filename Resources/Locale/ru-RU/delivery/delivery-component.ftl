@@ -19,6 +19,9 @@ delivery-teleporter-empty = { $entity } пуст.
 delivery-teleporter-empty-verb = заберите посылки
 # modifiers
 delivery-priority-examine = [color=orange]В ПРИОРИТЕТЕ![/color]. У вас осталось [color=orange]{ $time }[/color] чтобы получить бонус.
+delivery-priority-delivered-examine = This is a [color=orange]priority { $type }[/color]. It got delivered on time.
 delivery-priority-expired-examine = [color=orange]В ПРИОРИТЕТЕ![/color]. Кажется, у вас закончилось время..
 delivery-fragile-examine = [color=red]ОСТОРОЖНО ХРУПКОЕ![/color]. Принесите в сохраности чтобы получить бонус.
 delivery-fragile-broken-examine = [color=red]ОСТОРОЖНО ХРУПКОЕ![/color]. Кажется там что-то уже разбилось...
+delivery-bomb-examine = This is a [color=purple]bomb { $type }[/color]. Oh no.
+delivery-bomb-primed-examine = This is a [color=purple]bomb { $type }[/color]. Reading this is a bad use of your time.

@@ -19,6 +19,14 @@ class File:
 
     def save_data(self, file_data: typing.AnyStr):
         os.makedirs(os.path.dirname(self.full_path), exist_ok=True)
+        
+        # Ensure file ends with exactly one newline
+        if file_data and not file_data.endswith('\n'):
+            file_data += '\n'
+        elif file_data.endswith('\n\n'):
+            # Remove extra newlines at the end, keeping only one
+            file_data = file_data.rstrip('\n') + '\n'
+        
         file = open(self.full_path, 'w', encoding='utf8')
         file.write(file_data)
         file.close()

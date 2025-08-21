@@ -2,6 +2,7 @@ ent-BaseMagazineBoxRifle = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-MagazineBoxRifleBig = ящик патронов (5,56мм)
     .desc = { ent-BaseMagazineBoxRifle.desc }
+    .suffix = Big
 ent-MagazineBoxRifleSP = ammunition box (.20 rifle SP)
     .desc = { ent-BaseMagazineBoxRifle.desc }
 ent-MagazineBoxRifleHP = ammunition box (.20 rifle HP)

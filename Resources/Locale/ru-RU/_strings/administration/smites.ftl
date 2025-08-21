@@ -57,6 +57,7 @@ admin-smite-super-bonk-name = СуперБонк
 admin-smite-super-bonk-lite-name = СуперБонк-Лайт
 admin-smite-terminate-name = Экстерминировать
 admin-smite-super-slip-name = Суперскольжение
+admin-smite-crawler-name = Crawler
 admin-smite-omni-accent-name = Омни-акцент
 admin-smite-random-death-name = Случайная смерть
 
@@ -101,6 +102,7 @@ admin-smite-garbage-can-description = Превратите цель в мусо�
 admin-trick-unbolt-description = Разболтирует целевой шлюз.
 admin-smite-super-bonk-description = Заставляет цель удариться о каждый стол на станции и за её пределами.
 admin-smite-terminate-description = Создаёт экстерминатора с ролью призрака, с единственной задачей - убить выбранную цель.
+admin-smite-crawler-description = Makes the target fall down and be unable to stand up. Remove their hands too for added effect!
 admin-smite-super-slip-description = Очень сильно поскальзывает цель.
 admin-smite-omni-accent-description = Заставляет цель говорить практически со всеми доступными акцентами.
 admin-smite-random-death-description = Случайно выбирает очень трудно восстанавливаемую смерть.
