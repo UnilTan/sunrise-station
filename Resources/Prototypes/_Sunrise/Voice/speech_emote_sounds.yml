@@ -141,6 +141,8 @@
       collection: MaleCry
     Whistle:
       collection: Whistles
+    Oink:
+      path: /Audio/Animals/pig_oink.ogg
   params:
     variation: 0.125
 

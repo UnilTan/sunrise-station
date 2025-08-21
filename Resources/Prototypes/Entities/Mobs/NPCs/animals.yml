@@ -3821,6 +3821,15 @@
       path: /Audio/Animals/pig_oink.ogg
   - type: ReplacementAccent
     accent: pig
+  - type: Speech
+    speechSounds: UnisexSwine
+    speechVerb: Pig
+    allowedEmotes: ['Oink']
+  - type: Vocal
+    sounds:
+      Male: UnisexSwine
+      Female: UnisexSwine
+      Unsexed: UnisexSwine
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
