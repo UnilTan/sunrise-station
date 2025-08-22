@@ -1118,6 +1118,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.2
     baseSprintSpeed: 6 # sunrise-edit
+  - type: CanMoveInAir
+  - type: MovementAlwaysTouching
   - type: Reflect
     reflectProb: 0.65
     spread: 180
