@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.Preferences;
 using Content.Shared.Roles.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -208,6 +209,20 @@ public abstract class SharedJobSystem : EntitySystem
     {
         MindTryGetJobName(mindId, out var name);
         return name;
+    }
+
+    /// <summary>
+    ///     Gets the localized job name considering alternative titles from character profile.
+    ///     Returns the alternative title if one is selected, otherwise returns the default job name.
+    /// </summary>
+    public string GetJobName(JobPrototype job, HumanoidCharacterProfile? profile)
+    {
+        if (profile?.JobAlternativeTitles.TryGetValue(job.ID, out var alternativeTitle) == true)
+        {
+            return Loc.GetString(alternativeTitle);
+        }
+        
+        return job.LocalizedName;
     }
 
     public bool CanBeAntag(ICommonSession player)

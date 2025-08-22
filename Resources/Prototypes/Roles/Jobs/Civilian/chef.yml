@@ -3,6 +3,10 @@
   name: job-name-chef
   description: job-description-chef
   playTimeTracker: JobChef
+  alternativeTitles:
+    - job-alt-title-chef-cook
+    - job-alt-title-chef-culinary-artist
+    - job-alt-title-chef-gastronomer
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian

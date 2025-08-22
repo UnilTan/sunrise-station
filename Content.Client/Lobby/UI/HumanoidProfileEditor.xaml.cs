@@ -1065,6 +1065,10 @@ namespace Content.Client.Lobby.UI
                     icon.Texture = _sprite.Frame0(jobIcon.Icon);
                     selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
 
+                    // Setup alternative titles if any are available
+                    var selectedAltTitle = Profile?.JobAlternativeTitles.GetValueOrDefault(job.ID);
+                    selector.SetupAlternativeTitles(job.AlternativeTitles, job.LocalizedName, selectedAltTitle);
+
                     if (_requirements.IsRoleBanned(new[] { $"Job:{job.ID}" }, out var banReason, out var expirationTime))
                     {
                         selector.LockDueToBan(banReason, expirationTime);

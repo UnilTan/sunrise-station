@@ -39,6 +39,12 @@ namespace Content.Shared.Roles
         public string LocalizedName => Loc.GetString(Name);
 
         /// <summary>
+        ///     Alternative titles for this job that players can choose from.
+        /// </summary>
+        [DataField("alternativeTitles")]
+        public List<string> AlternativeTitles { get; private set; } = new();
+
+        /// <summary>
         ///     The name of this job as displayed to players.
         /// </summary>
         [DataField("description")]

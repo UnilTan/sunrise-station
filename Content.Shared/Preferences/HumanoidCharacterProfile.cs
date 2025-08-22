@@ -43,6 +43,13 @@ namespace Content.Shared.Preferences
         };
 
         /// <summary>
+        /// Alternative job titles selected by the player for each job.
+        /// Keys are job prototype IDs, values are localization keys for the selected alternative title.
+        /// </summary>
+        [DataField]
+        private Dictionary<ProtoId<JobPrototype>, string> _jobAlternativeTitles = new();
+
+        /// <summary>
         /// Antags we have opted in to.
         /// </summary>
         [DataField]
@@ -115,6 +122,11 @@ namespace Content.Shared.Preferences
         public IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> JobPriorities => _jobPriorities;
 
         /// <summary>
+        /// <see cref="_jobAlternativeTitles"/>
+        /// </summary>
+        public IReadOnlyDictionary<ProtoId<JobPrototype>, string> JobAlternativeTitles => _jobAlternativeTitles;
+
+        /// <summary>
         /// <see cref="_antagPreferences"/>
         /// </summary>
         public IReadOnlySet<ProtoId<AntagPrototype>> AntagPreferences => _antagPreferences;
@@ -143,6 +155,7 @@ namespace Content.Shared.Preferences
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
+            Dictionary<ProtoId<JobPrototype>, string> jobAlternativeTitles,
             PreferenceUnavailableMode preferenceUnavailable,
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
@@ -159,6 +172,7 @@ namespace Content.Shared.Preferences
             Appearance = appearance;
             SpawnPriority = spawnPriority;
             _jobPriorities = jobPriorities;
+            _jobAlternativeTitles = jobAlternativeTitles;
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
@@ -192,6 +206,7 @@ namespace Content.Shared.Preferences
                 other.Appearance.Clone(),
                 other.SpawnPriority,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
+                new Dictionary<ProtoId<JobPrototype>, string>(other.JobAlternativeTitles),
                 other.PreferenceUnavailable,
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
@@ -397,6 +412,25 @@ namespace Content.Shared.Preferences
             };
         }
 
+        public HumanoidCharacterProfile WithJobAlternativeTitle(ProtoId<JobPrototype> jobId, string titleKey)
+        {
+            var dictionary = new Dictionary<ProtoId<JobPrototype>, string>(_jobAlternativeTitles);
+            
+            if (string.IsNullOrEmpty(titleKey))
+            {
+                dictionary.Remove(jobId);
+            }
+            else
+            {
+                dictionary[jobId] = titleKey;
+            }
+
+            return new(this)
+            {
+                _jobAlternativeTitles = dictionary,
+            };
+        }
+
         public HumanoidCharacterProfile WithPreferenceUnavailable(PreferenceUnavailableMode mode)
         {
             return new(this) { PreferenceUnavailable = mode };
@@ -507,6 +541,7 @@ namespace Content.Shared.Preferences
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
+            if (!_jobAlternativeTitles.SequenceEqual(other._jobAlternativeTitles)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
@@ -677,6 +712,18 @@ namespace Content.Shared.Preferences
                 _jobPriorities.Add(job, priority);
             }
 
+            // Validate and clean up job alternative titles
+            _jobAlternativeTitles.Clear();
+            foreach (var (jobId, titleKey) in JobAlternativeTitles)
+            {
+                // Only keep alternative titles for jobs that exist and have that alternative title available
+                if (prototypeManager.TryIndex(jobId, out var jobProto) && 
+                    jobProto.AlternativeTitles.Contains(titleKey))
+                {
+                    _jobAlternativeTitles.Add(jobId, titleKey);
+                }
+            }
+
             PreferenceUnavailable = prefsUnavailableMode;
 
             _antagPreferences.Clear();
@@ -788,6 +835,7 @@ namespace Content.Shared.Preferences
         {
             var hashCode = new HashCode();
             hashCode.Add(_jobPriorities);
+            hashCode.Add(_jobAlternativeTitles);
             hashCode.Add(_antagPreferences);
             hashCode.Add(_traitPreferences);
             hashCode.Add(_loadouts);

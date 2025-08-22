@@ -22,12 +22,15 @@ public sealed partial class RequirementsSelector : BoxContainer
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     private readonly RadioOptions<int> _options;
     private readonly StripeBack _lockStripe;
+    private RadioOptions<string>? _alternativeTitleOptions;
     private List<ProtoId<GuideEntryPrototype>>? _guides;
 
     public event Action<int>? OnSelected;
+    public event Action<string>? OnAlternativeTitleSelected;
     public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
     public int Selected => _options.SelectedId;
+    public string? SelectedAlternativeTitle => _alternativeTitleOptions?.SelectedId;
 
     public RequirementsSelector()
     {
@@ -108,6 +111,50 @@ public sealed partial class RequirementsSelector : BoxContainer
         OptionsContainer.AddChild(_lockStripe);
     }
 
+    /// <summary>
+    /// Sets up alternative title selection for the job.
+    /// </summary>
+    public void SetupAlternativeTitles(List<string> alternativeTitles, string defaultTitle, string? selectedTitle = null)
+    {
+        if (alternativeTitles.Count == 0)
+        {
+            AlternativeTitleContainer.Visible = false;
+            return;
+        }
+
+        AlternativeTitleContainer.Visible = true;
+        
+        _alternativeTitleOptions = new RadioOptions<string>(RadioOptionsLayout.Horizontal)
+        {
+            FirstButtonStyle = StyleBase.ButtonOpenRight,
+            ButtonStyle = StyleBase.ButtonOpenBoth,
+            LastButtonStyle = StyleBase.ButtonOpenLeft,
+            HorizontalExpand = true,
+        };
+        
+        _alternativeTitleOptions.GenerateItem = GenerateAlternativeTitleButton;
+
+        // Add default title option
+        _alternativeTitleOptions.AddItem(Loc.GetString("humanoid-profile-editor-job-alternative-title-default"), "");
+        
+        // Add alternative titles
+        foreach (var titleKey in alternativeTitles)
+        {
+            _alternativeTitleOptions.AddItem(Loc.GetString(titleKey), titleKey);
+        }
+
+        _alternativeTitleOptions.OnItemSelected += args =>
+        {
+            _alternativeTitleOptions.Select(args.Id);
+            OnAlternativeTitleSelected?.Invoke(args.Id);
+        };
+
+        // Select the current title
+        _alternativeTitleOptions.Select(selectedTitle ?? "");
+
+        AlternativeTitleOptionsContainer.AddChild(_alternativeTitleOptions);
+    }
+
     public void LockRequirements(FormattedMessage requirements)
     {
         var requirementsLabel = new Label()
@@ -181,8 +228,23 @@ public sealed partial class RequirementsSelector : BoxContainer
         };
     }
 
+    private Button GenerateAlternativeTitleButton(string text, string value)
+    {
+        return new Button
+        {
+            Text = text,
+            MinWidth = 90,
+            HorizontalExpand = true,
+        };
+    }
+
     public void Select(int id)
     {
         _options.Select(id);
+    }
+
+    public void SelectAlternativeTitle(string titleKey)
+    {
+        _alternativeTitleOptions?.Select(titleKey ?? "");
     }
 }
