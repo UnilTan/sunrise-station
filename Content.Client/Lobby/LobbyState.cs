@@ -433,7 +433,10 @@ namespace Content.Client.Lobby
         private void SetLobbyParallax(string lobbyParallax)
         {
             if (!_prototypeManager.TryIndex<LobbyParallaxPrototype>(lobbyParallax, out var lobbyParallaxPrototype))
+            {
+                Logger.Warning($"Failed to find LobbyParallaxPrototype with ID: {lobbyParallax}");
                 return;
+            }
 
             if (Lobby == null)
             {
@@ -450,7 +453,8 @@ namespace Content.Client.Lobby
             if (_cfg.GetCVar(SunriseCCVars.LobbyBackgroundType) != "Random")
                 return;
 
-            SetLobbyBackgroundType(_gameTicker.LobbyType!);
+            if (_gameTicker.LobbyType != null)
+                SetLobbyBackgroundType(_gameTicker.LobbyType);
         }
 
         private void UpdateLobbyAnimation()
@@ -458,7 +462,8 @@ namespace Content.Client.Lobby
             if (_cfg.GetCVar(SunriseCCVars.LobbyAnimation) != "Random")
                 return;
 
-            SetLobbyAnimation(_gameTicker.LobbyAnimation!);
+            if (_gameTicker.LobbyAnimation != null)
+                SetLobbyAnimation(_gameTicker.LobbyAnimation);
         }
 
         private void UpdateLobbyArt()
@@ -466,7 +471,8 @@ namespace Content.Client.Lobby
             if (_cfg.GetCVar(SunriseCCVars.LobbyArt) != "Random")
                 return;
 
-            SetLobbyArt(_gameTicker.LobbyArt!);
+            if (_gameTicker.LobbyArt != null)
+                SetLobbyArt(_gameTicker.LobbyArt);
         }
 
         private void UpdateLobbyParallax()
@@ -474,7 +480,8 @@ namespace Content.Client.Lobby
             if (_cfg.GetCVar(SunriseCCVars.LobbyParallax) != "Random")
                 return;
 
-            SetLobbyParallax(_gameTicker.LobbyParallax!);
+            if (_gameTicker.LobbyParallax != null)
+                SetLobbyParallax(_gameTicker.LobbyParallax);
         }
 
         // Sunrise-end
