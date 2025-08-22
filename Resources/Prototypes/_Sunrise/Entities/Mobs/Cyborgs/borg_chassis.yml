@@ -409,6 +409,10 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 5
+  - type: BorgCuffed
+  - type: BorgDisguise
+    originalState: spider
+  - type: BorgStealth
   - type: InnateItem
     worldTargetActions:
     - EmagInnateItem
