@@ -5,6 +5,7 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Silicons.Borgs;
@@ -24,9 +25,9 @@ public sealed class BorgEnergySystem : EntitySystem
     {
         base.Initialize();
         
-        // Listen for when weapons with batteries are fired
-        SubscribeLocalEvent<BatteryComponent, GunShotEvent>(OnBatteryWeaponFired);
-        SubscribeLocalEvent<BatteryComponent, OnEmptyGunShotEvent>(OnBatteryWeaponEmptyFired);
+        // Listen for gun shot events on guns with batteries
+        SubscribeLocalEvent<GunComponent, GunShotEvent>(OnGunFired);
+        SubscribeLocalEvent<GunComponent, OnEmptyGunShotEvent>(OnGunEmptyFired);
         
         // Listen for module changes to manage battery behavior
         SubscribeLocalEvent<ItemBorgModuleComponent, BorgModuleSelectedEvent>(OnBorgModuleSelected);
@@ -34,10 +35,13 @@ public sealed class BorgEnergySystem : EntitySystem
     }
 
     /// <summary>
-    /// When a weapon with a battery is fired, check if it's borg-held and consume borg energy
+    /// When any weapon is fired, check if it's borg-held and consume borg energy
     /// </summary>
-    private void OnBatteryWeaponFired(EntityUid weaponUid, BatteryComponent weaponBattery, ref GunShotEvent args)
+    private void OnGunFired(EntityUid weaponUid, GunComponent gun, ref GunShotEvent args)
     {
+        if (!TryComp<BatteryComponent>(weaponUid, out var weaponBattery))
+            return;
+
         if (!TryGetBorgForWeapon(weaponUid, out var borgUid))
             return;
 
@@ -50,8 +54,11 @@ public sealed class BorgEnergySystem : EntitySystem
     /// <summary>
     /// Handle empty shot events similarly
     /// </summary>
-    private void OnBatteryWeaponEmptyFired(EntityUid weaponUid, BatteryComponent weaponBattery, ref OnEmptyGunShotEvent args)
+    private void OnGunEmptyFired(EntityUid weaponUid, GunComponent gun, ref OnEmptyGunShotEvent args)
     {
+        if (!TryComp<BatteryComponent>(weaponUid, out var weaponBattery))
+            return;
+
         if (!TryGetBorgForWeapon(weaponUid, out var borgUid))
             return;
 
