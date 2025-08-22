@@ -1,0 +1,19 @@
+<cartridges:TimerUiFragment xmlns:cartridges="clr-namespace:Content.Client.CartridgeLoader.Cartridges"
+                             xmlns="https://spacestation14.io" Margin="1 0 2 0">
+    <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <!-- Timer creation section -->
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <LineEdit Name="TimerNameInput" HorizontalExpand="True" PlaceholderText="{Loc 'timer-app-timer-name'}" SetHeight="32"/>
+            <LineEdit Name="MinutesInput" SetWidth="60" PlaceholderText="{Loc 'timer-app-minutes'}" SetHeight="32"/>
+            <Label Text=":" VerticalAlignment="Center" HorizontalAlignment="Center" SetWidth="10"/>
+            <LineEdit Name="SecondsInput" SetWidth="60" PlaceholderText="{Loc 'timer-app-seconds'}" SetHeight="32"/>
+            <Button Name="CreateButton" Text="{Loc 'timer-app-create'}" SetHeight="32"/>
+        </BoxContainer>
+        
+        <!-- Timer list -->
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Orientation="Vertical" Name="TimersContainer" HorizontalExpand="True" VerticalExpand="True"/>
+        </ScrollContainer>
+    </BoxContainer>
+</cartridges:TimerUiFragment>

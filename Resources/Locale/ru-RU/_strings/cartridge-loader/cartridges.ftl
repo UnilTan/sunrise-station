@@ -21,6 +21,7 @@ log-probe-printout-device = Просканированное устройств�
 log-probe-printout-header = Последние логи:
 log-probe-printout-entry = #{ $number } / { $time } / { $accessor }
 astro-nav-program-name = АстроНав
+timer-program-name = Таймер
 med-tek-program-name = МедТек
 # Wanted list cartridge
 wanted-list-program-name = Список разыскиваемых
@@ -83,3 +84,9 @@ wanted-list-status-label = [color=darkgray]статус:[/color] { $status ->
 wanted-list-history-table-time-col = Время
 wanted-list-history-table-reason-col = Нарушение
 wanted-list-history-table-initiator-col = Инициатор
+
+# Timer cartridge
+timer-app-timer-name = Название таймера
+timer-app-minutes = Мин
+timer-app-seconds = Сек
+timer-app-create = Создать

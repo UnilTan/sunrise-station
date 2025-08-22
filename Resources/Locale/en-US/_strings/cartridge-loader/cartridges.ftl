@@ -27,6 +27,8 @@ log-probe-printout-entry = #{$number} / {$time} / {$accessor}
 
 astro-nav-program-name = AstroNav
 
+timer-program-name = Timer
+
 med-tek-program-name = MedTek
 
 # NanoTask cartridge
@@ -98,3 +100,9 @@ wanted-list-status-label = [color=darkgray]status:[/color] {$status ->
 wanted-list-history-table-time-col = Time
 wanted-list-history-table-reason-col = Crime
 wanted-list-history-table-initiator-col = Initiator
+
+# Timer cartridge
+timer-app-timer-name = Timer name
+timer-app-minutes = Min
+timer-app-seconds = Sec
+timer-app-create = Create

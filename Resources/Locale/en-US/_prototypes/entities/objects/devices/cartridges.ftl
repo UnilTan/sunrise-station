@@ -16,3 +16,5 @@ ent-MedTekCartridge = MedTek cartridge
     .desc = A program that provides medical diagnostic tools.
 ent-AstroNavCartridge = AstroNav cartridge
     .desc = A program for navigation that provides GPS coordinates.
+ent-TimerCartridge = timer cartridge
+    .desc = A program for creating and managing timers and alarms.
