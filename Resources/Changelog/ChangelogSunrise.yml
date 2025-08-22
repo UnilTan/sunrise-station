@@ -21076,9 +21076,3 @@
   id: 1378
   time: '2025-08-20T22:04:23.0000000+00:00'
   url: https://github.com/space-sunrise/sunrise-station/pull/2877
-- author: Copilot (AI)
-  changes:
-  - message: "Команда adminwho теперь доступна всем игрокам. Администраторы со статусом stealth остаются скрытыми для обычных игроков."
-    type: Tweak
-  id: 1379
-  time: '2025-08-20T22:30:00.0000000+00:00'
