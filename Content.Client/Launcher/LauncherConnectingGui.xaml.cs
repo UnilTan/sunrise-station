@@ -1,6 +1,8 @@
 using System.Linq;
 using Content.Client._Sunrise.ServersHub;
+using Content.Client.Parallax;
 using Content.Client.Stylesheets;
+using Content.Shared._Sunrise.Lobby;
 using Content.Shared._Sunrise.ServersHub;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
@@ -11,6 +13,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Configuration;
 using Robust.Shared.IoC;
+using Robust.Shared.Log;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -88,6 +91,9 @@ namespace Content.Client.Launcher
             LastNetDisconnectedArgsChanged(edim.LastNetDisconnectedArgs);
 
             _serversHubManager.ServersDataListChanged += RefreshServersHubHeader; // Sunrise-Edit
+            
+            // Apply user parallax preferences to loading screen if not "Random"
+            ApplyUserParallaxPreferences();
         }
 
         // Sunrise-Start
@@ -231,6 +237,28 @@ namespace Content.Client.Launcher
         private void ConnectionStateChanged(ClientConnectionState state)
         {
             ConnectStatus.Text = Loc.GetString($"connecting-state-{state}");
+        }
+
+        /// <summary>
+        /// Apply user parallax preferences to the loading screen if the user has chosen a specific parallax (not "Random").
+        /// This ensures the loading screen respects user preferences just like the lobby does.
+        /// </summary>
+        private void ApplyUserParallaxPreferences()
+        {
+            var userParallax = _cfg.GetCVar(SunriseCCVars.LobbyParallax);
+            if (userParallax != "Random")
+            {
+                // Find the parallax prototype and apply it
+                if (_prototype.TryIndex<LobbyParallaxPrototype>(userParallax, out var parallaxPrototype))
+                {
+                    LoadingParallax.ParallaxPrototype = parallaxPrototype.Parallax;
+                    Logger.Debug($"Applied user parallax '{parallaxPrototype.Parallax}' to loading screen");
+                }
+                else
+                {
+                    Logger.Warning($"Failed to find LobbyParallaxPrototype with ID: {userParallax} for loading screen");
+                }
+            }
         }
     }
 }
