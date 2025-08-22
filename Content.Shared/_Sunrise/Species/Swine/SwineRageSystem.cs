@@ -4,6 +4,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Audio;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.Species.Swine;
@@ -15,6 +17,7 @@ public sealed class SwineRageSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -81,8 +84,10 @@ public sealed class SwineRageSystem : EntitySystem
         // Add initial rage stack
         AddRageStack(uid, rage);
         
+        // Play rage activation scream
+        _audio.PlayPredicted(new SoundCollectionSpecifier("SwineScreams"), uid, uid);
+        
         // TODO: Add visual effects (red eyes, sprite shaking, screen filter)
-        // TODO: Play rage activation sound
         
         Dirty(uid, rage);
     }

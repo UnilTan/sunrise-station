@@ -8,17 +8,6 @@ namespace Content.Shared._Sunrise.Species.Swine;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SwineTraitsComponent : Component
 {
-    /// <summary>
-    /// Multiplier for healing received from food consumption
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float FoodHealingMultiplier = 1.5f;
-    
-    /// <summary>
-    /// Whether the swine can eat any edible items regardless of species restrictions
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool CanEatAnything = true;
     
     /// <summary>
     /// Multiplier for doafter times

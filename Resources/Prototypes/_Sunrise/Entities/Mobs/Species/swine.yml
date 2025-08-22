@@ -56,8 +56,11 @@
       Female: UnisexSwine
       Unsexed: UnisexSwine
   - type: SwineAccent
-  - type: SwineTraits  # Add swine-specific traits
+  - type: SwineTraits  # Add swine-specific traits (footstep sounds, etc.)
   - type: SwineRage    # Add rage system
+  - type: FoodHealing  # Add universal food healing system
+    healingMultiplier: 1.5
+    baseHealingRate: 0.02
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Swine

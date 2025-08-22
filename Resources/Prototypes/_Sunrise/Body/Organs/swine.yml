@@ -8,3 +8,9 @@
         stomach:
           maxVol: 200
     - type: Stomach
+    - type: Metabolizer
+      maxReagents: 3
+      metabolizerTypes: [ Animal, Human ]  # Omnivorous - can digest both animal and human food
+      groups:
+      - id: Food
+      - id: Drink
