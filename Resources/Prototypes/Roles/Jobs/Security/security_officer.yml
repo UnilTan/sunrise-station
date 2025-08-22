@@ -5,6 +5,8 @@
   playTimeTracker: JobSecurityOfficer
   alternativeTitles:
     - job-alt-title-security-officer-senior-officer
+  alternativeTitleRequirements:
+    job-alt-title-security-officer-senior-officer: 10800 # 3 hours as Security Officer
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

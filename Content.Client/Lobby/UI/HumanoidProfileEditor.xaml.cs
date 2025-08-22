@@ -1067,7 +1067,8 @@ namespace Content.Client.Lobby.UI
 
                     // Setup alternative titles if any are available
                     var selectedAltTitle = Profile?.JobAlternativeTitles.GetValueOrDefault(job.ID);
-                    selector.SetupAlternativeTitles(job.AlternativeTitles, job.LocalizedName, selectedAltTitle);
+                    var unlockedTitles = _requirements.GetUnlockedAlternativeTitles(job);
+                    selector.SetupAlternativeTitles(unlockedTitles, job.LocalizedName, selectedAltTitle);
 
                     if (_requirements.IsRoleBanned(new[] { $"Job:{job.ID}" }, out var banReason, out var expirationTime))
                     {

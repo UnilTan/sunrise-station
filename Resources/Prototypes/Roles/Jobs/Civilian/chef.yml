@@ -7,6 +7,10 @@
     - job-alt-title-chef-cook
     - job-alt-title-chef-culinary-artist
     - job-alt-title-chef-gastronomer
+  alternativeTitleRequirements:
+    job-alt-title-chef-cook: 3600 # 1 hour as Chef
+    job-alt-title-chef-culinary-artist: 7200 # 2 hours as Chef
+    job-alt-title-chef-gastronomer: 14400 # 4 hours as Chef
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian

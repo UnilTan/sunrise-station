@@ -5,6 +5,8 @@
   playTimeTracker: JobHeadOfSecurity
   alternativeTitles:
     - job-alt-title-hos-deputy-head-of-security
+  alternativeTitleRequirements:
+    job-alt-title-hos-deputy-head-of-security: 21600 # 6 hours as HoS
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden

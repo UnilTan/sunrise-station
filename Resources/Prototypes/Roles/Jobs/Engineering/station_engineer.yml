@@ -5,6 +5,8 @@
   playTimeTracker: JobStationEngineer
   alternativeTitles:
     - job-alt-title-engineer-deputy-ce
+  alternativeTitleRequirements:
+    job-alt-title-engineer-deputy-ce: 14400 # 4 hours as Station Engineer
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering

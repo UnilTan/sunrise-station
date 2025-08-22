@@ -48,6 +48,7 @@ humanoid-profile-editor-antag-preference-no-button = No
 humanoid-profile-editor-job-priority-high-button = High
 humanoid-profile-editor-job-priority-medium-button = Medium
 humanoid-profile-editor-job-priority-low-button = Low
+humanoid-profile-editor-job-alternative-title-default = Default
 humanoid-profile-editor-job-priority-never-button = Never
 humanoid-profile-editor-job-alternative-title-label = Alternative title:
 humanoid-profile-editor-job-alternative-title-default = Default

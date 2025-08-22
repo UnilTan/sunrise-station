@@ -254,4 +254,41 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     {
         return IsBanned(GetRoleBans(), roles, out banReason, out expirationTime);
     }
+
+    /// <summary>
+    /// Checks if an alternative job title is unlocked based on playtime requirements.
+    /// </summary>
+    public bool IsAlternativeTitleUnlocked(JobPrototype job, string alternativeTitle)
+    {
+        // If no requirements are defined for this title, it's unlocked by default
+        if (!job.AlternativeTitleRequirements.TryGetValue(alternativeTitle, out var requiredTime))
+            return true;
+
+        // Check if role timers are enabled
+        if (!_cfg.GetCVar(CCVars.GameRoleTimers))
+            return true;
+
+        // Get the playtime for this specific job
+        var jobPlayTime = _roles.TryGetValue(job.PlayTimeTracker, out var playTime) ? playTime : TimeSpan.Zero;
+
+        return jobPlayTime >= requiredTime;
+    }
+
+    /// <summary>
+    /// Gets the unlocked alternative titles for a job based on playtime requirements.
+    /// </summary>
+    public List<string> GetUnlockedAlternativeTitles(JobPrototype job)
+    {
+        var unlockedTitles = new List<string>();
+        
+        foreach (var title in job.AlternativeTitles)
+        {
+            if (IsAlternativeTitleUnlocked(job, title))
+            {
+                unlockedTitles.Add(title);
+            }
+        }
+        
+        return unlockedTitles;
+    }
 }

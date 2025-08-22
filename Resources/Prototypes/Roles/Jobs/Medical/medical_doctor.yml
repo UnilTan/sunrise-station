@@ -5,6 +5,8 @@
   playTimeTracker: JobMedicalDoctor
   alternativeTitles:
     - job-alt-title-medical-doctor-deputy-cmo
+  alternativeTitleRequirements:
+    job-alt-title-medical-doctor-deputy-cmo: 14400 # 4 hours as Medical Doctor
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical

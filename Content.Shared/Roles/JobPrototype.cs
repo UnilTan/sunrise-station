@@ -45,6 +45,13 @@ namespace Content.Shared.Roles
         public List<string> AlternativeTitles { get; private set; } = new();
 
         /// <summary>
+        ///     Playtime requirements for alternative titles. Maps alternative title keys to required playtime in seconds.
+        ///     If a title is not in this dictionary, it's available immediately.
+        /// </summary>
+        [DataField("alternativeTitleRequirements")]
+        public Dictionary<string, TimeSpan> AlternativeTitleRequirements { get; private set; } = new();
+
+        /// <summary>
         ///     The name of this job as displayed to players.
         /// </summary>
         [DataField("description")]
