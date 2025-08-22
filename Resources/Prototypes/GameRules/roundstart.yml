@@ -211,10 +211,11 @@
   - type: TraitorRule
   # TODO: codewords in yml
   # TODO: uplink in yml
-  - type: AntagRandomObjectives
+  - type: TraitorObjectives
     sets:
     - groups: TraitorObjectiveGroups
     maxDifficulty: 5
+    maxKillObjectives: 1
   - type: AntagSelection
     agentName: traitor-round-end-agent-name
   - type: DynamicRuleCost

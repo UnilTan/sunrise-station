@@ -418,3 +418,26 @@
         - KillPersonCondition
         - KeepAliveCondition
   - type: FrameTargetCondition
+
+- type: entity
+  parent: [BaseTraitorObjective, BaseTargetObjective]
+  id: DamageTargetObjective
+  description: Deal significant damage to them without killing them. They must survive the encounter.
+  components:
+  - type: Objective
+    difficulty: 1.5
+  - type: TargetObjective
+    title: objective-condition-damage-title
+  - type: PickRandomPerson
+    filters:
+    # Can't have multiple objectives targeting the same person
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - DamageTargetCondition
+        - KillPersonCondition
+        - KeepAliveCondition
+        - FrameTargetCondition
+  - type: DamageTargetCondition
+    requiredDamage: 100
+    requireAlive: true

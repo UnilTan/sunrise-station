@@ -1,1 +1,2 @@
 objective-condition-frame-title = Frame {$targetName}, {CAPITALIZE($job)} and get them arrested
+objective-condition-damage-title = Deal 100 damage to {$targetName}, {CAPITALIZE($job)} without killing them

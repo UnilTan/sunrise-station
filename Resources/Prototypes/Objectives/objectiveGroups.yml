@@ -57,6 +57,7 @@
   id: TraitorObjectiveGroupMisconducts
   weights:
     FrameTargetObjective: 1
+    DamageTargetObjective: 1
 
 #Thief groups
 - type: weightedRandom

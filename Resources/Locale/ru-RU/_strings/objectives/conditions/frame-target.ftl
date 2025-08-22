@@ -1,1 +1,2 @@
 objective-condition-frame-title = Подставить {$targetName}, должность: {CAPITALIZE($job)} и добиться их ареста
+objective-condition-damage-title = Нанести 100 урона {$targetName}, должность: {CAPITALIZE($job)} не убивая их
