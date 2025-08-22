@@ -36,3 +36,4 @@ names-guard-rat-title-dataset-17 = Кровехвост
 names-guard-rat-title-dataset-18 = Чумозуб
 names-guard-rat-title-dataset-19 = Копьекоготь
 names-guard-rat-title-dataset-20 = Гнилоус
+names-guard-rat-title-dataset-21 = Кайзер

@@ -36,3 +36,4 @@ names-guard-rat-title-dataset-17 = Bloodtail
 names-guard-rat-title-dataset-18 = Plaguetooth
 names-guard-rat-title-dataset-19 = Spearclaw
 names-guard-rat-title-dataset-20 = Rotwhisker
+names-guard-rat-title-dataset-21 = Kaiser

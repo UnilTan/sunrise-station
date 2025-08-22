@@ -12,7 +12,7 @@
   # Sunrise edit end
   - type: CombatMode
   - type: MovementSpeedModifier
-    baseSprintSpeed : 5
+    baseSprintSpeed: 5
     baseWalkSpeed: 4.5
   - type: InputMover
   - type: MobMover
@@ -70,7 +70,7 @@
     requiredLegs: 1 # TODO: More than 1 leg
   - type: Hunger # probably should be prototyped
     thresholds:
-      Overfed: 200
+      Overfed: 250 # Sunrise-Edit
       Okay: 150
       Peckish: 100
       Starving: 50
@@ -342,6 +342,8 @@
     name: ghost-panel-antagonist-rats-name
     description: ghost-panel-antagonist-rats-description
     priority: 110
+  - type: TypingIndicator
+    proto: lizard
   - type: VentCrawler # Sunrise-edit
   - type: CombatMode
   - type: MovementSpeedModifier
@@ -363,7 +365,7 @@
     bleedReductionAmount: 1
     bloodRefreshAmount: 1.5
     bloodReagent: Blood
-    bloodMaxVolume: 150
+    bloodMaxVolume: 200
   - type: Reactive
     groups:
       Flammable: [Touch]
@@ -494,7 +496,7 @@
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable
   - type: NightVision
   - type: RandomMetadata
