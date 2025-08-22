@@ -41,6 +41,7 @@ public abstract class SharedRatKingSystem : EntitySystem
             return;
 
         _action.AddAction(uid, ref component.ActionRaiseArmyEntity, component.ActionRaiseArmy, component: comp);
+        _action.AddAction(uid, ref component.ActionRaiseGuardEntity, component.ActionRaiseGuard, component: comp);
         _action.AddAction(uid, ref component.ActionDomainEntity, component.ActionDomain, component: comp);
         _action.AddAction(uid, ref component.ActionOrderStayEntity, component.ActionOrderStay, component: comp);
         _action.AddAction(uid, ref component.ActionOrderFollowEntity, component.ActionOrderFollow, component: comp);
@@ -57,12 +58,19 @@ public abstract class SharedRatKingSystem : EntitySystem
             if (TryComp(servant, out RatKingServantComponent? servantComp))
                 servantComp.King = null;
         }
+        
+        foreach (var guard in component.Guards)
+        {
+            if (TryComp(guard, out RatKingServantComponent? guardComp))
+                guardComp.King = null;
+        }
 
         if (!TryComp(uid, out ActionsComponent? comp))
             return;
 
         var actions = new Entity<ActionsComponent?>(uid, comp);
         _action.RemoveAction(actions, component.ActionRaiseArmyEntity);
+        _action.RemoveAction(actions, component.ActionRaiseGuardEntity);
         _action.RemoveAction(actions, component.ActionDomainEntity);
         _action.RemoveAction(actions, component.ActionOrderStayEntity);
         _action.RemoveAction(actions, component.ActionOrderFollowEntity);
@@ -87,7 +95,10 @@ public abstract class SharedRatKingSystem : EntitySystem
     private void OnServantShutdown(EntityUid uid, RatKingServantComponent component, ComponentShutdown args)
     {
         if (TryComp(component.King, out RatKingComponent? ratKingComponent))
+        {
             ratKingComponent.Servants.Remove(uid);
+            ratKingComponent.Guards.Remove(uid);
+        }
     }
 
     private void UpdateActions(EntityUid uid, RatKingComponent? component = null)
@@ -147,6 +158,11 @@ public abstract class SharedRatKingSystem : EntitySystem
         foreach (var servant in component.Servants)
         {
             UpdateServantNpc(servant, component.CurrentOrder);
+        }
+        
+        foreach (var guard in component.Guards)
+        {
+            UpdateServantNpc(guard, component.CurrentOrder);
         }
     }
 
