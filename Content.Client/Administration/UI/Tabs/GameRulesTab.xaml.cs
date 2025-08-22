@@ -14,6 +14,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Content.Client.Administration.UI.Tabs
 {
@@ -27,6 +28,7 @@ namespace Content.Client.Administration.UI.Tabs
 
         private readonly Dictionary<string, Control> _availableRuleControls = new();
         private readonly Dictionary<string, Control> _activeRuleControls = new();
+        private string _lastActiveRulesOutput = string.Empty;
 
         public GameRulesTab()
         {
@@ -89,13 +91,52 @@ namespace Content.Client.Administration.UI.Tabs
             ActiveRulesContainer.RemoveAllChildren();
             _activeRuleControls.Clear();
 
-            // Request active rules from server via console command
-            // This is a simple approach - in a real implementation you might want a proper network message
-            _console.ExecuteCommand("listgamerules");
+            // Parse active rules from the list - create sample data for testing
+            // In a real implementation, you'd want to create a proper network message for this
+            var activeRules = GetSampleActiveRules();
 
-            // For now, show a placeholder as we can't easily get the list synchronously
-            var placeholderLabel = new Label { Text = Loc.GetString("admin-game-rules-no-active") };
-            ActiveRulesContainer.AddChild(placeholderLabel);
+            if (activeRules.Count == 0)
+            {
+                var noActiveLabel = new Label { Text = Loc.GetString("admin-game-rules-no-active") };
+                ActiveRulesContainer.AddChild(noActiveLabel);
+                return;
+            }
+
+            foreach (var (ruleId, entityId, duration) in activeRules)
+            {
+                var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+                
+                var infoLabel = new Label 
+                { 
+                    Text = $"{ruleId} ({duration})",
+                    HorizontalExpand = true,
+                    ClipText = true,
+                    ToolTip = $"Entity ID: {entityId}"
+                };
+                
+                var endButton = new Button { Text = Loc.GetString("admin-game-rules-end-button") };
+                endButton.OnPressed += _ => EndGameRule(entityId);
+                
+                container.AddChild(infoLabel);
+                container.AddChild(endButton);
+                
+                ActiveRulesContainer.AddChild(container);
+                _activeRuleControls[entityId] = container;
+            }
+        }
+
+        // Sample data for testing - replace with real implementation
+        private List<(string ruleId, string entityId, string duration)> GetSampleActiveRules()
+        {
+            var sampleRules = new List<(string, string, string)>();
+            
+            // This is just sample data for demonstration
+            // In a real implementation, you would either:
+            // 1. Create a proper network message to get this data
+            // 2. Use the console output parsing (more complex)
+            // 3. Subscribe to game rule events
+            
+            return sampleRules;
         }
 
         private void StartGameRule(string ruleId)

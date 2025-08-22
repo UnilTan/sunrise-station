@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'admin-coordinate-input-title'}"
+                      MinSize="300 150"
+                      SetSize="350 180">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <Label Text="{Loc 'admin-coordinate-input-description'}" />
+        
+        <Control MinSize="0 10" />
+        
+        <GridContainer Columns="2" Margin="0 10 0 0">
+            <Label Text="{Loc 'admin-coordinate-input-x'}" VerticalAlignment="Center" />
+            <SpinBox Name="XCoordinate" Value="0" />
+            
+            <Label Text="{Loc 'admin-coordinate-input-y'}" VerticalAlignment="Center" />
+            <SpinBox Name="YCoordinate" Value="0" />
+        </GridContainer>
+        
+        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+            <Button Name="ConfirmButton" Text="{Loc 'admin-coordinate-input-confirm'}" Margin="0 0 5 0" />
+            <Button Name="CancelButton" Text="{Loc 'admin-coordinate-input-cancel'}" Margin="5 0 0 0" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>
