@@ -6,7 +6,6 @@ using Content.Shared.Preferences;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -20,7 +19,6 @@ public sealed class BorgVoiceSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IServerPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
