@@ -29,6 +29,21 @@ jobs:
       - name: Generate XAML previews
         id: preview
         run: |
+          # Check if any XAML files were actually changed
+          xaml_files=""
+          for file in ${{ steps.files.outputs.modified }} ${{ steps.files.outputs.added }} ${{ steps.files.outputs.removed }}; do
+            if [[ "$file" == *.xaml ]]; then
+              xaml_files="$xaml_files $file"
+            fi
+          done
+          
+          if [ -z "$xaml_files" ]; then
+            echo "No XAML files changed, skipping preview generation"
+            echo "skip_preview=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "Processing XAML files: $xaml_files"
           python3 ./.github/scripts/xaml-preview.py \
             --modified "${{ steps.files.outputs.modified }}" \
             --added "${{ steps.files.outputs.added }}" \
@@ -44,7 +59,7 @@ jobs:
           body-includes: 🎨 XAML Preview Bot
 
       - name: Create comment if it doesn't exist
-        if: steps.fc.outputs.comment-id == ''
+        if: steps.fc.outputs.comment-id == '' && steps.preview.outputs.skip_preview != 'true'
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.number }}
@@ -52,7 +67,7 @@ jobs:
             ${{ steps.preview.outputs.PREVIEW_CONTENT }}
 
       - name: Update comment if it exists
-        if: steps.fc.outputs.comment-id != ''
+        if: steps.fc.outputs.comment-id != '' && steps.preview.outputs.skip_preview != 'true'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -61,7 +76,7 @@ jobs:
             ${{ steps.preview.outputs.PREVIEW_CONTENT }}
 
       - name: Update comment to read that it has been edited
-        if: steps.fc.outputs.comment-id != ''
+        if: steps.fc.outputs.comment-id != '' && steps.preview.outputs.skip_preview != 'true'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}

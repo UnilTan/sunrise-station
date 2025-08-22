@@ -79,14 +79,22 @@ def format_file_info(file_path: str, info: Dict, change_type: str) -> str:
     
     # File size formatting
     size = info['file_size']
-    if size > 1024:
+    if size > 1024 * 1024:
+        size_str = f"{size / (1024 * 1024):.1f} MB"
+    elif size > 1024:
         size_str = f"{size / 1024:.1f} KB"
     else:
         size_str = f"{size} bytes"
     
     # Build summary
     summary_parts = []
-    summary_parts.append(f"**Root Element:** `{info.get('root_element', 'Unknown')}`")
+    
+    # Clean up root element name for better readability
+    root_element = info.get('root_element', 'Unknown')
+    if '}' in root_element:
+        root_element = root_element.split('}')[-1]
+    summary_parts.append(f"**Root Element:** `{root_element}`")
+    
     summary_parts.append(f"**Controls:** {len(info.get('controls', []))} types")
     summary_parts.append(f"**Size:** {size_str} ({info['line_count']} lines)")
     
@@ -95,6 +103,16 @@ def format_file_info(file_path: str, info: Dict, change_type: str) -> str:
         if len(info['controls']) > 10:
             controls_list += f" and {len(info['controls']) - 10} more"
         summary_parts.append(f"**Used Controls:** {controls_list}")
+    
+    # Show namespaces if interesting
+    namespaces = info.get('namespaces', {})
+    if namespaces and len(namespaces) > 1:  # More than just default namespace
+        ns_list = []
+        for ns, uri in namespaces.items():
+            if ns != 'default' and 'spacestation14.io' not in uri:
+                ns_list.append(f"`{ns}`")
+        if ns_list:
+            summary_parts.append(f"**Custom Namespaces:** {', '.join(ns_list[:5])}")
     
     summary = '\n'.join(f"- {part}" for part in summary_parts)
     
@@ -128,9 +146,14 @@ def format_file_info(file_path: str, info: Dict, change_type: str) -> str:
 def process_xaml_files(modified_files: List[str], added_files: List[str], removed_files: List[str]) -> str:
     """Process all XAML files and generate preview content."""
     
+    # Filter to only include XAML files
+    modified_xaml = [f for f in modified_files if f.endswith('.xaml')]
+    added_xaml = [f for f in added_files if f.endswith('.xaml')]
+    removed_xaml = [f for f in removed_files if f.endswith('.xaml')]
+    
     preview_content = "# 🎨 XAML Preview Bot\n\n"
     
-    total_files = len(modified_files) + len(added_files) + len(removed_files)
+    total_files = len(modified_xaml) + len(added_xaml) + len(removed_xaml)
     
     if total_files == 0:
         return preview_content + "No XAML files were changed in this PR.\n"
@@ -138,21 +161,24 @@ def process_xaml_files(modified_files: List[str], added_files: List[str], remove
     preview_content += f"Found **{total_files}** XAML file(s) changed in this PR:\n\n"
     
     # Process added files
-    for file_path in added_files:
-        if file_path.endswith('.xaml') and os.path.exists(file_path):
+    for file_path in added_xaml:
+        if os.path.exists(file_path):
             info = parse_xaml_file(file_path)
             preview_content += format_file_info(file_path, info, 'added')
+        else:
+            preview_content += f"## ✨ Added: `{file_path}`\n\n⚠️ **File not found in current checkout**\n\n"
     
     # Process modified files
-    for file_path in modified_files:
-        if file_path.endswith('.xaml') and os.path.exists(file_path):
+    for file_path in modified_xaml:
+        if os.path.exists(file_path):
             info = parse_xaml_file(file_path)
             preview_content += format_file_info(file_path, info, 'modified')
+        else:
+            preview_content += f"## 📝 Modified: `{file_path}`\n\n⚠️ **File not found in current checkout**\n\n"
     
     # Process removed files
-    for file_path in removed_files:
-        if file_path.endswith('.xaml'):
-            preview_content += f"## 🗑️ Removed: `{file_path}`\n\n"
+    for file_path in removed_xaml:
+        preview_content += f"## 🗑️ Removed: `{file_path}`\n\n"
     
     # Add footer
     preview_content += "\n---\n"
