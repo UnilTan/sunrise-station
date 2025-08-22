@@ -2,7 +2,7 @@
   id: NewPlayer
   name: guide-entry-newplayer
   priority: 0
-  text: "/ServerInfo/Guidebook/NewPlayer/NewPlayer.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/NewPlayer/NewPlayer.xml"
   children:
   - Controls
   - CharacterCreation
@@ -10,19 +10,19 @@
 - type: guideEntry
   id: Controls
   name: guide-entry-controls
-  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Controls.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/NewPlayer/Controls/Controls.xml"
   children:
   - Radio
 
 - type: guideEntry
   id: Radio
   name: guide-entry-radio
-  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Radio.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/NewPlayer/Controls/Radio.xml"
 
 - type: guideEntry
   id: CharacterCreation
   name: guide-entry-charactercreation
-  text: "/ServerInfo/Guidebook/NewPlayer/CharacterCreation.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/NewPlayer/CharacterCreation.xml"
   children:
   - YourFirstCharacter
   - Species
