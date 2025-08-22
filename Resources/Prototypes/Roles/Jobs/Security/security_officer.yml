@@ -4,8 +4,14 @@
   description: job-description-security
   playTimeTracker: JobSecurityOfficer
   alternativeTitles:
-    - title: job-alt-title-security-officer-senior-officer
-      playtimeRequirement: 10800 # 3 hours as Security Officer
+    - title: job-alt-title-security-officer-corporal-first-class
+      playtimeRequirement: 36000 # 10 hours as Security Officer
+    - title: job-alt-title-security-officer-senior-corporal
+      playtimeRequirement: 360000 # 100 hours as Security Officer
+    - title: job-alt-title-security-officer-master-corporal
+      playtimeRequirement: 900000 # 250 hours as Security Officer
+    - title: job-alt-title-security-officer-sergeant
+      playtimeRequirement: 1800000 # 500 hours as Security Officer
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

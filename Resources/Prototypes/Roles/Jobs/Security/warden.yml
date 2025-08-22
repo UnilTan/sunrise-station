@@ -3,6 +3,17 @@
   name: job-name-warden
   description: job-description-warden
   playTimeTracker: JobWarden
+  alternativeTitles:
+    - title: job-alt-title-warden-first-sergeant
+      playtimeRequirement: 180000 # 50 hours as Warden
+    - title: job-alt-title-warden-lieutenant
+      playtimeRequirement: 360000 # 100 hours as Warden
+    - title: job-alt-title-warden-captain
+      playtimeRequirement: 900000 # 250 hours as Warden
+    - title: job-alt-title-warden-major
+      playtimeRequirement: 1800000 # 500 hours as Warden
+    - title: job-alt-title-warden-lieutenant-colonel
+      playtimeRequirement: 3600000 # 1000 hours as Warden
   requirements:
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer

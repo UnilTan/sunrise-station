@@ -4,8 +4,10 @@
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
   alternativeTitles:
-    - title: job-alt-title-hos-deputy-head-of-security
-      playtimeRequirement: 21600 # 6 hours as HoS
+    - title: job-alt-title-hos-lieutenant-colonel
+      playtimeRequirement: 360000 # 100 hours as HoS
+    - title: job-alt-title-hos-colonel
+      playtimeRequirement: 900000 # 250 hours as HoS
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden

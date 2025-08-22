@@ -3,6 +3,9 @@
   name: job-name-cadet
   description: job-description-cadet
   playTimeTracker: JobSecurityCadet
+  alternativeTitles:
+    - title: job-alt-title-security-cadet-private-first-class
+      playtimeRequirement: 36000 # 10 hours as Security Cadet
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 18000 #5 hrs # Sunrise-RoleTime
