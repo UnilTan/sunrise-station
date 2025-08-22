@@ -468,6 +468,11 @@
     Telecrystal: 12 #you're buying bulk so its a 25% discount, so no additional random discount over it
   categories:
   - UplinkExplosives
+  # Sunrise-Start: Limit purchases to prevent spam
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
+  # Sunrise-End
 
 - type: listing
   id: UplinkEmpGrenade
@@ -1441,6 +1446,10 @@
     whitelist:
       tags:
       - NukeOpsUplink
+  # Sunrise-Start: Limit reinforcements to prevent spam
+  - !type:ListingLimitedStockCondition
+    stock: 2
+  # Sunrise-End
 
 # Move to _Sunrise
 #- type: listing

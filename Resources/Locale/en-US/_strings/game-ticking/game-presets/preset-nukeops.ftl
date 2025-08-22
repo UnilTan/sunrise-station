@@ -33,3 +33,7 @@ nukeops-no-one-ready = No players readied up! Can't start Nukeops.
 nukeops-role-commander = Commander
 nukeops-role-agent = Corpsman
 nukeops-role-operator = Operator
+
+# Sunrise-Start: Centralized uplink system
+nukeops-uplink-disabled-left-base = Uplink disabled: operatives have left the base. No further purchases allowed.
+# Sunrise-End

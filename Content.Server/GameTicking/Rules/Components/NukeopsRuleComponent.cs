@@ -66,59 +66,14 @@ public sealed partial class NukeopsRuleComponent : Component
     [DataField]
     public FixedPoint2 WarTcAmountPerNukie = 45; // Sunrise-edit
 
-    // Sunrise-Start
     [DataField]
     public int RoundstartOperatives;
 
+    // Sunrise-Start: Centralized uplink system
+    /// <summary>
+    /// Reference to the commander's uplink entity for centralized purchases
+    /// </summary>
     public EntityUid? UplinkEnt;
-
-    /// <summary>
-    /// Whether operatives should spawn as delayed ghost roles instead of roundstart
-    /// </summary>
-    [DataField]
-    public bool DelayedSpawning = true;
-
-    /// <summary>
-    /// Minimum time before operatives can spawn as ghost roles
-    /// </summary>
-    [DataField]
-    public TimeSpan MinSpawnDelay = TimeSpan.FromMinutes(30);
-
-    /// <summary>
-    /// Maximum time before operatives can spawn as ghost roles
-    /// </summary>
-    [DataField]
-    public TimeSpan MaxSpawnDelay = TimeSpan.FromMinutes(45);
-
-    /// <summary>
-    /// When the operatives become available as ghost roles
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan? OperativesAvailableTime;
-
-    /// <summary>
-    /// Whether ghost role spawning has been enabled
-    /// </summary>
-    [DataField]
-    public bool GhostRolesEnabled = false;
-
-    /// <summary>
-    /// Maximum time operatives have to complete their mission once deployed
-    /// </summary>
-    [DataField]
-    public TimeSpan MissionTimeLimit = TimeSpan.FromMinutes(40);
-
-    /// <summary>
-    /// When the mission timer started (first operative leaves outpost or deploys)
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan? MissionStartTime;
-
-    /// <summary>
-    /// Set of warning thresholds (in minutes) that have already been announced
-    /// </summary>
-    [DataField]
-    public HashSet<int> TimerWarningsGiven = new();
     // Sunrise-End
 
     /// <summary>

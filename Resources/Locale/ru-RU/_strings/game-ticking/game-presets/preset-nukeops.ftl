@@ -29,3 +29,7 @@ nukeops-role-commander = Командир
 nukeops-role-agent = Агент
 nukeops-role-medic = Медик
 nukeops-role-operator = Оператор
+
+# Sunrise-Start: Centralized uplink system
+nukeops-uplink-disabled-left-base = Аплинк отключен: оперативники покинули базу. Дальнейшие покупки невозможны.
+# Sunrise-End

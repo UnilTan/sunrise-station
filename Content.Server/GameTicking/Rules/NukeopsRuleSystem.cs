@@ -31,12 +31,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Roles;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
-using Content.Server.Ghost.Roles; // Sunrise-Edit: For ghost role spawning
-using Content.Server.Ghost.Roles.Components; // Sunrise-Edit: For ghost role components
-using Content.Server.Ghost.Roles.Events; // Sunrise-Edit: For GhostRoleSpawnerUsedEvent
-using Content.Shared.Ghost.Roles; // Sunrise-Edit: For ghost role shared
-using Content.Shared.Ghost.Roles.Components; // Sunrise-Edit: For GhostRoleMobSpawnerComponent
-using Content.Server._Sunrise.NukeOps; // Sunrise-Edit: For NukeOpsCommanderSpawnerComponent
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -50,7 +44,6 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly UplinkSystem _uplinkSystem = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRoleSystem = default!; // Sunrise-Edit: For delayed spawning
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
@@ -80,50 +73,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
-        
-        // Sunrise-Start: Handle commander spawning for centralized uplinks
-        SubscribeLocalEvent<GhostRoleComponent, GhostRoleSpawnerUsedEvent>(OnGhostRoleSpawned);
-        // Sunrise-End
     }
-
-    // Sunrise-Start: Add Update method for delayed spawning
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = QueryActiveRules();
-        while (query.MoveNext(out var uid, out _, out var nukeops, out _))
-        {
-            // Handle delayed operative spawning
-            if (nukeops.DelayedSpawning && !nukeops.GhostRolesEnabled && nukeops.OperativesAvailableTime.HasValue)
-            {
-                if (Timing.CurTime >= nukeops.OperativesAvailableTime.Value)
-                {
-                    EnableOperativeGhostRoles((uid, nukeops));
-                }
-            }
-
-            // Handle mission timer
-            if (nukeops.MissionStartTime.HasValue)
-            {
-                var timeElapsed = Timing.CurTime - nukeops.MissionStartTime.Value;
-                var timeRemaining = nukeops.MissionTimeLimit - timeElapsed;
-                
-                if (timeRemaining <= TimeSpan.Zero)
-                {
-                    // Mission time limit exceeded - operatives fail
-                    nukeops.WinConditions.Add(WinCondition.AllNukiesDead);
-                    SetWinType((uid, nukeops), WinType.CrewMajor);
-                }
-                else
-                {
-                    // Send periodic warnings
-                    CheckMissionTimeWarnings((uid, nukeops), timeRemaining);
-                }
-            }
-        }
-    }
-    // Sunrise-End
 
     protected override void Started(EntityUid uid,
         NukeopsRuleComponent component,
@@ -144,17 +94,6 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             return;
 
         component.TargetStation = RobustRandom.Pick(eligible);
-
-        // Sunrise-Start: Setup delayed spawning if enabled
-        if (component.DelayedSpawning)
-        {
-            var delay = RobustRandom.NextFloat(
-                (float)component.MinSpawnDelay.TotalSeconds,
-                (float)component.MaxSpawnDelay.TotalSeconds);
-            
-            component.OperativesAvailableTime = Timing.CurTime + TimeSpan.FromSeconds(delay);
-        }
-        // Sunrise-End
     }
 
     #region Event Handlers
@@ -392,10 +331,12 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
             nukeops.LeftOutpost = true;
             
-            // Sunrise-Start: Start mission timer when operatives deploy
-            if (nukeops.DelayedSpawning && !nukeops.MissionStartTime.HasValue)
+            // Sunrise-Start: Notify that uplink is no longer usable after leaving base
+            if (nukeops.UplinkEnt != null)
             {
-                StartMissionTimer((uid, nukeops));
+                // TODO: Implement uplink disabling mechanism when operatives leave base
+                var msg = Loc.GetString("nukeops-uplink-disabled-left-base");
+                _popupSystem.PopupEntity(msg, nukeops.UplinkEnt.Value);
             }
             // Sunrise-End
         }
@@ -445,48 +386,6 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             }
         }
     }
-
-    // Sunrise-Start: Handle ghost role spawning for centralized uplink
-    private void OnGhostRoleSpawned(EntityUid uid, GhostRoleComponent component, GhostRoleSpawnerUsedEvent args)
-    {
-        // Check if this is a nuclear operative commander spawner
-        if (!TryComp<NukeOpsCommanderSpawnerComponent>(uid, out var commanderSpawner))
-            return;
-
-        if (commanderSpawner.AssociatedRule == null)
-            return;
-
-        // Set up the centralized uplink for the commander
-        if (TryComp<NukeopsRuleComponent>(commanderSpawner.AssociatedRule.Value, out var nukeops))
-        {
-            SetupCentralizedUplink(args.Spawned, nukeops);
-        }
-    }
-
-    private void SetupCentralizedUplink(EntityUid commander, NukeopsRuleComponent nukeops)
-    {
-        // Calculate total TCs for the team
-        var totalTCs = nukeops.WarTcAmountPerNukie * 4; // Assume 4 operatives max
-
-        // Find or create uplink on commander
-        var uplink = SetupUplink(commander, nukeops);
-        if (uplink == null)
-            return;
-
-        // Add the calculated TCs
-        var store = EnsureComp<StoreComponent>(uplink.Value);
-        _store.TryAddCurrency(
-            new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, totalTCs } },
-            uplink.Value,
-            store);
-
-        // Add purchase limits component
-        EnsureComp<NukeOpsPurchaseLimitsComponent>(uplink.Value);
-
-        // Store reference for later use
-        nukeops.UplinkEnt = uplink.Value;
-    }
-    // Sunrise-End
 
     #endregion Event Handlers
 
@@ -707,133 +606,4 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
         return null;
     }
-
-    // Sunrise-Start: Methods for delayed spawning and mission timing
-    private void EnableOperativeGhostRoles(Entity<NukeopsRuleComponent> ent)
-    {
-        var nukeops = ent.Comp;
-        
-        if (nukeops.GhostRolesEnabled)
-            return;
-
-        nukeops.GhostRolesEnabled = true;
-
-        // Get the outpost where spawners should be located
-        var outpost = GetOutpost((ent.Owner, null));
-        if (outpost == null)
-            return;
-
-        // Create ghost roles for nuclear operatives
-        CreateOperativeGhostRoles(ent, outpost.Value);
-
-        // Announce that operatives are now available
-        // TODO: Add localization strings for this
-    }
-
-    private void CreateOperativeGhostRoles(Entity<NukeopsRuleComponent> ent, EntityUid outpost)
-    {
-        var nukeops = ent.Comp;
-
-        // Find spawn points on the outpost
-        var spawnQuery = EntityQueryEnumerator<NukeOperativeSpawnerComponent, TransformComponent>();
-        var spawns = new List<EntityUid>();
-
-        while (spawnQuery.MoveNext(out var spawnerUid, out var spawner, out var transform))
-        {
-            if (transform.GridUid != outpost)
-                continue;
-
-            spawns.Add(spawnerUid);
-        }
-
-        if (spawns.Count == 0)
-            return;
-
-        // Create commander ghost role
-        if (spawns.Count > 0)
-            CreateCommanderGhostRole(ent, spawns[0]);
-
-        // Create operative ghost roles  
-        var maxOperatives = Math.Min(3, spawns.Count - 1);
-        for (int i = 1; i <= maxOperatives && i < spawns.Count; i++)
-        {
-            CreateOperativeGhostRole(ent, spawns[i], i == 1); // First operative is medic
-        }
-    }
-
-    private void CreateCommanderGhostRole(Entity<NukeopsRuleComponent> ent, EntityUid spawnPoint)
-    {
-        var ghostRole = EnsureComp<GhostRoleComponent>(spawnPoint);
-        ghostRole.RoleName = Loc.GetString("roles-antag-nuclear-operative-commander-name");
-        ghostRole.RoleDescription = Loc.GetString("roles-antag-nuclear-operative-commander-objective");
-        
-        var spawner = EnsureComp<GhostRoleMobSpawnerComponent>(spawnPoint);
-        // For now, use a simple approach - we'll improve this later
-        spawner.Prototype = "MobHuman";
-
-        // Mark this as the commander spawner
-        var commanderMarker = EnsureComp<NukeOpsCommanderSpawnerComponent>(spawnPoint);
-        commanderMarker.AssociatedRule = ent.Owner;
-    }
-
-    private void CreateOperativeGhostRole(Entity<NukeopsRuleComponent> ent, EntityUid spawnPoint, bool isMedic)
-    {
-        var ghostRole = EnsureComp<GhostRoleComponent>(spawnPoint);
-        
-        if (isMedic)
-        {
-            ghostRole.RoleName = Loc.GetString("roles-antag-nuclear-operative-medic-name");
-            ghostRole.RoleDescription = Loc.GetString("roles-antag-nuclear-operative-medic-objective");
-        }
-        else
-        {
-            ghostRole.RoleName = Loc.GetString("roles-antag-nuclear-operative-name");
-            ghostRole.RoleDescription = Loc.GetString("roles-antag-nuclear-operative-objective");
-        }
-
-        var spawner = EnsureComp<GhostRoleMobSpawnerComponent>(spawnPoint);
-        spawner.Prototype = "MobHuman";
-    }
-
-    private void StartMissionTimer(Entity<NukeopsRuleComponent> ent)
-    {
-        var nukeops = ent.Comp;
-        
-        if (nukeops.MissionStartTime.HasValue)
-            return;
-
-        nukeops.MissionStartTime = Timing.CurTime;
-        
-        // TODO: Add UI notification that mission timer started
-        // TODO: Add localization for mission timer announcements
-    }
-
-    private void CheckMissionTimeWarnings(Entity<NukeopsRuleComponent> ent, TimeSpan timeRemaining)
-    {
-        var nukeops = ent.Comp;
-        
-        // Define warning thresholds (in minutes)
-        var warningThresholds = new[] { 30, 20, 10, 5, 3, 1 };
-        
-        foreach (var threshold in warningThresholds)
-        {
-            var thresholdTime = TimeSpan.FromMinutes(threshold);
-            
-            // Check if we've crossed this threshold and haven't warned about it yet
-            if (timeRemaining <= thresholdTime && !nukeops.TimerWarningsGiven.Contains(threshold))
-            {
-                nukeops.TimerWarningsGiven.Add(threshold);
-                
-                // Send warning announcement
-                var message = Loc.GetString("nukeops-mission-timer-warning", 
-                    ("minutes", threshold));
-                
-                // TODO: Send station-wide announcement
-                // For now, just log it
-                Log.Info($"Nuclear operative mission timer warning: {threshold} minutes remaining");
-                break; // Only send one warning per update
-            }
-        }
-    }
-    // Sunrise-End
 }

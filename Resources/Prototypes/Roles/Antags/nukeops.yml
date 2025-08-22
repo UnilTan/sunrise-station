@@ -108,50 +108,12 @@
   equipment:
     neck: SyndicateWhistle
     #outerClothing: ClothingOuterHardsuitSyndieCommanderBiocode # Sunrise-Edit
-    pocket1: BaseUplinkRadio600TC # Sunrise-Edit: Increased TC for centralized purchasing
+    pocket1: BaseUplinkRadio0TC
   inhand:
   - NukeOpsDeclarationOfWar
   - RemoteNukeOpShuttleController # Sunrise-Edit
 
-# Sunrise-Start: New centralized gear for delayed spawning
-- type: startingGear
-  id: SyndicateCommanderGearCentralized
-  parent: SyndicateOperativeGearFullNoUplink
-  equipment:
-    neck: SyndicateWhistle
-    #outerClothing: ClothingOuterHardsuitSyndieCommanderBiocode # Sunrise-Edit
-    pocket1: BaseUplinkRadio0TC # Will be set up by the rule system
-  inhand:
-  - NukeOpsDeclarationOfWar
-  - RemoteNukeOpShuttleController
 
-- type: startingGear
-  id: SyndicateOperativeGearCentralized
-  parent: SyndicateOperativeGearFullNoUplink
-  # No uplinks for non-commander operatives
-
-- type: startingGear
-  id: SyndicateOperativeMedicCentralized
-  parent: SyndicateOperativeMedicFull
-  equipment:
-    eyes: ClothingEyesHudSyndicateMedic
-    #outerClothing: ClothingOuterHardsuitSyndieMedicBiocode
-    #shoes: ClothingShoesBootsMagSyndie
-    id: SyndiAgentPDA
-    belt: ClothingBeltMilitaryWebbingMedSunriseFilled
-  # Remove uplink from storage
-  storage:
-    back:
-    - SyndiHypo
-    - SawAdvanced
-    - Cautery
-    - CombatKnife
-    - WeaponPistolViper
-    - PinpointerSyndicateNuclear
-    - HandheldHealthAnalyzer
-    - CombatMedipen
-    - DeathAcidifierImplanter
-# Sunrise-End
 
 - type: chameleonOutfit
   id: NukeopsCommanderOutfit
