@@ -14,10 +14,4 @@ public sealed partial class CultRuneBaseComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField("invokersMinCount")]
     public uint InvokersMinCount = 1;
-
-    /// <summary>
-    /// DNA of the entity that created this rune (for reference)
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField("creatorDna")]
-    public string? CreatorDna;
 }
