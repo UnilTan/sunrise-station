@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install Pillow
+          pip install Pillow requests
 
       - name: Generate XAML previews
         id: preview
@@ -61,20 +61,22 @@ jobs:
             fi
           done
           
-          # Generate text preview
+          # Upload images and get URLs for direct embedding
+          echo "Uploading images..."
+          python3 ./.github/scripts/upload_images_for_comment.py \
+            "xaml-previews" \
+            "${{ github.token }}" \
+            "${{ github.repository }}" \
+            "${{ github.event.number }}" \
+            > image_urls.json
+          
+          # Generate text preview with embedded images
           python3 ./.github/scripts/xaml-preview.py \
             --modified "${{ steps.files.outputs.modified }}" \
             --added "${{ steps.files.outputs.added }}" \
             --removed "${{ steps.files.outputs.removed }}" \
+            --image-urls "image_urls.json" \
             >> $GITHUB_OUTPUT
-
-      - name: Upload mockup images
-        if: steps.preview.outputs.skip_preview != 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: xaml-previews
-          path: xaml-previews/
-          retention-days: 7
 
       - name: Find existing comment
         uses: peter-evans/find-comment@v1
