@@ -81,8 +81,9 @@ public sealed class EmoteAnimationSystem : EntitySystem
 
         if (emoteId == "FallOnNeck")
         {
-            var damage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Blunt"), 100);
-            _damageableSystem.TryChangeDamage(uid, damage, true, useVariance: false, useModifier: false);
+            // Sunrise: Removed lethal damage from FallOnNeck emote to fix issue #2682
+            // Players should not die from random neck-breaking when using shotguns
+            // The emote animation and sound effects are preserved for immersion
         }
 
         component.AnimationId = emoteId;
