@@ -117,7 +117,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: state-laws }
+    icon: { sprite: Objects/Specific/Robotics/borgmodule.rsi, state: icon-xenoborg-cloak }
     itemIconStyle: NoItem
     useDelay: 5
     priority: 8
@@ -130,7 +130,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: state-laws }
+    icon: { sprite: Objects/Specific/Robotics/borgmodule.rsi, state: icon-xenoborg-cloak2 }
     itemIconStyle: NoItem
     useDelay: 3
     priority: 7

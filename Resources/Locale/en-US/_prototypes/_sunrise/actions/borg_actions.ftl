@@ -14,3 +14,7 @@ ent-PieThrow = { "" }
     .desc = { "" }
 ent-ActionViewCrewManifest = View Crew Manifest
     .desc = View the View crew manifest station.
+ent-BorgDisguise = Change Disguise
+    .desc = Cycle through different cyborg disguises to blend in.
+ent-BorgStealth = Toggle Stealth
+    .desc = Activate or deactivate your cloaking device to become invisible.
