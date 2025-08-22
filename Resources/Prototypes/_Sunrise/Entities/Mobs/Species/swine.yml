@@ -34,7 +34,7 @@
       100: Critical
       200: Dead
   - type: Stamina
-    critThreshold: 100
+    critThreshold: 120  # Increased stamina from 100 to 120
   - type: Fixtures
     fixtures:
       fix1:
@@ -56,6 +56,7 @@
       Female: UnisexSwine
       Unsexed: UnisexSwine
   - type: SwineAccent
+  - type: SwineTraits  # Add swine-specific traits
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Swine
