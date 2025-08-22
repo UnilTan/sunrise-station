@@ -242,8 +242,47 @@ namespace Content.Client.Lobby
             UpdateLobbyParallax();
             UpdateLobbyAnimation();
             UpdateLobbyArt();
+            
+            // Ensure user preferences take precedence over server suggestions
+            // when user has chosen specific values (not "Random")
+            ReapplyUserPreferences();
             // Sunrise-End
             UpdateLobbyUi();
+        }
+
+        /// <summary>
+        /// Re-applies user preferences that are set to specific values (not "Random").
+        /// This ensures user choices always take precedence over server suggestions.
+        /// </summary>
+        private void ReapplyUserPreferences()
+        {
+            // Re-apply user background type if not Random
+            var userBackgroundType = _cfg.GetCVar(SunriseCCVars.LobbyBackgroundType);
+            if (userBackgroundType != "Random")
+            {
+                SetLobbyBackgroundType(userBackgroundType);
+            }
+
+            // Re-apply user parallax if not Random
+            var userParallax = _cfg.GetCVar(SunriseCCVars.LobbyParallax);
+            if (userParallax != "Random")
+            {
+                SetLobbyParallax(userParallax);
+            }
+
+            // Re-apply user art if not Random
+            var userArt = _cfg.GetCVar(SunriseCCVars.LobbyArt);
+            if (userArt != "Random")
+            {
+                SetLobbyArt(userArt);
+            }
+
+            // Re-apply user animation if not Random
+            var userAnimation = _cfg.GetCVar(SunriseCCVars.LobbyAnimation);
+            if (userAnimation != "Random")
+            {
+                SetLobbyAnimation(userAnimation);
+            }
         }
 
         private void LobbyLateJoinStatusUpdated()
