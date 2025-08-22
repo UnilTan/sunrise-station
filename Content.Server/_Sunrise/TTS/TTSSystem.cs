@@ -5,6 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
+using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -137,7 +138,7 @@ public sealed partial class TTSSystem : EntitySystem
             !GetVoicePrototype(args.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice))
             return;
 
-        var soundData = await GenerateTTS(args.Message, protoVoice, isAnnounce: true);
+        var soundData = await GenerateTTS(args.Message, protoVoice, null, false, true);
         soundData ??= [];
         RaiseNetworkEvent(new AnnounceTtsEvent(soundData, args.AnnouncementSound), args.Source.RemovePlayers(_ignoredRecipients));
     }
@@ -180,7 +181,7 @@ public sealed partial class TTSSystem : EntitySystem
         if (!recipients.Recipients.Any())
             return;
 
-        var soundData = await GenerateTTS(message, voicePrototype);
+        var soundData = await GenerateTTS(message, voicePrototype, uid);
 
         if (soundData is null)
             return;
@@ -194,7 +195,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         // If it's a whisper into a radio, generate speech without whisper
         // attributes to prevent an additional speech synthesis event
-        var soundData = await GenerateTTS(message, voicePrototype);
+        var soundData = await GenerateTTS(message, voicePrototype, uid);
         if (soundData is null)
             return;
 
@@ -227,7 +228,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void HandleRadio(EntityUid[] uids, string message, TTSVoicePrototype voicePrototype)
     {
-        var soundData = await GenerateTTS(message, voicePrototype, isRadio: true);
+        var soundData = await GenerateTTS(message, voicePrototype, null, true);
         if (soundData is null)
             return;
 
@@ -235,7 +236,7 @@ public sealed partial class TTSSystem : EntitySystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private async Task<byte[]?> GenerateTTS(string text, TTSVoicePrototype voicePrototype, bool isRadio = false, bool isAnnounce = false)
+    private async Task<byte[]?> GenerateTTS(string text, TTSVoicePrototype voicePrototype, EntityUid? speaker = null, bool isRadio = false, bool isAnnounce = false)
     {
         try
         {
@@ -243,6 +244,9 @@ public sealed partial class TTSSystem : EntitySystem
             if (textSanitized == "") return null;
             if (char.IsLetter(textSanitized[^1]))
                 textSanitized += ".";
+
+            // Check if speaker is a cyborg to apply robot effect
+            var isBorg = speaker.HasValue && HasComp<BorgChassisComponent>(speaker.Value);
 
             if (isRadio)
             {
@@ -252,6 +256,11 @@ public sealed partial class TTSSystem : EntitySystem
             if (isAnnounce)
             {
                 return await _ttsManager.ConvertTextToSpeechAnnounce(voicePrototype, textSanitized);
+            }
+
+            if (isBorg)
+            {
+                return await _ttsManager.ConvertTextToSpeech(voicePrototype, textSanitized, "robot");
             }
 
             return await _ttsManager.ConvertTextToSpeech(voicePrototype, textSanitized);

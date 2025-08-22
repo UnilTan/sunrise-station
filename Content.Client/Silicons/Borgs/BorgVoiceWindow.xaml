@@ -1,0 +1,24 @@
+&lt;DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc 'borg-voice-window-title'}"
+               MinSize="320 200"
+               SetSize="320 200"&gt;
+    &lt;VBoxContainer&gt;
+        &lt;Label Text="{Loc 'borg-voice-window-description'}" 
+               Margin="5 5 5 0" /&gt;
+        
+        &lt;HSeparator Margin="5 5 5 5" /&gt;
+        
+        &lt;GridContainer Columns="2" Margin="5 0 5 0"&gt;
+            &lt;Label Text="{Loc 'borg-voice-window-voice-label'}" 
+                   VerticalAlignment="Center" /&gt;
+            &lt;OptionButton Name="VoiceOptionButton" 
+                          HorizontalExpand="True" /&gt;
+        &lt;/GridContainer&gt;
+        
+        &lt;HBoxContainer Margin="5 10 5 5" HorizontalAlignment="Center"&gt;
+            &lt;Button Name="VoicePlayButton" 
+                    Text="{Loc 'borg-voice-window-play-button'}"
+                    Margin="0 0 5 0" /&gt;
+        &lt;/HBoxContainer&gt;
+    &lt;/VBoxContainer&gt;
+&lt;/DefaultWindow&gt;
