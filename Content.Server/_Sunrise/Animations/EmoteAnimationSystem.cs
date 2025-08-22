@@ -76,7 +76,13 @@ public sealed class EmoteAnimationSystem : EntitySystem
 
         if (emoteId == "Flip")
         {
-            _flipSystem.TryFlip(uid);
+            bool preventNeckBreaking = false;
+            if (TryComp<FlipFromAttackComponent>(uid, out var flipFromAttack))
+            {
+                preventNeckBreaking = flipFromAttack.PreventNeckBreaking;
+                RemComp<FlipFromAttackComponent>(uid); // Clean up the temporary component
+            }
+            _flipSystem.TryFlip(uid, preventNeckBreaking);
         }
 
         if (emoteId == "FallOnNeck")

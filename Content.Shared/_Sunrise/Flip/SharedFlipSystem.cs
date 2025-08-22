@@ -52,22 +52,28 @@ public abstract class SharedFlipSystem : EntitySystem
         _deadChance = deadChanse;
     }
 
-    public void TryFlip(EntityUid uid)
+    public void TryFlip(EntityUid uid, bool preventNeckBreaking = false)
     {
         if (_gravity.IsWeightless(uid) ||
             _standingStateSystem.IsDown(uid) ||
             !_mobState.IsAlive(uid))
             return;
 
-        Flip(uid);
+        Flip(uid, preventNeckBreaking);
     }
 
-    public void Flip(EntityUid uid)
+    public void Flip(EntityUid uid, bool preventNeckBreaking = false)
     {
-        _statusEffects.TryAddStatusEffect<FlipComponent>(uid,
+        if (_statusEffects.TryAddStatusEffect<FlipComponent>(uid,
             FlipStatusEffectKey,
             TimeSpan.FromMilliseconds(500),
-            false);
+            false))
+        {
+            if (TryComp<FlipComponent>(uid, out var component))
+            {
+                component.PreventNeckBreaking = preventNeckBreaking;
+            }
+        }
     }
 
     private void OnStartup(Entity<FlipComponent> ent, ref ComponentStartup args)
@@ -101,7 +107,7 @@ public abstract class SharedFlipSystem : EntitySystem
             }
         }
 
-        if (_random.Prob(_deadChance) && _net.IsServer)
+        if (!ent.Comp.PreventNeckBreaking && _random.Prob(_deadChance) && _net.IsServer)
         {
             RaiseLocalEvent(ent, new PlayEmoteMessage(EmoteFallOnNeckProto));
         }

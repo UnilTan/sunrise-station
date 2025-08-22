@@ -32,13 +32,16 @@ public sealed class FlipSystem : SharedFlipSystem
             if (!_random.Prob(component.Probability))
                 continue;
 
-            PlayEmoteFlip(args.User);
+            PlayEmoteFlip(args.User, preventNeckBreaking: true);
             return;
         }
     }
 
-    private void PlayEmoteFlip(EntityUid uid)
+    private void PlayEmoteFlip(EntityUid uid, bool preventNeckBreaking = false)
     {
+        // Store the preventNeckBreaking flag temporarily to pass it to the flip system
+        // We'll use a component to track this since emotes go through the chat system
+        EnsureComp<FlipFromAttackComponent>(uid).PreventNeckBreaking = preventNeckBreaking;
         _chat.TryEmoteWithChat(uid, EmoteFlipProto);
     }
 }
