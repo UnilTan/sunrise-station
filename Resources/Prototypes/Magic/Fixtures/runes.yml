@@ -30,6 +30,15 @@
           layer:
             - SlipLayer
     - type: Physics
+    - type: Puddle
+      canSlow: false
+      canSlip: false
+    - type: PuddleFootprint
+    - type: SolutionContainerManager
+      solutions:
+        puddle:
+          maxVol: 10
+    - type: Forensics
 
 - type: entity
   parent: CollideRune

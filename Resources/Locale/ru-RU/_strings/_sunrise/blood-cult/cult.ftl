@@ -44,7 +44,6 @@ cult-blood-boil-rune-no-targets = Нет целей.
 cult-teleport-rune-default-label = безымянная метка
 cult-cant-draw-rune = Нельзя рисовать руну в космосе.
 cult-cant-draw-rune-off-station = Руны можно рисовать только на станционных секциях.
-cult-rune-cleaned = Руна была очищена и исчезла.
 chat-manager-cult-channel-name = Культ
 chat-manager-send-cult-chat-wrap-message = [bold]\[{ $channelName }\] { $player }: { $message }[/bold]
 hud-chatbox-select-channel-Cult = Культ

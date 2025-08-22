@@ -76,9 +76,6 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             SubscribeLocalEvent<BloodCultistComponent, SummonNarsieDoAfterEvent>(NarsieSpawn);
             SubscribeLocalEvent<CultEmpowerComponent, ActivateInWorldEvent>(OnActiveInWorld);
             SubscribeLocalEvent<BloodBoilProjectileComponent, PreventCollideEvent>(BloodBoilCollide);
-            
-            // Handle rune cleaning through puddle system
-            SubscribeLocalEvent<CultRuneBaseComponent, SolutionChangedEvent>(OnRuneSolutionChanged);
 
             // UI
             SubscribeLocalEvent<RuneDrawerProviderComponent, UseInHandEvent>(OnRuneDrawerUseInHand);
@@ -1274,37 +1271,24 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
 
             var runeEntity = _entityManager.SpawnEntity(rune, coords);
             
-            // Make the rune itself a blood puddle containing creator's DNA
-            if (TryComp<BloodstreamComponent>(uid, out var bloodstreamComponent))
+            // Store creator's DNA in ForensicsComponent for security analysis  
+            if (TryComp<DnaComponent>(uid, out var dnaComponent) && !string.IsNullOrEmpty(dnaComponent.DNA))
             {
-                // Add PuddleComponent to the rune entity  
-                var puddleComp = EnsureComp<PuddleComponent>(runeEntity);
-                puddleComp.CanSlow = false; // Runes don't slow movement
-                puddleComp.CanSlip = false; // Runes don't cause slipping
-                
-                // Add PuddleFootprintComponent to enable footprint tracking
-                EnsureComp<Content.Shared._Sunrise.Footprints.PuddleFootprintComponent>(runeEntity);
-                
-                // Create blood solution containing creator's blood
-                var bloodReagent = bloodstreamComponent.BloodReagent; 
+                var forensicsComponent = EnsureComp<Content.Server.Forensics.ForensicsComponent>(runeEntity);
+                forensicsComponent.DNAs.Add(dnaComponent.DNA);
+                forensicsComponent.CanDnaBeCleaned = true;
+            }
+            
+            // Add blood solution to the rune's puddle
+            if (TryComp<BloodstreamComponent>(uid, out var bloodstreamComponent) && 
+                TryComp<PuddleComponent>(runeEntity, out var puddleComp))
+            {
+                var bloodReagent = bloodstreamComponent.BloodReagent;
                 var solution = new Solution(bloodReagent, FixedPoint2.New(5)); // Small amount of blood
                 
-                // Add solution container to the rune
-                if (_solutionContainer.EnsureSolution(runeEntity, puddleComp.SolutionName, out var ensuredSolution))
+                if (_solutionContainer.ResolveSolution(runeEntity, puddleComp.SolutionName, ref puddleComp.Solution, out var solutionComponent))
                 {
-                    // Get the solution component reference for the puddle
-                    if (_solutionContainer.ResolveSolution(runeEntity, puddleComp.SolutionName, ref puddleComp.Solution, out var solutionComponent))
-                    {
-                        _solutionContainer.TryAddSolution(puddleComp.Solution.Value, solution);
-                    }
-                }
-                
-                // Add forensics component with creator's DNA
-                if (TryComp<DnaComponent>(uid, out var dnaComponent) && !string.IsNullOrEmpty(dnaComponent.DNA))
-                {
-                    var forensicsComponent = EnsureComp<Content.Server.Forensics.ForensicsComponent>(runeEntity);
-                    forensicsComponent.DNAs.Add(dnaComponent.DNA);
-                    forensicsComponent.CanDnaBeCleaned = true;
+                    _solutionContainer.TryAddSolution(puddleComp.Solution.Value, solution);
                 }
             }
         }
@@ -1424,27 +1408,6 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             }
             coords = _map.GridTileToLocal(gridUid.Value, mapGrid, position);
             return true;
-        }
-
-        /// <summary>
-        /// Handles rune destruction when its blood puddle is cleaned/absorbed
-        /// </summary>
-        private void OnRuneSolutionChanged(EntityUid uid, CultRuneBaseComponent component, ref SolutionChangedEvent args)
-        {
-            // Check if the rune has a puddle component and if the solution is now empty
-            if (!TryComp<PuddleComponent>(uid, out var puddleComponent))
-                return;
-                
-            // Get the solution to check its volume  
-            if (!_solutionContainer.ResolveSolution(uid, puddleComponent.SolutionName, ref puddleComponent.Solution, out var solution))
-                return;
-                
-            // If the solution is empty or nearly empty, destroy the rune
-            if (solution.Volume <= FixedPoint2.New(0.1)) // Small threshold to account for rounding
-            {
-                _popupSystem.PopupEntity(Loc.GetString("cult-rune-cleaned"), uid, PopupType.Medium);
-                QueueDel(uid);
-            }
         }
 
         /*
