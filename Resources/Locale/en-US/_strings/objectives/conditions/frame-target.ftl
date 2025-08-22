@@ -1,0 +1,1 @@
+objective-condition-frame-title = Frame {$targetName}, {CAPITALIZE($job)} and get them arrested

@@ -365,3 +365,56 @@
   - type: StealCondition
     stealGroup: NukeDisk
     owner: objective-condition-steal-station
+
+# New Sunrise Objectives
+
+- type: entity
+  parent: BaseTraitorObjective
+  id: NotWantedObjective
+  name: Stay off the wanted list
+  description: Do not get arrested or put on the wanted list during the shift. If security puts you on the wanted list even once, this objective is failed.
+  components:
+  - type: Objective
+    difficulty: 1.5
+    icon:
+      sprite: Structures/Wallmounts/signs.rsi
+      state: securearea
+  - type: NotWantedCondition
+
+- type: entity
+  parent: BaseTraitorObjective
+  id: NoRedAlertObjective
+  name: Prevent prolonged red alert
+  description: Ensure the station does not remain on red alert for more than 10 minutes total during the shift.
+  components:
+  - type: Objective
+    difficulty: 2.0
+    icon:
+      sprite: Interface/Misc/job_icons.rsi
+      state: Captain
+  - type: NoRedAlertCondition
+
+- type: entity
+  parent: [BaseTraitorObjective, BaseTargetObjective]
+  id: FrameTargetObjective
+  description: Get them arrested and in custody by the end of the shift. Frame them for crimes, plant evidence, or manipulate security into arresting them.
+  components:
+  - type: Objective
+    difficulty: 2.25
+  - type: TargetObjective
+    title: objective-condition-frame-title
+  - type: PickRandomPerson
+    filters:
+    # Can't frame command staff as they're too hard to arrest
+    - !type:BodyMindFilter
+      blacklist:
+        components:
+        - CommandStaff
+    # Can't have multiple objectives targeting the same person
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - FrameTargetCondition
+        - KillPersonCondition
+        - KeepAliveCondition
+  - type: FrameTargetCondition

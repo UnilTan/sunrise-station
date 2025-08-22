@@ -1,0 +1,1 @@
+objective-condition-frame-title = Подставить {$targetName}, должность: {CAPITALIZE($job)} и добиться их ареста
