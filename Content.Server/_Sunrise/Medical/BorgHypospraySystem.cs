@@ -5,6 +5,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server._Sunrise.Medical;
 
@@ -44,8 +45,8 @@ public sealed class BorgHypospraySystem : EntitySystem
 
         // Make the announcement
         var message = Loc.GetString("borg-hypospray-inject-announcement", 
-            ("target", MetaData(target).EntityName),
-            ("reagent", reagentProto.LocalizedName));
+            ("target", MetaData(target).EntityName ?? "Unknown"),
+            ("reagent", reagentProto?.LocalizedName ?? "Unknown"));
         
         _chat.TrySendInGameICMessage(user, message, InGameICChatType.Speak, ChatTransmitRange.Normal);
     }
