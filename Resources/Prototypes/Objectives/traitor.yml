@@ -405,11 +405,6 @@
     title: objective-condition-frame-title
   - type: PickRandomPerson
     filters:
-    # Can't frame command staff as they're too hard to arrest
-    - !type:BodyMindFilter
-      blacklist:
-        components:
-        - CommandStaff
     # Can't have multiple objectives targeting the same person
     - !type:TargetObjectiveMindFilter
       blacklist:
