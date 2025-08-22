@@ -3,6 +3,8 @@
   name: job-name-doctor
   description: job-description-doctor
   playTimeTracker: JobMedicalDoctor
+  alternativeTitles:
+    - job-alt-title-medical-doctor-deputy-cmo
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical

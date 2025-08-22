@@ -3,6 +3,8 @@
   name: job-name-security
   description: job-description-security
   playTimeTracker: JobSecurityOfficer
+  alternativeTitles:
+    - job-alt-title-security-officer-senior-officer
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

@@ -30,7 +30,7 @@ public sealed partial class RequirementsSelector : BoxContainer
     public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
     public int Selected => _options.SelectedId;
-    public string? SelectedAlternativeTitle => _alternativeTitleOptions?.SelectedId;
+    public string? SelectedAlternativeTitle => _alternativeTitleOptions?.SelectedValue;
 
     public RequirementsSelector()
     {
@@ -146,11 +146,12 @@ public sealed partial class RequirementsSelector : BoxContainer
         _alternativeTitleOptions.OnItemSelected += args =>
         {
             _alternativeTitleOptions.Select(args.Id);
-            OnAlternativeTitleSelected?.Invoke(args.Id);
+            var selectedValue = _alternativeTitleOptions.SelectedValue;
+            OnAlternativeTitleSelected?.Invoke(selectedValue);
         };
 
         // Select the current title
-        _alternativeTitleOptions.Select(selectedTitle ?? "");
+        _alternativeTitleOptions.SelectByValue(selectedTitle ?? "");
 
         AlternativeTitleOptionsContainer.AddChild(_alternativeTitleOptions);
     }
@@ -245,6 +246,6 @@ public sealed partial class RequirementsSelector : BoxContainer
 
     public void SelectAlternativeTitle(string titleKey)
     {
-        _alternativeTitleOptions?.Select(titleKey ?? "");
+        _alternativeTitleOptions?.SelectByValue(titleKey ?? "");
     }
 }

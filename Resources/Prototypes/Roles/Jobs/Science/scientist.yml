@@ -3,6 +3,8 @@
   name: job-name-scientist
   description: job-description-scientist
   playTimeTracker: JobScientist
+  alternativeTitles:
+    - job-alt-title-scientist-deputy-rd
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science

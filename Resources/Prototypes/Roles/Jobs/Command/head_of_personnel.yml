@@ -3,6 +3,8 @@
   name: job-name-hop
   description: job-description-hop
   playTimeTracker: JobHeadOfPersonnel
+  alternativeTitles:
+    - job-alt-title-hop-head-of-staff-department
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering

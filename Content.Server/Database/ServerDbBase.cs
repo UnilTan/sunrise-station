@@ -207,6 +207,7 @@ namespace Content.Server.Database
         private static HumanoidCharacterProfile ConvertProfiles(Profile profile)
         {
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
+            var jobAlternativeTitles = new Dictionary<ProtoId<JobPrototype>, string>(); // TODO: Add database support for alternative titles
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
 
@@ -295,6 +296,7 @@ namespace Content.Server.Database
                 ),
                 spawnPriority,
                 jobs,
+                jobAlternativeTitles,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),

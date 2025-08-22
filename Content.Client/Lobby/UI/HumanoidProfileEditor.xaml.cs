@@ -1111,6 +1111,12 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                     };
 
+                    selector.OnAlternativeTitleSelected += selectedTitle =>
+                    {
+                        Profile = Profile?.WithJobAlternativeTitle(job.ID, selectedTitle);
+                        SetDirty();
+                    };
+
                     var loadoutWindowBtn = new Button()
                     {
                         Text = Loc.GetString("loadout-window"),

@@ -3,6 +3,8 @@
   name: job-name-hos
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
+  alternativeTitles:
+    - job-alt-title-hos-deputy-head-of-security
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden

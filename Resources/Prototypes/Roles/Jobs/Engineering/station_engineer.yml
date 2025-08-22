@@ -3,6 +3,8 @@
   name: job-name-engineer
   description: job-description-engineer
   playTimeTracker: JobStationEngineer
+  alternativeTitles:
+    - job-alt-title-engineer-deputy-ce
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
