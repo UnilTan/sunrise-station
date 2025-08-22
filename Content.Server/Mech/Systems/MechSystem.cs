@@ -12,6 +12,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
+using Content.Shared.Movement.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
@@ -86,11 +87,34 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechPilotComponent, AtmosExposedGetAirEvent>(OnExpose);
 
         SubscribeLocalEvent<MechAirComponent, GetFilterAirEvent>(OnGetFilterAir);
+        
+        SubscribeLocalEvent<MechPhasingComponent, ComponentStartup>(OnPhasingStartup);
 
         #region Equipment UI message relays
         SubscribeLocalEvent<MechComponent, MechGrabberEjectMessage>(ReceiveEquipmentUiMesssages);
         SubscribeLocalEvent<MechComponent, MechSoundboardPlayMessage>(ReceiveEquipmentUiMesssages);
         #endregion
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        
+        // Handle phasing energy consumption
+        var query = EntityQueryEnumerator<MechPhasingComponent, MechComponent>();
+        while (query.MoveNext(out var uid, out var phasing, out var mech))
+        {
+            if (!phasing.Phasing)
+                continue;
+                
+            // Consume energy while phasing
+            var energyDelta = -phasing.EnergyConsumption * frameTime;
+            if (!TryChangeEnergy(uid, energyDelta, mech))
+            {
+                // Not enough energy, disable phasing
+                TogglePhase(uid, mech);
+            }
+        }
     }
 
     private void OnMechSay(EntityUid uid, MechComponent component, MechSayEvent args)
@@ -517,6 +541,63 @@ public sealed partial class MechSystem : SharedMechSystem
             return;
 
         args.Air = comp.Air;
+    }
+
+    private void OnPhasingStartup(EntityUid uid, MechPhasingComponent component, ComponentStartup args)
+    {
+        // Ensure phasing starts disabled
+        component.Phasing = false;
+        Dirty(uid, component);
+    }
+
+    public override void TogglePhase(EntityUid uid, MechComponent component)
+    {
+        if (!TryComp<MechPhasingComponent>(uid, out var phasing))
+            return;
+
+        // Check if we have enough energy
+        if (!phasing.Phasing && component.Energy < phasing.MinimumEnergy)
+        {
+            _popup.PopupEntity(Loc.GetString("mech-phasing-insufficient-energy"), uid);
+            return;
+        }
+
+        phasing.Phasing = !phasing.Phasing;
+        
+        if (phasing.Phasing)
+        {
+            // Enable phasing - add movement components
+            var canMoveInAir = EnsureComp<CanMoveInAirComponent>(uid);
+            var alwaysTouching = EnsureComp<MovementAlwaysTouchingComponent>(uid);
+            
+            // Change to phase sprite if available
+            if (!string.IsNullOrEmpty(phasing.PhaseState))
+            {
+                component.BaseState = phasing.PhaseState;
+                UpdateAppearance(uid, component);
+            }
+            
+            _popup.PopupEntity(Loc.GetString("mech-phasing-enabled"), uid);
+        }
+        else
+        {
+            // Disable phasing - remove movement components
+            RemComp<CanMoveInAirComponent>(uid);
+            RemComp<MovementAlwaysTouchingComponent>(uid);
+            
+            // Restore normal sprite
+            if (!string.IsNullOrEmpty(phasing.PhaseState))
+            {
+                component.BaseState = "phazon"; // Default Phazon sprite
+                UpdateAppearance(uid, component);
+            }
+            
+            _popup.PopupEntity(Loc.GetString("mech-phasing-disabled"), uid);
+        }
+
+        _actions.SetToggled(component.MechPhaseActionEntity, phasing.Phasing);
+        Dirty(uid, phasing);
+        Dirty(uid, component);
     }
     #endregion
 }

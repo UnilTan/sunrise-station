@@ -1118,8 +1118,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.2
     baseSprintSpeed: 6 # sunrise-edit
-  - type: CanMoveInAir
-  - type: MovementAlwaysTouching
   - type: Reflect
     reflectProb: 0.65
     spread: 180
@@ -1139,6 +1137,10 @@
     - DoorBumpOpener
     - FootstepSound
     - Phazon
+  - type: MechPhasing
+    phaseState: phazon-phase
+    energyConsumption: 50
+    minimumEnergy: 100
 
 - type: entity
   id: MechPhazonBattery

@@ -69,3 +69,7 @@ public sealed partial class MechEjectPilotEvent : InstantActionEvent
 public sealed partial class MechToggleLightsEvent : InstantActionEvent
 {
 }
+
+public sealed partial class MechTogglePhaseEvent : InstantActionEvent
+{
+}

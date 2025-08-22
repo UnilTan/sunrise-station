@@ -60,6 +60,7 @@ public abstract partial class SharedMechSystem : EntitySystem
         SubscribeLocalEvent<MechComponent, MechToggleEquipmentEvent>(OnToggleEquipmentAction);
         SubscribeLocalEvent<MechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
         SubscribeLocalEvent<MechComponent, MechToggleLightsEvent>(OnToggleLightsEvent);
+        SubscribeLocalEvent<MechComponent, MechTogglePhaseEvent>(OnTogglePhaseEvent);
         SubscribeLocalEvent<MechComponent, UserActivateInWorldEvent>(RelayInteractionEvent);
         SubscribeLocalEvent<MechComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<MechComponent, MobStateChangedEvent>(OnMobState);
@@ -96,6 +97,16 @@ public abstract partial class SharedMechSystem : EntitySystem
             return;
 
         ToggleLights(uid, component);
+
+        args.Handled = true;
+    }
+
+    private void OnTogglePhaseEvent(EntityUid uid, MechComponent component, MechTogglePhaseEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        TogglePhase(uid, component);
 
         args.Handled = true;
     }
@@ -168,6 +179,12 @@ public abstract partial class SharedMechSystem : EntitySystem
         _actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
         _actions.AddAction(pilot, ref component.MechLightsActionEntity, component.MechLightsAction, mech);
         _actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
+
+        // Add phase action only if the mech has phasing capability
+        if (TryComp<MechPhasingComponent>(mech, out _))
+        {
+            _actions.AddAction(pilot, ref component.MechPhaseActionEntity, component.MechPhaseAction, mech);
+        }
     }
 
     private void RemoveUser(EntityUid mech, EntityUid pilot)
@@ -191,6 +208,11 @@ public abstract partial class SharedMechSystem : EntitySystem
             RaiseLocalEvent(uid, ref ev, true);
             Dirty(uid, component);
         }
+    }
+
+    public virtual void TogglePhase(EntityUid uid, MechComponent component)
+    {
+        // Implementation will be in server system
     }
 
     /// <summary>

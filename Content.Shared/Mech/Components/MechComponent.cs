@@ -190,6 +190,8 @@ public sealed partial class MechComponent : Component
     public EntProtoId MechEjectAction = "ActionMechEject";
     [DataField]
     public EntProtoId MechLightsAction = "ActionMechLights";
+    [DataField]
+    public EntProtoId MechPhaseAction = "ActionMechPhase";
     #endregion
 
     #region Visualizer States
@@ -205,6 +207,7 @@ public sealed partial class MechComponent : Component
     [DataField] public EntityUid? MechUiActionEntity;
     [DataField] public EntityUid? MechEjectActionEntity;
     [DataField] public EntityUid? MechLightsActionEntity;
+    [DataField] public EntityUid? MechPhaseActionEntity;
 }
 
 public enum MechHealthState

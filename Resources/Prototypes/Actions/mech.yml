@@ -59,3 +59,16 @@
     iconOn: { sprite: Interface/Actions/actions_mecha.rsi, state: mech_lights_on }
   - type: InstantAction
     event: !type:MechToggleLightsEvent
+
+- type: entity
+  id: ActionMechPhase
+  name: Phase
+  description: Activates phasing ability to pass through walls. Consumes a lot of energy.
+  components:
+  - type: Action
+    useDelay: 1
+    itemIconStyle: NoItem
+    icon: { sprite: Interface/Actions/actions_mecha.rsi, state: mech_phasing_off }
+    iconOn: { sprite: Interface/Actions/actions_mecha.rsi, state: mech_phasing_on }
+  - type: InstantAction
+    event: !type:MechTogglePhaseEvent
