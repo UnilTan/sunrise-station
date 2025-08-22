@@ -11,6 +11,7 @@ using Content.Server.Chemistry.Components;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Raffles;
 using Content.Server.Nutrition.Components;
+using Content.Server.Station.Components;
 using Content.Shared._Sunrise.BloodCult;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.Items;
@@ -24,6 +25,8 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Forensics;
+using Content.Shared.Forensics.Components;
 using Content.Shared.Ghost.Roles.Raffles;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -88,6 +91,9 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             SubscribeLocalEvent<CultRuneBaseComponent, CultEraseEvent>(OnErase);
             SubscribeLocalEvent<CultRuneBaseComponent, StartCollideEvent>(HandleCollision);
             SubscribeLocalEvent<CultRuneReviveComponent, ExaminedEvent>(OnExamine);
+            
+            // Cleaning support
+            SubscribeLocalEvent<CultRuneBaseComponent, CleanForensicsDoAfterEvent>(OnRuneCleaningFinished);
         }
 
         private void OnExamine(EntityUid uid, CultRuneReviveComponent component, ExaminedEvent args)
@@ -1260,7 +1266,35 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             var damageSpecifier = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), 10);
             _damageableSystem.TryChangeDamage(uid, damageSpecifier, true, false);
 
-            _entityManager.SpawnEntity(rune, coords);
+            var runeEntity = _entityManager.SpawnEntity(rune, coords);
+            
+            // Add ForensicsComponent to enable cleaning
+            var forensicsComponent = EnsureComp<Content.Server.Forensics.ForensicsComponent>(runeEntity);
+            forensicsComponent.CanDnaBeCleaned = true;
+            
+            // Store creator's forensic information
+            if (TryComp<CultRuneBaseComponent>(runeEntity, out var runeComponent))
+            {
+                // Get DNA
+                if (TryComp<DnaComponent>(uid, out var dnaComponent) && !string.IsNullOrEmpty(dnaComponent.DNA))
+                {
+                    runeComponent.CreatorDna = dnaComponent.DNA;
+                    forensicsComponent.DNAs.Add(dnaComponent.DNA);
+                }
+
+                // Get fingerprints
+                if (TryComp<FingerprintComponent>(uid, out var fingerprintComponent) && !string.IsNullOrEmpty(fingerprintComponent.Fingerprint))
+                {
+                    runeComponent.CreatorFingerprint = fingerprintComponent.Fingerprint;
+                    forensicsComponent.Fingerprints.Add(fingerprintComponent.Fingerprint);
+                }
+
+                // Get blood type from bloodstream
+                if (TryComp<BloodstreamComponent>(uid, out var bloodstreamComponent))
+                {
+                    runeComponent.CreatorBloodData = bloodstreamComponent.BloodReagent;
+                }
+            }
         }
 
         private bool SpawnShard(EntityUid target)
@@ -1350,7 +1384,18 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             var gridUid = transform.GridUid;
 
             if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
+            {
+                _popupSystem.PopupEntity(Loc.GetString("cult-cant-draw-rune"), uid, uid);
                 return false;
+            }
+
+            // Check if we're on a station grid
+            var owningStation = _stationSystem.GetOwningStation(gridUid.Value);
+            if (owningStation == null)
+            {
+                _popupSystem.PopupEntity(Loc.GetString("cult-cant-draw-rune-off-station"), uid, uid);
+                return false;
+            }
 
             var position = _map.TileIndicesFor(gridUid.Value, mapGrid, transform.Coordinates);
 
@@ -1367,6 +1412,16 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             }
             coords = _map.GridTileToLocal(gridUid.Value, mapGrid, position);
             return true;
+        }
+
+        private void OnRuneCleaningFinished(EntityUid uid, CultRuneBaseComponent component, CleanForensicsDoAfterEvent args)
+        {
+            if (args.Cancelled)
+                return;
+
+            // When successfully cleaned, the rune is destroyed
+            _popupSystem.PopupEntity(Loc.GetString("cult-rune-cleaned"), args.User, args.User);
+            _entityManager.DeleteEntity(uid);
         }
 
         /*
