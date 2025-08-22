@@ -16,5 +16,7 @@
         <panic:PanicBunkerTab Name="PanicBunkerControl" Access="Public" />
         <playerTab:PlayerTab Name="PlayerTabControl" Access="Public" />
         <objectsTab:ObjectsTab Name="ObjectsTabControl" Access="Public" />
+        <tabs:GameRulesTab Name="GameRulesTabControl" Access="Public" />
+        <tabs:GridSpawnTab Name="GridSpawnTabControl" Access="Public" />
     </TabContainer>
 </DefaultWindow>

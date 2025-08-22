@@ -1,0 +1,33 @@
+<Control
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Margin="4"
+    MinSize="50 50">
+    <BoxContainer Orientation="Vertical">
+        <GridContainer Columns="3" Margin="2" HorizontalAlignment="Stretch">
+            <controls:ConfirmButton Name="RefreshButton" Text="{Loc admin-game-rules-refresh-button}" />
+            <controls:ConfirmButton Name="ClearAllButton" Text="{Loc admin-game-rules-clear-all-button}" />
+            <Control />
+        </GridContainer>
+        
+        <Control MinSize="0 4" />
+        
+        <GridContainer Columns="2" HorizontalAlignment="Stretch" VerticalExpand="True">
+            <!-- Available Game Rules Section -->
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Text="{Loc admin-game-rules-available-title}" HorizontalAlignment="Center" Margin="4" />
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" MinSize="300 200">
+                    <BoxContainer Name="AvailableRulesContainer" Orientation="Vertical" />
+                </ScrollContainer>
+            </BoxContainer>
+            
+            <!-- Active Game Rules Section -->
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Text="{Loc admin-game-rules-active-title}" HorizontalAlignment="Center" Margin="4" />
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" MinSize="300 200">
+                    <BoxContainer Name="ActiveRulesContainer" Orientation="Vertical" />
+                </ScrollContainer>
+            </BoxContainer>
+        </GridContainer>
+    </BoxContainer>
+</Control>

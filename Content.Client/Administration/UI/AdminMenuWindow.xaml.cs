@@ -23,6 +23,8 @@ public sealed partial class AdminMenuWindow : DefaultWindow
         MasterTabContainer.SetTabTitle((int) TabIndex.PanicBunker, Loc.GetString("admin-menu-panic-bunker-tab"));
         MasterTabContainer.SetTabTitle((int) TabIndex.Players, Loc.GetString("admin-menu-players-tab"));
         MasterTabContainer.SetTabTitle((int) TabIndex.Objects, Loc.GetString("admin-menu-objects-tab"));
+        MasterTabContainer.SetTabTitle((int) TabIndex.GameRules, Loc.GetString("admin-menu-game-rules-tab"));
+        MasterTabContainer.SetTabTitle((int) TabIndex.GridSpawn, Loc.GetString("admin-menu-grid-spawn-tab"));
         MasterTabContainer.OnTabChanged += OnTabChanged;
     }
 
@@ -50,5 +52,7 @@ public sealed partial class AdminMenuWindow : DefaultWindow
         PanicBunker,
         Players,
         Objects,
+        GameRules,
+        GridSpawn,
     }
 }

@@ -1,0 +1,30 @@
+<Control
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Margin="4"
+    MinSize="50 50">
+    <BoxContainer Orientation="Vertical">
+        <GridContainer Columns="2" Margin="2" HorizontalAlignment="Stretch">
+            <controls:ConfirmButton Name="RefreshButton" Text="{Loc admin-grid-spawn-refresh-button}" />
+            <Control />
+        </GridContainer>
+        
+        <Control MinSize="0 4" />
+        
+        <!-- Spawn Location Options -->
+        <BoxContainer Orientation="Horizontal" Margin="4">
+            <Label Text="{Loc admin-grid-spawn-location-label}" Margin="0 0 10 0" />
+            <OptionButton Name="LocationOption" />
+        </BoxContainer>
+        
+        <Control MinSize="0 4" />
+        
+        <!-- Available Grids Section -->
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <Label Text="{Loc admin-grid-spawn-available-title}" HorizontalAlignment="Center" Margin="4" />
+            <ScrollContainer HorizontalExpand="True" VerticalExpand="True" MinSize="400 300">
+                <BoxContainer Name="AvailableGridsContainer" Orientation="Vertical" />
+            </ScrollContainer>
+        </BoxContainer>
+    </BoxContainer>
+</Control>

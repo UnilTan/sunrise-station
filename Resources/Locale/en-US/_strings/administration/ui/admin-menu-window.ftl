@@ -10,3 +10,5 @@ admin-menu-panic-bunker-tab = Panic Bunker
 admin-menu-baby-jail-tab = Baby Jail
 admin-menu-players-tab = Players
 admin-menu-objects-tab = Objects
+admin-menu-game-rules-tab = Game Rules
+admin-menu-grid-spawn-tab = Grid Spawn
