@@ -24,10 +24,9 @@ public sealed class BorgEnergySystem : EntitySystem
     {
         base.Initialize();
         
-        // Listen for when weapons are fired to handle energy consumption
-        // We listen on any entity that has a battery, then check if it's borg-held
-        SubscribeLocalEvent<BatteryComponent, GunShotEvent>(OnWeaponFired);
-        SubscribeLocalEvent<BatteryComponent, OnEmptyGunShotEvent>(OnWeaponEmptyFired);
+        // Listen for when weapons with batteries are fired
+        SubscribeLocalEvent<BatteryComponent, GunShotEvent>(OnBatteryWeaponFired);
+        SubscribeLocalEvent<BatteryComponent, OnEmptyGunShotEvent>(OnBatteryWeaponEmptyFired);
         
         // Listen for module changes to manage battery behavior
         SubscribeLocalEvent<ItemBorgModuleComponent, BorgModuleSelectedEvent>(OnBorgModuleSelected);
@@ -37,10 +36,12 @@ public sealed class BorgEnergySystem : EntitySystem
     /// <summary>
     /// When a weapon with a battery is fired, check if it's borg-held and consume borg energy
     /// </summary>
-    private void OnWeaponFired(EntityUid weaponUid, BatteryComponent weaponBattery, ref GunShotEvent args)
+    private void OnBatteryWeaponFired(EntityUid weaponUid, BatteryComponent weaponBattery, ref GunShotEvent args)
     {
         if (!TryGetBorgForWeapon(weaponUid, out var borgUid))
             return;
+
+        Log.Debug($"Borg weapon fired: {ToPrettyString(weaponUid)} by borg {ToPrettyString(borgUid)}");
 
         // Restore the weapon's battery charge and consume from borg instead
         TryConsumeBorgEnergyForWeapon(borgUid, weaponUid, weaponBattery);
@@ -49,10 +50,12 @@ public sealed class BorgEnergySystem : EntitySystem
     /// <summary>
     /// Handle empty shot events similarly
     /// </summary>
-    private void OnWeaponEmptyFired(EntityUid weaponUid, BatteryComponent weaponBattery, ref OnEmptyGunShotEvent args)
+    private void OnBatteryWeaponEmptyFired(EntityUid weaponUid, BatteryComponent weaponBattery, ref OnEmptyGunShotEvent args)
     {
         if (!TryGetBorgForWeapon(weaponUid, out var borgUid))
             return;
+
+        Log.Debug($"Borg weapon empty fired: {ToPrettyString(weaponUid)} by borg {ToPrettyString(borgUid)}");
 
         // Still try to charge weapon battery from borg for next shot
         TryConsumeBorgEnergyForWeapon(borgUid, weaponUid, weaponBattery);
@@ -110,19 +113,32 @@ public sealed class BorgEnergySystem : EntitySystem
     private void TryConsumeBorgEnergyForWeapon(EntityUid borgUid, EntityUid weaponUid, BatteryComponent weaponBattery)
     {
         if (!_powerCell.TryGetBatteryFromSlot(borgUid, out var borgBatteryUid, out var borgBattery))
+        {
+            Log.Debug($"Borg {ToPrettyString(borgUid)} has no battery slot or battery");
             return;
+        }
 
         // Calculate how much charge the weapon needs
         var chargeDelta = weaponBattery.MaxCharge - weaponBattery.CurrentCharge;
         
         if (chargeDelta <= 0)
+        {
+            Log.Debug($"Weapon {ToPrettyString(weaponUid)} already fully charged");
             return;
+        }
+
+        Log.Debug($"Trying to consume {chargeDelta} energy from borg {ToPrettyString(borgUid)} for weapon {ToPrettyString(weaponUid)}");
 
         // Try to consume this energy from the borg's battery
         if (_battery.TryUseCharge(borgBatteryUid.Value, chargeDelta, borgBattery))
         {
             // Successfully consumed from borg battery, restore weapon's charge
             _battery.SetCharge(weaponUid, weaponBattery.MaxCharge, weaponBattery);
+            Log.Debug($"Successfully transferred {chargeDelta} energy from borg to weapon");
+        }
+        else
+        {
+            Log.Debug($"Failed to consume energy from borg battery (insufficient charge)");
         }
         // If borg doesn't have enough energy, leave weapon battery as-is (empty)
     }
