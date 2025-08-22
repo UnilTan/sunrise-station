@@ -57,6 +57,7 @@
       Unsexed: UnisexSwine
   - type: SwineAccent
   - type: SwineTraits  # Add swine-specific traits
+  - type: SwineRage    # Add rage system
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Swine
