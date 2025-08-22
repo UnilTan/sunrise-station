@@ -9,3 +9,15 @@
   values:
     prefix: names-regal-rat-title-dataset-
     count: 17
+
+- type: localizedDataset
+  id: NamesRatGuard
+  values:
+    prefix: names-guard-rat-dataset-
+    count: 15
+
+- type: localizedDataset
+  id: NamesRatGuardTitle
+  values:
+    prefix: names-guard-rat-title-dataset-
+    count: 20

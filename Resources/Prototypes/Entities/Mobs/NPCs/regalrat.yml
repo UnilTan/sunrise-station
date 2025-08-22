@@ -12,8 +12,8 @@
   # Sunrise edit end
   - type: CombatMode
   - type: MovementSpeedModifier
-    baseWalkSpeed : 3.00
-    baseSprintSpeed : 5.00
+    baseSprintSpeed : 5
+    baseWalkSpeed: 4.5
   - type: InputMover
   - type: MobMover
   - type: HTN
@@ -54,7 +54,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Dead
+      400: Dead # Sunrise-Edit # Пусть стреляют Экспансивками
   - type: MeleeWeapon
     altDisarm: false
     soundHit:
@@ -138,6 +138,7 @@
     bleedReductionAmount: 1
     bloodRefreshAmount: 1.5
   - type: VentCrawler
+  - type: NightVision
   # Sunrise-end
 
 - type: entity
@@ -189,6 +190,7 @@
     name: ghost-panel-antagonist-rats-name
     description: ghost-panel-antagonist-rats-description
     priority: 110
+  - type: NightVision
   # Sunrise edit end
   - type: VentCrawler # Sunrise-edit
   - type: CombatMode
@@ -328,6 +330,7 @@
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
 
+# Sunrise-Start
 - type: entity
   name: rat guard
   id: MobRatGuard
@@ -335,12 +338,10 @@
   description: A massive, imposing rat that serves as the king's elite guard.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
-  # Sunrise edit start
   - type: GhostPanelAntagonistMarker
     name: ghost-panel-antagonist-rats-name
     description: ghost-panel-antagonist-rats-description
     priority: 110
-  # Sunrise edit end
   - type: VentCrawler # Sunrise-edit
   - type: CombatMode
   - type: MovementSpeedModifier
@@ -359,6 +360,8 @@
       FollowRange: !type:Single
         3.5
   - type: Bloodstream
+    bleedReductionAmount: 1
+    bloodRefreshAmount: 1.5
     bloodReagent: Blood
     bloodMaxVolume: 150
   - type: Reactive
@@ -371,7 +374,7 @@
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Animals/buffrat.rsi
-    scale: 1.2, 1.2
+    # scale: 1.2, 1.2 # Smaller that RatKingBuff
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: regalrat
@@ -395,14 +398,18 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      300: Critical  # High HP as requested
+      350: Critical  # High HP as requested
       400: Dead  # High HP as requested
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      200: 0.8
+      250: 0.6
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 400
+        damage: 600
       behaviors:
       - !type:GibBehavior
         recursive: false
@@ -415,9 +422,14 @@
     animation: WeaponArcClaw
     damage:
       types:
-        Slash: 20  # Strong guard attack
-        Piercing: 10
-        Blunt: 8   # Additional blunt damage
+        Slash: 5 # Additional claw damage
+        Piercing: 5 # Additional claw damage
+        Blunt: 25 # Strong guard attack
+        Structural: 10 # Strong guard attack
+    bluntStaminaDamageFactor: 1.75
+  - type: MeleeThrowOnHit
+    distance: 0.75
+    speed: 8
   - type: Body
     prototype: Rat
     requiredLegs: 1 # TODO: More than 1 leg
@@ -484,6 +496,13 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
+  - type: NightVision
+  - type: RandomMetadata
+    nameSegments:
+    - NamesRatGuard
+    - NamesRatGuardTitle
+    nameFormat: name-format-regal-rat
+# Sunrise-end
 
 - type: weightedRandomEntity
   id: RatKingLoot
@@ -597,6 +616,7 @@
       !type:RatKingOrderActionEvent
       type: Loose
 
+# Sunrise-Start
 - type: entity
   parent: BaseAction
   id: ActionRatKingRaiseGuard
@@ -607,6 +627,7 @@
     useDelay: 8
     icon:
       sprite: Interface/Actions/actions_rat_king.rsi
-      state: ratKingArmy  # Reuse the army icon for now
+      state: ratKingGuard
   - type: InstantAction
     event: !type:RatKingRaiseGuardActionEvent
+# Sunrise-End
