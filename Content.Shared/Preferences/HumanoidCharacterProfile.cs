@@ -718,7 +718,7 @@ namespace Content.Shared.Preferences
             {
                 // Only keep alternative titles for jobs that exist and have that alternative title available
                 if (prototypeManager.TryIndex(jobId, out var jobProto) && 
-                    jobProto.AlternativeTitles.Contains(titleKey))
+                    jobProto.AlternativeTitles.Any(alt => alt.Title == titleKey))
                 {
                     _jobAlternativeTitles.Add(jobId, titleKey);
                 }

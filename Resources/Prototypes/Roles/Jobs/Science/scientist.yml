@@ -4,9 +4,8 @@
   description: job-description-scientist
   playTimeTracker: JobScientist
   alternativeTitles:
-    - job-alt-title-scientist-deputy-rd
-  alternativeTitleRequirements:
-    job-alt-title-scientist-deputy-rd: 14400 # 4 hours as Scientist
+    - title: job-alt-title-scientist-deputy-rd
+      playtimeRequirement: 14400 # 4 hours as Scientist
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science

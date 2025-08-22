@@ -260,9 +260,12 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     /// </summary>
     public bool IsAlternativeTitleUnlocked(JobPrototype job, string alternativeTitle)
     {
-        // If no requirements are defined for this title, it's unlocked by default
-        if (!job.AlternativeTitleRequirements.TryGetValue(alternativeTitle, out var requiredTime))
-            return true;
+        // Find the alternative title in the job's alternative titles list
+        var altTitle = job.AlternativeTitles.FirstOrDefault(alt => alt.Title == alternativeTitle);
+        
+        // If title not found, it's not available
+        if (altTitle == null)
+            return false;
 
         // Check if role timers are enabled
         if (!_cfg.GetCVar(CCVars.GameRoleTimers))
@@ -271,7 +274,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         // Get the playtime for this specific job
         var jobPlayTime = _roles.TryGetValue(job.PlayTimeTracker, out var playTime) ? playTime : TimeSpan.Zero;
 
-        return jobPlayTime >= requiredTime;
+        return jobPlayTime >= altTitle.PlaytimeRequirement;
     }
 
     /// <summary>
@@ -281,11 +284,11 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     {
         var unlockedTitles = new List<string>();
         
-        foreach (var title in job.AlternativeTitles)
+        foreach (var altTitle in job.AlternativeTitles)
         {
-            if (IsAlternativeTitleUnlocked(job, title))
+            if (IsAlternativeTitleUnlocked(job, altTitle.Title))
             {
-                unlockedTitles.Add(title);
+                unlockedTitles.Add(altTitle.Title);
             }
         }
         

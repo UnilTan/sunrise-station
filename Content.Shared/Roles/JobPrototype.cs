@@ -11,6 +11,26 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Roles
 {
     /// <summary>
+    /// Represents an alternative job title with its playtime requirement.
+    /// </summary>
+    [DataDefinition]
+    public sealed partial class AlternativeJobTitle
+    {
+        /// <summary>
+        /// The localization key for the alternative title.
+        /// </summary>
+        [DataField("title", required: true)]
+        public string Title { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// The playtime requirement for this title in seconds. 
+        /// If set to 0, the title is available immediately.
+        /// </summary>
+        [DataField("playtimeRequirement")]
+        public TimeSpan PlaytimeRequirement { get; private set; } = TimeSpan.Zero;
+    }
+
+    /// <summary>
     ///     Describes information for a single job on the station.
     /// </summary>
     [Prototype]
@@ -42,14 +62,7 @@ namespace Content.Shared.Roles
         ///     Alternative titles for this job that players can choose from.
         /// </summary>
         [DataField("alternativeTitles")]
-        public List<string> AlternativeTitles { get; private set; } = new();
-
-        /// <summary>
-        ///     Playtime requirements for alternative titles. Maps alternative title keys to required playtime in seconds.
-        ///     If a title is not in this dictionary, it's available immediately.
-        /// </summary>
-        [DataField("alternativeTitleRequirements")]
-        public Dictionary<string, TimeSpan> AlternativeTitleRequirements { get; private set; } = new();
+        public List<AlternativeJobTitle> AlternativeTitles { get; private set; } = new();
 
         /// <summary>
         ///     The name of this job as displayed to players.

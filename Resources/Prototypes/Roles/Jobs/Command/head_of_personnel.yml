@@ -4,9 +4,8 @@
   description: job-description-hop
   playTimeTracker: JobHeadOfPersonnel
   alternativeTitles:
-    - job-alt-title-hop-head-of-staff-department
-  alternativeTitleRequirements:
-    job-alt-title-hop-head-of-staff-department: 18000 # 5 hours as HoP
+    - title: job-alt-title-hop-head-of-staff-department
+      playtimeRequirement: 18000 # 5 hours as HoP
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
