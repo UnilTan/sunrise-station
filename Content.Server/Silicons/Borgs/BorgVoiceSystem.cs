@@ -5,7 +5,9 @@ using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.UserInterface;
+using Content.Sunrise.Interfaces.Shared;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -19,17 +21,28 @@ public sealed class BorgVoiceSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    
+    private ISharedSponsorsManager? _sponsorsManager;;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<BorgVoiceComponent, BorgVoiceChangeActionEvent>(OnBorgVoiceChangeAction);
-        SubscribeLocalEvent<BorgVoiceComponent, BorgVoiceChangeMessage>(OnBorgVoiceChangeMessage);
         SubscribeLocalEvent<BorgVoiceComponent, ComponentStartup>(OnBorgVoiceStartup);
         
         // Subscribe to TTS voice transformation
         SubscribeLocalEvent<BorgVoiceComponent, TransformSpeakerVoiceEvent>(OnTransformSpeakerVoice);
+        
+        // Initialize sponsors manager
+        IoCManager.Instance!.TryResolveType(out _sponsorsManager);
+        
+        // Subscribe to UI events
+        Subs.BuiEvents<BorgVoiceComponent>(BorgVoiceUiKey.Key, subs =>
+        {
+            subs.Event<BorgVoiceChangeMessage>(OnBorgVoiceChangeMessage);
+        });
     }
 
     private void OnBorgVoiceChangeAction(EntityUid uid, BorgVoiceComponent component, BorgVoiceChangeActionEvent args)
@@ -41,9 +54,13 @@ public sealed class BorgVoiceSystem : EntitySystem
         if (!_uiSystem.HasUi(uid, BorgVoiceUiKey.Key))
             return;
 
-        var state = CreateVoiceChangeState(uid, component, args.Performer);
-        _uiSystem.ServerSendUiMessage(uid, BorgVoiceUiKey.Key, state, args.Performer);
-        _uiSystem.OpenUi(uid, BorgVoiceUiKey.Key, args.Performer);
+        // Get the player session for the performer
+        if (!_playerManager.TryGetSessionByEntity(args.Performer, out var session))
+            return;
+
+        var state = CreateVoiceChangeState(uid, component, session);
+        _uiSystem.SetUiState(uid, BorgVoiceUiKey.Key, state);
+        _uiSystem.OpenUi(uid, BorgVoiceUiKey.Key, session);
     }
 
     private void OnBorgVoiceChangeMessage(EntityUid uid, BorgVoiceComponent component, BorgVoiceChangeMessage args)
@@ -51,25 +68,40 @@ public sealed class BorgVoiceSystem : EntitySystem
         if (!TryComp<BorgChassisComponent>(uid, out _))
             return;
 
-        // Validate the voice prototype exists
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voicePrototype))
-        {
-            _popup.PopupEntity("Invalid voice selected!", uid, args.Actor, PopupType.MediumCaution);
+        // Get the player session for the actor
+        if (!_playerManager.TryGetSessionByEntity(args.Actor, out var session))
             return;
+
+        // Validate the voice prototype exists and player can use it
+        if (!CanUseVoice(args.VoiceId, session))
+        {
+            if (!_prototypeManager.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voicePrototype))
+            {
+                _popup.PopupEntity("Invalid voice selected!", uid, args.Actor, PopupType.MediumCaution);
+                return;
+            }
+            
+            if (voicePrototype.SponsorOnly)
+            {
+                _popup.PopupEntity("This voice is only available to sponsors!", uid, args.Actor, PopupType.MediumCaution);
+                return;
+            }
         }
 
-        // Check if player can use sponsor-only voices
-        if (voicePrototype.SponsorOnly && !CanUseSponsorVoice(args.Actor))
-        {
-            _popup.PopupEntity("This voice is only available to sponsors!", uid, args.Actor, PopupType.MediumCaution);
+        // Get the voice prototype for the success message
+        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voice))
             return;
-        }
 
         // Set the new voice
         component.SelectedVoiceId = args.VoiceId;
         Dirty(uid, component);
 
-        _popup.PopupEntity($"Voice changed to {voicePrototype.Name}!", uid, args.Actor, PopupType.Medium);
+        _popup.PopupEntity($"Voice changed to {voice.Name}!", uid, args.Actor, PopupType.Medium);
+
+        // Update UI
+        var state = CreateVoiceChangeState(uid, component, session);
+        _uiSystem.SetUiState(uid, BorgVoiceUiKey.Key, state);
+    }
 
         // Update UI
         var state = CreateVoiceChangeState(uid, component, args.Actor);
@@ -107,7 +139,7 @@ public sealed class BorgVoiceSystem : EntitySystem
     {
         var availableVoices = _prototypeManager
             .EnumeratePrototypes<TTSVoicePrototype>()
-            .Where(v => v.RoundStart)
+            .Where(v => v.RoundStart && CanUseVoice(v.ID, player))
             .Select(v => v.ID)
             .ToList();
 
@@ -116,8 +148,24 @@ public sealed class BorgVoiceSystem : EntitySystem
 
     private bool CanUseSponsorVoice(ICommonSession player)
     {
-        // TODO: Implement proper sponsor checking
-        // For now, allow all voices for cyborgs since they can speak with any voice
-        return true;
+        if (_sponsorsManager == null)
+            return false;
+            
+        return _sponsorsManager.TryGetPrototypes(player.UserId, out _);
+    }
+    
+    private bool CanUseVoice(string voiceId, ICommonSession player)
+    {
+        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var voice))
+            return false;
+            
+        if (!voice.SponsorOnly)
+            return true;
+            
+        if (_sponsorsManager == null)
+            return false;
+            
+        return _sponsorsManager.TryGetPrototypes(player.UserId, out var allowedPrototypes) && 
+               allowedPrototypes != null && allowedPrototypes.Contains(voiceId);
     }
 }
