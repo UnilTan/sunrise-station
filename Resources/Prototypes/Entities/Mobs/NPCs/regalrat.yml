@@ -211,7 +211,7 @@
         3.0
   - type: Bloodstream
     bloodReagent: Blood
-    bloodMaxVolume: 75
+    bloodMaxVolume: 60
   - type: Reactive
     groups:
       Flammable: [Touch]
@@ -252,19 +252,19 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Critical  # Sunrise-edit - increased from 50
-      120: Dead  # Sunrise-edit - increased from 60
+      40: Critical  # Sunrise-edit
+      50: Dead  # Sunrise-edit
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 120  # Updated to match new death threshold
+        damage: 60
       behaviors:
       - !type:GibBehavior
         recursive: false
   - type: Stamina
-    critThreshold: 120  # Updated to match new death threshold
+    critThreshold: 60
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
