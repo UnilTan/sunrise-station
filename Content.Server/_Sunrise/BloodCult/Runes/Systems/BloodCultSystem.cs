@@ -8,6 +8,7 @@ using Content.Server.DoAfter;
 using Content.Server.Emp;
 using Content.Server.EUI;
 using Content.Server.Flash;
+using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
 using Content.Server.Forensics.Components;
 using Content.Server.GameTicking;
@@ -72,6 +73,7 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
         [Dependency] private readonly MindSystem _mindSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly PuddleSystem _puddleSystem = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
         [Dependency] private readonly ItemSlotsSystem _slotsSystem = default!;

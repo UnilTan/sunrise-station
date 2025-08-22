@@ -8,6 +8,7 @@ using Content.Server.Bible.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Components;
+using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Raffles;
 using Content.Server.Nutrition.Components;
@@ -18,13 +19,18 @@ using Content.Shared._Sunrise.BloodCult.Items;
 using Content.Shared._Sunrise.BloodCult.Runes;
 using Content.Shared._Sunrise.BloodCult.UI;
 using Content.Shared.Body.Components;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
+using Content.Shared.Fluids.Components;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Ghost.Roles.Raffles;
@@ -91,9 +97,6 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             SubscribeLocalEvent<CultRuneBaseComponent, CultEraseEvent>(OnErase);
             SubscribeLocalEvent<CultRuneBaseComponent, StartCollideEvent>(HandleCollision);
             SubscribeLocalEvent<CultRuneReviveComponent, ExaminedEvent>(OnExamine);
-            
-            // Cleaning support
-            SubscribeLocalEvent<CultRuneBaseComponent, CleanForensicsDoAfterEvent>(OnRuneCleaningFinished);
         }
 
         private void OnExamine(EntityUid uid, CultRuneReviveComponent component, ExaminedEvent args)
@@ -1268,31 +1271,44 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
 
             var runeEntity = _entityManager.SpawnEntity(rune, coords);
             
-            // Add ForensicsComponent to enable cleaning
-            var forensicsComponent = EnsureComp<Content.Server.Forensics.ForensicsComponent>(runeEntity);
-            forensicsComponent.CanDnaBeCleaned = true;
-            
-            // Store creator's forensic information
+            // Store creator's DNA for reference
             if (TryComp<CultRuneBaseComponent>(runeEntity, out var runeComponent))
             {
-                // Get DNA
                 if (TryComp<DnaComponent>(uid, out var dnaComponent) && !string.IsNullOrEmpty(dnaComponent.DNA))
                 {
                     runeComponent.CreatorDna = dnaComponent.DNA;
-                    forensicsComponent.DNAs.Add(dnaComponent.DNA);
                 }
-
-                // Get fingerprints
-                if (TryComp<FingerprintComponent>(uid, out var fingerprintComponent) && !string.IsNullOrEmpty(fingerprintComponent.Fingerprint))
+            }
+            
+            // Create blood puddle on the same location to enable cleaning and forensics
+            if (TryComp<BloodstreamComponent>(uid, out var bloodstreamComponent))
+            {
+                // Create blood solution containing creator's DNA
+                var bloodReagent = bloodstreamComponent.BloodReagent; 
+                var solution = new Solution(bloodReagent, FixedPoint2.New(5)); // Small amount of blood
+                
+                // Spill blood at the rune location using PuddleSystem
+                if (_puddleSystem.TrySpillAt(coords, solution, out var puddleUid, sound: false))
                 {
-                    runeComponent.CreatorFingerprint = fingerprintComponent.Fingerprint;
-                    forensicsComponent.Fingerprints.Add(fingerprintComponent.Fingerprint);
-                }
-
-                // Get blood type from bloodstream
-                if (TryComp<BloodstreamComponent>(uid, out var bloodstreamComponent))
-                {
-                    runeComponent.CreatorBloodData = bloodstreamComponent.BloodReagent;
+                    // Add creator's DNA to the blood puddle for forensics
+                    if (TryComp<DnaComponent>(uid, out var dnaComponent) && !string.IsNullOrEmpty(dnaComponent.DNA))
+                    {
+                        var forensicsComponent = EnsureComp<Content.Server.Forensics.ForensicsComponent>(puddleUid);
+                        forensicsComponent.DNAs.Add(dnaComponent.DNA);
+                        forensicsComponent.CanDnaBeCleaned = true;
+                    }
+                    
+                    // Modify puddle properties to be non-slippery since it's part of the rune
+                    if (TryComp<PuddleComponent>(puddleUid, out var puddleComp))
+                    {
+                        // Use RemComp and re-add to modify the component properly
+                        RemComp<PuddleComponent>(puddleUid);
+                        var newPuddleComp = EnsureComp<PuddleComponent>(puddleUid);
+                        newPuddleComp.CanSlow = false;
+                        newPuddleComp.CanSlip = false;
+                        newPuddleComp.SolutionName = puddleComp.SolutionName;
+                        newPuddleComp.Solution = puddleComp.Solution;
+                    }
                 }
             }
         }
@@ -1412,16 +1428,6 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             }
             coords = _map.GridTileToLocal(gridUid.Value, mapGrid, position);
             return true;
-        }
-
-        private void OnRuneCleaningFinished(EntityUid uid, CultRuneBaseComponent component, CleanForensicsDoAfterEvent args)
-        {
-            if (args.Cancelled)
-                return;
-
-            // When successfully cleaned, the rune is destroyed
-            _popupSystem.PopupEntity(Loc.GetString("cult-rune-cleaned"), args.User, args.User);
-            _entityManager.DeleteEntity(uid);
         }
 
         /*
