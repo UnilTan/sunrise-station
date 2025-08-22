@@ -18,6 +18,7 @@ public sealed class TimerEntry
 {
     public string Name { get; set; } = string.Empty;
     public int DurationSeconds { get; set; }
+    public int OriginalDurationSeconds { get; set; }
     public TimeSpan? StartTime { get; set; }
     public bool IsRunning { get; set; }
 
@@ -29,6 +30,7 @@ public sealed class TimerEntry
     {
         Name = name;
         DurationSeconds = durationSeconds;
+        OriginalDurationSeconds = durationSeconds;
         IsRunning = false;
         StartTime = null;
     }

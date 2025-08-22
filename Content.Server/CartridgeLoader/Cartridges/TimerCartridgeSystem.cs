@@ -64,6 +64,7 @@ public sealed class TimerCartridgeSystem : EntitySystem
                     if (existingTimer != null)
                     {
                         existingTimer.DurationSeconds = message.Duration;
+                        existingTimer.OriginalDurationSeconds = message.Duration;
                         existingTimer.IsRunning = false;
                         existingTimer.StartTime = null;
                     }
@@ -117,7 +118,7 @@ public sealed class TimerCartridgeSystem : EntitySystem
                 {
                     timerToReset.IsRunning = false;
                     timerToReset.StartTime = null;
-                    // Keep original duration - we'll need to store it somewhere
+                    timerToReset.DurationSeconds = timerToReset.OriginalDurationSeconds;
                     _adminLogger.Add(LogType.PdaInteract, LogImpact.Low,
                         $"{ToPrettyString(args.Actor)} reset timer '{message.TimerName}' on: {ToPrettyString(uid)}");
                 }
@@ -140,7 +141,7 @@ public sealed class TimerCartridgeSystem : EntitySystem
             timer.DurationSeconds = 0;
 
             // Play notification sound
-            _audio.PlayPredicted("/Audio/Machines/Nuke/nuke_armed.ogg", uid, null);
+            _audio.PlayPvs("/Audio/Machines/timer.ogg", uid);
             
             _adminLogger.Add(LogType.PdaInteract, LogImpact.Low,
                 $"Timer '{timer.Name}' expired on: {ToPrettyString(uid)}");
@@ -148,8 +149,9 @@ public sealed class TimerCartridgeSystem : EntitySystem
 
         if (expiredTimers.Any())
         {
-            // Update UI to reflect expired timers
-            UpdateUiState(uid, uid, component); // This might need the loader UID instead
+            // Update UI to reflect expired timers - we need to find the loader entity
+            // For now, let's use a simpler approach and just force an update
+            Dirty(uid, component);
         }
     }
 
