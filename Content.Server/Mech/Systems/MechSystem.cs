@@ -5,6 +5,7 @@ using Content.Server.Mech.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -57,6 +58,7 @@ public sealed partial class MechSystem : SharedMechSystem
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
 
     private static readonly ProtoId<ToolQualityPrototype> PryingQuality = "Prying";
