@@ -2,6 +2,7 @@ using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Server.Player;
 using System.Linq;
+using Robust.Shared.GameObjects;
 
 namespace Content.Server.Administration.Commands;
 
@@ -9,12 +10,14 @@ namespace Content.Server.Administration.Commands;
 public sealed class NotifyCommand : LocalizedCommands
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
 
     public override string Command => "notify";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
+        var quickDialog = _entitySystemManager.GetEntitySystem<QuickDialogSystem>();
+
         if (args.Length < 2)
         {
             shell.WriteLine("Usage: notify <all|username1,username2,...> <title> [message]");
@@ -33,7 +36,7 @@ public sealed class NotifyCommand : LocalizedCommands
         {
             // Message provided as argument
             message = string.Join(" ", args[2..]);
-            SendNotifications(shell, target, title, message);
+            SendNotifications(shell, quickDialog, target, title, message);
         }
         else
         {
@@ -44,18 +47,18 @@ public sealed class NotifyCommand : LocalizedCommands
                 return;
             }
 
-            _quickDialog.OpenDialog<string>(shell.Player, "Enter Notification Message", "Message:", 
-                (msg) => SendNotifications(shell, target, title, msg),
+            quickDialog.OpenDialog<string>(shell.Player, "Enter Notification Message", "Message:", 
+                (msg) => SendNotifications(shell, quickDialog, target, title, msg),
                 () => shell.WriteLine("Notification cancelled."));
         }
     }
 
-    private void SendNotifications(IConsoleShell shell, string target, string title, string message)
+    private void SendNotifications(IConsoleShell shell, QuickDialogSystem quickDialog, string target, string title, string message)
     {
         if (target.Equals("all", StringComparison.OrdinalIgnoreCase))
         {
             // Send to all players
-            _quickDialog.NotifyAllPlayers(title, message);
+            quickDialog.NotifyAllPlayers(title, message);
             var playerCount = _playerManager.PlayerCount;
             shell.WriteLine($"Notification sent to all {playerCount} players.");
         }
@@ -66,7 +69,7 @@ public sealed class NotifyCommand : LocalizedCommands
                                   .Select(u => u.Trim())
                                   .ToArray();
 
-            var notFound = _quickDialog.NotifyPlayers(title, message, usernames);
+            var notFound = quickDialog.NotifyPlayers(title, message, usernames);
             
             var sentCount = usernames.Length - notFound.Count;
             shell.WriteLine($"Notification sent to {sentCount} player(s).");
