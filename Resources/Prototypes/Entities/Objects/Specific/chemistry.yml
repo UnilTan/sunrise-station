@@ -245,6 +245,8 @@
       beaker:
         maxVol: 40 #Sunrise-Edit
         canReact: false
+  - type: CryostasisBeaker
+    maxTemperature: 293.15
 
 - type: entity
   name: bluespace beaker
