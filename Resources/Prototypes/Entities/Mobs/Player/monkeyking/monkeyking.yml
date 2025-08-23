@@ -225,7 +225,7 @@
     nameSegments:
     - NamesFirst
     nameFormat: "{0} the Armed Monkey"
-  - type: HandsShort # Monkeys have only one hand as specified
+  - type: Hands
   - type: Inventory
     speciesId: monkey
     templateId: monkey

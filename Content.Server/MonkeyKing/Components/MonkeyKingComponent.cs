@@ -50,6 +50,19 @@ public sealed partial class MonkeyKingComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField("summonedMonkeyPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string SummonedMonkeyPrototype = "MobMonkeyArmed";
 
+    /// <summary>
+    /// Random weapons that can be given to summoned monkeys
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField("monkeyWeapons")]
+    public List<string> MonkeyWeapons = new()
+    {
+        "KitchenKnife",
+        "CombatKnife", 
+        "BaseBallBat",
+        "Spear",
+        "SpearBone"
+    };
+
     [ViewVariables(VVAccess.ReadWrite), DataField("soundRoar")]
     public SoundSpecifier? SoundRoar = new SoundPathSpecifier("/Audio/Animals/monkey_scream.ogg");
 
@@ -61,4 +74,7 @@ public sealed partial class MonkeyKingComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<NpcFactionPrototype> Faction = "MonkeyKing";
+
+    [DataField]
+    public ProtoId<NpcFactionPrototype> HostileFaction = "SimpleHostile";
 }

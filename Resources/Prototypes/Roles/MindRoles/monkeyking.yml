@@ -1,0 +1,22 @@
+# Monkey King Mind Roles
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleMonkeyKing
+  name: Monkey King Role
+  components:
+  - type: MindRole
+    antagPrototype: MonkeyKing
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+
+# Supporting armed monkey role
+- type: entity
+  parent: MindRoleGhostRoleNeutral
+  id: MindRoleArmedMonkey
+  name: Armed Monkey Role
+  components:
+  - type: MindRole
+    antagPrototype: MonkeyKing
+    exclusiveAntag: false
+    roleType: TeamAntagonist

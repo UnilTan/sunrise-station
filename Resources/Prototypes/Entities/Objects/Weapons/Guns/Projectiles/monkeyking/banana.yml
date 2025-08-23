@@ -18,9 +18,5 @@
     ignoreResistances: false
   - type: StaminaDamageOnCollide
     damage: 100 # Enough to knock down
-  - type: SoundOnCollide
-    sound:
-      path: /Audio/Effects/Fluids/splat.ogg
-  - type: DeleteOnCollide
   - type: TimedDespawn
     lifetime: 10

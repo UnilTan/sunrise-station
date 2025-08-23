@@ -1,14 +1,17 @@
 using Content.Server.Actions;
+using Content.Server.Hands.Systems;
+using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.MonkeyKing.Components;
 using Content.Shared.Actions;
+using Content.Shared.Hands.Components;
 using Content.Shared.MonkeyKing;
 using Content.Shared.Maps;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Movement.Systems;
+using Content.Shared.Movement.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.Physics;
@@ -32,8 +35,10 @@ public sealed partial class MonkeyKingSystem : EntitySystem
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -85,14 +90,25 @@ public sealed partial class MonkeyKingSystem : EntitySystem
         var performerTransform = Transform(args.Performer);
         var targetCoords = args.Target;
 
-        // Create and fire banana projectile
-        var bananaEnt = EntityManager.SpawnEntity(component.BananaProjectilePrototype, performerTransform.Coordinates);
+        // Calculate direction for the projectile
+        var mapTargetPos = targetCoords.ToMapPos(EntityManager, _transform);
+        var mapPerformerPos = performerTransform.WorldPosition;
+        var direction = (mapTargetPos - mapPerformerPos).Normalized();
+        
+        // Spawn the banana projectile slightly in front of performer
+        var spawnPos = performerTransform.Coordinates.Offset(direction * 0.5f);
+        var bananaEnt = EntityManager.SpawnEntity(component.BananaProjectilePrototype, spawnPos);
+        
+        // Use the projectile system to properly set up the projectile
+        if (TryComp<ProjectileComponent>(bananaEnt, out var projectile))
+        {
+            _projectileSystem.SetShooter(bananaEnt, projectile, args.Performer);
+        }
         
         if (TryComp<PhysicsComponent>(bananaEnt, out var projectilePhysics))
         {
-            var direction = (targetCoords.ToMapPos(EntityManager, _transform) - performerTransform.WorldPosition).Normalized();
             var velocity = direction * 15f; // Banana speed
-            _physics.SetLinearVelocity(bananaEnt, velocity);
+            _physics.SetLinearVelocity(bananaEnt, velocity, body: projectilePhysics);
         }
 
         // Play throw sound
@@ -116,11 +132,18 @@ public sealed partial class MonkeyKingSystem : EntitySystem
 
         foreach (var entity in nearbyEntities)
         {
-            // Check if entity is a monkey (has monkey faction or is summoned monkey)
-            if (component.SummonedMonkeys.Contains(entity) || HasComp<MonkeyKingComponent>(entity))
+            // Check if entity is a monkey (summoned monkey or is MonkeyKing)
+            var isMonkey = component.SummonedMonkeys.Contains(entity) || 
+                          HasComp<MonkeyKingComponent>(entity);
+
+            if (isMonkey && HasComp<MobStateComponent>(entity))
             {
-                // Apply speed buff and healing effect
-                // TODO: Implement proper buff system
+                // Apply adrenaline effect for healing and stamina
+                _statusEffects.TryAddStatusEffect(entity, "Adrenaline", TimeSpan.FromSeconds(30), true);
+
+                // Visual effect - make them glow briefly
+                _popup.PopupEntity("УК-УК-УК!", entity);
+                
                 buffedCount++;
             }
         }
@@ -156,8 +179,21 @@ public sealed partial class MonkeyKingSystem : EntitySystem
         // Set faction
         if (TryComp<NpcFactionMemberComponent>(monkey, out var factionComp))
         {
-            _faction.RemoveFaction(monkey, "SimpleHostile", false);
+            _faction.RemoveFaction(monkey, component.HostileFaction, false);
             _faction.AddFaction(monkey, component.Faction);
+        }
+
+        // Give the monkey a random weapon
+        if (component.MonkeyWeapons.Count > 0)
+        {
+            var randomWeapon = _random.Pick(component.MonkeyWeapons);
+            var weapon = EntityManager.SpawnEntity(randomWeapon, spawnPos);
+            
+            // Try to put weapon in monkey's hand
+            if (TryComp<HandsComponent>(monkey, out var hands))
+            {
+                _hands.TryPickup(monkey, weapon, checkActionBlocker: false, handsComp: hands);
+            }
         }
 
         _popup.PopupEntity("Король обезьян призывает вооруженную обезьяну!", args.Performer);
@@ -184,9 +220,8 @@ public sealed partial class MonkeyKingSystem : EntitySystem
             return;
         }
 
-        // TODO: Inject cognizine or make sentient directly
-        // For now, just add mind container component to make sentient
-        var mindContainer = EntityManager.AddComponent<MindContainerComponent>(target);
+        // Use the mind system to make the target sentient
+        _mind.MakeSentient(target);
         
         _popup.PopupEntity("Король обезьян освобождает разум существа!", args.Performer);
         _popup.PopupEntity("Вы чувствуете, как сознание проясняется!", target);
