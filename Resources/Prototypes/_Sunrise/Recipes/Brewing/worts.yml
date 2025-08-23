@@ -11,6 +11,7 @@
   materials:
     Wheat: 1
   applyMaterialDiscount: true
+  fermentedResult: FermentedRegularBeer
 
 - type: brewingRecipe
   id: DarkWortRecipe
@@ -24,6 +25,7 @@
     Wheat: 1
     WeldingFuel: 5
   applyMaterialDiscount: true
+  fermentedResult: FermentedDarkBeer
 
 - type: brewingRecipe
   id: RiceWortRecipe
@@ -36,6 +38,7 @@
   materials:
     Rice: 1
   applyMaterialDiscount: true
+  fermentedResult: FermentedRiceBeer
 
 - type: brewingRecipe
   id: WineWortRecipe
@@ -48,6 +51,7 @@
   materials:
     Berries: 2
   applyMaterialDiscount: true
+  fermentedResult: FermentedWine
 
 # Advanced Recipes (require industrial apparatus)
 
@@ -64,6 +68,7 @@
     Wheat: 1
     ColdOil: 5
   applyMaterialDiscount: true
+  fermentedResult: FermentedCoolingBeer
 
 - type: brewingRecipe
   id: HotWortRecipe
@@ -78,6 +83,7 @@
     Wheat: 1
     HotOil: 5
   applyMaterialDiscount: true
+  fermentedResult: FermentedFireBeer
 
 - type: brewingRecipe
   id: DeusWortRecipe
@@ -92,6 +98,7 @@
     Wheat: 1
     AmbrosiaDeus: 1
   applyMaterialDiscount: true
+  fermentedResult: FermentedMedicalBeer
 
 - type: brewingRecipe
   id: AleWortRecipe
@@ -106,6 +113,7 @@
     Wheat: 1
     Beer: 5
   applyMaterialDiscount: true
+  fermentedResult: FermentedAle
 
 - type: brewingRecipe
   id: EliteWineWortRecipe
@@ -120,6 +128,7 @@
     Berries: 2
     Ambrosia: 1
   applyMaterialDiscount: true
+  fermentedResult: FermentedEliteWine
 
 # Exotic Recipes (require industrial apparatus)
 
@@ -136,6 +145,7 @@
     Wheat: 1
     XenomorphBlood: 5
   applyMaterialDiscount: true
+  fermentedResult: FermentedAsteroidBugBeer
 
 - type: brewingRecipe
   id: ExplosiveWortRecipe
@@ -150,6 +160,7 @@
     Wheat: 1
     Plasma: 5
   applyMaterialDiscount: true
+  fermentedResult: FermentedPlasmaBeer
 
 - type: brewingRecipe
   id: HonkingWortRecipe
@@ -163,3 +174,4 @@
     Wheat: 1
     BananaPeel: 1
   applyMaterialDiscount: true
+  fermentedResult: FermentedHonkBeer

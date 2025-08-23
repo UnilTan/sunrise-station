@@ -12,10 +12,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Verbs;
 using Content.Shared.Examine;
 using Content.Shared._Sunrise.Brewing;
+using Content.Shared._Sunrise.Brewing.Prototypes;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Brewing
@@ -23,6 +25,7 @@ namespace Content.Server._Sunrise.Brewing
     public sealed class BrewingBarrelSystem : EntitySystem
     {
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly ContainerSystem _container = default!;
@@ -255,22 +258,13 @@ namespace Content.Server._Sunrise.Brewing
 
         private string? GetFermentedVariant(string wortType)
         {
-            return wortType switch
+            // Look for a brewing recipe that produces this wort type and return its fermented result
+            foreach (var recipe in _proto.EnumeratePrototypes<BrewingRecipePrototype>())
             {
-                "RegularWort" => "FermentedRegularBeer",
-                "DarkWort" => "FermentedDarkBeer",
-                "ColdWort" => "FermentedCoolingBeer",
-                "HotWort" => "FermentedFireBeer",
-                "DeusWort" => "FermentedMedicalBeer",
-                "AlienWort" => "FermentedAsteroidBugBeer",
-                "RiceWort" => "FermentedRiceBeer",
-                "AleWort" => "FermentedAle",
-                "ExplosiveWort" => "FermentedPlasmaBeer",
-                "WineWort" => "FermentedWine",
-                "EliteWineWort" => "FermentedEliteWine",
-                "HonkingWort" => "FermentedHonkBeer",
-                _ => null
-            };
+                if (recipe.Result == wortType)
+                    return recipe.FermentedResult;
+            }
+            return null;
         }
 
         private void UpdateAtmosphericConditions(EntityUid uid, BrewingBarrelComponent component, TransformComponent xform)

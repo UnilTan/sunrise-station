@@ -64,4 +64,10 @@ public sealed partial class BrewingRecipePrototype : IPrototype
     /// </summary>
     [DataField]
     public bool RequiresIndustrial = false;
+
+    /// <summary>
+    /// The reagent id that is produced when the wort from this recipe is fermented.
+    /// </summary>
+    [DataField]
+    public string? FermentedResult;
 }
