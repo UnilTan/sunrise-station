@@ -8,8 +8,8 @@
   components:
   - type: Action
     icon:
-      sprite: Objects/Consumable/Food/produce.rsi
-      state: banana
+      sprite: Objects/Specific/Hydroponics/banana.rsi
+      state: produce
     useDelay: 30 # 30 second cooldown
     priority: 1
   - type: WorldTargetAction
@@ -25,8 +25,8 @@
   components:
   - type: Action
     icon:
-      sprite: Interface/Actions/scream.rsi
-      state: icon
+      sprite: Interface/Actions
+      state: scream
     useDelay: 40 # 40 second cooldown
     priority: 2
   - type: InstantAction
@@ -40,8 +40,8 @@
   components:
   - type: Action
     icon:
-      sprite: Interface/Actions/mass-sleep.rsi
-      state: icon
+      sprite: Interface/Actions
+      state: carp_summon
     useDelay: 10 # 10 second cooldown
     priority: 3
   - type: InstantAction
@@ -55,8 +55,8 @@
   components:
   - type: Action
     icon:
-      sprite: Interface/Actions/psionics.rsi
-      state: icon
+      sprite: Interface/Actions
+      state: manifest
     useDelay: 5 # 5 second cooldown
     priority: 4
   - type: EntityTargetAction

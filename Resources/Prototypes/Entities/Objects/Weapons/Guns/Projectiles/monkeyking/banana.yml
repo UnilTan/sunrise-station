@@ -7,9 +7,9 @@
   parent: BaseBullet
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Food/produce.rsi
+    sprite: Objects/Specific/Hydroponics/banana.rsi
     layers:
-    - state: banana
+    - state: produce
   - type: Projectile
     damage:
       types:

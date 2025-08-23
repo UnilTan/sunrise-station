@@ -16,14 +16,14 @@
   components:
   - type: Objective
     icon:
-      sprite: Objects/Consumable/Food/produce.rsi
-      state: banana
+      sprite: Objects/Specific/Hydroponics/banana.rsi
+      state: produce
   - type: NumberObjective
     min: 5
     max: 10
     title: objective-monkey-king-liberate-title
     description: objective-monkey-king-liberate-description
-  # TODO: Add proper condition component
+    # Note: Progress tracking is implemented in MonkeyKingSystem
 
 - type: entity
   parent: [BaseMonkeyKingObjective, BaseSurviveObjective]
