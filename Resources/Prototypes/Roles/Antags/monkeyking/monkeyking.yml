@@ -1,0 +1,6 @@
+- type: antag
+  id: MonkeyKing
+  name: roles-antag-monkey-king-name
+  antagonist: true
+  playTimeTracker: AntagMonkeyKing
+  objective: roles-antag-monkey-king-objective

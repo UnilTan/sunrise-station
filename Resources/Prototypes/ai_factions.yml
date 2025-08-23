@@ -11,6 +11,7 @@
   - Revolutionary
   - AllHostile
   - Wizard
+  - MonkeyKing
   # Sunrise Edit
   - Thief
   - Vampire
@@ -30,6 +31,7 @@
   - Wizard
   - Xenoborg
   - Dragon
+  - MonkeyKing
   # Sunrise Edit
   - Thief
   - Carps
@@ -238,4 +240,27 @@
   - FleshHuman
   - Flesh
   - Xeno
+  - BloodCult
+
+- type: npcFaction
+  id: MonkeyKing
+  friendly:
+  - MonkeyKing # Self-friendly
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Xeno
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - AllHostile
+  - Wizard
+  - Dragon
+  - SimpleHostile
+  - Carps
+  # Sunrise Edit
+  - Thief
+  - Vampire
+  - FleshHuman
+  - Flesh
   - BloodCult

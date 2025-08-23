@@ -1,0 +1,26 @@
+# Monkey King Projectiles
+
+- type: entity
+  id: MonkeyKingBananaProjectile
+  name: flying banana
+  description: A banana thrown with tremendous force!
+  parent: BaseBullet
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/produce.rsi
+    layers:
+    - state: banana
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 15
+    speed: 15
+    ignoreResistances: false
+  - type: StaminaDamageOnCollide
+    damage: 100 # Enough to knock down
+  - type: SoundOnCollide
+    sound:
+      path: /Audio/Effects/Fluids/splat.ogg
+  - type: DeleteOnCollide
+  - type: TimedDespawn
+    lifetime: 10

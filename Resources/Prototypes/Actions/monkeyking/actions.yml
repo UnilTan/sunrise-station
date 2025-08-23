@@ -1,0 +1,67 @@
+# Monkey King Actions
+
+- type: entity
+  parent: BaseAction
+  id: ActionMonkeyKingBananaThrow
+  name: "[color=yellow]Лови банан! (Catch Banana!)[/color]"
+  description: Throw a banana that deals damage and knocks down enemies in its path.
+  components:
+  - type: Action
+    icon:
+      sprite: Objects/Consumable/Food/produce.rsi
+      state: banana
+    useDelay: 30 # 30 second cooldown
+    priority: 1
+  - type: WorldTargetAction
+    checkCanAccess: false
+    range: 15
+    event: !type:MonkeyKingBananaThrowActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMonkeyKingBattleCry
+  name: "[color=orange]УК-УК-УК! (Battle Cry!)[/color]"
+  description: Rally nearby monkeys, giving them speed and regeneration.
+  components:
+  - type: Action
+    icon:
+      sprite: Interface/Actions/scream.rsi
+      state: icon
+    useDelay: 40 # 40 second cooldown
+    priority: 2
+  - type: InstantAction
+    event: !type:MonkeyKingBattleCryActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMonkeyKingCallToArms
+  name: "[color=red]Призыв к оружию (Call to Arms)[/color]"
+  description: Summon an armed intelligent monkey to fight for you.
+  components:
+  - type: Action
+    icon:
+      sprite: Interface/Actions/mass-sleep.rsi
+      state: icon
+    useDelay: 10 # 10 second cooldown
+    priority: 3
+  - type: InstantAction
+    event: !type:MonkeyKingCallToArmsActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMonkeyKingLiberation
+  name: "[color=green]Освобождение (Liberation)[/color]"
+  description: Make a creature sentient by injecting cognizine.
+  components:
+  - type: Action
+    icon:
+      sprite: Interface/Actions/psionics.rsi
+      state: icon
+    useDelay: 5 # 5 second cooldown
+    priority: 4
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - MobState
+    event: !type:MonkeyKingLiberationActionEvent

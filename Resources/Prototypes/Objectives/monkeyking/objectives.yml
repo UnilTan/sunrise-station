@@ -1,0 +1,51 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseMonkeyKingObjective
+  components:
+  - type: Objective
+    difficulty: 1.5
+    issuer: objective-issuer-monkey-king
+  - type: RoleRequirement
+    roles:
+    - MonkeyKingRole
+
+- type: entity
+  parent: BaseMonkeyKingObjective
+  id: MonkeyKingLiberateObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Consumable/Food/produce.rsi
+      state: banana
+  - type: NumberObjective
+    min: 5
+    max: 10
+    title: objective-monkey-king-liberate-title
+    description: objective-monkey-king-liberate-description
+  # TODO: Add proper condition component
+
+- type: entity
+  parent: [BaseMonkeyKingObjective, BaseSurviveObjective]
+  id: MonkeyKingSurviveObjective
+  name: Survive
+  description: You must stay alive to lead the monkey uprising.
+  components:
+  - type: Objective
+    icon:
+      sprite: Mobs/Animals/gorilla.rsi
+      state: crawling
+
+- type: entity
+  parent: BaseMonkeyKingObjective
+  id: MonkeyKingKillCrewObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: Interface/Misc/job_icons.rsi
+      state: Assistant
+  - type: KillPersonCondition
+  - type: PickRandomPerson
+    blacklist:
+      components:
+      - NonSentientCreature

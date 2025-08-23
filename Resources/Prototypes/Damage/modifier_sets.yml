@@ -457,3 +457,21 @@
     Heat: 10
     Slash: 5
     Piercing: 5
+
+# High physical damage resistance for Monkey King (opposite of Dragon's thermal resistance)
+- type: damageModifierSet
+  id: MonkeyKing
+  coefficients:
+    Blunt: 0.4      # 60% resistance to physical damage
+    Slash: 0.4      # 60% resistance to physical damage
+    Piercing: 0.5   # 50% resistance to physical damage
+    Heat: 1.2       # 20% increased heat damage (vulnerability)
+    Cold: 1.0       # Normal cold damage
+    Shock: 0.8      # 20% resistance to shock
+    Poison: 0.7     # 30% resistance to poison
+    Radiation: 0.0  # 100% resistance to radiation (redspace entity)
+    Asphyxiation: 0.0 # 100% resistance to suffocation (redspace entity)
+  flatReductions:
+    Blunt: 8
+    Slash: 8
+    Piercing: 5
