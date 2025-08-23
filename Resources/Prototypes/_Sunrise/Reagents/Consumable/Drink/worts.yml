@@ -1,0 +1,167 @@
+- type: reagent
+  id: RegularWort
+  name: reagent-name-regular-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-regular-wort
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: wort
+  color: "#D2B48C"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: DarkWort
+  name: reagent-name-dark-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-dark-wort
+  physicalDesc: reagent-physical-desc-dark
+  flavor: wort
+  color: "#8B4513"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: ColdWort
+  name: reagent-name-cold-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-cold-wort
+  physicalDesc: reagent-physical-desc-cold
+  flavor: wort
+  color: "#B0E0E6"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: HotWort
+  name: reagent-name-hot-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-hot-wort
+  physicalDesc: reagent-physical-desc-hot
+  flavor: wort
+  color: "#FF6347"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: DeusWort
+  name: reagent-name-deus-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-deus-wort
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: wort
+  color: "#32CD32"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: AlienWort
+  name: reagent-name-alien-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-alien-wort
+  physicalDesc: reagent-physical-desc-viscous
+  flavor: wort
+  color: "#4B0082"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: RiceWort
+  name: reagent-name-rice-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-rice-wort
+  physicalDesc: reagent-physical-desc-clear
+  flavor: wort
+  color: "#F5F5DC"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: AleWort
+  name: reagent-name-ale-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-ale-wort
+  physicalDesc: reagent-physical-desc-bubbly
+  flavor: wort
+  color: "#DAA520"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: ExplosiveWort
+  name: reagent-name-explosive-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-explosive-wort
+  physicalDesc: reagent-physical-desc-volatile
+  flavor: wort
+  color: "#FF00FF"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: WineWort
+  name: reagent-name-wine-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-wine-wort
+  physicalDesc: reagent-physical-desc-fruity
+  flavor: wort
+  color: "#722F37"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: EliteWineWort
+  name: reagent-name-elite-wine-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-elite-wine-wort
+  physicalDesc: reagent-physical-desc-luxurious
+  flavor: wort
+  color: "#8B0000"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+
+- type: reagent
+  id: HonkingWort
+  name: reagent-name-honking-wort
+  parent: BaseAlcohol
+  desc: reagent-desc-honking-wort
+  physicalDesc: reagent-physical-desc-comedic
+  flavor: wort
+  color: "#FFFF00"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5

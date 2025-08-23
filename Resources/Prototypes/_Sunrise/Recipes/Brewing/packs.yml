@@ -1,0 +1,21 @@
+# Brewing Recipe Packs
+
+- type: brewingRecipePack
+  id: BasicBrewingRecipes
+  recipes:
+  - RegularWortRecipe
+  - DarkWortRecipe
+  - RiceWortRecipe
+  - WineWortRecipe
+  - HonkingWortRecipe
+
+- type: brewingRecipePack
+  id: IndustrialBrewingRecipes
+  recipes:
+  - ColdWortRecipe
+  - HotWortRecipe
+  - DeusWortRecipe
+  - AleWortRecipe
+  - EliteWineWortRecipe
+  - AlienWortRecipe
+  - ExplosiveWortRecipe

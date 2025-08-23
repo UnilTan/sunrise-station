@@ -1,0 +1,165 @@
+# Basic Brewing Recipes
+
+- type: brewingRecipe
+  id: RegularWortRecipe
+  name: brewing-recipe-regular-wort
+  description: brewing-recipe-regular-wort-desc
+  result: RegularWort
+  resultReagentAmount: 10
+  completeTime: 5
+  category: BasicWorts
+  materials:
+    Wheat: 1
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: DarkWortRecipe
+  name: brewing-recipe-dark-wort
+  description: brewing-recipe-dark-wort-desc
+  result: DarkWort
+  resultReagentAmount: 10
+  completeTime: 6
+  category: BasicWorts
+  materials:
+    Wheat: 1
+    WeldingFuel: 5
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: RiceWortRecipe
+  name: brewing-recipe-rice-wort
+  description: brewing-recipe-rice-wort-desc
+  result: RiceWort
+  resultReagentAmount: 10
+  completeTime: 5
+  category: BasicWorts
+  materials:
+    Rice: 1
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: WineWortRecipe
+  name: brewing-recipe-wine-wort
+  description: brewing-recipe-wine-wort-desc
+  result: WineWort
+  resultReagentAmount: 10
+  completeTime: 7
+  category: BasicWorts
+  materials:
+    Berries: 2
+  applyMaterialDiscount: true
+
+# Advanced Recipes (require industrial apparatus)
+
+- type: brewingRecipe
+  id: ColdWortRecipe
+  name: brewing-recipe-cold-wort
+  description: brewing-recipe-cold-wort-desc
+  result: ColdWort
+  resultReagentAmount: 10
+  completeTime: 8
+  category: AdvancedWorts
+  requiresIndustrial: true
+  materials:
+    Wheat: 1
+    ColdOil: 5
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: HotWortRecipe
+  name: brewing-recipe-hot-wort
+  description: brewing-recipe-hot-wort-desc
+  result: HotWort
+  resultReagentAmount: 10
+  completeTime: 8
+  category: AdvancedWorts
+  requiresIndustrial: true
+  materials:
+    Wheat: 1
+    HotOil: 5
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: DeusWortRecipe
+  name: brewing-recipe-deus-wort
+  description: brewing-recipe-deus-wort-desc
+  result: DeusWort
+  resultReagentAmount: 10
+  completeTime: 10
+  category: AdvancedWorts
+  requiresIndustrial: true
+  materials:
+    Wheat: 1
+    AmbrosiaDeus: 1
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: AleWortRecipe
+  name: brewing-recipe-ale-wort
+  description: brewing-recipe-ale-wort-desc
+  result: AleWort
+  resultReagentAmount: 15
+  completeTime: 8
+  category: AdvancedWorts
+  requiresIndustrial: true
+  materials:
+    Wheat: 1
+    Beer: 5
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: EliteWineWortRecipe
+  name: brewing-recipe-elite-wine-wort
+  description: brewing-recipe-elite-wine-wort-desc
+  result: EliteWineWort
+  resultReagentAmount: 10
+  completeTime: 12
+  category: AdvancedWorts
+  requiresIndustrial: true
+  materials:
+    Berries: 2
+    Ambrosia: 1
+  applyMaterialDiscount: true
+
+# Exotic Recipes (require industrial apparatus)
+
+- type: brewingRecipe
+  id: AlienWortRecipe
+  name: brewing-recipe-alien-wort
+  description: brewing-recipe-alien-wort-desc
+  result: AlienWort
+  resultReagentAmount: 10
+  completeTime: 15
+  category: ExoticWorts
+  requiresIndustrial: true
+  materials:
+    Wheat: 1
+    XenomorphBlood: 5
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: ExplosiveWortRecipe
+  name: brewing-recipe-explosive-wort
+  description: brewing-recipe-explosive-wort-desc
+  result: ExplosiveWort
+  resultReagentAmount: 10
+  completeTime: 10
+  category: ExoticWorts
+  requiresIndustrial: true
+  materials:
+    Wheat: 1
+    Plasma: 5
+  applyMaterialDiscount: true
+
+- type: brewingRecipe
+  id: HonkingWortRecipe
+  name: brewing-recipe-honking-wort
+  description: brewing-recipe-honking-wort-desc
+  result: HonkingWort
+  resultReagentAmount: 10
+  completeTime: 6
+  category: ExoticWorts
+  materials:
+    Wheat: 1
+    BananaPeel: 1
+  applyMaterialDiscount: true

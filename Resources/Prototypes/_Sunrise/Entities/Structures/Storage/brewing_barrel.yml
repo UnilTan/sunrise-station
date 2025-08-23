@@ -1,0 +1,80 @@
+- type: entity
+  parent: BaseStructure
+  id: BrewingBarrel
+  name: бочка для брожения
+  description: Деревянная бочка для ферментации сусла в пиво или вино. Чувствительна к атмосферным условиям.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Storage/brewing_barrel.rsi
+    state: barrel_closed
+    layers:
+    - state: barrel_closed
+      map: ["base"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BrewingBarrelVisuals.IsOpen:
+        base:
+          True: { state: barrel_open }
+          False: { state: barrel_closed }
+      enum.BrewingBarrelVisuals.IsFermenting:
+        base:
+          True: { state: barrel_fermenting }
+  - type: BrewingBarrel
+    openSound:
+      path: /Audio/Effects/woodhit.ogg
+    closeSound:
+      path: /Audio/Effects/woodhit.ogg
+    wortContainerId: barrel_wort
+    waterContainerId: barrel_water
+    outputContainerId: barrel_output
+    fermentationTime: 10.0
+    optimalMinTemp: 288.15
+    optimalMaxTemp: 298.15
+  - type: SolutionContainer
+    solutions:
+      barrel_wort:
+        maxVol: 100
+        canMix: true
+      barrel_water:
+        maxVol: 100
+        canMix: true
+      barrel_output:
+        maxVol: 200
+        canMix: true
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 15
+            max: 25
+  - type: Construction
+    graph: BrewingBarrel
+    node: barrel
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer

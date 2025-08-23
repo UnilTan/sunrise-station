@@ -1,0 +1,407 @@
+# Fermented Beer Variants from Worts
+
+- type: reagent
+  id: FermentedRegularBeer
+  name: reagent-name-fermented-regular-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-regular-beer
+  physicalDesc: reagent-physical-desc-bubbly
+  flavor: beer
+  color: "#FFD700"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.04
+      # Fermentation buff - slightly increased stamina recovery
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStamina
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 10
+        refresh: true
+
+- type: reagent
+  id: FermentedDarkBeer
+  name: reagent-name-fermented-dark-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-dark-beer
+  physicalDesc: reagent-physical-desc-dark
+  flavor: beer
+  color: "#8B4513"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
+      # Fermentation buff - slightly increased heat resistance
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectHeat
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 10
+        refresh: true
+
+- type: reagent
+  id: FermentedCoolingBeer
+  name: reagent-name-fermented-cooling-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-cooling-beer
+  physicalDesc: reagent-physical-desc-cold
+  flavor: beer
+  color: "#B0E0E6"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.04
+      - !type:AdjustTemperature
+        amount: -2
+      # Fermentation buff - cold resistance
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectCold
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 15
+        refresh: true
+
+- type: reagent
+  id: FermentedFireBeer
+  name: reagent-name-fermented-fire-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-fire-beer
+  physicalDesc: reagent-physical-desc-hot
+  flavor: beer
+  color: "#FF6347"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.04
+      - !type:AdjustTemperature
+        amount: 2
+      # Fermentation buff - heat resistance
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectHeat
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 15
+        refresh: true
+
+- type: reagent
+  id: FermentedMedicalBeer
+  name: reagent-name-fermented-medical-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-medical-beer
+  physicalDesc: reagent-physical-desc-medicinal
+  flavor: beer
+  color: "#32CD32"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.03
+      - !type:HealthChange
+        damage:
+          types:
+            Brute: -0.5
+            Burn: -0.5
+      # Fermentation buff - enhanced healing
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectHealing
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 20
+        refresh: true
+
+- type: reagent
+  id: FermentedAsteroidBugBeer
+  name: reagent-name-fermented-asteroid-bug-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-asteroid-bug-beer
+  physicalDesc: reagent-physical-desc-alien
+  flavor: beer
+  color: "#4B0082"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.06
+      # Fermentation buff - improved night vision
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDarkAdaptation
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 30
+        refresh: true
+
+- type: reagent
+  id: FermentedRiceBeer
+  name: reagent-name-fermented-rice-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-rice-beer
+  physicalDesc: reagent-physical-desc-light
+  flavor: beer
+  color: "#F5F5DC"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.03
+      - !type:SatiateHunger
+        factor: 1
+      # Fermentation buff - increased nutrition absorption
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSatiated
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 15
+        refresh: true
+
+- type: reagent
+  id: FermentedAle
+  name: reagent-name-fermented-ale
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-ale
+  physicalDesc: reagent-physical-desc-robust
+  flavor: beer
+  color: "#DAA520"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2.5
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
+      # Fermentation buff - morale boost
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMorale
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 20
+        refresh: true
+
+- type: reagent
+  id: FermentedPlasmaBeer
+  name: reagent-name-fermented-plasma-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-plasma-beer
+  physicalDesc: reagent-physical-desc-volatile
+  flavor: beer
+  color: "#FF00FF"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.07
+      # Explosive when spilled - handled by special system
+      # Fermentation buff - increased explosion resistance
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectExplosionResist
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 10
+        refresh: true
+
+- type: reagent
+  id: FermentedWine
+  name: reagent-name-fermented-wine
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-wine
+  physicalDesc: reagent-physical-desc-elegant
+  flavor: wine
+  color: "#722F37"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/wineglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
+      # Fermentation buff - social enhancement
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectCharisma
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 25
+        refresh: true
+
+- type: reagent
+  id: FermentedEliteWine
+  name: reagent-name-fermented-elite-wine
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-elite-wine
+  physicalDesc: reagent-physical-desc-luxurious
+  flavor: wine
+  color: "#8B0000"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/wineglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.06
+      # Enhanced fermentation buffs - premium quality
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectCharisma
+        conditions:
+        - !type:ReagentThreshold
+          min: 3
+        type: Add
+        time: 40
+        refresh: true
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectLuck
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+        type: Add
+        time: 30
+        refresh: true
+
+- type: reagent
+  id: FermentedHonkBeer
+  name: reagent-name-fermented-honk-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-fermented-honk-beer
+  physicalDesc: reagent-physical-desc-hilarious
+  flavor: beer
+  color: "#FFFF00"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beer.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.04
+      # Fermentation buff - comedy enhancement (slips more, honks randomly)
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - honk-beer-effect-honk
+        - honk-beer-effect-slip
+        - honk-beer-effect-funny
+        probability: 0.05
+        conditions:
+        - !type:ReagentThreshold
+          min: 5

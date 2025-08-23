@@ -1,0 +1,16 @@
+# Brewing Recipe Categories
+
+- type: brewingRecipeCategory
+  id: BasicWorts
+  name: brewing-category-basic-worts
+  sortWeight: 0
+
+- type: brewingRecipeCategory
+  id: AdvancedWorts
+  name: brewing-category-advanced-worts
+  sortWeight: 1
+
+- type: brewingRecipeCategory
+  id: ExoticWorts
+  name: brewing-category-exotic-worts
+  sortWeight: 2

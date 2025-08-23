@@ -1,0 +1,85 @@
+- type: entity
+  parent: BaseMachinePowered
+  id: BrewingApparatusMoonshine
+  name: самогонный аппарат
+  description: Простой аппарат для приготовления сусла из растений и жидкостей. Подходит для базовых рецептов.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Machines/brewing_apparatus.rsi
+    state: moonshine
+  - type: BrewingApparatus
+    type: Moonshine
+    staticPacks:
+    - BasicBrewingRecipes
+    brewingSound:
+      path: /Audio/Machines/blender.ogg
+    wortOutputSlotId: wort_output
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Wheat
+      - Rice
+      - Berries
+      - BananaPeel
+      - WeldingFuel
+  - type: UserInterface
+    interfaces:
+      enum.BrewingApparatusUiKey.Key:
+        type: BrewingApparatusBoundUserInterface
+  - type: ItemSlots
+    slots:
+      wort_output:
+        name: Контейнер для сусла
+        whitelist:
+          components:
+          - SolutionContainer
+        insertSound: /Audio/Machines/machine_switch.ogg
+        ejectSound: /Audio/Machines/machine_switch.ogg
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      wort_output: !type:ContainerSlot
+  - type: ApcPowerReceiver
+    powerLoad: 1500
+  - type: ExaminableBattery
+  - type: PointLight
+    enabled: false
+    castShadows: false
+    radius: 1.5
+
+- type: entity
+  parent: BrewingApparatusMoonshine
+  id: BrewingApparatusIndustrial
+  name: промышленный пивоварный аппарат
+  description: Продвинутый аппарат для приготовления сложных видов сусла. Поддерживает все рецепты, включая исследуемые.
+  components:
+  - type: Sprite
+    state: industrial
+  - type: BrewingApparatus
+    type: Industrial
+    staticPacks:
+    - BasicBrewingRecipes
+    dynamicPacks:
+    - IndustrialBrewingRecipes
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Wheat
+      - Rice
+      - Berries
+      - BananaPeel
+      - WeldingFuel
+      - ColdOil
+      - HotOil
+      - AmbrosiaDeus
+      - Ambrosia
+      - XenomorphBlood
+      - Plasma
+      - Beer
+  - type: TechnologyDatabase
+    technologyIds:
+    - BasicBrewing
+  - type: ResearchClient
+  - type: ApcPowerReceiver
+    powerLoad: 2500
