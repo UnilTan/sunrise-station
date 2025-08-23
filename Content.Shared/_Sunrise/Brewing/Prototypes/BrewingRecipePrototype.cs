@@ -1,6 +1,5 @@
 using Content.Shared.Materials;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Shared._Sunrise.Brewing.Prototypes;
 
@@ -44,7 +43,7 @@ public sealed partial class BrewingRecipePrototype : IPrototype
     /// <summary>
     /// The materials required to brew this recipe.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdValueDictionarySerializer<int, MaterialPrototype>))]
+    [DataField]
     public Dictionary<ProtoId<MaterialPrototype>, int> Materials = new();
 
     /// <summary>
