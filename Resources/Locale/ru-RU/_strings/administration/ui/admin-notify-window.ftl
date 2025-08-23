@@ -1,0 +1,9 @@
+admin-notify-title = Отправить уведомление
+admin-notify-target-label = Цель:
+admin-notify-target-placeholder = all или username1,username2,...
+admin-notify-title-label = Заголовок:
+admin-notify-title-placeholder = Заголовок уведомления
+admin-notify-message-label = Сообщение:
+admin-notify-message-placeholder = Текст уведомления...
+admin-notify-button = Отправить уведомление
+admin-notify-keep-open = Держать открытым

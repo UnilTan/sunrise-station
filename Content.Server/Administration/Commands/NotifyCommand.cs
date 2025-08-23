@@ -21,12 +21,12 @@ public sealed class NotifyCommand : LocalizedCommands
 
         if (args.Length < 2)
         {
-            shell.WriteLine(Loc.GetString("cmd-notify-help", ("command", Command)));
+            shell.WriteLine(Loc.GetString("cmd-admin-notify-help", ("command", Command)));
             shell.WriteLine("");
             shell.WriteLine("Examples:");
-            shell.WriteLine("  " + Loc.GetString("cmd-notify-example-all"));
-            shell.WriteLine("  " + Loc.GetString("cmd-notify-example-players"));
-            shell.WriteLine("  " + Loc.GetString("cmd-notify-example-prompt"));
+            shell.WriteLine("  " + Loc.GetString("cmd-admin-notify-example-all"));
+            shell.WriteLine("  " + Loc.GetString("cmd-admin-notify-example-players"));
+            shell.WriteLine("  " + Loc.GetString("cmd-admin-notify-example-prompt"));
             return;
         }
 
@@ -50,10 +50,10 @@ public sealed class NotifyCommand : LocalizedCommands
             }
 
             quickDialog.OpenDialog<string>(shell.Player, 
-                Loc.GetString("cmd-notify-message-prompt-title"), 
-                Loc.GetString("cmd-notify-message-prompt"), 
+                Loc.GetString("cmd-admin-notify-message-prompt-title"), 
+                Loc.GetString("cmd-admin-notify-message-prompt"), 
                 (msg) => SendNotifications(shell, quickDialog, target, title, msg),
-                () => shell.WriteLine(Loc.GetString("cmd-notify-cancelled")));
+                () => shell.WriteLine(Loc.GetString("cmd-admin-notify-cancelled")));
         }
     }
 
@@ -64,7 +64,7 @@ public sealed class NotifyCommand : LocalizedCommands
             // Send to all players
             quickDialog.NotifyAllPlayers(title, message);
             var playerCount = _playerManager.PlayerCount;
-            shell.WriteLine(Loc.GetString("cmd-notify-sent-to-all", ("count", playerCount)));
+            shell.WriteLine(Loc.GetString("cmd-admin-notify-sent-to-all", ("count", playerCount)));
         }
         else
         {
@@ -76,11 +76,11 @@ public sealed class NotifyCommand : LocalizedCommands
             var notFound = quickDialog.NotifyPlayers(title, message, usernames);
             
             var sentCount = usernames.Length - notFound.Count;
-            shell.WriteLine(Loc.GetString("cmd-notify-sent-to-players", ("sent", sentCount)));
+            shell.WriteLine(Loc.GetString("cmd-admin-notify-sent-to-players", ("sent", sentCount)));
             
             if (notFound.Count > 0)
             {
-                shell.WriteError(Loc.GetString("cmd-notify-players-not-found", ("players", string.Join(", ", notFound))));
+                shell.WriteError(Loc.GetString("cmd-admin-notify-players-not-found", ("players", string.Join(", ", notFound))));
             }
         }
     }
@@ -91,17 +91,17 @@ public sealed class NotifyCommand : LocalizedCommands
         {
             var options = new List<string> { "all" };
             options.AddRange(_playerManager.Sessions.Select(s => s.Name));
-            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-notify-arg-target"));
+            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-admin-notify-arg-target"));
         }
         
         if (args.Length == 2)
         {
-            return CompletionResult.FromHint(Loc.GetString("cmd-notify-arg-title"));
+            return CompletionResult.FromHint(Loc.GetString("cmd-admin-notify-arg-title"));
         }
         
         if (args.Length == 3)
         {
-            return CompletionResult.FromHint(Loc.GetString("cmd-notify-arg-message"));
+            return CompletionResult.FromHint(Loc.GetString("cmd-admin-notify-arg-message"));
         }
 
         return CompletionResult.Empty;

@@ -4,6 +4,7 @@ admin-player-actions-window-admin-ghost = Admin Ghost
 admin-player-actions-window-teleport = Teleport
 admin-player-actions-window-permissions = Permissions Panel
 admin-player-actions-window-announce = Announce
+admin-player-actions-window-notify = Notify Players
 admin-player-actions-window-shuttle = (Re)call Shuttle
 admin-player-actions-window-admin-logs = Admin Logs
 admin-player-actions-window-admin-notes = Admin Notes
