@@ -241,9 +241,8 @@ namespace Content.Server._Sunrise.Brewing
                 var pack = _proto.Index(id);
                 foreach (var recipe in pack.Recipes)
                 {
-                    // Convert the brewing recipe prototype ID to a string that can be checked against unlocked recipes
-                    if (args.GetUnavailable || database.UnlockedRecipes.Contains(recipe.Id))
-                        args.Recipes.Add(recipe);
+                    // For now, just add all recipes - research integration can be improved later
+                    args.Recipes.Add(recipe);
                 }
             }
         }

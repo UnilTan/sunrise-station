@@ -1,0 +1,21 @@
+# Brewing Construction Graph
+
+- type: constructionGraph
+  id: BrewingBarrel
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: barrel
+      steps:
+      - material: Wood
+        amount: 30
+        doAfter: 5
+
+- type: constructionNode
+  id: barrel
+  name: Бочка для брожения
+  icon:
+    sprite: _Sunrise/Structures/Storage/brewing_barrel.rsi
+    state: barrel_closed
+  entity: BrewingBarrel
