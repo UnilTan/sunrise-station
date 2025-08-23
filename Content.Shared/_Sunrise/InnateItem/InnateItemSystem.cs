@@ -18,7 +18,7 @@ public sealed class InnateItemSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InnateItemComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<InnateItemComponent, InnateEntityTargetActionEvent>(WorldTargetActionActivate);
+        SubscribeLocalEvent<InnateItemComponent, InnateEntityTargetActionEvent>(EntityTargetActionActivate);
         SubscribeLocalEvent<InnateItemComponent, InnateInstantActionEvent>(InstantActionActivate);
         SubscribeLocalEvent<InnateItemComponent, ComponentShutdown>(OnShutdown);
     }
@@ -41,7 +41,7 @@ public sealed class InnateItemSystem : EntitySystem
         foreach (var itemProto in component.WorldTargetActions)
         {
             var item = Spawn(itemProto);
-            var action = CreateWorldTargetAction(item);
+            var action = CreateEntityTargetAction(item);
             _actionContainer.AddAction(uid, action);
             _actionsSystem.AddAction(uid, action, uid);
             component.Actions.Add(action);
@@ -57,12 +57,11 @@ public sealed class InnateItemSystem : EntitySystem
         }
     }
 
-    private EntityUid CreateWorldTargetAction(EntityUid uid)
+    private EntityUid CreateEntityTargetAction(EntityUid uid)
     {
         if (!TryComp<ActionComponent>(uid, out var action))
             return EntityUid.Invalid;
 
-        EnsureComp<WorldTargetActionComponent>(uid);
         EnsureComp<EntityTargetActionComponent>(uid);
         var targetAction = EnsureComp<TargetActionComponent>(uid);
         _actionsSystem.SetIcon(uid, new SpriteSpecifier.EntityPrototype(MetaData(uid).EntityPrototype!.ID));
@@ -101,16 +100,13 @@ public sealed class InnateItemSystem : EntitySystem
         return uid;
     }
 
-    private void WorldTargetActionActivate(EntityUid uid, InnateItemComponent component, InnateEntityTargetActionEvent args)
+    private void EntityTargetActionActivate(EntityUid uid, InnateItemComponent component, InnateEntityTargetActionEvent args)
     {
-        if (args.Entity == null)
-            return;
-
         _interactionSystem.InteractUsing(
             args.Performer,
             args.Item,
-            args.Entity.Value,
             args.Target,
+            Transform(args.Target).Coordinates,
             false,
             false,
             false);
@@ -123,7 +119,7 @@ public sealed class InnateItemSystem : EntitySystem
     }
 }
 
-public sealed partial class InnateEntityTargetActionEvent : WorldTargetActionEvent
+public sealed partial class InnateEntityTargetActionEvent : EntityTargetActionEvent
 {
     public EntityUid Item;
 
