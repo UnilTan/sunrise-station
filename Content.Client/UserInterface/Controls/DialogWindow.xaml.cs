@@ -44,6 +44,22 @@ public sealed partial class DialogWindow : FancyWindow
     /// Won't do anything on its own, you need to handle or network with <see cref="OnConfirmed"/> and <see cref="OnCancelled"/>.
     /// </remarks>
     public DialogWindow(string title, List<QuickDialogEntry> entries, bool ok = true, bool cancel = true)
+        : this(title, entries, null, ok, cancel)
+    {
+    }
+
+    /// <summary>
+    /// Create and open a new dialog with some prompts or just a message.
+    /// </summary>
+    /// <param name="title">String to use for the window title.</param>
+    /// <param name="entries">Quick dialog entries to create prompts with. Can be empty for notification-only dialogs.</param>
+    /// <param name="message">Optional message to display above prompts. If entries is empty, this will be the main content.</param>
+    /// <param name="ok">Whether to have an Ok button.</param>
+    /// <param name="cancel">Whether to have a Cancel button. Closing the window will still cancel it.</param>
+    /// <remarks>
+    /// Won't do anything on its own, you need to handle or network with <see cref="OnConfirmed"/> and <see cref="OnCancelled"/>.
+    /// </remarks>
+    public DialogWindow(string title, List<QuickDialogEntry> entries, string? message, bool ok = true, bool cancel = true)
     {
         RobustXamlLoader.Load(this);
 
@@ -53,6 +69,26 @@ public sealed partial class DialogWindow : FancyWindow
         CancelButton.Visible = cancel;
 
         _promptLines = new(entries.Count);
+
+        // Add message if provided and no entries, or if message should be shown above entries
+        if (!string.IsNullOrEmpty(message))
+        {
+            var messageBox = new BoxContainer();
+            var messageLabel = new Label() 
+            { 
+                Text = message, 
+                HorizontalExpand = true,
+                SizeFlagsStretchRatio = 1.0f 
+            };
+            messageBox.AddChild(messageLabel);
+            Prompts.AddChild(messageBox);
+            
+            // Add some spacing if there are entries below
+            if (entries.Count > 0)
+            {
+                Prompts.AddChild(new BoxContainer() { MinHeight = 10 });
+            }
+        }
 
         for (int i = 0; i < entries.Count; i++)
         {
@@ -111,8 +147,12 @@ public sealed partial class DialogWindow : FancyWindow
     {
         base.Opened();
         
-        // Grab keyboard focus for the first dialog entry
-        _promptLines[0].Item2.GrabKeyboardFocus();
+        // Grab keyboard focus for the first dialog entry, if any exist
+        if (_promptLines.Count > 0)
+            _promptLines[0].Item2.GrabKeyboardFocus();
+        else
+            // For notification-only dialogs, focus the OK button
+            OkButton.GrabKeyboardFocus();
     }
 
     private void Confirm()

@@ -84,7 +84,7 @@ public sealed partial class QuickDialogSystem : EntitySystem
         _openDialogsByUser.Remove(user);
     }
 
-    private void OpenDialogInternal(ICommonSession session, string title, List<QuickDialogEntry> entries, QuickDialogButtonFlag buttons, Action<QuickDialogResponseEvent> okAction, Action cancelAction)
+    private void OpenDialogInternal(ICommonSession session, string title, List<QuickDialogEntry> entries, QuickDialogButtonFlag buttons, Action<QuickDialogResponseEvent> okAction, Action cancelAction, string? message = null)
     {
         var did = GetDialogId();
         RaiseNetworkEvent(
@@ -92,7 +92,8 @@ public sealed partial class QuickDialogSystem : EntitySystem
                 title,
                 entries,
                 did,
-                buttons),
+                buttons,
+                message),
             session
         );
 

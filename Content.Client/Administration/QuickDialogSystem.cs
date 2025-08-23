@@ -18,7 +18,7 @@ public sealed class QuickDialogSystem : EntitySystem
     {
         var ok = (ev.Buttons & QuickDialogButtonFlag.OkButton) != 0;
         var cancel = (ev.Buttons & QuickDialogButtonFlag.CancelButton) != 0;
-        var window = new DialogWindow(ev.Title, ev.Prompts, ok: ok, cancel: cancel);
+        var window = new DialogWindow(ev.Title, ev.Prompts, ev.Message, ok: ok, cancel: cancel);
 
         window.OnConfirmed += responses =>
         {

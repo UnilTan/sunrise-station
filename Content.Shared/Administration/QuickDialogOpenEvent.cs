@@ -14,6 +14,11 @@ public sealed class QuickDialogOpenEvent : EntityEventArgs
     public string Title;
 
     /// <summary>
+    /// Optional message to display in the dialog. Used for notifications.
+    /// </summary>
+    public string? Message;
+
+    /// <summary>
     /// The internal dialog ID.
     /// </summary>
     public int DialogId;
@@ -28,9 +33,10 @@ public sealed class QuickDialogOpenEvent : EntityEventArgs
     /// </summary>
     public QuickDialogButtonFlag Buttons = QuickDialogButtonFlag.OkButton | QuickDialogButtonFlag.CancelButton;
 
-    public QuickDialogOpenEvent(string title, List<QuickDialogEntry> prompts, int dialogId, QuickDialogButtonFlag buttons)
+    public QuickDialogOpenEvent(string title, List<QuickDialogEntry> prompts, int dialogId, QuickDialogButtonFlag buttons, string? message = null)
     {
         Title = title;
+        Message = message;
         Prompts = prompts;
         Buttons = buttons;
         DialogId = dialogId;

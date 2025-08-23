@@ -37,7 +37,8 @@ public sealed partial class QuickDialogSystem
                     cancelAction?.Invoke();
                 }
             }),
-            cancelAction ?? (() => { })
+            cancelAction ?? (() => { }),
+            null // No message for regular dialogs
         );
     }
 
@@ -78,7 +79,8 @@ public sealed partial class QuickDialogSystem
                     cancelAction?.Invoke();
                 }
             }),
-            cancelAction ?? (() => { })
+            cancelAction ?? (() => { }),
+            null // No message for regular dialogs
         );
     }
 
@@ -122,7 +124,8 @@ public sealed partial class QuickDialogSystem
                     cancelAction?.Invoke();
                 }
             }),
-            cancelAction ?? (() => { })
+            cancelAction ?? (() => { }),
+            null // No message for regular dialogs
         );
     }
 
@@ -170,7 +173,8 @@ public sealed partial class QuickDialogSystem
                     cancelAction?.Invoke();
                 }
             }),
-            cancelAction ?? (() => { })
+            cancelAction ?? (() => { }),
+            null // No message for regular dialogs
         );
     }
 }
