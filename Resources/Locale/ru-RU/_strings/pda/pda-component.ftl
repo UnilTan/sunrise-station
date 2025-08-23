@@ -36,4 +36,3 @@ comp-pda-ui-shuttle-arrival-time = До прибытия шаттла: [color=wh
 comp-pda-ui-shuttle-launch-time = До запуска шаттла: [color=white]{ $time }[/color]
 
 # Sunrise-end
-
