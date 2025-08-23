@@ -3,6 +3,7 @@ research-discipline-industrial = Промышленность
 research-discipline-arsenal = Арсенал
 research-discipline-experimental = Экспериментальное
 research-discipline-civilian-services = Обслуживание персонала
+research-discipline-illegal = Незаконные
 research-technology-fulton = Фултоны
 research-technology-salvage-equipment = Снаряжение для утилизации
 research-technology-advanced-powercells = Продвинутые батареи
@@ -81,3 +82,9 @@ research-technology-honk-weapons = Бананиумное вооружение
 research-technology-advanced-spray = Продвинутые спреи
 research-technology-quantum-fiber-weaving = Плетение квантового волокна
 research-technology-bluespace-cargo-transport = Блюспейс-транспортировка грузов
+
+research-technology-illegal-implants = Незаконные импланты
+research-technology-syndicate-basics = Базовые технологии Синдиката
+research-technology-illegal-weapons = Незаконное вооружение
+research-technology-illegal-medicine = Незаконная медицина
+research-technology-syndicate-advanced = Продвинутые технологии Синдиката

@@ -3,8 +3,11 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Access.Systems;
+using Content.Shared.Emag.Components;
+using Content.Shared.Emag.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Research.Components;
+using Content.Shared.Research.Prototypes;
 using Content.Shared.Research.Systems;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
@@ -34,6 +37,34 @@ namespace Content.Server.Research.Systems
             InitializeServer();
 
             SubscribeLocalEvent<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>(OnDatabaseRegistrationChanged);
+        }
+
+        /// <summary>
+        /// Server-side override that checks emag status to show hidden technologies
+        /// </summary>
+        public override List<TechnologyPrototype> GetAvailableTechnologies(EntityUid uid, TechnologyDatabaseComponent? component = null, bool showHidden = false)
+        {
+            if (!Resolve(uid, ref component, false))
+                return new List<TechnologyPrototype>();
+
+            // Check if the console is emagged and show hidden techs if so
+            var isEmagged = _emag.CheckFlag(uid, EmagType.Interaction);
+            var shouldShowHidden = showHidden || isEmagged;
+
+            // If emagged, temporarily add Illegal discipline to supported disciplines
+            var originalSupportedDisciplines = component.SupportedDisciplines.ToList();
+            if (isEmagged && !component.SupportedDisciplines.Contains("Illegal"))
+            {
+                component.SupportedDisciplines.Add("Illegal");
+            }
+
+            var result = base.GetAvailableTechnologies(uid, component, shouldShowHidden);
+
+            // Restore original supported disciplines
+            component.SupportedDisciplines.Clear();
+            component.SupportedDisciplines.AddRange(originalSupportedDisciplines);
+
+            return result;
         }
 
         /// <summary>

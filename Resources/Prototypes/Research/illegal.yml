@@ -1,0 +1,90 @@
+# Illegal Technology Branch
+# These technologies are hidden by default and only appear when research console is emagged
+
+# Tier 1
+
+- type: technology
+  id: IllegalImplants
+  name: research-technology-illegal-implants
+  icon:
+    sprite: Objects/Specific/Medical/implant.rsi
+    state: implanter0
+  discipline: Illegal
+  tier: 1
+  cost: 7500
+  hidden: true
+  recipeUnlocks:
+  - ImplantFreedom
+  - ImplantScram
+  - ImplantEmp
+
+- type: technology
+  id: SyndicateBasics
+  name: research-technology-syndicate-basics
+  icon:
+    sprite: Objects/Tools/crowbar.rsi
+    state: icon
+  discipline: Illegal
+  tier: 1
+  cost: 5000
+  hidden: true
+  recipeUnlocks:
+  - Crowbar
+  - EmergencyToolbox
+  - ClothingMaskGas
+
+# Tier 2
+
+- type: technology
+  id: IllegalWeapons
+  name: research-technology-illegal-weapons
+  icon:
+    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+    state: icon
+  discipline: Illegal
+  tier: 2
+  cost: 10000
+  hidden: true
+  technologyPrerequisites:
+  - SyndicateBasics
+  recipeUnlocks:
+  - Stunprod
+  - FlashBang
+  - BoxFlashBang
+
+- type: technology
+  id: IllegalMedicine
+  name: research-technology-illegal-medicine
+  icon:
+    sprite: Objects/Specific/Chemistry/beaker.rsi
+    state: beaker-1
+  discipline: Illegal
+  tier: 2
+  cost: 8000
+  hidden: true
+  technologyPrerequisites:
+  - IllegalImplants
+  recipeUnlocks:
+  - Epinephrine
+  - Leporazine
+  - TraumaKitAdvanced
+
+# Tier 3
+
+- type: technology
+  id: SyndicateAdvanced
+  name: research-technology-syndicate-advanced
+  icon:
+    sprite: Objects/Tools/emag.rsi
+    state: icon
+  discipline: Illegal
+  tier: 3
+  cost: 15000
+  hidden: true
+  technologyPrerequisites:
+  - IllegalWeapons
+  - IllegalMedicine
+  recipeUnlocks:
+  - WeaponDisabler
+  - BoxHandcuffs
+  - Handcuffs

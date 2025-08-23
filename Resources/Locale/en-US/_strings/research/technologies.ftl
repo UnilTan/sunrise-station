@@ -3,6 +3,7 @@ research-discipline-industrial = Industrial
 research-discipline-arsenal = Arsenal
 research-discipline-experimental = Experimental
 research-discipline-civilian-services = Civilian Services
+research-discipline-illegal = Illegal
 
 research-technology-fulton = Fultons
 research-technology-salvage-equipment = Salvage Equipment
@@ -77,3 +78,9 @@ research-technology-bluespace-cargo-transport = Bluespace Cargo Transport
 research-technology-clowning-utilities = Clowning Utilities
 research-technology-quantum-fiber-weaving = Quantum Fiber Weaving
 research-technology-bluespace-chemistry = Bluespace Chemistry
+
+research-technology-illegal-implants = Illegal Implants
+research-technology-syndicate-basics = Syndicate Basics
+research-technology-illegal-weapons = Illegal Weapons  
+research-technology-illegal-medicine = Illegal Medicine
+research-technology-syndicate-advanced = Advanced Syndicate Tech

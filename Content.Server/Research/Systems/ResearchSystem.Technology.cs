@@ -151,7 +151,7 @@ public sealed partial class ResearchSystem
         if (!TryGetClientServer(uid, out _, out var serverComp, client))
             return false;
 
-        if (!IsTechnologyAvailable(database, technology))
+        if (!IsTechnologyAvailable(database, technology, null, false))
             return false;
 
         if (technology.Cost > serverComp.Points)

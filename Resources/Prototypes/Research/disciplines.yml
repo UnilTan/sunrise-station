@@ -45,3 +45,15 @@
     1: 0
     2: 0.75
     3: 0.75
+
+- type: techDiscipline
+  id: Illegal
+  name: research-discipline-illegal
+  color: "#8B0000"
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: arsenal
+  tierPrerequisites:
+    1: 0
+    2: 0.75
+    3: 0.75

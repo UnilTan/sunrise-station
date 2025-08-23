@@ -49,6 +49,11 @@ public abstract class SharedResearchSystem : EntitySystem
 
     public List<TechnologyPrototype> GetAvailableTechnologies(EntityUid uid, TechnologyDatabaseComponent? component = null)
     {
+        return GetAvailableTechnologies(uid, component, false);
+    }
+
+    public virtual List<TechnologyPrototype> GetAvailableTechnologies(EntityUid uid, TechnologyDatabaseComponent? component = null, bool showHidden = false)
+    {
         if (!Resolve(uid, ref component, false))
             return new List<TechnologyPrototype>();
 
@@ -56,7 +61,7 @@ public abstract class SharedResearchSystem : EntitySystem
         var disciplineTiers = GetDisciplineTiers(component);
         foreach (var tech in PrototypeManager.EnumeratePrototypes<TechnologyPrototype>())
         {
-            if (IsTechnologyAvailable(component, tech, disciplineTiers))
+            if (IsTechnologyAvailable(component, tech, disciplineTiers, showHidden))
                 availableTechnologies.Add(tech);
         }
 
@@ -65,9 +70,14 @@ public abstract class SharedResearchSystem : EntitySystem
 
     public bool IsTechnologyAvailable(TechnologyDatabaseComponent component, TechnologyPrototype tech, Dictionary<string, int>? disciplineTiers = null)
     {
+        return IsTechnologyAvailable(component, tech, disciplineTiers, false);
+    }
+
+    public bool IsTechnologyAvailable(TechnologyDatabaseComponent component, TechnologyPrototype tech, Dictionary<string, int>? disciplineTiers = null, bool showHidden = false)
+    {
         disciplineTiers ??= GetDisciplineTiers(component);
 
-        if (tech.Hidden)
+        if (tech.Hidden && !showHidden)
             return false;
 
         if (!component.SupportedDisciplines.Contains(tech.Discipline))
