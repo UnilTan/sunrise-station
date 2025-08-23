@@ -83,8 +83,8 @@ research-technology-advanced-spray = Продвинутые спреи
 research-technology-quantum-fiber-weaving = Плетение квантового волокна
 research-technology-bluespace-cargo-transport = Блюспейс-транспортировка грузов
 
-research-technology-illegal-implants = Незаконные импланты
+research-technology-illegal-surgery = Незаконная хирургия
 research-technology-syndicate-basics = Базовые технологии Синдиката
-research-technology-illegal-weapons = Незаконное вооружение
-research-technology-illegal-medicine = Незаконная медицина
-research-technology-syndicate-advanced = Продвинутые технологии Синдиката
+research-technology-illegal-detention = Незаконное задержание
+research-technology-illegal-chemistry = Незаконная химия
+research-technology-illegal-synthetics = Незаконная синтетика

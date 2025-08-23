@@ -79,8 +79,8 @@ research-technology-clowning-utilities = Clowning Utilities
 research-technology-quantum-fiber-weaving = Quantum Fiber Weaving
 research-technology-bluespace-chemistry = Bluespace Chemistry
 
-research-technology-illegal-implants = Illegal Implants
+research-technology-illegal-surgery = Illegal Surgery
 research-technology-syndicate-basics = Syndicate Basics
-research-technology-illegal-weapons = Illegal Weapons  
-research-technology-illegal-medicine = Illegal Medicine
-research-technology-syndicate-advanced = Advanced Syndicate Tech
+research-technology-illegal-detention = Illegal Detention
+research-technology-illegal-chemistry = Illegal Chemistry
+research-technology-illegal-synthetics = Illegal Synthetics

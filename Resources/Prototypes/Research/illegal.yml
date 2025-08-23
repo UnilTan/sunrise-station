@@ -4,19 +4,20 @@
 # Tier 1
 
 - type: technology
-  id: IllegalImplants
-  name: research-technology-illegal-implants
+  id: IllegalSurgery
+  name: research-technology-illegal-surgery
   icon:
-    sprite: Objects/Specific/Medical/implant.rsi
-    state: implanter0
+    sprite: Objects/Specific/Medical/surgery.rsi
+    state: scalpel
   discipline: Illegal
   tier: 1
-  cost: 7500
+  cost: 5000
   hidden: true
   recipeUnlocks:
-  - ImplantFreedom
-  - ImplantScram
-  - ImplantEmp
+  - Scalpel
+  - Retractor
+  - Cautery
+  - Implanter
 
 - type: technology
   id: SyndicateBasics
@@ -26,65 +27,66 @@
     state: icon
   discipline: Illegal
   tier: 1
-  cost: 5000
+  cost: 6000
   hidden: true
   recipeUnlocks:
   - Crowbar
-  - EmergencyToolbox
+  - Wirecutter
+  - Screwdriver
   - ClothingMaskGas
 
 # Tier 2
 
 - type: technology
-  id: IllegalWeapons
-  name: research-technology-illegal-weapons
+  id: IllegalDetention
+  name: research-technology-illegal-detention
   icon:
-    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
-    state: icon
-  discipline: Illegal
-  tier: 2
-  cost: 10000
-  hidden: true
-  technologyPrerequisites:
-  - SyndicateBasics
-  recipeUnlocks:
-  - Stunprod
-  - FlashBang
-  - BoxFlashBang
-
-- type: technology
-  id: IllegalMedicine
-  name: research-technology-illegal-medicine
-  icon:
-    sprite: Objects/Specific/Chemistry/beaker.rsi
-    state: beaker-1
+    sprite: Objects/Misc/handcuffs.rsi
+    state: cuff
   discipline: Illegal
   tier: 2
   cost: 8000
   hidden: true
   technologyPrerequisites:
-  - IllegalImplants
+  - SyndicateBasics
   recipeUnlocks:
-  - Epinephrine
-  - Leporazine
-  - TraumaKitAdvanced
+  - Handcuffs
+  - Zipties
+  - ClothingEyesBlindFold
+
+- type: technology
+  id: IllegalChemistry
+  name: research-technology-illegal-chemistry
+  icon:
+    sprite: Objects/Specific/Chemistry/beaker.rsi
+    state: beaker-1
+  discipline: Illegal
+  tier: 2
+  cost: 9000
+  hidden: true
+  technologyPrerequisites:
+  - IllegalSurgery
+  recipeUnlocks:
+  - ChemicalPayload
+  - Syringe
+  - Hypospray
 
 # Tier 3
 
 - type: technology
-  id: SyndicateAdvanced
-  name: research-technology-syndicate-advanced
+  id: IllegalSynthetics
+  name: research-technology-illegal-synthetics
   icon:
-    sprite: Objects/Tools/emag.rsi
-    state: icon
+    sprite: Objects/Specific/Medical/implant.rsi
+    state: implanter0
   discipline: Illegal
   tier: 3
-  cost: 15000
+  cost: 12000
   hidden: true
   technologyPrerequisites:
-  - IllegalWeapons
-  - IllegalMedicine
+  - IllegalDetention
+  - IllegalChemistry
   recipeUnlocks:
-  - WeaponDisabler
-  - BoxHandcuffs
-  - Handcuffs
+  - ClothingHeadPyjamaSyndicateRed
+  - ClothingUniformJumpsuitPyjamaSyndicateRed
+  - ClothingMaskGasStation
