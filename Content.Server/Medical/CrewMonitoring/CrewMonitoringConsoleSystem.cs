@@ -13,6 +13,7 @@ using Content.Shared.Pinpointer;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
@@ -21,6 +22,7 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
@@ -40,12 +42,10 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
             if (!component.DoCorpseAlert)
                 continue;
 
-            component.AccumulatedCorpseAlertTime += frameTime;
-
-            if (component.AccumulatedCorpseAlertTime < component.CorpseAlertTime)
+            if (component.NextCorpseAlertTime > _gameTiming.CurTime)
                 continue;
 
-            component.AccumulatedCorpseAlertTime -= component.CorpseAlertTime;
+            component.NextCorpseAlertTime = _gameTiming.CurTime + TimeSpan.FromSeconds(component.CorpseAlertTime);
 
             // Check for corpses with sensors outside morgues
             if (HasCorpsesOutsideMorgue(component))

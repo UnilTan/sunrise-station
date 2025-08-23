@@ -1,5 +1,6 @@
 using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
@@ -25,9 +26,10 @@ public sealed partial class CrewMonitoringConsoleComponent : Component
     public bool DoCorpseAlert = true;
 
     /// <summary>
-    ///     Accumulated frame time for corpse alert beeping.
+    ///     Next time to check for corpses and potentially play alert sound.
     /// </summary>
-    public float AccumulatedCorpseAlertTime = 0f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan NextCorpseAlertTime = TimeSpan.Zero;
 
     /// <summary>
     ///     The amount of time between each corpse alert beep.
