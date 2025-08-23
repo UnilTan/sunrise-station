@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseStructure
   id: BrewingBarrel
-  name: бочка для брожения
-  description: Деревянная бочка для ферментации сусла в пиво или вино. Чувствительна к атмосферным условиям.
+  name: ent-BrewingBarrel-name
+  description: ent-BrewingBarrel-desc
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Storage/brewing_barrel.rsi

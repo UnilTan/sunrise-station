@@ -12,10 +12,14 @@
         amount: 30
         doAfter: 5
 
-- type: constructionNode
-  id: barrel
-  name: Бочка для брожения
-  icon:
-    sprite: _Sunrise/Structures/Storage/brewing_barrel.rsi
-    state: barrel_closed
-  entity: BrewingBarrel
+  - node: barrel
+    entity: BrewingBarrel
+
+# Construction recipe for the barrel
+- type: construction
+  id: BrewingBarrel
+  graph: BrewingBarrel
+  startNode: start
+  targetNode: barrel
+  category: construction-category-structures
+  objectType: Structure

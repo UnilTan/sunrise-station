@@ -495,3 +495,13 @@
 
 - type: Tag
   id: Table
+
+# Brewing ingredient tags
+- type: Tag
+  id: BrewingIngredient
+  
+- type: Tag
+  id: Rice
+  
+- type: Tag
+  id: Berries

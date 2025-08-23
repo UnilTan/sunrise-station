@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseMachinePowered
   id: BrewingApparatusMoonshine
-  name: самогонный аппарат
-  description: Простой аппарат для приготовления сусла из растений и жидкостей. Подходит для базовых рецептов.
+  name: ent-BrewingApparatusMoonshine-name
+  description: ent-BrewingApparatusMoonshine-desc
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Machines/brewing_apparatus.rsi
@@ -17,11 +17,7 @@
   - type: MaterialStorage
     whitelist:
       tags:
-      - Wheat
-      - Rice
-      - Berries
-      - BananaPeel
-      - WeldingFuel
+      - BrewingIngredient
   - type: UserInterface
     interfaces:
       enum.BrewingApparatusUiKey.Key:
@@ -29,10 +25,10 @@
   - type: ItemSlots
     slots:
       wort_output:
-        name: Контейнер для сусла
+        name: brewing-wort-output-slot
         whitelist:
           components:
-          - SolutionContainer
+          - SolutionContainerManager
         insertSound: /Audio/Machines/machine_switch.ogg
         ejectSound: /Audio/Machines/machine_switch.ogg
   - type: ContainerContainer
@@ -51,8 +47,8 @@
 - type: entity
   parent: BrewingApparatusMoonshine
   id: BrewingApparatusIndustrial
-  name: промышленный пивоварный аппарат
-  description: Продвинутый аппарат для приготовления сложных видов сусла. Поддерживает все рецепты, включая исследуемые.
+  name: ent-BrewingApparatusIndustrial-name
+  description: ent-BrewingApparatusIndustrial-desc
   components:
   - type: Sprite
     state: industrial
@@ -65,21 +61,6 @@
   - type: MaterialStorage
     whitelist:
       tags:
-      - Wheat
-      - Rice
-      - Berries
-      - BananaPeel
-      - WeldingFuel
-      - ColdOil
-      - HotOil
-      - AmbrosiaDeus
-      - Ambrosia
-      - XenomorphBlood
-      - Plasma
-      - Beer
-  - type: TechnologyDatabase
-    technologyIds:
-    - BasicBrewing
-  - type: ResearchClient
+      - BrewingIngredient
   - type: ApcPowerReceiver
     powerLoad: 2500
