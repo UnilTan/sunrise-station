@@ -1,5 +1,6 @@
 using Content.Server.Antag.Components;
 using Content.Server.Objectives;
+using Content.Server.Objectives.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
@@ -32,6 +33,7 @@ public sealed class AntagRandomObjectivesSystem : EntitySystem
         }
 
         var difficulty = 0f;
+        var killObjectiveCount = 0;
         foreach (var set in ent.Comp.Sets)
         {
             if (!_random.Prob(set.Prob))
@@ -43,10 +45,24 @@ public sealed class AntagRandomObjectivesSystem : EntitySystem
                 if (_objectives.GetRandomObjective(mindId, mind, set.Groups, remainingDifficulty) is not { } objective)
                     continue;
 
+                // Check if this is a kill objective and if we've reached the limit
+                var isKillObjective = HasComp<KillPersonConditionComponent>(objective);
+                if (isKillObjective && ent.Comp.MaxKillObjectives.HasValue && killObjectiveCount >= ent.Comp.MaxKillObjectives.Value)
+                {
+                    // Skip this objective and delete it
+                    QueueDel(objective);
+                    Log.Debug($"Skipping kill objective for {ToPrettyString(args.EntityUid):player} - already has {killObjectiveCount} kill objectives (limit: {ent.Comp.MaxKillObjectives.Value})");
+                    continue;
+                }
+
                 _mind.AddObjective(mindId, mind, objective);
                 var adding = Comp<ObjectiveComponent>(objective).Difficulty;
                 difficulty += adding;
-                Log.Debug($"Added objective {ToPrettyString(objective):objective} to {ToPrettyString(args.EntityUid):player} with {adding} difficulty");
+
+                if (isKillObjective)
+                    killObjectiveCount++;
+
+                Log.Debug($"Added objective {ToPrettyString(objective):objective} to {ToPrettyString(args.EntityUid):player} with {adding} difficulty (kill: {isKillObjective})");
             }
         }
     }

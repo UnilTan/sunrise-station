@@ -211,7 +211,7 @@
   - type: TraitorRule
   # TODO: codewords in yml
   # TODO: uplink in yml
-  - type: TraitorObjectives
+  - type: AntagRandomObjectives
     sets:
     - groups: TraitorObjectiveGroups
     maxDifficulty: 5

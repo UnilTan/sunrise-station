@@ -21,6 +21,13 @@ public sealed partial class AntagRandomObjectivesComponent : Component
     /// </summary>
     [DataField(required: true)]
     public float MaxDifficulty;
+
+    /// <summary>
+    /// Maximum number of kill objectives that can be assigned to each antag.
+    /// If null, no limit is applied.
+    /// </summary>
+    [DataField]
+    public int? MaxKillObjectives;
 }
 
 /// <summary>
