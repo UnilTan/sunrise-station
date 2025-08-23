@@ -1,10 +1,8 @@
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 
-namespace Content.IntegrationTests.Tests.Chemistry;
+namespace Content.IntegrationTests.Tests._Sunrise.Chemistry;
 
 [TestFixture]
 [TestOf(typeof(CryostasisBeakerSystem))]
@@ -37,28 +35,23 @@ public sealed class CryostasisBeakerTests
         var server = pair.Server;
 
         var testMap = await pair.CreateTestMap();
-        var solutionSystem = server.ResolveDependency<SharedSolutionContainerSystem>();
 
-        await server.WaitAssertion(() =>
+        await server.WaitPost(() =>
         {
-            var beaker = server.EntManager.SpawnEntity("TestCryostasisBeaker", testMap.GridCoords);
-            
-            // Get the solution
+            var solutionSystem = server.System<SharedSolutionContainerSystem>();
+
+            var beaker = server.EntMan.SpawnEntity("TestCryostasisBeaker", testMap.GridCoords);
+
             Assert.That(solutionSystem.TryGetSolution(beaker, "beaker", out var solutionEntity, out var solution));
-            
-            // Add some reagent
+
             solutionSystem.TryAddReagent(solutionEntity.Value, "TestReagent", FixedPoint2.New(10));
-            
-            // Try to heat it to a high temperature (well above room temperature)
+
             solutionSystem.SetTemperature(solutionEntity.Value, 500.0f);
-            
-            // The temperature should be capped at room temperature (293.15K)
+
             Assert.That(solution!.Temperature, Is.LessThanOrEqualTo(293.15f));
-            
-            // Try to add thermal energy
+
             solutionSystem.AddThermalEnergy(solutionEntity.Value, 10000.0f);
-            
-            // Temperature should still be capped
+
             Assert.That(solution.Temperature, Is.LessThanOrEqualTo(293.15f));
         });
     }
@@ -70,28 +63,21 @@ public sealed class CryostasisBeakerTests
         var server = pair.Server;
 
         var testMap = await pair.CreateTestMap();
-        var solutionSystem = server.ResolveDependency<SharedSolutionContainerSystem>();
 
-        await server.WaitAssertion(() =>
+        await server.WaitPost(() =>
         {
-            // Create a normal beaker without CryostasisBeaker component
-            var beaker = server.EntManager.SpawnEntity(null, testMap.GridCoords);
-            var solutionManager = server.EntManager.AddComponent<SolutionContainerManagerComponent>(beaker);
-            solutionManager.Solutions.Add("beaker", new SolutionComponent()
-            {
-                Solution = new() { MaxVolume = FixedPoint2.New(50) }
-            });
-            
-            // Get the solution
+            var solutionSystem = server.System<SharedSolutionContainerSystem>();
+
+            var beaker = server.EntMan.SpawnEntity("TestCryostasisBeaker", testMap.GridCoords);
+            if (server.EntMan.HasComponent<CryostasisBeakerComponent>(beaker))
+                server.EntMan.RemoveComponent<CryostasisBeakerComponent>(beaker);
+
             Assert.That(solutionSystem.TryGetSolution(beaker, "beaker", out var solutionEntity, out var solution));
-            
-            // Add some reagent
+
             solutionSystem.TryAddReagent(solutionEntity.Value, "TestReagent", FixedPoint2.New(10));
-            
-            // Heat it to a high temperature
+
             solutionSystem.SetTemperature(solutionEntity.Value, 500.0f);
-            
-            // Normal beaker should allow high temperatures
+
             Assert.That(solution!.Temperature, Is.EqualTo(500.0f));
         });
     }
