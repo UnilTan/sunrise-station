@@ -48,3 +48,6 @@ nuke-slot-component-slot-name-disk = Disk
 ## Examine
 nuke-examine-armed = Hey uh, why's that [color=red]red light[/color] blinking?
 nuke-examine-exploding = Yeah... I think it's too late buddy.
+
+## Nuclear escape pod evacuation
+nuclear-escape-pods-launching = [color=orange]ATTENTION! Nuclear threat detected! Emergency escape pods are launching automatically to ensure crew safety![/color]

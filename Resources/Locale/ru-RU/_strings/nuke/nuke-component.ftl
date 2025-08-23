@@ -41,3 +41,6 @@ nuke-codes-fax-paper-name = коды ядерной аутентификации
 nuke-slot-component-slot-name-disk = Диск
 nuke-examine-armed = Эй, а почему эта [color=red]красная лампочка[/color] мигает?
 nuke-examine-exploding = Ага... Похоже, уже слишком поздно, приятель.
+
+## Nuclear escape pod evacuation
+nuclear-escape-pods-launching = [color=orange]ВНИМАНИЕ! Обнаружена ядерная угроза! Спасательные капсулы запускаются автоматически для обеспечения безопасности экипажа![/color]

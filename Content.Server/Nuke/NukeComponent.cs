@@ -180,6 +180,11 @@ namespace Content.Server.Nuke
         /// </summary>
         public bool PlayedAlertSound = false;
 
+        /// <summary>
+        ///     Check if nuclear escape pod evacuation has been triggered
+        /// </summary>
+        public bool TriggeredEscapePodEvacuation = false;
+
         public EntityUid? AlertAudioStream = default;
 
         /// <summary>

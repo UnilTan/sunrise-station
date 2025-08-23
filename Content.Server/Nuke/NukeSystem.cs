@@ -334,6 +334,17 @@ public sealed class NukeSystem : EntitySystem
             UpdateAppearance(uid, nuke);
         }
 
+        // trigger escape pod evacuation when countdown reaches alert time (10 seconds)
+        if (nuke.RemainingTime <= nuke.AlertSoundTime && !nuke.TriggeredEscapePodEvacuation)
+        {
+            nuke.TriggeredEscapePodEvacuation = true;
+            var evacuationEvent = new NuclearEscapePodEvacuationEvent()
+            {
+                OwningStation = nuke.OriginStation
+            };
+            RaiseLocalEvent(evacuationEvent);
+        }
+
         if (nuke.RemainingTime <= 0)
         {
             nuke.RemainingTime = 0;
@@ -553,6 +564,7 @@ public sealed class NukeSystem : EntitySystem
 
         // disable sound and reset it
         component.PlayedAlertSound = false;
+        component.TriggeredEscapePodEvacuation = false;
         component.AlertAudioStream = _audio.Stop(component.AlertAudioStream);
 
         // turn off the spinny light
@@ -687,5 +699,14 @@ public sealed class NukeExplodedEvent : EntityEventArgs
 public sealed class NukeDisarmSuccessEvent : EntityEventArgs
 {
 
+}
+
+/// <summary>
+///     Raised when nuclear escape pod evacuation should be triggered (10 seconds before explosion).
+///     Escape pods should launch immediately to safety.
+/// </summary>
+public sealed class NuclearEscapePodEvacuationEvent : EntityEventArgs
+{
+    public EntityUid? OwningStation;
 }
 

@@ -12,6 +12,7 @@ using Content.Server.Communications;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
+using Content.Server.Nuke;
 using Content.Server.Parallax;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
@@ -122,6 +123,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
         SubscribeLocalEvent<EmergencyShuttleComponent, FTLCompletedEvent>(OnEmergencyFTLComplete);
         SubscribeNetworkEvent<EmergencyShuttleRequestPositionMessage>(OnShuttleRequestPosition);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEnded); // Sunrise-edit
+        SubscribeLocalEvent<NuclearEscapePodEvacuationEvent>(OnNuclearEscapePodEvacuation);
         InitializeEmergencyConsole();
     }
 
@@ -129,6 +131,26 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
     private void OnRoundEnded(RoundEndTextAppendEvent ev)
     {
         DockTime = null;
+    }
+
+    /// <summary>
+    /// Handles nuclear escape pod evacuation - launches all escape pods immediately when nuclear countdown reaches 10 seconds
+    /// </summary>
+    private void OnNuclearEscapePodEvacuation(NuclearEscapePodEvacuationEvent ev)
+    {
+        var podQuery = AllEntityQuery<EscapePodComponent>();
+
+        // Launch all escape pods immediately with minimal stagger for safety
+        while (podQuery.MoveNext(out _, out var pod))
+        {
+            pod.LaunchTime = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(0.0f, 0.2f));
+        }
+
+        // Dispatch a global announcement about the nuclear escape pod evacuation
+        _chatSystem.DispatchGlobalAnnouncement(
+            Loc.GetString("nuclear-escape-pods-launching"),
+            playDefault: false,
+            colorOverride: Color.Orange);
     }
     // Sunrise-end
 
