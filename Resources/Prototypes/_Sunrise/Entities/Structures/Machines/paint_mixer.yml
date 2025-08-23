@@ -49,7 +49,7 @@
     interfaces:
       enum.PaintMixerUiKey.Key:
         type: PaintMixerBoundUserInterface
-  - type: PowerReceiver
+  - type: ApcPowerReceiver
     powerDisabled: true
   - type: ExtensionCableReceiver
   - type: Machine
