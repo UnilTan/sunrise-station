@@ -34,7 +34,7 @@ namespace Content.Server.RatKing
             base.Initialize();
 
             SubscribeLocalEvent<RatKingComponent, RatKingRaiseArmyActionEvent>(OnRaiseArmy);
-            SubscribeLocalEvent<RatKingComponent, RatKingRaiseGuardActionEvent>(OnRaiseGuard);
+            SubscribeLocalEvent<RatKingComponent, RatKingRaiseGuardActionEvent>(OnRaiseGuard); // Sunrise-Edit
             SubscribeLocalEvent<RatKingComponent, RatKingDomainActionEvent>(OnDomain);
             SubscribeLocalEvent<RatKingComponent, AfterPointedAtEvent>(OnPointedAt);
         }
@@ -83,6 +83,7 @@ namespace Content.Server.RatKing
             UpdateServantNpc(servant, component.CurrentOrder);
         }
 
+        // Sunrise-Start
         /// <summary>
         /// Summons an allied rat guard at the King, costing a large amount of hunger
         /// </summary>
@@ -125,6 +126,7 @@ namespace Content.Server.RatKing
             _npc.SetBlackboard(guard, NPCBlackboard.FollowTarget, new EntityCoordinates(uid, Vector2.Zero));
             UpdateServantNpc(guard, component.CurrentOrder);
         }
+        // Sunrise-End
 
         /// <summary>
         /// uses hunger to release a specific amount of ammonia into the air. This heals the rat king
@@ -161,11 +163,13 @@ namespace Content.Server.RatKing
             {
                 _npc.SetBlackboard(servant, NPCBlackboard.CurrentOrderedTarget, args.Pointed);
             }
-            
+
+            // Sunrise-Start
             foreach (var guard in component.Guards)
             {
                 _npc.SetBlackboard(guard, NPCBlackboard.CurrentOrderedTarget, args.Pointed);
             }
+            // Sunrise-End
         }
 
         public override void UpdateServantNpc(EntityUid uid, RatKingOrderType orderType)

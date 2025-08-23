@@ -7,10 +7,12 @@ public sealed partial class RatKingRaiseArmyActionEvent : InstantActionEvent
 
 }
 
+// Sunrise-Start
 public sealed partial class RatKingRaiseGuardActionEvent : InstantActionEvent
 {
 
 }
+// Sunrise-End
 
 public sealed partial class RatKingDomainActionEvent : InstantActionEvent
 {
