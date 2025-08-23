@@ -9,30 +9,30 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// </summary>
 public sealed class CryostasisBeakerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<CryostasisBeakerComponent, SolutionChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<SolutionComponent, SolutionChangedEvent>(OnSolutionChanged);
     }
 
-    private void OnSolutionChanged(EntityUid uid, CryostasisBeakerComponent component, ref SolutionChangedEvent args)
+    private void OnSolutionChanged(EntityUid solutionEntity, SolutionComponent solutionComp, ref SolutionChangedEvent args)
     {
-        // Check if the solution belongs to this cryostasis beaker
-        if (!TryComp<SolutionContainerManagerComponent>(uid, out var containerManager))
+        // Get the container that holds this solution
+        if (!TryComp<ContainedSolutionComponent>(solutionEntity, out var containedSolution))
             return;
 
-        // Find all solutions in this cryostasis beaker and enforce temperature limits
-        foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((uid, containerManager)))
+        var containerEntity = containedSolution.Container;
+        
+        // Check if the container is a CryostasisBeaker
+        if (!TryComp<CryostasisBeakerComponent>(containerEntity, out var cryostasisBeaker))
+            return;
+
+        var solution = solutionComp.Solution;
+        
+        // If the solution temperature is above the maximum allowed, cool it down
+        if (solution.Temperature > cryostasisBeaker.MaxTemperature)
         {
-            var solution = soln.Comp.Solution;
-            
-            // If the solution temperature is above the maximum allowed, cool it down
-            if (solution.Temperature > component.MaxTemperature)
-            {
-                solution.Temperature = component.MaxTemperature;
-            }
+            solution.Temperature = cryostasisBeaker.MaxTemperature;
         }
     }
 }
