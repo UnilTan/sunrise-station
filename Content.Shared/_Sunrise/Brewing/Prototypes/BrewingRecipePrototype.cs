@@ -1,4 +1,5 @@
 using Content.Shared.Materials;
+using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Brewing.Prototypes;
@@ -45,6 +46,12 @@ public sealed partial class BrewingRecipePrototype : IPrototype
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<MaterialPrototype>, int> Materials = new();
+
+    /// <summary>
+    /// The reagents required to brew this recipe.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<ReagentPrototype>, int> Reagents = new();
 
     /// <summary>
     /// Whether this recipe's material cost should be reduced by the material use multiplier.

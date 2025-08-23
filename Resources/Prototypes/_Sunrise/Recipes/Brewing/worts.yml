@@ -23,6 +23,7 @@
   category: BasicWorts
   materials:
     Wheat: 1
+  reagents:
     WeldingFuel: 5
   applyMaterialDiscount: true
   fermentedResult: FermentedDarkBeer
@@ -66,6 +67,7 @@
   requiresIndustrial: true
   materials:
     Wheat: 1
+  reagents:
     ColdOil: 5
   applyMaterialDiscount: true
   fermentedResult: FermentedCoolingBeer
@@ -81,6 +83,7 @@
   requiresIndustrial: true
   materials:
     Wheat: 1
+  reagents:
     HotOil: 5
   applyMaterialDiscount: true
   fermentedResult: FermentedFireBeer
@@ -111,6 +114,7 @@
   requiresIndustrial: true
   materials:
     Wheat: 1
+  reagents:
     Beer: 5
   applyMaterialDiscount: true
   fermentedResult: FermentedAle
@@ -143,6 +147,7 @@
   requiresIndustrial: true
   materials:
     Wheat: 1
+  reagents:
     XenomorphBlood: 5
   applyMaterialDiscount: true
   fermentedResult: FermentedAsteroidBugBeer

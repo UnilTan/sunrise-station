@@ -131,6 +131,7 @@ namespace Content.Server._Sunrise.Brewing
             if (!CanProduce(uid, recipe, 1, component))
                 return false;
 
+            // Consume materials
             foreach (var (mat, amount) in recipe.Materials)
             {
                 var adjustedAmount = recipe.ApplyMaterialDiscount
@@ -139,6 +140,16 @@ namespace Content.Server._Sunrise.Brewing
 
                 _materialStorage.TryChangeMaterialAmount(uid, mat, adjustedAmount);
             }
+
+            // Consume reagents
+            if (_solution.TryGetSolution(uid, "reagents", out var solution, out var solutionComp))
+            {
+                foreach (var (reagent, amount) in recipe.Reagents)
+                {
+                    _solution.RemoveReagent(solution.Value, new ReagentId(reagent.Id, null), amount);
+                }
+            }
+
             component.Queue.Enqueue(recipe);
 
             return true;

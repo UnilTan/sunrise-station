@@ -18,6 +18,16 @@
     whitelist:
       tags:
       - BrewingIngredient
+  - type: SolutionContainerManager
+    solutions:
+      reagents:
+        maxVol: 1000
+  - type: RefillableSolution
+    solution: reagents
+  - type: ExaminableSolution
+    solution: reagents
+  - type: Spillable
+    solution: reagents
   - type: UserInterface
     interfaces:
       enum.BrewingApparatusUiKey.Key:
@@ -62,5 +72,15 @@
     whitelist:
       tags:
       - BrewingIngredient
+  - type: SolutionContainerManager
+    solutions:
+      reagents:
+        maxVol: 1000
+  - type: RefillableSolution
+    solution: reagents
+  - type: ExaminableSolution
+    solution: reagents
+  - type: Spillable
+    solution: reagents
   - type: ApcPowerReceiver
     powerLoad: 2500

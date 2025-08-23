@@ -5,6 +5,8 @@ using Content.Shared._Sunrise.Brewing.Prototypes;
 using Content.Shared.Localizations;
 using Content.Shared.Materials;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -18,6 +20,7 @@ public abstract class SharedBrewingApparatusSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
 
     public readonly Dictionary<string, List<BrewingRecipePrototype>> InverseRecipes = new();
@@ -89,6 +92,7 @@ public abstract class SharedBrewingApparatusSystem : EntitySystem
         if (recipe.RequiresIndustrial && component.Type != BrewingApparatusType.Industrial)
             return false;
 
+        // Check materials
         foreach (var (material, needed) in recipe.Materials)
         {
             var adjustedAmount = AdjustMaterial(needed, recipe.ApplyMaterialDiscount, component.MaterialUseMultiplier);
@@ -96,6 +100,18 @@ public abstract class SharedBrewingApparatusSystem : EntitySystem
             if (_materialStorage.GetMaterialAmount(uid, material) < adjustedAmount * amount)
                 return false;
         }
+
+        // Check reagents
+        foreach (var (reagent, needed) in recipe.Reagents)
+        {
+            if (!_solutionContainer.TryGetSolution(uid, "reagents", out var solution, out var solutionComp))
+                return false;
+
+            var availableAmount = solution.Value.Comp.Solution.GetReagentQuantity(new ReagentId(reagent.Id, null)).Int();
+            if (availableAmount < needed * amount)
+                return false;
+        }
+
         return true;
     }
 
