@@ -533,3 +533,9 @@
     Gold: 100
     Silver: 100
     Diamond: 100  #sunrise-end
+
+# Paint Mixer - Sunrise
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  id: PaintMixerMachineCircuitboard
+  result: PaintMixerMachineCircuitboard

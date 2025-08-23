@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
+using Content.Shared._Sunrise.PaintMixer;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -11,7 +12,7 @@ namespace Content.Shared._Sunrise.Paint;
 /// Entity when used on another entity will paint target entity.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedPaintSystem))]
+[Access(typeof(SharedPaintSystem), typeof(SharedPaintMixerSystem))]
 public sealed partial class PaintComponent : Component
 {
     /// <summary>

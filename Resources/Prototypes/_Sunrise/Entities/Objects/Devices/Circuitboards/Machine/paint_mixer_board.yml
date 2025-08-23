@@ -1,0 +1,23 @@
+- type: entity
+  id: PaintMixerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: paint mixer machine board
+  description: A machine board for a paint mixer.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: generic
+  - type: MachineBoard
+    prototype: PaintMixer
+    requirements:
+      Capacitor: 2
+      Manipulator: 2
+      MatterBin: 1
+    materialRequirements:
+      Cable: 5
+      Steel: 5
+    tagRequirements:
+      Glass:
+        amount: 2
+        defaultPrototype: SheetGlass1
+        examineName: Glass

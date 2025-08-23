@@ -1,0 +1,76 @@
+- type: entity
+  id: PaintMixer
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  name: paint mixer
+  description: A machine for creating custom-colored spray paint cans. Mix your own colors!
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/microwave.rsi
+    state: mw
+    layers:
+    - state: mw
+      map: ["enum.MicrowaveVisualLayers.Base"]
+    - state: mw_panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: WiresVisuals
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Transform
+    anchored: true
+  - type: Pullable
+  - type: PaintMixer
+    mixingTime: 5
+    sprayPaintPrototype: "PaintBase"
+    requiredMaterials:
+      Steel: 5
+      Plastic: 1
+    requiredPaintAmount: 15
+    paintReagentId: "SpaceGlue"
+  - type: MaterialStorage
+    whitelist:
+      tags:
+        - Sheet
+        - RawMaterial
+        - Ingot
+  - type: ActivatableUI
+    key: enum.PaintMixerUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.PaintMixerUiKey.Key:
+        type: PaintMixerBoundUserInterface
+  - type: PowerReceiver
+    powerDisabled: true
+  - type: ExtensionCableReceiver
+  - type: Machine
+    board: PaintMixerMachineCircuitboard
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresPanel
+  - type: StaticPrice
+    price: 500
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
