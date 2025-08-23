@@ -1,13 +1,12 @@
 <DefaultWindow xmlns="https://spacestation14.io"
-            Title="{Loc 'comp-pda-ui-menu-title'}"
+            Title="{Loc 'cloning-console-window-title'}"
             SetSize="400 400"
             MinSize="400 400">
-    <TabContainer Name="MasterTabContainer">
-        <BoxContainer Name="Scanner"
-                      Orientation="Vertical"
-                      VerticalExpand="True"
-                      HorizontalExpand="True"
-                      MinSize="100 150">
+    <BoxContainer Name="Scanner"
+                  Orientation="Vertical"
+                  VerticalExpand="True"
+                  HorizontalExpand="True"
+                  MinSize="100 150">
             <PanelContainer VerticalExpand="True" StyleClasses="Inset">
                 <BoxContainer Name="GeneticScannerContents" Margin="5 5 5 5" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
                     <Label HorizontalAlignment="Center" Text="{Loc 'cloning-console-window-scanner-details-label'}" />
@@ -54,6 +53,5 @@
                     <Label HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Loc 'cloning-console-window-clone-pod-far-label'}" />
                 </BoxContainer>
             </PanelContainer>
-        </BoxContainer>
-    </TabContainer>
+    </BoxContainer>
 </DefaultWindow>
