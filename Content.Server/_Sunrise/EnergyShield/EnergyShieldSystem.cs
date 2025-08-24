@@ -12,6 +12,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.PowerCell.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
+using Robust.Shared.Containers;
 
 namespace Content.Server._Sunrise.EnergyShield;
 
@@ -21,6 +22,7 @@ public sealed class EnergyShieldSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -56,6 +58,19 @@ public sealed class EnergyShieldSystem : EntitySystem
 
     private void OnToggleAttempt(Entity<EnergyShieldComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {
+        // Prevent activation while inside a container (e.g., mech, locker)
+        if (Exists(args.User) && _container.IsEntityInContainer(args.User.Value))
+        {
+            _popup.PopupEntity(
+                Loc.GetString("energy-shield-cant-activate-in-container"),
+                args.User.Value,
+                args.User.Value,
+                PopupType.Medium
+            );
+            args.Cancelled = true;
+            return;
+        }
+
         if (TryComp<BatteryComponent>(ent, out var battery) &&
             battery.CurrentCharge >= battery.MaxCharge * ent.Comp.MinChargeFractionForActivation)
         {
