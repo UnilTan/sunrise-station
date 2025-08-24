@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Threading.Tasks;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.TTS;
@@ -96,8 +97,11 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     /// </summary>
     private void PlayAnnouncementNow(QueuedAnnouncement announcement)
     {
+        var duration = TimeSpan.FromSeconds(AnnouncementDurationEstimate);
+        if (announcement.TtsData != null)
+            duration = GetAudioDurationFromBytes(announcement.TtsData);
         _isPlayingAnnouncement = true;
-        _currentAnnouncementEndTime = _timing.CurTime + TimeSpan.FromSeconds(AnnouncementDurationEstimate);
+        _currentAnnouncementEndTime = _timing.CurTime + duration;
 
         var ev = new AnnouncementSpeakerEvent(
             announcement.Station,
@@ -106,7 +110,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
             announcement.AnnounceVoice,
             announcement.TtsData
         );
-        
+
         RaiseLocalEvent(ref ev);
     }
 
@@ -198,7 +202,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         if (!GetVoicePrototype(announceVoice ?? _defaultAnnounceVoice, out var protoVoice))
             return;
         var generatedTts = await GenerateTtsForAnnouncement(message, protoVoice);
-        
+
         var queuedAnnouncement = new QueuedAnnouncement(station, message, resolvedSound, announceVoice, generatedTts)
         {
             QueuedAt = _timing.CurTime
@@ -229,7 +233,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         if (!GetVoicePrototype(announceVoice ?? _defaultAnnounceVoice, out var protoVoice))
             return;
         var generatedTts = await GenerateTtsForAnnouncement(message, protoVoice);
-        
+
         var stationQuery = EntityQueryEnumerator<StationDataComponent>();
         while (stationQuery.MoveNext(out var stationUid, out var stationData))
         {
@@ -304,7 +308,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
             return false;
 
         var playerPos = playerTransform.Coordinates;
-        
+
         // Find all speakers and check if any are in range and working
         var query = EntityQueryEnumerator<AnnouncementSpeakerComponent, TransformComponent>();
         while (query.MoveNext(out var speakerUid, out var speakerComp, out var speakerTransform))
@@ -355,5 +359,57 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private static TimeSpan GetWavDurationFromBytes(byte[] wavData)
+    {
+        // WAV header is 44 bytes for PCM
+        if (wavData.Length < 44)
+            return TimeSpan.Zero;
+        int sampleRate = BitConverter.ToInt32(wavData, 24);
+        short channels = BitConverter.ToInt16(wavData, 22);
+        short bitsPerSample = BitConverter.ToInt16(wavData, 34);
+        int dataSize = BitConverter.ToInt32(wavData, 40);
+        int bytesPerSample = bitsPerSample / 8;
+        int totalSamples = dataSize / (bytesPerSample * channels);
+        if (sampleRate <= 0 || channels <= 0 || bitsPerSample <= 0)
+            return TimeSpan.Zero;
+        double durationSeconds = (double)totalSamples / sampleRate;
+        return TimeSpan.FromSeconds(durationSeconds);
+    }
+
+    private static TimeSpan GetAudioDurationFromBytes(byte[] audioData, string? fileType = null)
+    {
+        if (fileType == "wav" || (audioData.Length > 12 && audioData[0] == 'R' && audioData[1] == 'I' && audioData[2] == 'F' && audioData[8] == 'W' && audioData[9] == 'A' && audioData[10] == 'V'))
+        {
+            return GetWavDurationFromBytes(audioData);
+        }
+        if (fileType == "ogg" || (audioData.Length > 4 && audioData[0] == 'O' && audioData[1] == 'g' && audioData[2] == 'g' && audioData[3] == 'S'))
+        {
+            try
+            {
+                var nvorbisType = Type.GetType("NVorbis.VorbisReader, NVorbis");
+                if (nvorbisType != null)
+                {
+                    using var stream = new MemoryStream(audioData);
+                    using var reader = (IDisposable)Activator.CreateInstance(nvorbisType, stream, false)!;
+                    var totalTimeProp = nvorbisType.GetProperty("TotalTime");
+                    if (totalTimeProp != null)
+                    {
+                        var totalTime = totalTimeProp.GetValue(reader);
+                        if (totalTime is TimeSpan ts)
+                            return ts;
+                    }
+                }
+            }
+            catch
+            {
+                // NVorbis не доступен или ошибка — fallback
+            }
+            double fallbackBitrate = 128000.0; // 128 кбит/с
+            double duration = audioData.Length * 8.0 / fallbackBitrate;
+            return TimeSpan.FromSeconds(duration);
+        }
+        return TimeSpan.Zero;
     }
 }
