@@ -242,7 +242,7 @@
       - type: SpaceNinja
       - type: NpcFactionMember
         factions:
-        - Syndicate
+        - SpiderClan
       - type: AutoImplant
         implants:
         - MacroBombImplant # Sunrise-Edit
