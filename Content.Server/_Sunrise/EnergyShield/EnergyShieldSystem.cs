@@ -10,6 +10,7 @@ using Content.Shared.Examine;
 using Content.Shared.Timing;
 using Content.Shared.IdentityManagement;
 using Content.Shared.PowerCell.Components;
+using Content.Shared.Inventory;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Containers;
@@ -23,11 +24,15 @@ public sealed class EnergyShieldSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<EnergyShieldComponent, DamageChangedEvent>(OnDamage);
         SubscribeLocalEvent<EnergyShieldComponent, ItemToggleActivateAttemptEvent>(OnToggleAttempt);
+        
+        // Listen for when entities are inserted into containers to auto-deactivate shields
+        SubscribeLocalEvent<EntInsertedIntoContainerMessage>(OnEntityInsertedIntoContainer);
     }
 
     private void OnDamage(Entity<EnergyShieldComponent> ent, ref DamageChangedEvent args)
@@ -88,5 +93,38 @@ public sealed class EnergyShieldSystem : EntitySystem
         }
 
         args.Cancelled = true;
+    }
+
+    private void OnEntityInsertedIntoContainer(EntInsertedIntoContainerMessage args)
+    {
+        // Check if the entity being inserted into a container has any active energy shields
+        var entity = args.Entity;
+        
+        // Get all equipped energy shields on the entity
+        if (!TryComp<InventoryComponent>(entity, out var inventory))
+            return;
+
+        // Check all inventory slots for active energy shields
+        if (_inventory.TryGetContainerSlotEnumerator(entity, out var slotEnumerator))
+        {
+            while (slotEnumerator.NextItem(out var itemEntity, out var slot))
+            {
+                if (!TryComp<EnergyShieldComponent>(itemEntity, out var shieldComp))
+                    continue;
+
+                // If the shield is active, deactivate it
+                if (_itemToggle.IsActivated(itemEntity))
+                {
+                    _itemToggle.Toggle(itemEntity);
+                    _popup.PopupEntity(
+                        Loc.GetString("energy-shield-deactivated-in-container"),
+                        entity,
+                        entity,
+                        PopupType.Medium
+                    );
+                    _audio.PlayPvs(shieldComp.ShutdownSound, itemEntity);
+                }
+            }
+        }
     }
 }
