@@ -12,7 +12,8 @@ public readonly record struct AnnouncementSpeakerEvent(
     EntityUid Station,
     string Message,
     ResolvedSoundSpecifier? AnnouncementSound,
-    string? AnnounceVoice)
+    string? AnnounceVoice,
+    byte[]? TtsData = null)
 {
 }
 
@@ -24,6 +25,6 @@ public readonly record struct SpeakerPlayAnnouncementEvent(
     string Message,
     ResolvedSoundSpecifier? AnnouncementSound,
     string? AnnounceVoice,
-    byte[]? PreGeneratedTts = null)
+    byte[]? GeneratedTts = null)
 {
 }

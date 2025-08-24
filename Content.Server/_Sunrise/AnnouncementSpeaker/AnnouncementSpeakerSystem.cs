@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.TTS;
@@ -11,7 +10,6 @@ using Content.Shared.Station.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
-using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
 using Content.Shared._Sunrise.SunriseCCVars;
 
@@ -23,12 +21,10 @@ namespace Content.Server._Sunrise.AnnouncementSpeaker;
 /// </summary>
 public sealed class AnnouncementSpeakerSystem : EntitySystem
 {
-    [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    
-    private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
+
     private bool _isEnabled;
     private string _defaultAnnounceVoice = "Hanson";
 
@@ -45,15 +41,9 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     /// </summary>
     private void OnAnnouncementSpeaker(ref AnnouncementSpeakerEvent ev)
     {
-        // Handle the announcement asynchronously without ref parameter
-        _ = HandleAnnouncementSpeakerAsync(ev);
-    }
-
-    private async Task HandleAnnouncementSpeakerAsync(AnnouncementSpeakerEvent ev)
-    {
         // Find all speakers on the station
         var speakers = GetStationSpeakers(ev.Station);
-        
+
         if (speakers.Count == 0)
         {
             // Fallback: If no speakers are found, log a warning
@@ -86,18 +76,8 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
             }
         }
 
-        // Generate TTS once for all speakers to improve performance
-        byte[]? preGeneratedTts = null;
-        if (_isEnabled && ev.Message.Length <= MaxMessageChars * 2)
-        {
-            if (GetVoicePrototype(ev.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice) && protoVoice != null)
-            {
-                preGeneratedTts = await GenerateTtsForAnnouncement(ev.Message, protoVoice);
-            }
-        }
-
-        // Send the announcement to each speaker with the pre-generated TTS
-        var speakerEvent = new SpeakerPlayAnnouncementEvent(ev.Message, ev.AnnouncementSound, ev.AnnounceVoice, preGeneratedTts);
+        // Передаём TTS сразу всем динамикам
+        var speakerEvent = new SpeakerPlayAnnouncementEvent(ev.Message, ev.AnnouncementSound, ev.AnnounceVoice, ev.TtsData);
         foreach (var speaker in speakers)
         {
             RaiseLocalEvent(speaker, ref speakerEvent);
@@ -110,7 +90,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     private List<EntityUid> GetStationSpeakers(EntityUid station)
     {
         var speakers = new List<EntityUid>();
-        
+
         if (!TryComp<StationDataComponent>(station, out var stationData))
             return speakers;
 
@@ -135,10 +115,15 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     /// Dispatches an announcement to all speakers on a station.
     /// This is the main entry point for the announcement speaker system.
     /// </summary>
-    public void DispatchAnnouncementToSpeakers(EntityUid station, string message, SoundSpecifier? announcementSound = null, string? announceVoice = null)
+    public async void DispatchAnnouncementToSpeakers(EntityUid station, string message, SoundSpecifier? announcementSound = null, string? announceVoice = null)
     {
         var resolvedSound = announcementSound != null ? _audioSystem.ResolveSound(announcementSound) : null;
-        var ev = new AnnouncementSpeakerEvent(station, message, resolvedSound, announceVoice);
+        if (!_isEnabled)
+            return;
+        if (!GetVoicePrototype(announceVoice ?? _defaultAnnounceVoice, out var protoVoice))
+            return;
+        var generatedTts = await GenerateTtsForAnnouncement(message, protoVoice);
+        var ev = new AnnouncementSpeakerEvent(station, message, resolvedSound, announceVoice, generatedTts);
         RaiseLocalEvent(ref ev);
     }
 
@@ -146,13 +131,18 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     /// Dispatches an announcement to speakers on all stations.
     /// Used for server-wide announcements like round start/end.
     /// </summary>
-    public void DispatchAnnouncementToAllStations(string message, SoundSpecifier? announcementSound = null, string? announceVoice = null)
+    public async void DispatchAnnouncementToAllStations(string message, SoundSpecifier? announcementSound = null, string? announceVoice = null)
     {
         var resolvedSound = announcementSound != null ? _audioSystem.ResolveSound(announcementSound) : null;
+        if (!_isEnabled)
+            return;
+        if (!GetVoicePrototype(announceVoice ?? _defaultAnnounceVoice, out var protoVoice))
+            return;
+        var generatedTts = await GenerateTtsForAnnouncement(message, protoVoice);
         var stationQuery = EntityQueryEnumerator<StationDataComponent>();
         while (stationQuery.MoveNext(out var stationUid, out var stationData))
         {
-            var ev = new AnnouncementSpeakerEvent(stationUid, message, resolvedSound, announceVoice);
+            var ev = new AnnouncementSpeakerEvent(stationUid, message, resolvedSound, announceVoice, generatedTts);
             RaiseLocalEvent(ref ev);
         }
     }

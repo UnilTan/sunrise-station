@@ -160,12 +160,6 @@ public sealed partial class TTSSystem : EntitySystem
     /// </summary>
     private void OnSpeakerPlayAnnouncement(EntityUid speakerUid, AnnouncementSpeakerComponent component, ref SpeakerPlayAnnouncementEvent args)
     {
-        // Handle the announcement asynchronously
-        _ = HandleSpeakerAnnouncementAsync(speakerUid, component, args);
-    }
-
-    private async Task HandleSpeakerAnnouncementAsync(EntityUid speakerUid, AnnouncementSpeakerComponent component, SpeakerPlayAnnouncementEvent args)
-    {
         // Check if speaker is enabled
         if (!component.Enabled)
             return;
@@ -176,40 +170,23 @@ public sealed partial class TTSSystem : EntitySystem
             if (!TryComp<ApcPowerReceiverComponent>(speakerUid, out var powerReceiver) || !powerReceiver.Powered)
                 return;
         }
-        
+
         if (!_isEnabled)
+            return;
+
+        byte[]? soundData = args.GeneratedTts;
+        if (soundData == null || soundData.Length == 0)
         {
-            // TTS is disabled, announcement sound is handled server-side in AnnouncementSpeakerSystem
             return;
         }
 
-        // Use pre-generated TTS if available, otherwise generate it (fallback)
-        byte[]? soundData = args.PreGeneratedTts;
-        
-        if (soundData == null || soundData.Length == 0)
-        {
-            // Fallback: generate TTS if not pre-generated
-            if (args.Message.Length <= MaxMessageChars * 2 &&
-                GetVoicePrototype(args.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice))
-            {
-                soundData = await GenerateTTS(args.Message, protoVoice, isAnnounce: true);
-            }
-        }
-
-        if (soundData == null || soundData.Length == 0)
-        {
-            // No TTS data available, announcement sound is handled server-side
-            return;
-        }
-
-        // Create a spatial filter for players within range of this speaker
         var speakerPos = Transform(speakerUid).Coordinates;
         var playersInRange = Filter.Empty();
-        
+
         var playerQuery = EntityQueryEnumerator<ActorComponent, TransformComponent>();
         while (playerQuery.MoveNext(out var playerUid, out var actor, out var playerTransform))
         {
-            if (speakerPos.TryDistance(EntityManager, playerTransform.Coordinates, out var distance) && 
+            if (speakerPos.TryDistance(EntityManager, playerTransform.Coordinates, out var distance) &&
                 distance <= component.Range)
             {
                 playersInRange = playersInRange.AddPlayer(actor.PlayerSession);
