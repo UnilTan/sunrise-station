@@ -36,7 +36,6 @@ public sealed class TTSSystem : EntitySystem
     private float _volume;
     private float _radioVolume;
     private int _fileIdx;
-    private float _volumeAnnounce;
     private bool _isQueueEnabled;
     private bool _ghostRadioEnabled;
     private readonly Queue<QueuedTts> _ttsQueue = new();
@@ -61,7 +60,6 @@ public sealed class TTSSystem : EntitySystem
         _res.AddRoot(Prefix, ContentRoot);
         _cfg.OnValueChanged(SunriseCCVars.TTSVolume, OnTtsVolumeChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
-        _cfg.OnValueChanged(SunriseCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.TTSClientEnabled, OnTtsClientOptionChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.TTSClientQueueEnabled, OnTTSQueueOptionChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.TTSRadioGhostEnabled, OnTtsRadioGhostChanged, true);
@@ -73,7 +71,6 @@ public sealed class TTSSystem : EntitySystem
         base.Shutdown();
         _cfg.UnsubValueChanged(SunriseCCVars.TTSVolume, OnTtsVolumeChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged);
-        _cfg.UnsubValueChanged(SunriseCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.TTSClientEnabled, OnTtsClientOptionChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.TTSClientQueueEnabled, OnTTSQueueOptionChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.TTSRadioGhostEnabled, OnTtsRadioGhostChanged);
@@ -101,10 +98,6 @@ public sealed class TTSSystem : EntitySystem
     private void OnTTSQueueOptionChanged(bool option)
     {
         _isQueueEnabled = option;
-    }
-    private void OnTtsAnnounceVolumeChanged(float volume)
-    {
-        _volumeAnnounce = volume;
     }
 
     private void OnTtsClientOptionChanged(bool option)

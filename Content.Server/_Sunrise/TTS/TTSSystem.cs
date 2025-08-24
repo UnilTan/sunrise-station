@@ -179,12 +179,7 @@ public sealed partial class TTSSystem : EntitySystem
         
         if (!_isEnabled)
         {
-            // If TTS is disabled, just play the announcement sound if available
-            if (args.AnnouncementSound != null)
-            {
-                var audioParams = AudioParams.Default.WithVolume(-2f * component.VolumeModifier).WithMaxDistance(component.Range);
-                _audioSystem.PlayPvs(args.AnnouncementSound, speakerUid, audioParams);
-            }
+            // TTS is disabled, announcement sound is handled server-side in AnnouncementSpeakerSystem
             return;
         }
 
@@ -203,12 +198,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         if (soundData == null || soundData.Length == 0)
         {
-            // Fallback to announcement sound if TTS generation failed
-            if (args.AnnouncementSound != null)
-            {
-                var audioParams = AudioParams.Default.WithVolume(-2f * component.VolumeModifier).WithMaxDistance(component.Range);
-                _audioSystem.PlayPvs(args.AnnouncementSound, speakerUid, audioParams);
-            }
+            // No TTS data available, announcement sound is handled server-side
             return;
         }
 

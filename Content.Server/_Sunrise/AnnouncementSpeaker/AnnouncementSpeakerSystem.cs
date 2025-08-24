@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.TTS;
+using Content.Server.Power.Components;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Components;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
 using Content.Shared._Sunrise.TTS;
@@ -59,6 +60,30 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
             // In the future, this could send to a single communications console or similar
             Logger.Warning($"No announcement speakers found on station {ToPrettyString(ev.Station)}. Announcement not played: {ev.Message}");
             return;
+        }
+
+        // Play announcement sound via PVS for each speaker on server side
+        if (ev.AnnouncementSound != null)
+        {
+            foreach (var speaker in speakers)
+            {
+                if (!TryComp<AnnouncementSpeakerComponent>(speaker, out var speakerComp))
+                    continue;
+
+                // Check if speaker is enabled and has power
+                if (!speakerComp.Enabled)
+                    continue;
+
+                if (speakerComp.RequiresPower)
+                {
+                    if (!TryComp<ApcPowerReceiverComponent>(speaker, out var powerReceiver) || !powerReceiver.Powered)
+                        continue;
+                }
+
+                // Play announcement sound via PVS from this speaker
+                var audioParams = AudioParams.Default.WithVolume(-2f * speakerComp.VolumeModifier).WithMaxDistance(speakerComp.Range);
+                _audioSystem.PlayPvs(ev.AnnouncementSound, speaker, audioParams);
+            }
         }
 
         // Generate TTS once for all speakers to improve performance
