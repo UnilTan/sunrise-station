@@ -138,6 +138,12 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         }
 
+        // Play announcement sound first if available (for global announcements)
+        if (args.AnnouncementSound != null)
+        {
+            _audioSystem.PlayGlobal(args.AnnouncementSound, args.Source, true);
+        }
+
         if (!_isEnabled ||
             args.Message.Length > MaxMessageChars * 2 ||
             !GetVoicePrototype(args.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice))
@@ -145,7 +151,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         var soundData = await GenerateTTS(args.Message, protoVoice, isAnnounce: true);
         soundData ??= [];
-        RaiseNetworkEvent(new AnnounceTtsEvent(soundData, args.AnnouncementSound), args.Source.RemovePlayers(_ignoredRecipients));
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, isRadio: false), args.Source.RemovePlayers(_ignoredRecipients));
     }
 
     /// <summary>
@@ -224,7 +230,8 @@ public sealed partial class TTSSystem : EntitySystem
         var filteredPlayers = playersInRange.RemovePlayers(_ignoredRecipients);
         if (filteredPlayers.Recipients.Any())
         {
-            RaiseNetworkEvent(new AnnounceTtsEvent(soundData, args.AnnouncementSound), filteredPlayers);
+            var speakerNetEntity = GetNetEntity(speakerUid);
+            RaiseNetworkEvent(new PlayTTSEvent(soundData, speakerNetEntity, isRadio: false), filteredPlayers);
         }
     }
 

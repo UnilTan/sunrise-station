@@ -43,18 +43,16 @@ public sealed class TTSSystem : EntitySystem
     private (EntityUid Entity, AudioComponent Component)? _currentPlaying;
     private static readonly AudioResource EmptyAudioResource = new();
 
-    public sealed class QueuedTts(byte[] data, TtsType ttsType, ResolvedSoundSpecifier? announcementSound = null)
+    public sealed class QueuedTts(byte[] data, TtsType ttsType)
     {
         public byte[] Data = data;
-        public ResolvedSoundSpecifier? AnnouncementSound = announcementSound;
         public TtsType TtsType = ttsType;
     }
 
     public enum TtsType
     {
         Voice,
-        Radio,
-        Announce
+        Radio
     }
 
     public override void Initialize()
@@ -68,7 +66,6 @@ public sealed class TTSSystem : EntitySystem
         _cfg.OnValueChanged(SunriseCCVars.TTSClientQueueEnabled, OnTTSQueueOptionChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.TTSRadioGhostEnabled, OnTtsRadioGhostChanged, true);
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
-        SubscribeNetworkEvent<AnnounceTtsEvent>(OnAnnounceTTSPlay);
     }
 
     public override void Shutdown()
@@ -120,15 +117,7 @@ public sealed class TTSSystem : EntitySystem
         _ghostRadioEnabled = option;
     }
 
-    private void OnAnnounceTTSPlay(AnnounceTtsEvent ev)
-    {
-        if (_volumeAnnounce == 0)
-            return;
 
-        var entry = new QueuedTts(ev.Data, TtsType.Announce, ev.AnnouncementSound);
-
-        _ttsQueue.Enqueue(entry);
-    }
 
     private void PlayNextInQueue()
     {
@@ -145,9 +134,6 @@ public sealed class TTSSystem : EntitySystem
             case TtsType.Radio:
                 volume = _radioVolume;
                 break;
-            case TtsType.Announce:
-                volume = _volumeAnnounce;
-                break;
             case TtsType.Voice:
                 volume = _volume;
                 break;
@@ -155,10 +141,6 @@ public sealed class TTSSystem : EntitySystem
 
         var finalParams = AudioParams.Default.WithVolume(SharedAudioSystem.GainToVolume(volume));
 
-        if (entry.AnnouncementSound != null)
-        {
-            _currentPlaying = _audio.PlayGlobal(entry.AnnouncementSound, new EntityUid(), finalParams.AddVolume(-5f));
-        }
         _currentPlaying = PlayTTSBytes(entry.Data, null, finalParams, true);
     }
 
