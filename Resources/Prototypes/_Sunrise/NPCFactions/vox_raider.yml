@@ -1,0 +1,6 @@
+# Vox Raider NPC faction
+- type: npcFaction
+  id: VoxRaider
+  hostile:
+  - NanoTrasen
+  - Revolutionary

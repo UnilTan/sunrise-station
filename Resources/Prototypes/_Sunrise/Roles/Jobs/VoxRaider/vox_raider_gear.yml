@@ -1,0 +1,13 @@
+# Vox Raider starting gear
+- type: startingGear
+  id: VoxRaiderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    back: ClothingBackpackDuffel
+    shoes: ClothingShoesBootsCombat
+    outerClothing: ClothingOuterCoatDetective
+    id: VoxRaiderPDA
+    gloves: ClothingHandsGlovesNitrile
+  innerClothingSkirt: ClothingUniformJumpsuitColorGrey
+  satchel: ClothingBackpackSatchelDuffel
+  duffelbag: ClothingBackpackDuffel

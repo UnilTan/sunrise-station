@@ -15,6 +15,8 @@
     sound:
       path: /Audio/_Sunrise/Items/Handling/Stunbatons/pickup.ogg
   # Sunrise added end
+  - type: Steal
+    stealGroup: Stunbaton
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunbaton.rsi
     layers:

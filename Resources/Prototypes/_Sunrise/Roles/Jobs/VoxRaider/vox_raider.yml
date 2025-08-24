@@ -1,0 +1,9 @@
+# Vox Raider role
+- type: entity
+  id: MindRoleVoxRaider
+  name: Vox Raider
+  noSpawn: true
+  components:
+  - type: MindRole
+    antagPrototype: VoxRaider
+  - type: VoxRaiderRole

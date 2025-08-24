@@ -1,0 +1,40 @@
+# Vox Raider game rule
+- type: entity
+  parent: BaseGameRule
+  id: VoxRaider
+  components:
+  - type: VoxRaiderRule
+  - type: AntagObjectives
+    objectives:
+    - VoxRaiderSurvivalObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: VoxRaiderObjectiveGroups
+      maxPicks: 5
+    maxDifficulty: 8.0
+  - type: AntagSelection
+    agentName: vox-raider-round-end-agent-name
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ VoxRaider ]
+      fallbackRoles: [ Thief, Traitor ]
+      max: 4
+      playerRatio: 25
+      lateJoinAdditional: true
+      allowNonHumans: true
+      speciesRestrictions:
+      - Vox
+      multiAntagSetting: NotExclusive
+      startingGear: VoxRaiderGear
+      components:
+      - type: NpcFactionMember
+        factions:
+        - VoxRaider
+      mindRoles:
+      - MindRoleVoxRaider
+      briefing:
+        text: vox-raider-role-greeting
+        color: Orange
+        sound: "/Audio/Misc/thief_greeting.ogg"
+  - type: DynamicRuleCost
+    cost: 120

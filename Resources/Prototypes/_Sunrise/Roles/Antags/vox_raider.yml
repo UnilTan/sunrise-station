@@ -1,0 +1,5 @@
+# Vox Raider antagonist
+- type: antag
+  id: VoxRaider
+  name: vox-raider-antag-name
+  playTimeTracker: VoxRaider

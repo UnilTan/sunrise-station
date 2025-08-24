@@ -1,0 +1,93 @@
+# Base Vox Raider objectives
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseVoxRaiderObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-vox-raider
+  - type: RoleRequirement
+    roles:
+    - VoxRaiderRole
+
+# Survival objective - all Vox Raiders must escape to their shuttle
+- type: entity
+  parent: BaseVoxRaiderObjective
+  id: VoxRaiderSurvivalObjective
+  components:
+  - type: Objective
+    difficulty: 2.0
+    icon:
+      sprite: Objects/Specific/Shuttles/emergency.rsi
+      state: icon
+  - type: VoxRaiderSurvivalCondition
+
+# Base steal objective for Vox Raiders
+- type: entity
+  abstract: true
+  parent: [BaseVoxRaiderObjective, BaseStealObjective]
+  id: BaseVoxRaiderStealObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: false
+    descriptionText: objective-condition-vox-raider-steal-description
+    checkStealAreas: false # Raiders can steal from anywhere
+
+# Technology theft objectives
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealTechnologyDiskObjective
+  components:
+  - type: StealCondition
+    stealGroup: TechnologyDisk
+    minCollectionSize: 3
+    maxCollectionSize: 8
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 1.0
+
+# Nuclear bomb theft - high value target
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealNuclearBombObjective
+  components:
+  - type: StealCondition
+    stealGroup: NuclearBomb
+    minCollectionSize: 1
+    maxCollectionSize: 1
+  - type: Objective
+    difficulty: 3.0
+
+# Equipment theft - Medical Tech Fab
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealMedicalTechFabObjective
+  components:
+  - type: StealCondition
+    stealGroup: MedicalTechFabCircuitboard
+    minCollectionSize: 1
+    maxCollectionSize: 1
+  - type: Objective
+    difficulty: 2.0
+
+# Weapons theft
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealStunbatonObjective
+  components:
+  - type: StealCondition
+    stealGroup: Stunbaton
+    minCollectionSize: 2
+    maxCollectionSize: 5
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 1.5
+
+# Vox Raider objective groups
+- type: weightedRandom
+  id: VoxRaiderObjectiveGroups
+  weights:
+    VoxRaiderStealTechnologyDiskObjective: 2.0
+    VoxRaiderStealNuclearBombObjective: 0.5
+    VoxRaiderStealMedicalTechFabObjective: 1.0
+    VoxRaiderStealStunbatonObjective: 1.5

@@ -1,0 +1,44 @@
+# Vox Raider equipment
+- type: entity
+  parent: BasePDA
+  id: VoxRaiderPDA
+  name: Vox raider PDA
+  description: A modified PDA with untraceable communications.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/PDA/pda.rsi
+    layers:
+    - state: "pda-syndicate"
+  - type: PDA
+    id: VoxRaiderIDCard
+    state: pda-syndicate
+  - type: PDABorderColor
+    borderColor: "#FF4500"
+    accentVColor: "#FF6500"
+  - type: Icon
+    sprite: Objects/Specific/PDA/pda.rsi
+    state: "pda-syndicate"
+  - type: CartridgeLoader
+    preinstalled:
+      - CrewManifestCartridge
+      - NotesCartridge
+      - ChatCartridge
+
+# Vox Raider ID Card
+- type: entity
+  parent: IDCardStandard
+  id: VoxRaiderIDCard
+  name: Vox raider ID card
+  description: An agent identification card.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: departmenticon-syndicate
+  - type: IdCard
+    fullName: Vox Raider
+    jobTitle: Raider
+  - type: Access
+    tags:
+    - Syndicate
