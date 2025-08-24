@@ -508,7 +508,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // Sunrise added end
 
         var clients = Filter.Empty();
-        var receivers = new List<EntityUid>();
+        var receivers = new HashSet<EntityUid>();
         var mindQuery = EntityQueryEnumerator<CollectiveMindComponent, ActorComponent>();
         while (mindQuery.MoveNext(out var uid, out var collectMindComp, out var actorComp))
         {
@@ -527,9 +527,19 @@ public sealed partial class ChatSystem : SharedChatSystem
         string messageWrap;
         string adminMessageWrap;
 
-        messageWrap = Loc.GetString("collective-mind-chat-wrap-message",
-            ("message", message),
-            ("channel", collectiveMind.LocalizedName));
+        if (collectiveMind.ShowAuthor)
+        {
+            messageWrap = Loc.GetString("collective-mind-chat-wrap-message-with-author",
+                ("source", source),
+                ("message", message),
+                ("channel", collectiveMind.LocalizedName));
+        }
+        else
+        {
+            messageWrap = Loc.GetString("collective-mind-chat-wrap-message",
+                ("message", message),
+                ("channel", collectiveMind.LocalizedName));
+        }
 
         adminMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-admin",
             ("source", source),
@@ -557,7 +567,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             collectiveMind.Color);
 
         // Raise event for TTS
-        RaiseLocalEvent(new CollectiveMindSpokeEvent(source, message, receivers.ToArray()));
+        RaiseLocalEvent(new CollectiveMindSpokeEvent(source, message, receivers, collectiveMind.ID));
     }
     // Sunrise-End
 
@@ -1195,10 +1205,11 @@ public sealed class RadioSpokeEvent(EntityUid source, string message, EntityUid[
     public readonly EntityUid[] Receivers = receivers;
 }
 
-public sealed class CollectiveMindSpokeEvent(EntityUid source, string message, EntityUid[] receivers) : EntityEventArgs
+public sealed class CollectiveMindSpokeEvent(EntityUid source, string message, IReadOnlyCollection<EntityUid> receivers, string collectiveMindId) : EntityEventArgs
 {
     public readonly EntityUid Source = source;
     public readonly string Message = message;
-    public readonly EntityUid[] Receivers = receivers;
+    public readonly IReadOnlyCollection<EntityUid> Receivers = receivers;
+    public readonly string CollectiveMindId = collectiveMindId;
 }
 // Sunrise-TTS-End

@@ -1,6 +1,18 @@
 ﻿Entries:
 - author: VigersRay
   changes:
+  - message: "Добавлена поддержка TTS для коллективного разума"
+    type: Add
+  - message: "Каждый коллективный разум теперь имеет свой уникальный голос"
+    type: Add  
+  - message: "Добавлен параметр showAuthor для коллективного разума (по умолчанию false, true только для абдукторов)"
+    type: Add
+  - message: "Улучшена безопасность памяти в системе коллективного разума"
+    type: Tweak
+  id: 1377
+  time: '2025-01-08T12:00:00.0000000+00:00'
+- author: VigersRay
+  changes:
   - message: "\u0414\u043E\u0431\u0430\u0432\u0438\u043B \u0432\u0443\u043B\u044C\u043F\
       \u043A\u0430\u043D\u0438\u043D\u043E\u0432"
     type: Add

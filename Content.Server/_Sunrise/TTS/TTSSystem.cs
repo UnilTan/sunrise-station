@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
+using Content.Shared._Sunrise.CollectiveMind;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
 using Robust.Shared.Audio.Systems;
@@ -119,16 +120,13 @@ public sealed partial class TTSSystem : EntitySystem
         if (!_isEnabled || args.Message.Length > MaxMessageChars)
             return;
 
-        if (!TryComp(args.Source, out TTSComponent? senderComponent))
+        // Get the collective mind prototype to use its voice
+        if (!_prototypeManager.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
             return;
 
-        var voiceId = senderComponent.VoicePrototypeId;
+        var voiceId = collectiveMindProto.VoiceId;
         if (voiceId == null)
             return;
-
-        var voiceEv = new TransformSpeakerVoiceEvent(args.Source, voiceId);
-        RaiseLocalEvent(args.Source, voiceEv);
-        voiceId = voiceEv.VoiceId;
 
         if (!GetVoicePrototype(voiceId, out var protoVoice))
         {
@@ -263,7 +261,7 @@ public sealed partial class TTSSystem : EntitySystem
         RaiseNetworkEvent(new PlayTTSEvent(soundData, null, true), Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
     }
 
-    private async void HandleCollectiveMind(EntityUid[] uids, string message, TTSVoicePrototype voicePrototype)
+    private async void HandleCollectiveMind(IReadOnlyCollection<EntityUid> uids, string message, TTSVoicePrototype voicePrototype)
     {
         var soundData = await GenerateTTS(message, voicePrototype);
         if (soundData is null)
