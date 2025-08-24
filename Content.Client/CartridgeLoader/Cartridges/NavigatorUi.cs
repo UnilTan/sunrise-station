@@ -8,6 +8,12 @@ namespace Content.Client.CartridgeLoader.Cartridges;
 public sealed partial class NavigatorUi : UIFragment
 {
     private NavigatorUiFragment? _fragment;
+    private IEntityManager _entManager;
+
+    public NavigatorUi()
+    {
+        _entManager = IoCManager.Resolve<IEntityManager>();
+    }
 
     public override Control GetUIFragmentRoot()
     {
@@ -25,6 +31,7 @@ public sealed partial class NavigatorUi : UIFragment
         if (state is not NavigatorUiState navigatorState)
             return;
 
-        _fragment?.UpdateState(navigatorState.MapUid, navigatorState.StationName);
+        var mapUid = _entManager.GetEntity(navigatorState.MapUid);
+        _fragment?.UpdateState(mapUid, navigatorState.StationName);
     }
 }

@@ -5,10 +5,10 @@ namespace Content.Shared.CartridgeLoader.Cartridges;
 [Serializable, NetSerializable]
 public sealed class NavigatorUiState : BoundUserInterfaceState
 {
-    public EntityUid? MapUid;
+    public NetEntity? MapUid;
     public string StationName;
 
-    public NavigatorUiState(EntityUid? mapUid, string stationName)
+    public NavigatorUiState(NetEntity? mapUid, string stationName)
     {
         MapUid = mapUid;
         StationName = stationName;

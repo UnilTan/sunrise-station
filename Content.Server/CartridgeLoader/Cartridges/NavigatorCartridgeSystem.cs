@@ -46,7 +46,7 @@ public sealed class NavigatorCartridgeSystem : EntitySystem
 
         var owningStation = _stationSystem.GetOwningStation(loaderUid);
         var stationName = "Unknown Station";
-        EntityUid? mapUid = null;
+        NetEntity? mapUid = null;
 
         if (owningStation != null && TryComp<MetaDataComponent>(owningStation.Value, out var metaData))
         {
@@ -55,8 +55,8 @@ public sealed class NavigatorCartridgeSystem : EntitySystem
             // Try to get the station's primary grid for the map
             if (TryComp<StationDataComponent>(owningStation.Value, out var stationData) && stationData.Grids.Count > 0)
             {
-                // Get the first grid as the map reference
-                mapUid = stationData.Grids.First();
+                // Get the first grid as the map reference and convert to NetEntity
+                mapUid = GetNetEntity(stationData.Grids.First());
             }
         }
 
