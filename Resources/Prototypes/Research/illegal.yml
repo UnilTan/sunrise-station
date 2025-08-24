@@ -1,92 +1,91 @@
 # Illegal Technology Branch
 # These technologies are hidden by default and only appear when research console is emagged
+# Contains restricted security and utility equipment normally only available through emag
 
 # Tier 1
 
 - type: technology
-  id: IllegalSurgery
-  name: research-technology-illegal-surgery
+  id: IllegalWeaponry
+  name: research-technology-illegal-weaponry
   icon:
-    sprite: Objects/Specific/Medical/surgery.rsi
-    state: scalpel
+    sprite: Objects/Weapons/Guns/Battery/advanced_laser.rsi
+    state: icon
   discipline: Illegal
   tier: 1
   cost: 5000
   hidden: true
   recipeUnlocks:
-  - Scalpel
-  - Retractor
-  - Cautery
-  - Implanter
+  - WeaponAdvancedLaser
+  - WeaponDisablerSMG
+  - CombatKnife
 
 - type: technology
-  id: SyndicateBasics
-  name: research-technology-syndicate-basics
+  id: IllegalUtility
+  name: research-technology-illegal-utility
   icon:
-    sprite: Objects/Tools/crowbar.rsi
+    sprite: Objects/Weapons/Melee/telescopic_shield.rsi
     state: icon
   discipline: Illegal
   tier: 1
   cost: 6000
   hidden: true
   recipeUnlocks:
-  - Crowbar
-  - Wirecutter
-  - Screwdriver
-  - ClothingMaskGas
+  - TelescopicShield
+  - ExplosivePayload
+  - Flash
 
 # Tier 2
 
 - type: technology
-  id: IllegalDetention
-  name: research-technology-illegal-detention
+  id: IllegalAdvanced
+  name: research-technology-illegal-advanced
   icon:
-    sprite: Objects/Misc/handcuffs.rsi
-    state: cuff
+    sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
+    state: icon
   discipline: Illegal
   tier: 2
   cost: 8000
   hidden: true
   technologyPrerequisites:
-  - SyndicateBasics
+  - IllegalWeaponry
   recipeUnlocks:
-  - Handcuffs
-  - Zipties
-  - ClothingEyesBlindFold
+  - WeaponLaserCannon
+  - WeaponXrayCannon
+  - Truncheon
 
 - type: technology
-  id: IllegalChemistry
-  name: research-technology-illegal-chemistry
+  id: IllegalExplosives
+  name: research-technology-illegal-explosives
   icon:
-    sprite: Objects/Specific/Chemistry/beaker.rsi
-    state: beaker-1
+    sprite: Objects/Weapons/Grenades/explosive.rsi
+    state: icon
   discipline: Illegal
   tier: 2
   cost: 9000
   hidden: true
   technologyPrerequisites:
-  - IllegalSurgery
+  - IllegalUtility
   recipeUnlocks:
-  - ChemicalPayload
-  - Syringe
-  - Hypospray
+  - BoxShotgunIncendiary
+  - BoxShotgunUranium
+  - MagazineBoxPistolIncendiary
 
 # Tier 3
 
 - type: technology
-  id: IllegalSynthetics
-  name: research-technology-illegal-synthetics
+  id: IllegalSpecial
+  name: research-technology-illegal-special
   icon:
-    sprite: Objects/Specific/Medical/implant.rsi
-    state: implanter0
+    sprite: Objects/Weapons/Guns/Battery/temperature_gun.rsi
+    state: icon
   discipline: Illegal
   tier: 3
   cost: 12000
   hidden: true
   technologyPrerequisites:
-  - IllegalDetention
-  - IllegalChemistry
+  - IllegalAdvanced
+  - IllegalExplosives
   recipeUnlocks:
-  - ClothingHeadPyjamaSyndicateRed
-  - ClothingUniformJumpsuitPyjamaSyndicateRed
-  - ClothingMaskGasStation
+  - WeaponTemperatureGun
+  - MagazineBoxRifleUranium
+  - MagazineBoxMagnumUranium
