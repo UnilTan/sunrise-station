@@ -192,5 +192,5 @@
       programName: navigator-program-name
       icon:
         sprite: Structures/Wallmounts/signs.rsi
-        state: direction_space
+        state: space
     - type: NavigatorCartridge
