@@ -1,10 +1,7 @@
 using System.Linq;
-using Content.Server.Power.EntitySystems;
-using Content.Server.Power.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Components;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
-using Content.Shared.Power;
 using Content.Shared.Station.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -24,7 +21,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<AnnouncementSpeakerEvent>(OnAnnouncementSpeaker);
-        SubscribeLocalEvent<AnnouncementSpeakerComponent, SpeakerPlayAnnouncementEvent>(OnSpeakerPlayAnnouncement);
+        // Note: SpeakerPlayAnnouncementEvent is handled by TTSSystem for the component
     }
 
     /// <summary>
@@ -48,27 +45,6 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         foreach (var speaker in speakers)
         {
             RaiseLocalEvent(speaker, ref speakerEvent);
-        }
-    }
-
-    /// <summary>
-    /// Handles playing announcements on individual speakers.
-    /// </summary>
-    private void OnSpeakerPlayAnnouncement(EntityUid uid, AnnouncementSpeakerComponent component, ref SpeakerPlayAnnouncementEvent ev)
-    {
-        // Check if speaker is enabled
-        if (!component.Enabled)
-            return;
-
-        // Check if speaker has power (if required)
-        if (component.RequiresPower && TryComp<ApcPowerReceiverComponent>(uid, out var powerReceiver) && !powerReceiver.Powered)
-            return;
-
-        // Play the announcement sound with spatial audio
-        if (ev.AnnouncementSound != null)
-        {
-            var audioParams = AudioParams.Default.WithVolume(-2f * component.VolumeModifier).WithMaxDistance(component.Range);
-            _audioSystem.PlayPvs(ev.AnnouncementSound, uid, audioParams);
         }
     }
 

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
+using Content.Server.Power.Components;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Components;
@@ -158,6 +159,16 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async Task HandleSpeakerAnnouncementAsync(EntityUid speakerUid, AnnouncementSpeakerComponent component, SpeakerPlayAnnouncementEvent args)
     {
+        // Check if speaker is enabled
+        if (!component.Enabled)
+            return;
+
+        // Check if speaker has power (if required)
+        if (component.RequiresPower)
+        {
+            if (!TryComp<ApcPowerReceiverComponent>(speakerUid, out var powerReceiver) || !powerReceiver.Powered)
+                return;
+        }
         if (!_isEnabled)
         {
             // If TTS is disabled, just play the announcement sound if available
