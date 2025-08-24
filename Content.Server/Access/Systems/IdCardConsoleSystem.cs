@@ -42,6 +42,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         base.Initialize();
 
         SubscribeLocalEvent<IdCardConsoleComponent, WriteToTargetIdMessage>(OnWriteToTargetIdMessage);
+        SubscribeLocalEvent<IdCardConsoleComponent, GrantAllAccessMessage>(OnGrantAllAccessMessage);
+        SubscribeLocalEvent<IdCardConsoleComponent, RevokeAllAccessMessage>(OnRevokeAllAccessMessage);
 
         // one day, maybe bound user interfaces can be shared too.
         SubscribeLocalEvent<IdCardConsoleComponent, ComponentStartup>(UpdateUserInterface);
@@ -60,6 +62,52 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             return;
 
         TryWriteToTargetId(uid, args.FullName, args.JobTitle, args.AccessList, args.JobPrototype, player, component);
+
+        UpdateUserInterface(uid, component, args);
+    }
+
+    private void OnGrantAllAccessMessage(EntityUid uid, IdCardConsoleComponent component, GrantAllAccessMessage args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        if (!PrivilegedIdIsAuthorized(uid, component) || component.TargetIdSlot.Item is not { Valid: true } targetId)
+            return;
+
+        // Get current target ID data
+        var targetIdComponent = Comp<IdCardComponent>(targetId);
+        var privilegedId = component.PrivilegedIdSlot.Item!.Value;
+        var privilegedPerms = _accessReader.FindAccessTags(privilegedId).ToHashSet();
+        
+        // Grant all access levels that the privileged ID has access to
+        var allAccessList = component.AccessLevels.Where(access => privilegedPerms.Contains(access)).ToList();
+
+        TryWriteToTargetId(uid, targetIdComponent.FullName ?? string.Empty, 
+            targetIdComponent.LocalizedJobTitle ?? string.Empty, 
+            allAccessList, targetIdComponent.JobPrototype ?? new ProtoId<AccessLevelPrototype>(string.Empty), 
+            player, component);
+
+        UpdateUserInterface(uid, component, args);
+    }
+
+    private void OnRevokeAllAccessMessage(EntityUid uid, IdCardConsoleComponent component, RevokeAllAccessMessage args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        if (!PrivilegedIdIsAuthorized(uid, component) || component.TargetIdSlot.Item is not { Valid: true } targetId)
+            return;
+
+        // Get current target ID data
+        var targetIdComponent = Comp<IdCardComponent>(targetId);
+        
+        // Revoke all access (empty list)
+        var emptyAccessList = new List<ProtoId<AccessLevelPrototype>>();
+
+        TryWriteToTargetId(uid, targetIdComponent.FullName ?? string.Empty, 
+            targetIdComponent.LocalizedJobTitle ?? string.Empty, 
+            emptyAccessList, targetIdComponent.JobPrototype ?? new ProtoId<AccessLevelPrototype>(string.Empty), 
+            player, component);
 
         UpdateUserInterface(uid, component, args);
     }

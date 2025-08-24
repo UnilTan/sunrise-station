@@ -88,5 +88,15 @@ namespace Content.Client.Access.UI
                 newAccessList,
                 newJobPrototype));
         }
+
+        public void GrantAllAccess()
+        {
+            SendMessage(new GrantAllAccessMessage());
+        }
+
+        public void RevokeAllAccess()
+        {
+            SendMessage(new RevokeAllAccessMessage());
+        }
     }
 }

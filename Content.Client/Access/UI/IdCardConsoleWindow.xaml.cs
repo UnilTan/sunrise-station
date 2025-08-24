@@ -87,6 +87,9 @@ namespace Content.Client.Access.UI
             {
                 button.OnPressed += _ => SubmitData();
             }
+
+            GrantAllAccessButton.OnPressed += _ => GrantAllAccess();
+            RevokeAllAccessButton.OnPressed += _ => RevokeAllAccess();
         }
 
         private void ClearAllAccess()
@@ -180,6 +183,9 @@ namespace Content.Client.Access.UI
 
             JobPresetOptionButton.Disabled = !interfaceEnabled;
 
+            GrantAllAccessButton.Disabled = !interfaceEnabled;
+            RevokeAllAccessButton.Disabled = !interfaceEnabled;
+
             _accessButtons.UpdateState(state.TargetIdAccessList?.ToList() ??
                                        new List<ProtoId<AccessLevelPrototype>>(),
                                        state.AllowedModifyAccessList?.ToList() ??
@@ -213,6 +219,16 @@ namespace Content.Client.Access.UI
                 // Iterate over the buttons dictionary, filter by `Pressed`, only get key from the key/value pair
                 _accessButtons.ButtonsList.Where(x => x.Value.Pressed).Select(x => x.Key).ToList(),
                 jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : string.Empty);
+        }
+
+        private void GrantAllAccess()
+        {
+            _owner.GrantAllAccess();
+        }
+
+        private void RevokeAllAccess()
+        {
+            _owner.RevokeAllAccess();
         }
     }
 }

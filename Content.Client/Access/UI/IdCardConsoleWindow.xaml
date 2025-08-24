@@ -30,6 +30,11 @@
             <Label Text="{Loc 'id-card-console-window-job-selection-label'}" />
             <OptionButton Name="JobPresetOptionButton" />
         </GridContainer>
+        <Control MinSize="0 8" />
+        <GridContainer Columns="2">
+            <Button Name="GrantAllAccessButton" Text="{Loc 'id-card-console-window-grant-all-access'}" HorizontalExpand="True" />
+            <Button Name="RevokeAllAccessButton" Text="{Loc 'id-card-console-window-revoke-all-access'}" HorizontalExpand="True" />
+        </GridContainer>
         <Control Name="AccessLevelControlContainer" />
     </BoxContainer>
 </DefaultWindow>

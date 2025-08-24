@@ -36,6 +36,16 @@ public sealed partial class IdCardConsoleComponent : Component
         }
     }
 
+    [Serializable, NetSerializable]
+    public sealed class GrantAllAccessMessage : BoundUserInterfaceMessage
+    {
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class RevokeAllAccessMessage : BoundUserInterfaceMessage
+    {
+    }
+
     // Put this on shared so we just send the state once in PVS range rather than every time the UI updates.
 
     [DataField, AutoNetworkedField]
