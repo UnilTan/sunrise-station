@@ -12,7 +12,7 @@ public sealed class DrunkSystem : SharedDrunkSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
 
-    private float _fallCheckInterval = 3.0f; // Check every 3 seconds
+    private float _fallCheckInterval = 4.0f; // Check every 4 seconds
     private float _fallCheckTimer = 0.0f;
 
     public override void Initialize()
@@ -61,14 +61,14 @@ public sealed class DrunkSystem : SharedDrunkSystem
 
         var drunkenessScale = Math.Clamp(magic / MagicNumber, 0f, 1f);
 
-        // Only very drunk people fall (scale > 0.6)
-        if (drunkenessScale < 0.6f)
+        // Only heavily drunk people fall (scale > 0.7)
+        if (drunkenessScale < 0.7f)
             return;
 
         // Calculate fall chance based on drunkeness level
-        // At max drunkeness (scale = 1.0), 10% chance per check
-        // At medium drunkeness (scale = 0.6), 2% chance per check
-        var fallChance = (drunkenessScale - 0.6f) * 0.25f; // 0 to 0.1 (0% to 10%)
+        // At max drunkeness (scale = 1.0), 8% chance per check (4 second intervals)
+        // At threshold drunkeness (scale = 0.7), 1.6% chance per check
+        var fallChance = (drunkenessScale - 0.7f) * 0.27f; // 0 to 0.081 (0% to ~8%)
 
         if (_random.Prob(fallChance))
         {
