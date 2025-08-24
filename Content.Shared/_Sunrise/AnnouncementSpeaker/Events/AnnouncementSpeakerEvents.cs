@@ -23,6 +23,7 @@ public readonly record struct AnnouncementSpeakerEvent(
 public readonly record struct SpeakerPlayAnnouncementEvent(
     string Message,
     ResolvedSoundSpecifier? AnnouncementSound,
-    string? AnnounceVoice)
+    string? AnnounceVoice,
+    byte[]? PreGeneratedTts = null)
 {
 }

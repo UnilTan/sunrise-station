@@ -1,10 +1,18 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using Content.Server.Station.Systems;
+using Content.Server._Sunrise.TTS;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Components;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
+using Content.Shared._Sunrise.TTS;
 using Content.Shared.Station.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
+using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
+using Content.Shared._Sunrise.SunriseCCVars;
 
 namespace Content.Server._Sunrise.AnnouncementSpeaker;
 
@@ -16,10 +24,17 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
 {
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    
+    private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
+    private bool _isEnabled;
+    private string _defaultAnnounceVoice = "Hanson";
 
     public override void Initialize()
     {
         base.Initialize();
+        _cfg.OnValueChanged(SunriseCCVars.TTSEnabled, v => _isEnabled = v, true);
         SubscribeLocalEvent<AnnouncementSpeakerEvent>(OnAnnouncementSpeaker);
         // Note: SpeakerPlayAnnouncementEvent is handled by TTSSystem for the component
     }
@@ -28,6 +43,12 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     /// Handles station-wide announcements by finding all speakers on the station and playing the announcement through them.
     /// </summary>
     private void OnAnnouncementSpeaker(ref AnnouncementSpeakerEvent ev)
+    {
+        // Handle the announcement asynchronously without ref parameter
+        _ = HandleAnnouncementSpeakerAsync(ev);
+    }
+
+    private async Task HandleAnnouncementSpeakerAsync(AnnouncementSpeakerEvent ev)
     {
         // Find all speakers on the station
         var speakers = GetStationSpeakers(ev.Station);
@@ -40,8 +61,18 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
             return;
         }
 
-        // Send the announcement to each speaker
-        var speakerEvent = new SpeakerPlayAnnouncementEvent(ev.Message, ev.AnnouncementSound, ev.AnnounceVoice);
+        // Generate TTS once for all speakers to improve performance
+        byte[]? preGeneratedTts = null;
+        if (_isEnabled && ev.Message.Length <= MaxMessageChars * 2)
+        {
+            if (GetVoicePrototype(ev.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice) && protoVoice != null)
+            {
+                preGeneratedTts = await GenerateTtsForAnnouncement(ev.Message, protoVoice);
+            }
+        }
+
+        // Send the announcement to each speaker with the pre-generated TTS
+        var speakerEvent = new SpeakerPlayAnnouncementEvent(ev.Message, ev.AnnouncementSound, ev.AnnounceVoice, preGeneratedTts);
         foreach (var speaker in speakers)
         {
             RaiseLocalEvent(speaker, ref speakerEvent);
@@ -99,5 +130,48 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
             var ev = new AnnouncementSpeakerEvent(stationUid, message, resolvedSound, announceVoice);
             RaiseLocalEvent(ref ev);
         }
+    }
+
+    /// <summary>
+    /// Gets a voice prototype by ID, with fallback to default voice.
+    /// </summary>
+    private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
+    {
+        if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
+        {
+            return _prototypeManager.TryIndex("father_grigori", out voicePrototype);
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Generates TTS audio for an announcement with the megaphone effect.
+    /// </summary>
+    private async Task<byte[]?> GenerateTtsForAnnouncement(string text, TTSVoicePrototype voicePrototype)
+    {
+        try
+        {
+            var textSanitized = Sanitize(text);
+            if (textSanitized == "") return null;
+            if (char.IsLetter(textSanitized[^1]))
+                textSanitized += ".";
+
+            // Use TTS manager directly to generate with megaphone effect
+            var ttsManager = IoCManager.Resolve<TTSManager>();
+            return await ttsManager.ConvertTextToSpeechAnnounce(voicePrototype, textSanitized);
+        }
+        catch (Exception e)
+        {
+            Logger.Error($"TTS System error in announcement generation: {e.Message}");
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Sanitizes text for TTS generation.
+    /// </summary>
+    private string Sanitize(string text)
+    {
+        return text.Trim();
     }
 }

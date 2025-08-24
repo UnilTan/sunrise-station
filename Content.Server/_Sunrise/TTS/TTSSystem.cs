@@ -8,6 +8,7 @@ using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Components;
 using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -169,6 +170,7 @@ public sealed partial class TTSSystem : EntitySystem
             if (!TryComp<ApcPowerReceiverComponent>(speakerUid, out var powerReceiver) || !powerReceiver.Powered)
                 return;
         }
+        
         if (!_isEnabled)
         {
             // If TTS is disabled, just play the announcement sound if available
@@ -180,12 +182,19 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         }
 
-        if (args.Message.Length > MaxMessageChars * 2 ||
-            !GetVoicePrototype(args.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice))
-            return;
+        // Use pre-generated TTS if available, otherwise generate it (fallback)
+        byte[]? soundData = args.PreGeneratedTts;
+        
+        if (soundData == null || soundData.Length == 0)
+        {
+            // Fallback: generate TTS if not pre-generated
+            if (args.Message.Length <= MaxMessageChars * 2 &&
+                GetVoicePrototype(args.AnnounceVoice ?? _defaultAnnounceVoice, out var protoVoice))
+            {
+                soundData = await GenerateTTS(args.Message, protoVoice, isAnnounce: true);
+            }
+        }
 
-        // Generate TTS for the announcement
-        var soundData = await GenerateTTS(args.Message, protoVoice, isAnnounce: true);
         if (soundData == null || soundData.Length == 0)
         {
             // Fallback to announcement sound if TTS generation failed

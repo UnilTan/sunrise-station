@@ -145,7 +145,7 @@ public sealed class TTSManager
     public async Task<byte[]?> ConvertTextToSpeechAnnounce(TTSVoicePrototype voicePrototype, string text)
     {
         WantedAnnounceCount.Inc();
-        var soundData = await ConvertTextToSpeech(voicePrototype, text, "announce");
+        var soundData = await ConvertTextToSpeech(voicePrototype, text, "megaphone");
 
         return soundData;
     }
