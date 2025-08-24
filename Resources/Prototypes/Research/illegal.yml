@@ -15,8 +15,7 @@
   cost: 5000
   hidden: true
   recipeUnlocks:
-  - WeaponPistolViper
-  - ThrowingKnivesKit
+  - IllegalWeaponry
 
 - type: technology
   id: IllegalUtility
@@ -29,8 +28,7 @@
   cost: 6000
   hidden: true
   recipeUnlocks:
-  - ToolboxSyndicateFilled
-  - ElectricalDisruptionKit
+  - IllegalUtility
 
 # Tier 2
 
@@ -47,8 +45,7 @@
   technologyPrerequisites:
   - IllegalWeaponry
   recipeUnlocks:
-  - EnergyDaggerBox
-  - ChemicalSynthesisKit
+  - IllegalAdvanced
 
 - type: technology
   id: IllegalMedical
@@ -63,8 +60,7 @@
   technologyPrerequisites:
   - IllegalUtility
   recipeUnlocks:
-  - StimkitFilled
-  - MedkitCombatFilled
+  - IllegalMedical
 
 # Tier 3 - More advanced contraband items from uplink
 # Note: These would need additional recipes created for higher-tier syndicate items

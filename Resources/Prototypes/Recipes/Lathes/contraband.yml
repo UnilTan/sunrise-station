@@ -89,3 +89,28 @@
     Plastic: 800
     Glass: 600
     Cloth: 400
+
+# Contraband recipe packs for illegal technologies
+- type: latheRecipePack
+  id: IllegalWeaponry
+  recipes:
+  - WeaponPistolViper
+  - ThrowingKnivesKit
+
+- type: latheRecipePack
+  id: IllegalUtility
+  recipes:
+  - ToolboxSyndicateFilled
+  - ElectricalDisruptionKit
+
+- type: latheRecipePack
+  id: IllegalAdvanced
+  recipes:
+  - EnergyDaggerBox
+  - ChemicalSynthesisKit
+
+- type: latheRecipePack
+  id: IllegalMedical
+  recipes:
+  - StimkitFilled
+  - MedkitCombatFilled

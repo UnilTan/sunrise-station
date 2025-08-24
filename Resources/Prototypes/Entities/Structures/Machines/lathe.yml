@@ -225,6 +225,11 @@
     - CargoSuit
     - SurgeryDynamicSunrise
     - NightVisionDevice
+    # Contraband (unlocked via illegal research)
+    - IllegalWeaponry
+    - IllegalUtility
+    - IllegalAdvanced
+    - IllegalMedical
     # Sunrise-End
   - type: EmagLatheRecipes
     emagDynamicPacks:
