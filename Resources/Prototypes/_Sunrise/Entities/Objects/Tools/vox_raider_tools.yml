@@ -1,0 +1,85 @@
+# Vox Raider Tools and Equipment
+
+# Vox Raider Cloaking Device
+- type: entity
+  parent: BaseItem
+  id: VoxRaiderCloakingDevice
+  name: cloaking projector
+  description: A compact device that provides temporary invisibility.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/remote.rsi
+    state: remote
+  - type: Item
+    sprite: Objects/Devices/remote.rsi
+    size: Small
+  - type: UseDelay
+    delay: 5.0
+  # TODO: Add invisibility effect when implementing advanced features
+  - type: Steal
+    stealGroup: VoxEquipment
+
+# Vox Raider Bluespace Satchel
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackVoxRaiderBluespace
+  name: vox raider bluespace satchel
+  description: A high-tech satchel with expanded storage capacity using bluespace technology.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/satchel.rsi
+    state: satchel
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,7,4
+    whitelist:
+      tags:
+      - Document
+      - Folder
+      - Paper
+      - Book
+      - Pen
+      - Stamp
+      - RawMaterial
+      - Sheet
+      - Ingot
+      - Ore
+      - Shard
+      - Part
+  - type: Steal
+    stealGroup: VoxEquipment
+
+# Vox Raider Helmet
+- type: entity
+  parent: ClothingHeadHelmetBasic
+  id: ClothingHeadHelmetVoxRaider
+  name: vox raider helmet
+  description: A protective helmet designed specifically for Vox anatomy.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/basic.rsi # Placeholder sprite
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/basic.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.6
+        Heat: 0.8
+  - type: Steal
+    stealGroup: VoxEquipment
+
+# Vox Raider EVA Helmet
+- type: entity
+  parent: ClothingHeadHelmetVoxRaider
+  id: ClothingHeadHelmetVoxRaiderEva
+  name: vox raider EVA helmet
+  description: A specialized helmet that provides life support for Vox physiology.
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: BreathMask
+  - type: IngestionBlocker

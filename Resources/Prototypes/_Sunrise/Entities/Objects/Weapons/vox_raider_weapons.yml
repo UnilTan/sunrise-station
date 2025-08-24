@@ -1,0 +1,94 @@
+# Vox Raider Weapons
+
+# Vox Spike Thrower
+- type: entity
+  parent: BaseWeaponRanged
+  id: WeaponVoxSpikeThrower
+  name: vox spike thrower
+  description: A unique Vox weapon that fires sharp spikes causing bleeding and puncture wounds.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/crossbow.rsi # Placeholder sprite
+    state: crossbow
+  - type: Item
+    sprite: Objects/Weapons/Guns/Projectiles/crossbow.rsi
+    heldPrefix: crossbow
+  - type: Gun
+    projectileSpeed: 15
+    fireRate: 2
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/crossbow.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+    autoEject: true
+    ammo: CartridgeVoxSpike
+    capacity: 1
+  - type: UseDelay
+    delay: 1.0
+  - type: Steal
+    stealGroup: VoxWeapon
+
+# Vox Dart Launcher (placeholder - would need dart projectiles)
+- type: entity
+  parent: BaseWeaponRanged
+  id: WeaponVoxDartLauncher
+  name: vox dart launcher
+  description: Fires darts with various chemical payloads. Can heal or poison depending on the dart type.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/crossbow.rsi # Placeholder sprite
+    state: crossbow
+  - type: Item
+    sprite: Objects/Weapons/Guns/Projectiles/crossbow.rsi
+    heldPrefix: crossbow
+  - type: Gun
+    projectileSpeed: 12
+    fireRate: 1.5
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/crossbow.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+    autoEject: true
+    ammo: CartridgeDart # Using existing dart ammo for now
+    capacity: 1
+  - type: UseDelay
+    delay: 1.5
+  - type: Steal
+    stealGroup: VoxWeapon
+
+# Vox Spike ammunition
+- type: entity
+  parent: BaseCartridge
+  id: CartridgeVoxSpike
+  name: vox spike
+  description: A sharp crystalline spike that causes bleeding.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/crossbow_bolt.rsi
+    state: spent-projectile
+  - type: Cartridge
+    projectile: BulletVoxSpike
+
+# Vox Spike projectile
+- type: entity
+  parent: BaseBullet
+  id: BulletVoxSpike
+  name: vox spike
+  description: A sharp spike that punctures and causes bleeding.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/crossbow_bolt.rsi
+    state: projectile
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 25
+        Bloodloss: 15
+  - type: StaminaDamageOnHit
+    damage: 25

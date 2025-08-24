@@ -3,11 +3,14 @@
   id: VoxRaiderGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorGrey
-    back: ClothingBackpackDuffel
+    back: ClothingBackpackVoxRaiderBluespace
     shoes: ClothingShoesBootsCombat
-    outerClothing: ClothingOuterCoatDetective
+    outerClothing: ClothingOuterHardsuitVoxRaider
+    head: ClothingHeadHelmetVoxRaiderEva
     id: VoxRaiderPDA
     gloves: ClothingHandsGlovesNitrile
+    pocket1: VoxRaiderCloakingDevice
+    belt: WeaponVoxSpikeThrower
   innerClothingSkirt: ClothingUniformJumpsuitColorGrey
-  satchel: ClothingBackpackSatchelDuffel
-  duffelbag: ClothingBackpackDuffel
+  satchel: ClothingBackpackVoxRaiderBluespace
+  duffelbag: ClothingBackpackVoxRaiderBluespace
