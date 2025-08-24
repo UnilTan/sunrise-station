@@ -2,6 +2,7 @@
 using Content.Shared.Standing;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
+using Robust.Shared.Log;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -42,6 +43,7 @@ public sealed class DrunkSystem : SharedDrunkSystem
             // Random chance to fall
             if (_random.Prob(_fallChance))
             {
+                Log.Debug($"Drunk entity {ToPrettyString(uid)} is falling down due to drunkenness");
                 _standing.Down(uid, playSound: true, dropHeldItems: true);
             }
         }
