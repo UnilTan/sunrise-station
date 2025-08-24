@@ -55,6 +55,104 @@
   - type: ApcPowerReceiver
     powerLoad: 1000
 
+# Sunrise: Salvage Quota Console
+- type: entity
+  parent: BaseComputer
+  id: SalvageQuotaConsole
+  name: salvage quota console
+  description: Консоль управления квотами утилизации. Управляет типами миссий и активацией шаттла утилизаторов.
+  components:
+  - type: Computer
+    board: SalvageQuotaConsoleCircuitboard
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: supply
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true, shader: shaded }
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: false }
+          False: { visible: true }
+  - type: SalvageQuotaConsole
+  - type: ActivatableUI
+    key: enum.SalvageQuotaConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SalvageQuotaConsoleUiKey.Key:
+        type: SalvageQuotaConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - Supply
+
+# Sunrise: Enhanced Salvage Shuttle Control Console
+- type: entity
+  parent: BaseComputer
+  id: EnhancedSalvageShuttleControl
+  name: enhanced salvage shuttle control console
+  description: Расширенная консоль управления шаттлом утилизаторов с таймером и системой аварийной активации.
+  components:
+  - type: Computer
+    board: EnhancedSalvageShuttleControlCircuitboard
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: shuttle
+    - map: ["computerLayerKeys"]
+      state: shuttle_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true, shader: shaded }
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: false }
+          False: { visible: true }
+  - type: EnhancedSalvageShuttleControl
+  - type: ActivatableUI
+    key: enum.EnhancedSalvageShuttleControlUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.EnhancedSalvageShuttleControlUiKey.Key:
+        type: EnhancedSalvageShuttleControlBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - Supply
+  - type: AccessReader
+    access: [["Salvage"], ["Captain"]]
+
 - type: weightedRandomEntity
   id: RandomAsteroidPool
   weights:

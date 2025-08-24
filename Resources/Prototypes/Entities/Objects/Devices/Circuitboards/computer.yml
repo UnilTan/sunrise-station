@@ -565,3 +565,27 @@
       state: cpu_science
     - type: ComputerBoard
       prototype: StationAiUploadComputer
+
+# Sunrise: Salvage Quota Console Circuit Board
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: SalvageQuotaConsoleCircuitboard
+  name: salvage quota console board
+  description: A computer printed circuit board for a salvage quota console.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: SalvageQuotaConsole
+
+# Sunrise: Enhanced Salvage Shuttle Control Circuit Board
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: EnhancedSalvageShuttleControlCircuitboard
+  name: enhanced salvage shuttle control board
+  description: A computer printed circuit board for an enhanced salvage shuttle control console.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: EnhancedSalvageShuttleControl
