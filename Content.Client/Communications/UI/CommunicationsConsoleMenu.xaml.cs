@@ -21,6 +21,8 @@ namespace Content.Client.Communications.UI
         public bool CanCall;
         public bool AlertLevelSelectable;
         public bool CountdownStarted;
+        public bool IntercomEnabled;
+        public float IntercomTimeRemaining;
         public string CurrentLevel = string.Empty;
         public TimeSpan? CountdownEnd;
 
@@ -28,6 +30,7 @@ namespace Content.Client.Communications.UI
         public event Action<string>? OnAlertLevel;
         public event Action<string>? OnAnnounce;
         public event Action<string>? OnBroadcast;
+        public event Action? OnIntercomToggle;
 
         public CommunicationsConsoleMenu()
         {
@@ -58,6 +61,8 @@ namespace Content.Client.Communications.UI
             BroadcastButton.OnPressed += _ => OnBroadcast?.Invoke(Rope.Collapse(MessageInput.TextRope));
             BroadcastButton.Disabled = !CanBroadcast;
 
+            IntercomButton.OnPressed += _ => OnIntercomToggle?.Invoke();
+
             AlertLevelButton.OnItemSelected += args =>
             {
                 var metadata = AlertLevelButton.GetItemMetadata(args.Id);
@@ -78,6 +83,7 @@ namespace Content.Client.Communications.UI
         {
             base.FrameUpdate(args);
             UpdateCountdown();
+            UpdateIntercomButton();
         }
 
         // The current alert could make levels unselectable, so we need to ensure that the UI reacts properly.
@@ -132,6 +138,18 @@ namespace Content.Client.Communications.UI
             var infoText = Loc.GetString($"comms-console-menu-time-remaining",
                 ("time", diff.ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)));
             CountdownLabel.SetMessage(infoText);
+        }
+
+        public void UpdateIntercomButton()
+        {
+            if (IntercomEnabled)
+            {
+                IntercomButton.Text = Loc.GetString("comms-console-menu-intercom-button-activated", ("time", (int)IntercomTimeRemaining));
+            }
+            else
+            {
+                IntercomButton.Text = Loc.GetString("comms-console-menu-intercom-button");
+            }
         }
     }
 }

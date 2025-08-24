@@ -18,8 +18,10 @@ namespace Content.Shared.Communications
         public List<string>? AlertLevels;
         public string CurrentAlert;
         public float CurrentAlertDelay;
+        public readonly bool IntercomEnabled;
+        public readonly float IntercomTimeRemaining;
 
-        public CommunicationsConsoleInterfaceState(bool canAnnounce, bool canCall, List<string>? alertLevels, string currentAlert, float currentAlertDelay, TimeSpan? expectedCountdownEnd = null)
+        public CommunicationsConsoleInterfaceState(bool canAnnounce, bool canCall, List<string>? alertLevels, string currentAlert, float currentAlertDelay, TimeSpan? expectedCountdownEnd = null, bool intercomEnabled = false, float intercomTimeRemaining = 0f)
         {
             CanAnnounce = canAnnounce;
             CanCall = canCall;
@@ -28,6 +30,8 @@ namespace Content.Shared.Communications
             AlertLevels = alertLevels;
             CurrentAlert = currentAlert;
             CurrentAlertDelay = currentAlertDelay;
+            IntercomEnabled = intercomEnabled;
+            IntercomTimeRemaining = intercomTimeRemaining;
         }
     }
 
@@ -70,6 +74,11 @@ namespace Content.Shared.Communications
 
     [Serializable, NetSerializable]
     public sealed class CommunicationsConsoleRecallEmergencyShuttleMessage : BoundUserInterfaceMessage
+    {
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CommunicationsConsoleToggleIntercomMessage : BoundUserInterfaceMessage
     {
     }
 

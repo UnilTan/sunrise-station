@@ -80,6 +80,40 @@ namespace Content.Server.Communications
         // Sunrise-Start
         [DataField("announceVoice", customTypeSerializer:typeof(PrototypeIdSerializer<TTSVoicePrototype>))]
         public string AnnounceVoice = "Hanson";
-        // Sunrise-Start
+        // Sunrise-End
+
+        /// <summary>
+        /// Whether the intercom functionality is currently enabled
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public bool IntercomEnabled = false;
+
+        /// <summary>
+        /// Remaining time for intercom functionality in seconds
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public float IntercomTimeRemaining = 0f;
+
+        /// <summary>
+        /// Duration of intercom functionality in seconds (1-2 minutes)
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public float IntercomDuration = 90f; // 1.5 minutes
+
+        /// <summary>
+        /// Sound played when intercom is activated
+        /// </summary>
+        [DataField]
+        public SoundSpecifier IntercomActivationSound = new SoundPathSpecifier("/Audio/Machines/beep.ogg");
+
+        /// <summary>
+        /// Channel for intercom broadcasts (uses station communication channel)
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public string IntercomChannel = "Common";
     }
 }

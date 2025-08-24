@@ -10,10 +10,15 @@ comms-console-menu-call-shuttle = Вызвать
 comms-console-menu-recall-shuttle = Отозвать
 comms-console-menu-emergency-shuttle-button-tooltip = Вызов или отмена эвакуационного шаттла. Отменить можно только, если осталось достаточно времени.
 comms-console-menu-time-remaining = Оставшееся время: { $time }
+comms-console-menu-intercom-button = Интерком
+comms-console-menu-intercom-button-activated = Выключить интерком ({ $time }с)
+comms-console-menu-intercom-button-tooltip = Активирует интерком на 90 секунд. Автоматически передает все, что вы говорите.
 # Popup
 comms-console-permission-denied = В доступе отказано
 comms-console-shuttle-unavailable = В настоящее время шаттл недоступен
 comms-console-message-too-long = Сообщение слишком длинное
+comms-console-intercom-activated = Интерком активирован на { $duration } секунд
+comms-console-intercom-deactivated = Интерком деактивирован
 # Placeholder values
 comms-console-announcement-sent-by = Отправитель
 comms-console-announcement-unknown-sender = Неизвестный

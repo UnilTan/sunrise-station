@@ -27,6 +27,7 @@ namespace Content.Client.Communications.UI
             _menu.OnBroadcast += BroadcastButtonPressed;
             _menu.OnAlertLevel += AlertLevelSelected;
             _menu.OnEmergencyLevel += EmergencyShuttleButtonPressed;
+            _menu.OnIntercomToggle += IntercomTogglePressed;
         }
 
         public void AlertLevelSelected(string level)
@@ -68,6 +69,11 @@ namespace Content.Client.Communications.UI
             SendMessage(new CommunicationsConsoleRecallEmergencyShuttleMessage());
         }
 
+        public void IntercomTogglePressed()
+        {
+            SendMessage(new CommunicationsConsoleToggleIntercomMessage());
+        }
+
         protected override void UpdateState(BoundUserInterfaceState state)
         {
             base.UpdateState(state);
@@ -84,8 +90,11 @@ namespace Content.Client.Communications.UI
                 _menu.AlertLevelSelectable = commsState.AlertLevels != null && !float.IsNaN(commsState.CurrentAlertDelay) && commsState.CurrentAlertDelay <= 0;
                 _menu.CurrentLevel = commsState.CurrentAlert;
                 _menu.CountdownEnd = commsState.ExpectedCountdownEnd;
+                _menu.IntercomEnabled = commsState.IntercomEnabled;
+                _menu.IntercomTimeRemaining = commsState.IntercomTimeRemaining;
 
                 _menu.UpdateCountdown();
+                _menu.UpdateIntercomButton();
                 _menu.UpdateAlertLevels(commsState.AlertLevels, _menu.CurrentLevel);
                 _menu.AlertLevelButton.Disabled = !_menu.AlertLevelSelectable;
                 _menu.EmergencyShuttleButton.Disabled = !_menu.CanCall;

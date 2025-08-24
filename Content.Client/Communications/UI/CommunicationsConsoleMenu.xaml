@@ -39,6 +39,12 @@
                     ToolTip="{Loc 'comms-console-menu-broadcast-button-tooltip'}"
                     StyleClasses="OpenBoth"/>
 
+                <Button Name="IntercomButton"
+                    Access="Public"
+                    Text="{Loc 'comms-console-menu-intercom-button'}"
+                    ToolTip="{Loc 'comms-console-menu-intercom-button-tooltip'}"
+                    StyleClasses="OpenBoth"/>
+
                 <OptionButton Name="AlertLevelButton"
                     Access="Public"
                     ToolTip="{Loc 'comms-console-menu-alert-level-button-tooltip'}"

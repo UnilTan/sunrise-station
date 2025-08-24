@@ -10,11 +10,16 @@ comms-console-menu-call-shuttle = Call emergency shuttle
 comms-console-menu-recall-shuttle = Recall emergency shuttle
 comms-console-menu-emergency-shuttle-button-tooltip = Calls or recalls the emergency shuttle. You can only recall when there's enough time left.
 comms-console-menu-time-remaining = Time remaining: {$time}
+comms-console-menu-intercom-button = Intercom
+comms-console-menu-intercom-button-activated = Deactivate Intercom ({$time}s)
+comms-console-menu-intercom-button-tooltip = Activates intercom for 90 seconds. Automatically transmits everything you say.
 
 # Popup
 comms-console-permission-denied = Permission denied
 comms-console-shuttle-unavailable = Shuttle is currently unavailable
 comms-console-message-too-long = Message is too long
+comms-console-intercom-activated = Intercom activated for {$duration} seconds
+comms-console-intercom-deactivated = Intercom deactivated
 
 # Placeholder values
 comms-console-announcement-sent-by = Sent by

@@ -3,6 +3,8 @@ using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Popups;
+using Content.Server.Radio.Components;
+using Content.Server.Radio.EntitySystems;
 using Content.Server.RoundEnd;
 using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Systems;
@@ -10,6 +12,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.TTS; // Sunrise-edit
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Communications;
@@ -18,8 +21,11 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
+using Content.Shared.Speech.Components;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 
 namespace Content.Server.Communications
 {
@@ -27,10 +33,12 @@ namespace Content.Server.Communications
     {
         [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
         [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
+        [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
         [Dependency] private readonly ChatSystem _chatSystem = default!;
         [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
         [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private readonly RadioDeviceSystem _radioDeviceSystem = default!;
         [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!;
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
@@ -52,6 +60,7 @@ namespace Content.Server.Communications
             SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleBroadcastMessage>(OnBroadcastMessage);
             SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleCallEmergencyShuttleMessage>(OnCallShuttleMessage);
             SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleRecallEmergencyShuttleMessage>(OnRecallShuttleMessage);
+            SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleToggleIntercomMessage>(OnToggleIntercomMessage);
 
             // On console init, set cooldown
             SubscribeLocalEvent<CommunicationsConsoleComponent, MapInitEvent>(OnCommunicationsConsoleMapInit);
@@ -66,6 +75,17 @@ namespace Content.Server.Communications
                 if (comp.AnnouncementCooldownRemaining >= 0f)
                 {
                     comp.AnnouncementCooldownRemaining -= frameTime;
+                }
+
+                // Handle intercom timer countdown
+                if (comp.IntercomEnabled && comp.IntercomTimeRemaining > 0f)
+                {
+                    comp.IntercomTimeRemaining -= frameTime;
+                    if (comp.IntercomTimeRemaining <= 0f)
+                    {
+                        // Automatically deactivate intercom when time runs out
+                        DeactivateIntercom(uid, comp);
+                    }
                 }
 
                 comp.UIUpdateAccumulator += frameTime;
@@ -165,7 +185,9 @@ namespace Content.Server.Communications
                 levels,
                 currentLevel,
                 currentDelay,
-                _roundEndSystem.ExpectedCountdownEnd
+                _roundEndSystem.ExpectedCountdownEnd,
+                comp.IntercomEnabled,
+                comp.IntercomTimeRemaining
             ));
         }
 
@@ -337,6 +359,75 @@ namespace Content.Server.Communications
 
             _roundEndSystem.CancelRoundEndCountdown(uid);
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
+        }
+
+        private void OnToggleIntercomMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleToggleIntercomMessage message)
+        {
+            if (!CanUse(message.Actor, uid))
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
+                return;
+            }
+
+            if (comp.IntercomEnabled)
+            {
+                DeactivateIntercom(uid, comp);
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-intercom-deactivated"), uid, message.Actor);
+            }
+            else
+            {
+                ActivateIntercom(uid, comp);
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-intercom-activated", ("duration", (int)comp.IntercomDuration)), uid, message.Actor);
+            }
+
+            UpdateCommsConsoleInterface(uid, comp);
+            _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(message.Actor):player} has {(comp.IntercomEnabled ? "activated" : "deactivated")} the intercom on communications console {ToPrettyString(uid)}.");
+        }
+
+        private void ActivateIntercom(EntityUid uid, CommunicationsConsoleComponent comp)
+        {
+            comp.IntercomEnabled = true;
+            comp.IntercomTimeRemaining = comp.IntercomDuration;
+
+            // Play activation beep sound
+            _audioSystem.PlayPvs(comp.IntercomActivationSound, uid);
+
+            // Add radio microphone component with proper initialization
+            var microphoneComp = new RadioMicrophoneComponent
+            {
+                BroadcastChannel = comp.IntercomChannel,
+                ListenRange = 4,
+                Enabled = false, // Will be enabled by RadioDeviceSystem
+                PowerRequired = false,
+                ToggleOnInteract = false
+            };
+            AddComp(uid, microphoneComp);
+
+            // Enable the microphone using the radio device system
+            _radioDeviceSystem.SetMicrophoneEnabled(uid, null, true, true, microphoneComp);
+
+            // Add listener component
+            var listenerComp = new ActiveListenerComponent
+            {
+                Range = 4f
+            };
+            AddComp(uid, listenerComp);
+        }
+
+        private void DeactivateIntercom(EntityUid uid, CommunicationsConsoleComponent comp)
+        {
+            comp.IntercomEnabled = false;
+            comp.IntercomTimeRemaining = 0f;
+
+            // Disable the microphone using the radio device system before removing
+            if (TryComp<RadioMicrophoneComponent>(uid, out var microphoneComp))
+            {
+                _radioDeviceSystem.SetMicrophoneEnabled(uid, null, false, true, microphoneComp);
+            }
+
+            // Remove radio microphone and listener components
+            RemCompDeferred<RadioMicrophoneComponent>(uid);
+            RemCompDeferred<ActiveListenerComponent>(uid);
         }
     }
 
