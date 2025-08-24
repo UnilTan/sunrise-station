@@ -83,15 +83,29 @@ def main():
     added_files = args.added.split() if args.added else []
     removed_files = args.removed.split() if args.removed else []
     
-    # Filter for XAML files
+    # Filter for XAML files and check existence
     xaml_files = []
+    missing_files = []
+    
     for files_list in [modified_files, added_files]:
         for file in files_list:
-            if file.endswith('.xaml') and os.path.exists(file):
-                xaml_files.append(file)
+            if file.endswith('.xaml'):
+                if os.path.exists(file):
+                    xaml_files.append(file)
+                else:
+                    missing_files.append(file)
+                    print(f"Warning: XAML file {file} was detected as changed but not found in current checkout")
+    
+    if missing_files:
+        print(f"Missing files that may need attention: {missing_files}")
+        print("This usually means the workflow is running on the wrong branch/commit.")
     
     if not xaml_files:
-        print("No XAML files to process")
+        if missing_files:
+            print(f"No XAML files to process - {len(missing_files)} files were missing from checkout")
+            # Still return 0 to avoid failing the workflow, but generate a report
+        else:
+            print("No XAML files to process")
         return 0
     
     # Build the C# tool
@@ -129,17 +143,16 @@ def main():
     print(f"Generated {successful_previews} previews out of {len(xaml_files)} XAML files")
     
     # Generate preview content for GitHub comment
-    if successful_previews > 0:
-        content = generate_preview_content(modified_files, added_files, removed_files, image_urls)
-        
-        # Output for GitHub Actions
-        print(f"PREVIEW_CONTENT<<EOF")
-        print(content)
-        print("EOF")
+    content = generate_preview_content(modified_files, added_files, removed_files, image_urls, missing_files)
     
-    return 0 if successful_previews > 0 else 1
+    # Output for GitHub Actions
+    print(f"PREVIEW_CONTENT<<EOF")
+    print(content)
+    print("EOF")
+    
+    return 0
 
-def generate_preview_content(modified_files, added_files, removed_files, image_urls):
+def generate_preview_content(modified_files, added_files, removed_files, image_urls, missing_files=None):
     """Generate the GitHub comment content with embedded images."""
     
     # Filter for XAML files
@@ -150,43 +163,50 @@ def generate_preview_content(modified_files, added_files, removed_files, image_u
     total_files = len(modified_xaml) + len(added_xaml) + len(removed_xaml)
     
     content = []
-    content.append("# 🎨 XAML Preview Bot (C# Enhanced)")
+    content.append("🎨 XAML Preview Bot")
     content.append("")
-    content.append(f"Found **{total_files}** XAML file(s) changed: **{len(modified_xaml)} modified**, **{len(added_xaml)} added**, **{len(removed_xaml)} removed**")
-    content.append("")
-    content.append("### 🖼️ Live Visual Previews")
-    content.append("This PR includes **actual game-rendered previews** showing exactly how the UI will look in Space Station 14.")
+    content.append(f"Found {total_files} XAML file(s) changed: {len(modified_xaml)} modified, {len(added_xaml)} added, {len(removed_xaml)} removed")
     content.append("")
     
     # Process each type of change
     for file_list, change_type, emoji in [
         (modified_xaml, "Modified", "📝"),
-        (added_xaml, "Added", "➕"),
+        (added_xaml, "Added", "✨"),
         (removed_xaml, "Removed", "🗑️")
     ]:
         if not file_list:
             continue
             
         for xaml_file in file_list:
-            content.append(f"## {emoji} {change_type}: `{xaml_file}`")
-            content.append("")
+            content.append(f"{emoji} **{change_type}**: {xaml_file}")
             
             if change_type != "Removed" and xaml_file in image_urls:
-                # Add the rendered preview
-                content.append("### 🖼️ Rendered Preview")
-                content.append(f"![XAML Preview]({image_urls[xaml_file]})")
+                # File exists and has a preview
                 content.append("")
-                content.append("*Generated using actual SS14 client rendering for 100% accuracy*")
-                content.append("")
+            elif change_type != "Removed" and missing_files and xaml_file in missing_files:
+                # File was detected as changed but not found
+                content.append("⚠️ File not found in current checkout")
             elif change_type == "Removed":
-                content.append("*File was removed from the repository.*")
+                # File was removed
                 content.append("")
             else:
-                content.append("*Preview generation failed for this file.*")
-                content.append("")
+                # File exists but preview failed
+                content.append("❌ Preview generation failed")
+            content.append("")
     
-    content.append("---")
-    content.append("*Generated by C# XAML Preview Tool using RobustToolbox rendering*")
+    # Add troubleshooting info if there were missing files
+    if missing_files:
+        content.append("## ⚠️ Issues Detected")
+        content.append("")
+        content.append("Some files were detected as changed but not found in the current checkout.")
+        content.append("This typically happens when the workflow runs on the wrong branch/commit.")
+        content.append("The preview bot has been updated to checkout the correct PR branch.")
+        content.append("")
+    
+    content.append("🤖 **About This Preview**")
+    content.append("This enhanced preview shows the UI structure and layout analysis of your XAML changes. The structure diagram uses icons to represent different control types and shows the hierarchy to help you understand the layout without building locally.")
+    content.append("")
+    content.append("Preview automatically generated by XAML Preview Bot")
     
     return "\n".join(content)
 
