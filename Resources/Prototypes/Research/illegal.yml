@@ -1,6 +1,6 @@
 # Illegal Technology Branch
 # These technologies are hidden by default and only appear when research console is emagged
-# Contains restricted security and utility equipment normally only available through emag
+# Contains contraband devices and equipment normally restricted from civilian fabrication
 
 # Tier 1
 
@@ -8,31 +8,31 @@
   id: IllegalWeaponry
   name: research-technology-illegal-weaponry
   icon:
-    sprite: Objects/Weapons/Guns/Battery/advanced_laser.rsi
+    sprite: Objects/Weapons/Melee/combat_knife.rsi
     state: icon
   discipline: Illegal
   tier: 1
   cost: 5000
   hidden: true
   recipeUnlocks:
-  - WeaponAdvancedLaser
-  - WeaponDisablerSMG
   - CombatKnife
+  - Handcuffs
+  - Zipties
 
 - type: technology
   id: IllegalUtility
   name: research-technology-illegal-utility
   icon:
-    sprite: Objects/Weapons/Melee/telescopic_shield.rsi
-    state: icon
+    sprite: Objects/Devices/payload.rsi
+    state: timer-trigger
   discipline: Illegal
   tier: 1
   cost: 6000
   hidden: true
   recipeUnlocks:
-  - TelescopicShield
-  - ExplosivePayload
-  - Flash
+  - TimerTrigger
+  - SignalTrigger
+  - VoiceTrigger
 
 # Tier 2
 
@@ -40,8 +40,8 @@
   id: IllegalAdvanced
   name: research-technology-illegal-advanced
   icon:
-    sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
-    state: icon
+    sprite: Objects/Devices/payload.rsi
+    state: payload-flash-armed
   discipline: Illegal
   tier: 2
   cost: 8000
@@ -49,16 +49,16 @@
   technologyPrerequisites:
   - IllegalWeaponry
   recipeUnlocks:
-  - WeaponLaserCannon
-  - WeaponXrayCannon
-  - Truncheon
+  - FlashPayload
+  - ChemicalPayload
+  - Igniter
 
 - type: technology
   id: IllegalExplosives
   name: research-technology-illegal-explosives
   icon:
-    sprite: Objects/Weapons/Grenades/explosive.rsi
-    state: icon
+    sprite: Objects/Devices/payload.rsi
+    state: payload-explosive-armed
   discipline: Illegal
   tier: 2
   cost: 9000
@@ -66,9 +66,9 @@
   technologyPrerequisites:
   - IllegalUtility
   recipeUnlocks:
-  - BoxShotgunIncendiary
-  - BoxShotgunUranium
-  - MagazineBoxPistolIncendiary
+  - ExplosivePayload
+  - Signaller
+  - SignallerAdvanced
 
 # Tier 3
 
@@ -76,7 +76,7 @@
   id: IllegalSpecial
   name: research-technology-illegal-special
   icon:
-    sprite: Objects/Weapons/Guns/Battery/temperature_gun.rsi
+    sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
     state: icon
   discipline: Illegal
   tier: 3
@@ -86,6 +86,6 @@
   - IllegalAdvanced
   - IllegalExplosives
   recipeUnlocks:
-  - WeaponTemperatureGun
-  - MagazineBoxRifleUranium
-  - MagazineBoxMagnumUranium
+  - WeaponForceGun
+  - WeaponTetherGun
+  - DeviceQuantumSpinInverter
