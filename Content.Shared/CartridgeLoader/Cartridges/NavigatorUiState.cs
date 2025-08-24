@@ -8,9 +8,9 @@ public sealed class NavigatorUiState : BoundUserInterfaceState
 {
     public NetEntity? MapUid;
     public string StationName;
-    public EntityCoordinates? OwnerCoordinates;
+    public NetCoordinates? OwnerCoordinates;
 
-    public NavigatorUiState(NetEntity? mapUid, string stationName, EntityCoordinates? ownerCoordinates = null)
+    public NavigatorUiState(NetEntity? mapUid, string stationName, NetCoordinates? ownerCoordinates = null)
     {
         MapUid = mapUid;
         StationName = stationName;

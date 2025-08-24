@@ -1,6 +1,7 @@
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Robust.Client.UserInterface;
+using Robust.Shared.Map;
 
 namespace Content.Client.CartridgeLoader.Cartridges;
 
@@ -27,6 +28,14 @@ public sealed partial class NavigatorUi : UIFragment
             return;
 
         var mapUid = _entManager.GetEntity(navigatorState.MapUid);
-        _fragment?.UpdateState(mapUid, navigatorState.StationName, navigatorState.OwnerCoordinates);
+        
+        // Convert NetCoordinates to EntityCoordinates if available
+        EntityCoordinates? ownerCoordinates = null;
+        if (navigatorState.OwnerCoordinates != null)
+        {
+            ownerCoordinates = _entManager.GetCoordinates(navigatorState.OwnerCoordinates.Value);
+        }
+        
+        _fragment?.UpdateState(mapUid, navigatorState.StationName, ownerCoordinates);
     }
 }

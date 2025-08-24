@@ -47,7 +47,7 @@ public sealed class NavigatorCartridgeSystem : EntitySystem
         var owningStation = _stationSystem.GetOwningStation(loaderUid);
         var stationName = "Unknown Station";
         NetEntity? mapUid = null;
-        EntityCoordinates? ownerCoordinates = null;
+        NetCoordinates? ownerCoordinates = null;
 
         if (owningStation != null && TryComp<MetaDataComponent>(owningStation.Value, out var metaData))
         {
@@ -64,7 +64,7 @@ public sealed class NavigatorCartridgeSystem : EntitySystem
         // Get the coordinates of the PDA/cartridge loader to show owner position
         if (TryComp<TransformComponent>(loaderUid, out var xform))
         {
-            ownerCoordinates = xform.Coordinates;
+            ownerCoordinates = GetNetCoordinates(xform.Coordinates);
         }
 
         var state = new NavigatorUiState(mapUid, stationName, ownerCoordinates);
