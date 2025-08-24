@@ -82,5 +82,4 @@ research-technology-bluespace-chemistry = Bluespace Chemistry
 research-technology-illegal-weaponry = Illegal Weaponry
 research-technology-illegal-utility = Illegal Utility
 research-technology-illegal-advanced = Illegal Advanced
-research-technology-illegal-explosives = Illegal Explosives
-research-technology-illegal-special = Illegal Special
+research-technology-illegal-medical = Illegal Medical

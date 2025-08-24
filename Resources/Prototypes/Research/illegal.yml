@@ -1,6 +1,6 @@
 # Illegal Technology Branch
 # These technologies are hidden by default and only appear when research console is emagged
-# Contains contraband devices and equipment normally restricted from civilian fabrication
+# Contains actual syndicate contraband devices from uplink catalogs
 
 # Tier 1
 
@@ -8,31 +8,29 @@
   id: IllegalWeaponry
   name: research-technology-illegal-weaponry
   icon:
-    sprite: Objects/Weapons/Melee/combat_knife.rsi
+    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
     state: icon
   discipline: Illegal
   tier: 1
   cost: 5000
   hidden: true
   recipeUnlocks:
-  - CombatKnife
-  - Handcuffs
-  - Zipties
+  - WeaponPistolViper
+  - ThrowingKnivesKit
 
 - type: technology
   id: IllegalUtility
   name: research-technology-illegal-utility
   icon:
-    sprite: Objects/Devices/payload.rsi
-    state: timer-trigger
+    sprite: Objects/Storage/toolbox_syndicate.rsi
+    state: icon
   discipline: Illegal
   tier: 1
   cost: 6000
   hidden: true
   recipeUnlocks:
-  - TimerTrigger
-  - SignalTrigger
-  - VoiceTrigger
+  - ToolboxSyndicateFilled
+  - ElectricalDisruptionKit
 
 # Tier 2
 
@@ -40,8 +38,8 @@
   id: IllegalAdvanced
   name: research-technology-illegal-advanced
   icon:
-    sprite: Objects/Devices/payload.rsi
-    state: payload-flash-armed
+    sprite: Objects/Weapons/Melee/e_dagger.rsi
+    state: icon
   discipline: Illegal
   tier: 2
   cost: 8000
@@ -49,16 +47,15 @@
   technologyPrerequisites:
   - IllegalWeaponry
   recipeUnlocks:
-  - FlashPayload
-  - ChemicalPayload
-  - Igniter
+  - EnergyDaggerBox
+  - ChemicalSynthesisKit
 
 - type: technology
-  id: IllegalExplosives
-  name: research-technology-illegal-explosives
+  id: IllegalMedical
+  name: research-technology-illegal-medical
   icon:
-    sprite: Objects/Devices/payload.rsi
-    state: payload-explosive-armed
+    sprite: Objects/Storage/medikit.rsi
+    state: stimkit
   discipline: Illegal
   tier: 2
   cost: 9000
@@ -66,26 +63,8 @@
   technologyPrerequisites:
   - IllegalUtility
   recipeUnlocks:
-  - ExplosivePayload
-  - Signaller
-  - SignallerAdvanced
+  - StimkitFilled
+  - MedkitCombatFilled
 
-# Tier 3
-
-- type: technology
-  id: IllegalSpecial
-  name: research-technology-illegal-special
-  icon:
-    sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
-    state: icon
-  discipline: Illegal
-  tier: 3
-  cost: 12000
-  hidden: true
-  technologyPrerequisites:
-  - IllegalAdvanced
-  - IllegalExplosives
-  recipeUnlocks:
-  - WeaponForceGun
-  - WeaponTetherGun
-  - DeviceQuantumSpinInverter
+# Tier 3 - More advanced contraband items from uplink
+# Note: These would need additional recipes created for higher-tier syndicate items

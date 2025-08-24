@@ -86,5 +86,4 @@ research-technology-bluespace-cargo-transport = Блюспейс-транспо�
 research-technology-illegal-weaponry = Незаконное вооружение
 research-technology-illegal-utility = Незаконные устройства
 research-technology-illegal-advanced = Продвинутое незаконное вооружение
-research-technology-illegal-explosives = Незаконные взрывчатки
-research-technology-illegal-special = Специальные незаконные технологии
+research-technology-illegal-medical = Незаконная медицина
