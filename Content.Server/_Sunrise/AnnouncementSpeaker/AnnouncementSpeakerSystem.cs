@@ -12,8 +12,31 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Content.Shared._Sunrise.SunriseCCVars;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.AnnouncementSpeaker;
+
+/// <summary>
+/// Represents a queued announcement waiting to be played.
+/// </summary>
+public sealed class QueuedAnnouncement
+{
+    public EntityUid Station { get; set; }
+    public string Message { get; set; } = "";
+    public ResolvedSoundSpecifier? AnnouncementSound { get; set; }
+    public string? AnnounceVoice { get; set; }
+    public byte[]? TtsData { get; set; }
+    public TimeSpan QueuedAt { get; set; }
+
+    public QueuedAnnouncement(EntityUid station, string message, ResolvedSoundSpecifier? announcementSound, string? announceVoice, byte[]? ttsData)
+    {
+        Station = station;
+        Message = message;
+        AnnouncementSound = announcementSound;
+        AnnounceVoice = announceVoice;
+        TtsData = ttsData;
+    }
+}
 
 /// <summary>
 /// System that manages announcement speakers distributed across stations.
@@ -24,9 +47,16 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private bool _isEnabled;
     private string _defaultAnnounceVoice = "Hanson";
+
+    // Queue system for preventing overlapping announcements
+    private readonly Queue<QueuedAnnouncement> _announcementQueue = new();
+    private bool _isPlayingAnnouncement = false;
+    private TimeSpan _currentAnnouncementEndTime;
+    private const float AnnouncementDurationEstimate = 5.0f; // Estimate 5 seconds per announcement
 
     public override void Initialize()
     {
@@ -34,6 +64,50 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         _cfg.OnValueChanged(SunriseCCVars.TTSEnabled, v => _isEnabled = v, true);
         SubscribeLocalEvent<AnnouncementSpeakerEvent>(OnAnnouncementSpeaker);
         // Note: SpeakerPlayAnnouncementEvent is handled by TTSSystem for the component
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        ProcessAnnouncementQueue();
+    }
+
+    /// <summary>
+    /// Processes the announcement queue and plays the next announcement if none is currently playing.
+    /// </summary>
+    private void ProcessAnnouncementQueue()
+    {
+        // Check if current announcement has finished
+        if (_isPlayingAnnouncement && _timing.CurTime >= _currentAnnouncementEndTime)
+        {
+            _isPlayingAnnouncement = false;
+        }
+
+        // If not playing and have queued announcements, play next one
+        if (!_isPlayingAnnouncement && _announcementQueue.Count > 0)
+        {
+            var announcement = _announcementQueue.Dequeue();
+            PlayAnnouncementNow(announcement);
+        }
+    }
+
+    /// <summary>
+    /// Immediately plays an announcement without queuing.
+    /// </summary>
+    private void PlayAnnouncementNow(QueuedAnnouncement announcement)
+    {
+        _isPlayingAnnouncement = true;
+        _currentAnnouncementEndTime = _timing.CurTime + TimeSpan.FromSeconds(AnnouncementDurationEstimate);
+
+        var ev = new AnnouncementSpeakerEvent(
+            announcement.Station,
+            announcement.Message,
+            announcement.AnnouncementSound,
+            announcement.AnnounceVoice,
+            announcement.TtsData
+        );
+        
+        RaiseLocalEvent(ref ev);
     }
 
     /// <summary>
@@ -114,6 +188,7 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     /// <summary>
     /// Dispatches an announcement to all speakers on a station.
     /// This is the main entry point for the announcement speaker system.
+    /// Uses the queue system to prevent overlapping announcements.
     /// </summary>
     public async void DispatchAnnouncementToSpeakers(EntityUid station, string message, SoundSpecifier? announcementSound = null, string? announceVoice = null)
     {
@@ -123,13 +198,28 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         if (!GetVoicePrototype(announceVoice ?? _defaultAnnounceVoice, out var protoVoice))
             return;
         var generatedTts = await GenerateTtsForAnnouncement(message, protoVoice);
-        var ev = new AnnouncementSpeakerEvent(station, message, resolvedSound, announceVoice, generatedTts);
-        RaiseLocalEvent(ref ev);
+        
+        var queuedAnnouncement = new QueuedAnnouncement(station, message, resolvedSound, announceVoice, generatedTts)
+        {
+            QueuedAt = _timing.CurTime
+        };
+
+        if (!_isPlayingAnnouncement)
+        {
+            // If no announcement is playing, play immediately
+            PlayAnnouncementNow(queuedAnnouncement);
+        }
+        else
+        {
+            // Queue the announcement to play after current one finishes
+            _announcementQueue.Enqueue(queuedAnnouncement);
+        }
     }
 
     /// <summary>
     /// Dispatches an announcement to speakers on all stations.
     /// Used for server-wide announcements like round start/end.
+    /// Uses the queue system to prevent overlapping announcements.
     /// </summary>
     public async void DispatchAnnouncementToAllStations(string message, SoundSpecifier? announcementSound = null, string? announceVoice = null)
     {
@@ -139,11 +229,25 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         if (!GetVoicePrototype(announceVoice ?? _defaultAnnounceVoice, out var protoVoice))
             return;
         var generatedTts = await GenerateTtsForAnnouncement(message, protoVoice);
+        
         var stationQuery = EntityQueryEnumerator<StationDataComponent>();
         while (stationQuery.MoveNext(out var stationUid, out var stationData))
         {
-            var ev = new AnnouncementSpeakerEvent(stationUid, message, resolvedSound, announceVoice, generatedTts);
-            RaiseLocalEvent(ref ev);
+            var queuedAnnouncement = new QueuedAnnouncement(stationUid, message, resolvedSound, announceVoice, generatedTts)
+            {
+                QueuedAt = _timing.CurTime
+            };
+
+            if (!_isPlayingAnnouncement)
+            {
+                // If no announcement is playing, play immediately
+                PlayAnnouncementNow(queuedAnnouncement);
+            }
+            else
+            {
+                // Queue the announcement to play after current one finishes
+                _announcementQueue.Enqueue(queuedAnnouncement);
+            }
         }
     }
 
@@ -188,5 +292,68 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
     private string Sanitize(string text)
     {
         return text.Trim();
+    }
+
+    /// <summary>
+    /// Checks if a player has any working announcement speakers within range.
+    /// Used to determine if they should receive announcement messages in chat.
+    /// </summary>
+    public bool HasWorkingSpeakersNearby(EntityUid playerEntity)
+    {
+        if (!TryComp<TransformComponent>(playerEntity, out var playerTransform))
+            return false;
+
+        var playerPos = playerTransform.Coordinates;
+        
+        // Find all speakers and check if any are in range and working
+        var query = EntityQueryEnumerator<AnnouncementSpeakerComponent, TransformComponent>();
+        while (query.MoveNext(out var speakerUid, out var speakerComp, out var speakerTransform))
+        {
+            // Check if speaker is enabled
+            if (!speakerComp.Enabled)
+                continue;
+
+            // Check if speaker has power (if required)
+            if (speakerComp.RequiresPower)
+            {
+                if (!TryComp<ApcPowerReceiverComponent>(speakerUid, out var powerReceiver) || !powerReceiver.Powered)
+                    continue;
+            }
+
+            // Check if player is within range of this speaker
+            if (playerPos.TryDistance(EntityManager, speakerTransform.Coordinates, out var distance) &&
+                distance <= speakerComp.Range)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Gets all speakers on all stations that are working.
+    /// Used to determine if any announcements can be played at all.
+    /// </summary>
+    public bool HasAnyWorkingSpeakers()
+    {
+        var query = EntityQueryEnumerator<AnnouncementSpeakerComponent>();
+        while (query.MoveNext(out var speakerUid, out var speakerComp))
+        {
+            // Check if speaker is enabled
+            if (!speakerComp.Enabled)
+                continue;
+
+            // Check if speaker has power (if required)
+            if (speakerComp.RequiresPower)
+            {
+                if (!TryComp<ApcPowerReceiverComponent>(speakerUid, out var powerReceiver) || !powerReceiver.Powered)
+                    continue;
+            }
+
+            return true; // Found at least one working speaker
+        }
+
+        return false;
     }
 }

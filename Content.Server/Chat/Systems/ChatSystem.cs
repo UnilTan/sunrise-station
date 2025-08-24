@@ -372,7 +372,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
-        _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
+        
+        // Sunrise-start - Only show in chat for players with working speakers nearby
+        var filteredPlayers = GetPlayersWithWorkingSpeakers();
+        if (filteredPlayers.Recipients.Any())
+        {
+            _chatManager.ChatMessageToManyFiltered(filteredPlayers, ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
+        }
+        // Sunrise-end
 
         // Sunrise-start - Use speaker network instead of global broadcast
         if (playTts && (playDefault || announcementSound != null))
@@ -414,7 +421,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source ?? default, false, true, colorOverride);
+        
+        // Sunrise-start - Filter chat recipients by working speakers
+        var filteredChatPlayers = FilterPlayersByWorkingSpeakers(filter);
+        if (filteredChatPlayers.Recipients.Any())
+        {
+            _chatManager.ChatMessageToManyFiltered(filteredChatPlayers, ChatChannel.Radio, message, wrappedMessage, source ?? default, false, true, colorOverride);
+        }
+        // Sunrise-end
         
         // Sunrise-start - For filtered announcements, we may want to try speaker network if source is on a station
         if (playTts && (playDefault || announcementSound != null))
@@ -486,7 +500,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var filter = _stationSystem.GetInStation(stationDataComp);
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
+        // Sunrise-start - Filter chat recipients by working speakers
+        var filteredChatPlayers = FilterPlayersByWorkingSpeakers(filter);
+        if (filteredChatPlayers.Recipients.Any())
+        {
+            _chatManager.ChatMessageToManyFiltered(filteredChatPlayers, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
+        }
+        // Sunrise-end
 
         // Sunrise-start - Use speaker network for station announcements
         if (playTts && (playDefault || announcementSound != null))
@@ -843,6 +863,53 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
     }
+    #endregion
+
+    #region Utility
+
+    /// <summary>
+    /// Gets all players who have working announcement speakers nearby.
+    /// Used to filter chat recipients for announcements.
+    /// </summary>
+    private Filter GetPlayersWithWorkingSpeakers()
+    {
+        var filteredPlayers = Filter.Empty();
+        
+        foreach (var player in _playerManager.Sessions)
+        {
+            if (player.AttachedEntity is not { Valid: true } playerEntity)
+                continue;
+
+            if (_announcementSpeaker.HasWorkingSpeakersNearby(playerEntity))
+            {
+                filteredPlayers = filteredPlayers.AddPlayer(player);
+            }
+        }
+
+        return filteredPlayers;
+    }
+
+    /// <summary>
+    /// Filters an existing filter to only include players with working speakers nearby.
+    /// </summary>
+    private Filter FilterPlayersByWorkingSpeakers(Filter originalFilter)
+    {
+        var filteredPlayers = Filter.Empty();
+        
+        foreach (var player in originalFilter.Recipients)
+        {
+            if (player.AttachedEntity is not { Valid: true } playerEntity)
+                continue;
+
+            if (_announcementSpeaker.HasWorkingSpeakersNearby(playerEntity))
+            {
+                filteredPlayers = filteredPlayers.AddPlayer(player);
+            }
+        }
+
+        return filteredPlayers;
+    }
+
     #endregion
 
     #region Utility
