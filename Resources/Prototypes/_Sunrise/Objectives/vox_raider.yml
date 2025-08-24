@@ -83,6 +83,81 @@
   - type: Objective
     difficulty: 1.5
 
+# Material theft objectives
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealSteelObjective
+  components:
+  - type: StealCondition
+    stealGroup: Steel
+    minCollectionSize: 10
+    maxCollectionSize: 30
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 0.8
+
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealPlasteelObjective
+  components:
+  - type: StealCondition
+    stealGroup: Plasteel
+    minCollectionSize: 5
+    maxCollectionSize: 15
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 1.2
+
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealGlassObjective
+  components:
+  - type: StealCondition
+    stealGroup: Glass
+    minCollectionSize: 10
+    maxCollectionSize: 25
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 0.7
+
+# Kidnapping objectives
+- type: entity
+  parent: BaseVoxRaiderObjective
+  id: VoxRaiderKidnapCrewObjective
+  components:
+  - type: Objective
+    difficulty: 2.5
+    icon:
+      sprite: Objects/Misc/handcuffs.rsi
+      state: cuff
+  - type: VoxRaiderKidnapCondition
+    requiredKidnaps: 1
+
+# Medical equipment theft
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealHyposprayObjective
+  components:
+  - type: StealCondition
+    stealGroup: Hypospray
+    minCollectionSize: 1
+    maxCollectionSize: 3
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 1.8
+
+- type: entity
+  parent: BaseVoxRaiderStealObjective
+  id: VoxRaiderStealDefibrillatorObjective
+  components:
+  - type: StealCondition
+    stealGroup: AdvancedDefibrillator
+    minCollectionSize: 1
+    maxCollectionSize: 2
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 2.0
+
 # Vox Raider objective groups
 - type: weightedRandom
   id: VoxRaiderObjectiveGroups
@@ -91,3 +166,9 @@
     VoxRaiderStealNuclearBombObjective: 0.5
     VoxRaiderStealMedicalTechFabObjective: 1.0
     VoxRaiderStealStunbatonObjective: 1.5
+    VoxRaiderStealSteelObjective: 3.0
+    VoxRaiderStealPlasteelObjective: 2.0
+    VoxRaiderStealGlassObjective: 2.5
+    VoxRaiderKidnapCrewObjective: 1.0
+    VoxRaiderStealHyposprayObjective: 1.5
+    VoxRaiderStealDefibrillatorObjective: 1.2

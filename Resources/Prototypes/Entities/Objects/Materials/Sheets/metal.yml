@@ -46,6 +46,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
+  - type: Steal
+    stealGroup: Steel
   - type: Stack
     stackType: Steel
     baseLayer: base
@@ -174,6 +176,8 @@
   - type: PhysicalComposition
     materialComposition:
       Plasteel: 100
+  - type: Steal
+    stealGroup: Plasteel
   - type: Stack
     stackType: Plasteel
     baseLayer: base

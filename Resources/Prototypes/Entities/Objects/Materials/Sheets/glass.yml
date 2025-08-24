@@ -59,6 +59,8 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 100
+  - type: Steal
+    stealGroup: Glass
   - type: Stack
     stackType: Glass
     baseLayer: base
