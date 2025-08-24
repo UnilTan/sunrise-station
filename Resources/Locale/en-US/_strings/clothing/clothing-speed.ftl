@@ -7,3 +7,11 @@ clothing-speed-increase-run-examine = This increases your running speed by [colo
 clothing-speed-decrease-run-examine = This decreases your running speed by [color=yellow]{$runSpeed}%[/color].
 clothing-speed-increase-walk-examine = This increases your walking speed by [color=yellow]{$walkSpeed}%[/color].
 clothing-speed-decrease-walk-examine = This decreases your walking speed by [color=yellow]{$walkSpeed}%[/color].
+
+# Clothing speed cap examine
+clothing-speed-cap-examinable-verb-text = Speed Limits
+clothing-speed-cap-examinable-verb-message = Examine the speed limit values.
+clothing-speed-cap-equal-examine = This limits your speed to [color=red]{$speed} m/s[/color].
+clothing-speed-cap-different-examine = This limits your walking speed to [color=red]{$walkSpeed} m/s[/color] and running speed to [color=red]{$runSpeed} m/s[/color].
+clothing-speed-cap-walk-examine = This limits your walking speed to [color=red]{$walkSpeed} m/s[/color].
+clothing-speed-cap-run-examine = This limits your running speed to [color=red]{$runSpeed} m/s[/color].

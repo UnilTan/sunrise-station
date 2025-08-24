@@ -117,6 +117,9 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
+  - type: ClothingSpeedCap
+    maxWalkSpeed: 2.25
+    maxSprintSpeed: 4.05
   - type: NoSlip
   - type: SlowedOverSlippery
     slowdownModifier: 0.75

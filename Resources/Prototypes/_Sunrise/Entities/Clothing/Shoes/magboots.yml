@@ -13,6 +13,9 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.9
+  - type: ClothingSpeedCap
+    maxWalkSpeed: 2.375  # 2.5 * 0.95 = 2.375
+    maxSprintSpeed: 4.05  # 4.5 * 0.9 = 4.05
   - type: ClothingSlowOnDamageModifier
     modifier: 0.5
 
@@ -44,6 +47,9 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.7
+  - type: ClothingSpeedCap
+    maxWalkSpeed: 1.875  # 2.5 * 0.75 = 1.875
+    maxSprintSpeed: 3.15  # 4.5 * 0.7 = 3.15
   - type: ClothingSlowOnDamageModifier
     modifier: 0.75
 
