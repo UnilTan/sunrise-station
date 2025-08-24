@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using Content.Server._Sunrise.Chat.Sanitization;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -39,6 +40,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly TelecomDegradationSystem _degradation = default!;
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -171,8 +173,10 @@ public sealed class RadioSystem : EntitySystem
         var canSend = !sendAttemptEv.Cancelled;
 
         var sourceMapId = Transform(radioSource).MapID;
-        var hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
+        var sourcePosition = Transform(radioSource).Coordinates.Position;
         var sourceServerExempt = _exemptQuery.HasComp(radioSource);
+        var bestServer = GetBestServer(sourceMapId, channel.ID, sourcePosition);
+        var signalQuality = 1.0f; // Default quality
 
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
         while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
@@ -189,8 +193,16 @@ public sealed class RadioSystem : EntitySystem
 
             // don't need telecom server for long range channels or handheld radios and intercoms
             var needServer = !channel.LongRange && !sourceServerExempt;
-            if (needServer && !hasActiveServer)
+            if (needServer && bestServer == null)
                 continue;
+
+            // Apply telecom degradation effects if using a server
+            if (needServer && bestServer != null)
+            {
+                // Add usage degradation to the server
+                _degradation.AddUsageDegradation((bestServer.Value.Entity, bestServer.Value.Component));
+                signalQuality = bestServer.Value.Quality;
+            }
 
             // check if message can be sent to specific receiver
             var attemptEv = new RadioReceiveAttemptEvent(channel, radioSource, receiver);
@@ -202,6 +214,9 @@ public sealed class RadioSystem : EntitySystem
             // send the message
             RaiseLocalEvent(receiver, ref ev);
         }
+
+        // Pass signal quality to TTS system via a new event
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, FormattedMessage.RemoveMarkupPermissive(message), ev.Receivers.ToArray())); // Sunrise-TTS
 
         RaiseLocalEvent(new RadioSpokeEvent(messageSource, FormattedMessage.RemoveMarkupPermissive(message), ev.Receivers.ToArray())); // Sunrise-TTS
 
@@ -292,16 +307,39 @@ public sealed class RadioSystem : EntitySystem
     /// <inheritdoc cref="TelecomServerComponent"/>
     private bool HasActiveServer(MapId mapId, string channelId)
     {
-        var servers = EntityQuery<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
-        foreach (var (_, keys, power, transform) in servers)
+        return GetBestServer(mapId, channelId, Vector2.Zero) != null;
+    }
+
+    /// <summary>
+    /// Gets the best available telecom server for the given parameters
+    /// </summary>
+    private (EntityUid Entity, TelecomServerComponent Component, float Quality)? GetBestServer(MapId mapId, string channelId, Vector2 position)
+    {
+        var servers = EntityQueryEnumerator<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
+        (EntityUid Entity, TelecomServerComponent Component, float Quality)? bestServer = null;
+        float bestQuality = 0.0f;
+
+        while (servers.MoveNext(out var uid, out var telecom, out var keys, out var power, out var transform))
         {
-            if (transform.MapID == mapId &&
-                power.Powered &&
-                keys.Channels.Contains(channelId))
+            if (transform.MapID != mapId ||
+                !power.Powered ||
+                !keys.Channels.Contains(channelId) ||
+                !_degradation.IsFunctional((uid, telecom)))
             {
-                return true;
+                continue;
+            }
+
+            // Calculate signal quality based on degradation and distance
+            var distance = (transform.Coordinates.Position - position).Length();
+            var quality = _degradation.GetDistanceDegradation((uid, telecom), distance);
+            
+            if (quality > bestQuality)
+            {
+                bestQuality = quality;
+                bestServer = (uid, telecom, quality);
             }
         }
-        return false;
+
+        return bestServer;
     }
 }

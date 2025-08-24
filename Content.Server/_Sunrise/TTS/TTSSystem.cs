@@ -3,8 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
+using Content.Server.Power.Components;
+using Content.Server.Radio.EntitySystems;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
+using Content.Shared.Radio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -23,6 +26,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _rng = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly TelecomDegradationSystem _degradation = default!;
 
 
     private readonly List<string> _sampleText =
@@ -47,8 +51,10 @@ public sealed partial class TTSSystem : EntitySystem
     private bool _isEnabled;
     private string _defaultAnnounceVoice = "Hanson";
     private List<ICommonSession> _ignoredRecipients = new();
-    private const float WhisperVoiceVolumeModifier = 0.6f; // how far whisper goes in world units
+    // Dictionary to store signal quality for current radio transmissions
+    private readonly Dictionary<EntityUid, float> _currentSignalQuality = new();
     private const int WhisperVoiceRange = 3; // how far whisper goes in world units
+    private const float WhisperVoiceVolumeModifier = 0.6f; // how far whisper goes in world units
 
     public override void Initialize()
     {
@@ -231,7 +237,47 @@ public sealed partial class TTSSystem : EntitySystem
         if (soundData is null)
             return;
 
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, true), Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
+        // Calculate signal quality degradation for TTS volume modification
+        float volumeModifier = 1.0f;
+        
+        if (uids.Length > 0)
+        {
+            // Check telecom quality for the map the receivers are on
+            var firstReceiver = uids[0];
+            if (TryComp<TransformComponent>(firstReceiver, out var receiverTransform))
+            {
+                var mapId = receiverTransform.MapID;
+                var position = receiverTransform.Coordinates.Position;
+                
+                // Find best telecom server for this transmission
+                var servers = EntityQueryEnumerator<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
+                (EntityUid Entity, TelecomServerComponent Component, float Quality)? bestServer = null;
+                float bestQuality = 0.0f;
+
+                while (servers.MoveNext(out var uid, out var telecom, out var keys, out var power, out var transform))
+                {
+                    if (transform.MapID != mapId || !power.Powered || !_degradation.IsFunctional((uid, telecom)))
+                        continue;
+
+                    var distance = (transform.Coordinates.Position - position).Length();
+                    var quality = _degradation.GetDistanceDegradation((uid, telecom), distance);
+                    
+                    if (quality > bestQuality)
+                    {
+                        bestQuality = quality;
+                        bestServer = (uid, telecom, quality);
+                    }
+                }
+
+                if (bestServer != null)
+                {
+                    volumeModifier = bestServer.Value.Quality;
+                }
+            }
+        }
+
+        var ttsEvent = new PlayTTSEvent(soundData, null, true, volumeModifier);
+        RaiseNetworkEvent(ttsEvent, Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
     }
 
     // ReSharper disable once InconsistentNaming
