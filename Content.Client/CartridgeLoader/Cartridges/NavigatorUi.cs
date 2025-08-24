@@ -27,6 +27,6 @@ public sealed partial class NavigatorUi : UIFragment
             return;
 
         var mapUid = _entManager.GetEntity(navigatorState.MapUid);
-        _fragment?.UpdateState(mapUid, navigatorState.StationName);
+        _fragment?.UpdateState(mapUid, navigatorState.StationName, navigatorState.OwnerCoordinates);
     }
 }
