@@ -120,7 +120,7 @@ public sealed partial class TTSSystem : EntitySystem
         HandleRadio(args.Receivers, message, protoVoice);
     }
 
-    private void OnCollectiveMindSpokeEvent(CollectiveMindSpokeEvent args)
+    private async void OnCollectiveMindSpokeEvent(CollectiveMindSpokeEvent args)
     {
         if (!_isEnabled || args.Message.Length > MaxMessageChars)
             return;
@@ -142,14 +142,19 @@ public sealed partial class TTSSystem : EntitySystem
         RaiseLocalEvent(args.Source, accentEvent);
         var message = accentEvent.Text;
 
-        HandleCollectiveMind(args.Receivers, message, protoVoice);
+        var soundData = await GenerateTTS(message, protoVoice);
+        if (soundData is null)
+            return;
+
+        var recipients = Filter.Entities(args.Receivers.ToArray()).RemovePlayers(_ignoredRecipients);
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), recipients);
     }
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
     {
         if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
         {
-            return _prototypeManager.TryIndex("father_grigori", out voicePrototype);
+            return _prototypeManager.TryIndex(_defaultAnnounceVoice, out voicePrototype);
         }
 
         return true;
@@ -327,15 +332,6 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         RaiseNetworkEvent(new PlayTTSEvent(soundData, null, true), Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
-    }
-
-    private async void HandleCollectiveMind(IReadOnlyCollection<EntityUid> uids, string message, TTSVoicePrototype voicePrototype)
-    {
-        var soundData = await GenerateTTS(message, voicePrototype);
-        if (soundData is null)
-            return;
-
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Entities(uids).RemovePlayers(_ignoredRecipients));
     }
 
     // ReSharper disable once InconsistentNaming
