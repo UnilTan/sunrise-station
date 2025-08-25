@@ -127,6 +127,7 @@ public sealed class BorgVoiceSystem : EntitySystem
         {
             args.VoiceId = component.SelectedVoiceId;
         }
+        args.Effect = component.VoiceEffect;
     }
 
     private BorgVoiceChangeState CreateVoiceChangeState(EntityUid uid, BorgVoiceComponent component, ICommonSession player)

@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.TTS;
 
@@ -16,4 +15,8 @@ public sealed partial class BorgVoiceComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
     public ProtoId<TTSVoicePrototype>? SelectedVoiceId { get; set; }
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public string VoiceEffect { get; set; } = "robot";
 }
