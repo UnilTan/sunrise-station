@@ -22,8 +22,8 @@ public sealed class BorgVoiceSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    
-    private ISharedSponsorsManager? _sponsorsManager;;
+
+    private ISharedSponsorsManager? _sponsorsManager;
 
     public override void Initialize()
     {
@@ -31,13 +31,13 @@ public sealed class BorgVoiceSystem : EntitySystem
 
         SubscribeLocalEvent<BorgVoiceComponent, BorgVoiceChangeActionEvent>(OnBorgVoiceChangeAction);
         SubscribeLocalEvent<BorgVoiceComponent, ComponentStartup>(OnBorgVoiceStartup);
-        
+
         // Subscribe to TTS voice transformation
         SubscribeLocalEvent<BorgVoiceComponent, TransformSpeakerVoiceEvent>(OnTransformSpeakerVoice);
-        
+
         // Initialize sponsors manager
         IoCManager.Instance!.TryResolveType(out _sponsorsManager);
-        
+
         // Subscribe to UI events
         Subs.BuiEvents<BorgVoiceComponent>(BorgVoiceUiKey.Key, subs =>
         {
@@ -80,7 +80,7 @@ public sealed class BorgVoiceSystem : EntitySystem
                 _popup.PopupEntity("Invalid voice selected!", uid, args.Actor, PopupType.MediumCaution);
                 return;
             }
-            
+
             if (voicePrototype.SponsorOnly)
             {
                 _popup.PopupEntity("This voice is only available to sponsors!", uid, args.Actor, PopupType.MediumCaution);
@@ -103,11 +103,6 @@ public sealed class BorgVoiceSystem : EntitySystem
         _uiSystem.SetUiState(uid, BorgVoiceUiKey.Key, state);
     }
 
-        // Update UI
-        var state = CreateVoiceChangeState(uid, component, args.Actor);
-        _uiSystem.ServerSendUiMessage(uid, BorgVoiceUiKey.Key, state, args.Actor);
-    }
-
     private void OnBorgVoiceStartup(EntityUid uid, BorgVoiceComponent component, ComponentStartup args)
     {
         // Set default voice if not already set
@@ -115,8 +110,7 @@ public sealed class BorgVoiceSystem : EntitySystem
         {
             var defaultVoice = _prototypeManager
                 .EnumeratePrototypes<TTSVoicePrototype>()
-                .Where(v => v.RoundStart && !v.SponsorOnly)
-                .FirstOrDefault();
+                .FirstOrDefault(v => v.RoundStart && !v.SponsorOnly);
 
             if (defaultVoice != null)
             {
@@ -146,26 +140,18 @@ public sealed class BorgVoiceSystem : EntitySystem
         return new BorgVoiceChangeState(component.SelectedVoiceId, availableVoices);
     }
 
-    private bool CanUseSponsorVoice(ICommonSession player)
-    {
-        if (_sponsorsManager == null)
-            return false;
-            
-        return _sponsorsManager.TryGetPrototypes(player.UserId, out _);
-    }
-    
     private bool CanUseVoice(string voiceId, ICommonSession player)
     {
         if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var voice))
             return false;
-            
+
         if (!voice.SponsorOnly)
             return true;
-            
+
         if (_sponsorsManager == null)
             return false;
-            
-        return _sponsorsManager.TryGetPrototypes(player.UserId, out var allowedPrototypes) && 
+
+        return _sponsorsManager.TryGetPrototypes(player.UserId, out var allowedPrototypes) &&
                allowedPrototypes != null && allowedPrototypes.Contains(voiceId);
     }
 }

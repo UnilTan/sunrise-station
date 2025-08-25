@@ -53,7 +53,7 @@ public sealed partial class BorgVoiceWindow : DefaultWindow
         {
             if (VoiceOptionButton.SelectedId != null)
             {
-                var voice = _voiceList[VoiceOptionButton.SelectedId.Value];
+                var voice = _voiceList[VoiceOptionButton.SelectedId];
                 OnVoicePreview?.Invoke(voice.ID);
             }
         };
@@ -68,7 +68,7 @@ public sealed partial class BorgVoiceWindow : DefaultWindow
         {
             var voice = _voiceList[i];
             var name = Loc.GetString(voice.Name);
-            
+
             VoiceOptionButton.AddItem(name, i);
 
             if (voice.ID == state.CurrentVoiceId)
