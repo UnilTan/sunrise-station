@@ -1373,8 +1373,8 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 MakePlayerRecord(ban.CreatedBy),
                 ban.BanTime,
                 MakePlayerRecord(ban.LastEditedBy),
-                ban.LastEditedAt,
-                ban.ExpirationTime,
+                NormalizeDatabaseTime(ban.LastEditedAt),
+                NormalizeDatabaseTime(ban.ExpirationTime),
                 ban.Hidden,
                 MakePlayerRecord(ban.Unban?.UnbanningAdmin == null
                     ? null
@@ -1415,8 +1415,8 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 MakePlayerRecord(ban.CreatedBy),
                 ban.BanTime,
                 MakePlayerRecord(ban.LastEditedBy),
-                ban.LastEditedAt,
-                ban.ExpirationTime,
+                NormalizeDatabaseTime(ban.LastEditedAt),
+                NormalizeDatabaseTime(ban.ExpirationTime),
                 ban.Hidden,
                 new [] { ban.RoleId.Replace(BanManager.JobPrefix, null) },
                 MakePlayerRecord(unbanningAdmin),
@@ -1845,28 +1845,31 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<MentorHelpTicket>> GetMentorHelpTicketsByPlayerAsync(Guid playerId)
         {
             await using var db = await GetDb();
-            return await db.DbContext.MentorHelpTickets
+            return (await db.DbContext.MentorHelpTickets
                 .Where(t => t.PlayerId == playerId)
+                .ToListAsync())
                 .OrderByDescending(t => t.CreatedAt)
-                .ToListAsync();
+                .ToList();
         }
 
         public async Task<List<MentorHelpTicket>> GetOpenMentorHelpTicketsAsync()
         {
             await using var db = await GetDb();
-            return await db.DbContext.MentorHelpTickets
+            return (await db.DbContext.MentorHelpTickets
                 .Where(t => t.Status != MentorHelpTicketStatus.Closed)
+                .ToListAsync())
                 .OrderByDescending(t => t.UpdatedAt)
-                .ToListAsync();
+                .ToList();
         }
 
         public async Task<List<MentorHelpTicket>> GetAssignedMentorHelpTicketsAsync(Guid mentorId)
         {
             await using var db = await GetDb();
-            return await db.DbContext.MentorHelpTickets
+            return (await db.DbContext.MentorHelpTickets
                 .Where(t => t.AssignedToUserId == mentorId && t.Status != MentorHelpTicketStatus.Closed)
+                .ToListAsync())
                 .OrderByDescending(t => t.UpdatedAt)
-                .ToListAsync();
+                .ToList();
         }
 
         public async Task AddMentorHelpMessageAsync(MentorHelpMessage message)

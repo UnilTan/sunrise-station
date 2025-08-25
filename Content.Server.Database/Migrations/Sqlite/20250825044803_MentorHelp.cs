@@ -1,13 +1,12 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Content.Server.Database.Migrations.Postgres
+namespace Content.Server.Database.Migrations.Sqlite
 {
     /// <inheritdoc />
-    public partial class MentorHelpTickets : Migration
+    public partial class MentorHelp : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,19 +15,19 @@ namespace Content.Server.Database.Migrations.Postgres
                 name: "mentor_help_tickets",
                 columns: table => new
                 {
-                    mentor_help_tickets_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    player_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    assigned_to_user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    subject = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false),
-                    initial_message = table.Column<string>(type: "character varying(4096)", maxLength: 4096, nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    closed_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    closed_by_user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    round_id = table.Column<int>(type: "integer", nullable: true),
-                    server_id = table.Column<int>(type: "integer", nullable: true)
+                    mentor_help_tickets_id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    player_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    assigned_to_user_id = table.Column<Guid>(type: "TEXT", nullable: true),
+                    subject = table.Column<string>(type: "TEXT", maxLength: 512, nullable: false),
+                    initial_message = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: false),
+                    status = table.Column<int>(type: "INTEGER", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    closed_at = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    closed_by_user_id = table.Column<Guid>(type: "TEXT", nullable: true),
+                    round_id = table.Column<int>(type: "INTEGER", nullable: true),
+                    server_id = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,13 +38,13 @@ namespace Content.Server.Database.Migrations.Postgres
                 name: "mentor_help_messages",
                 columns: table => new
                 {
-                    mentor_help_messages_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ticket_id = table.Column<int>(type: "integer", nullable: false),
-                    sender_user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    message = table.Column<string>(type: "character varying(4096)", maxLength: 4096, nullable: false),
-                    sent_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    is_staff_only = table.Column<bool>(type: "boolean", nullable: false)
+                    mentor_help_messages_id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ticket_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    sender_user_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    message = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: false),
+                    sent_at = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    is_staff_only = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

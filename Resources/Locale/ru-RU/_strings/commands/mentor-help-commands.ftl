@@ -1,7 +1,4 @@
-cmd-openahelp-help = Открывает окно админ-помощи
-cmd-openahelp-error = Неверный формат команды
-
-cmd-openmhelp-help = Открывает окно ментор-помощи  
+cmd-openmhelp-help = Открывает окно ментор-помощи
 cmd-openmhelp-error = Неверный формат команды
 
 cmd-openhelpChoice-help = Показывает выбор между админ-помощью и ментор-помощью

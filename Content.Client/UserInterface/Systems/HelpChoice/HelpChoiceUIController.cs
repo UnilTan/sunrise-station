@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client.Administration.Systems;
 using Content.Client.UserInterface.Systems.Bwoink;
 using Content.Client.UserInterface.Systems.MentorHelp;
 using Content.Shared.Input;
@@ -24,10 +25,19 @@ public sealed class HelpChoiceUIController : UIController
     {
         base.Initialize();
 
+    }
+
+    public void OnSystemLoaded(MentorHelpSystem system)
+    {
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenHelpChoice,
                 InputCmdHandler.FromDelegate(_ => ShowHelpChoiceDialog()))
             .Register<HelpChoiceUIController>();
+    }
+
+    public void OnSystemUnloaded(MentorHelpSystem system)
+    {
+        CommandBinds.Unregister<HelpChoiceUIController>();
     }
 
     private void ShowHelpChoiceDialog()

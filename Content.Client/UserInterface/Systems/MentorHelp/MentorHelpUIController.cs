@@ -103,10 +103,10 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
     private void OnAdminStatusUpdated()
     {
         _hasMentorPermissions = _adminManager.HasFlag(AdminFlags.Adminhelp);
-        
+
         if (UIHelper is not { IsOpen: true })
             return;
-        
+
         EnsureUIHelper();
     }
 
@@ -150,7 +150,7 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
         UIHelper?.Dispose();
         var ownerUserId = _playerManager.LocalUser!.Value;
 
-        UIHelper = hasMentorPerms 
+        UIHelper = hasMentorPerms
             ? new MentorMentorHelpUIHandler(ownerUserId, _mentorHelpSystem)
             : new PlayerMentorHelpUIHandler(ownerUserId, _mentorHelpSystem);
 
@@ -173,7 +173,7 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
     public void ToggleWindow()
     {
         EnsureUIHelper();
-        
+
         if (UIHelper!.IsOpen)
         {
             UIHelper.CloseWindow();
