@@ -1,20 +1,18 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
                Title="{Loc 'borg-voice-window-title'}"
-               MinSize="320 200"
-               SetSize="320 200">
+               MinSize="600 180"
+               SetSize="600 180"
+               Resizable="False">
     <BoxContainer Orientation="Vertical">
         <Label Text="{Loc 'borg-voice-window-description'}"
-               Margin="5 5 5 0" />
+               Margin="5 5 5 0" HorizontalAlignment="Center"/>
 
         <customControls:HSeparator Margin="5 5 5 5" />
 
-        <GridContainer Columns="2" Margin="5 0 5 0">
-            <Label Text="{Loc 'borg-voice-window-voice-label'}"
-                   VerticalAlignment="Center" />
-            <OptionButton Name="VoiceOptionButton"
-                          HorizontalExpand="True" />
-        </GridContainer>
+
+        <OptionButton Name="VoiceOptionButton"
+                      HorizontalExpand="True" />
 
         <BoxContainer Orientation="Horizontal" Margin="5 10 5 5" HorizontalAlignment="Center">
             <Button Name="VoicePlayButton"

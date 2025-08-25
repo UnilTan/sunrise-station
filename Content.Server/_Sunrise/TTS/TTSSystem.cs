@@ -123,7 +123,7 @@ public sealed partial class TTSSystem : EntitySystem
         RaiseLocalEvent(args.Source, accentEvent);
         var message = accentEvent.Text;
 
-        HandleRadio(args.Receivers, message, protoVoice, voiceEv.VoiceId);
+        HandleRadio(args.Receivers, message, protoVoice, voiceEv.Effect);
     }
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
@@ -245,7 +245,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         }
 
-        HandleSay(uid, message, protoVoice, voiceEv.VoiceId);
+        HandleSay(uid, message, protoVoice, voiceEv.Effect);
     }
 
     private async void HandleSay(EntityUid uid, string message, TTSVoicePrototype voicePrototype, string? effect)
@@ -301,7 +301,7 @@ public sealed partial class TTSSystem : EntitySystem
         }
     }
 
-    private async void HandleRadio(EntityUid[] uids, string message, TTSVoicePrototype voicePrototype, string effect)
+    private async void HandleRadio(EntityUid[] uids, string message, TTSVoicePrototype voicePrototype, string? effect = null)
     {
         var soundData = await GenerateTTS(message, voicePrototype, _radioEffect);
         if (soundData is null)

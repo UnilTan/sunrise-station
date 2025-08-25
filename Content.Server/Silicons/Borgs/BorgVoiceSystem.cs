@@ -77,13 +77,13 @@ public sealed class BorgVoiceSystem : EntitySystem
         {
             if (!_prototypeManager.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voicePrototype))
             {
-                _popup.PopupEntity("Invalid voice selected!", uid, args.Actor, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("borg-voice-popup-invalid"), uid, args.Actor, PopupType.MediumCaution);
                 return;
             }
 
             if (voicePrototype.SponsorOnly)
             {
-                _popup.PopupEntity("This voice is only available to sponsors!", uid, args.Actor, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("borg-voice-popup-sponsor-only"), uid, args.Actor, PopupType.MediumCaution);
                 return;
             }
         }
@@ -96,7 +96,7 @@ public sealed class BorgVoiceSystem : EntitySystem
         component.SelectedVoiceId = args.VoiceId;
         Dirty(uid, component);
 
-        _popup.PopupEntity($"Voice changed to {voice.Name}!", uid, args.Actor, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("borg-voice-popup-changed", ("voice", Loc.GetString(voice.Name))), uid, args.Actor, PopupType.Medium);
 
         // Update UI
         var state = CreateVoiceChangeState(uid, component, session);
@@ -150,9 +150,8 @@ public sealed class BorgVoiceSystem : EntitySystem
             return true;
 
         if (_sponsorsManager == null)
-            return false;
+            return true;
 
-        return _sponsorsManager.TryGetPrototypes(player.UserId, out var allowedPrototypes) &&
-               allowedPrototypes != null && allowedPrototypes.Contains(voiceId);
+        return _sponsorsManager.TryGetPrototypes(player.UserId, out var allowedPrototypes) && allowedPrototypes.Contains(voiceId);
     }
 }

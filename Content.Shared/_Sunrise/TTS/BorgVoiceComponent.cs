@@ -18,5 +18,5 @@ public sealed partial class BorgVoiceComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
-    public string VoiceEffect { get; set; } = "robot";
+    public string VoiceEffect = "robot";
 }

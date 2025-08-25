@@ -7,8 +7,6 @@ namespace Content.Client.Silicons.Borgs;
 
 public sealed class BorgVoiceBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly TTSSystem _tts = default!;
-
     private BorgVoiceWindow? _window;
 
     public BorgVoiceBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -42,7 +40,7 @@ public sealed class BorgVoiceBoundUserInterface : BoundUserInterface
 
     private void OnVoicePreview(string voiceId)
     {
-        _tts.RequestPreviewTts(voiceId);
+        EntMan.System<TTSSystem>().RequestPreviewTts(voiceId);
     }
 
     protected override void Dispose(bool disposing)
