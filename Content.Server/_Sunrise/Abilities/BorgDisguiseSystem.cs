@@ -1,3 +1,4 @@
+using Content.Server.Silicons.Borgs;
 using Content.Shared._Sunrise.Abilities;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
@@ -59,7 +60,7 @@ public sealed class BorgDisguiseSystem : EntitySystem
 
         // Update the disguise state
         component.CurrentDisguise = args.DisguiseState;
-        
+
         // Update borg chassis state
         if (args.DisguiseState == component.OriginalState)
         {

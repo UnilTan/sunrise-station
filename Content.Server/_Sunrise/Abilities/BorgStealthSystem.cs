@@ -2,6 +2,7 @@ using Content.Shared._Sunrise.Abilities;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
+using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 
 namespace Content.Server._Sunrise.Abilities;
@@ -11,6 +12,8 @@ public sealed class BorgStealthSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStealthSystem _stealthSystem = default!;
+
 
     public override void Initialize()
     {
@@ -53,11 +56,7 @@ public sealed class BorgStealthSystem : EntitySystem
         {
             // Enable stealth
             var stealthComp = EnsureComp<StealthComponent>(uid);
-            stealthComp.LastVisibility = component.MinVisibility;
-            stealthComp.MinVisibility = component.MinVisibility;
-            stealthComp.MaxVisibility = component.MaxVisibility;
-            stealthComp.Enabled = true;
-            
+            _stealthSystem.SetEnabled(uid, true, stealthComp);
             _popup.PopupEntity("You activate your cloaking device.", uid, uid);
         }
         else
@@ -65,10 +64,9 @@ public sealed class BorgStealthSystem : EntitySystem
             // Disable stealth
             if (TryComp<StealthComponent>(uid, out var stealthComp))
             {
-                stealthComp.LastVisibility = component.MaxVisibility;
-                stealthComp.Enabled = false;
+                _stealthSystem.SetEnabled(uid, false, stealthComp);
             }
-            
+
             _popup.PopupEntity("You deactivate your cloaking device.", uid, uid);
         }
 

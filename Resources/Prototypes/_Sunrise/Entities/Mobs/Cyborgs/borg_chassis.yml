@@ -413,6 +413,9 @@
   - type: BorgDisguise
     originalState: spider
   - type: BorgStealth
+  - type: Stealth
+    minVisibility: 0
+    lastVisibility: 0
   - type: InnateItem
     worldTargetActions:
     - EmagInnateItem
