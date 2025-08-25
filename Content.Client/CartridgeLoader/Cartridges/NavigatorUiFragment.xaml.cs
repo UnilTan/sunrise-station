@@ -13,7 +13,6 @@ namespace Content.Client.CartridgeLoader.Cartridges;
 public sealed partial class NavigatorUiFragment : BoxContainer
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
     public NavMapControl? NavMap;
     private EntityUid? _owner;
@@ -53,20 +52,22 @@ public sealed partial class NavigatorUiFragment : BoxContainer
         if (NavMap == null || _owner == null || !_entManager.EntityExists(_owner.Value))
             return;
 
-        var ownerCoords = _transformSystem.GetMapCoordinates(_owner.Value);
+        var transformSystem = _entManager.System<SharedTransformSystem>();
+
+        var ownerCoords = transformSystem.GetMapCoordinates(_owner.Value);
         var ownerEntityCoords = new EntityCoordinates(_owner.Value, Vector2.Zero);
-        
+
         // Clear previous owner tracking
         NavMap.TrackedCoordinates.Clear();
-        
+
         // Add owner position as a tracked coordinate
-        NavMap.TrackedCoordinates[ownerEntityCoords] = (true, Color.LimeGreen);
+        NavMap.TrackedCoordinates[ownerEntityCoords] = (true, Color.Red);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
-        
+
         // Periodically update owner position
         UpdateOwnerPosition();
     }
