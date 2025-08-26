@@ -1,0 +1,48 @@
+- type: entity
+  parent: BaseComputer
+  id: MusicConsole
+  name: music console
+  description: A console for playing music through station speakers.
+  components:
+  - type: Appearance
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: comm
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: MusicConsole
+    musicVolume: 0.5
+    musicMaxDistance: 30
+    musicRolloffFactor: 1
+    musicLoop: true
+    buttonSound: /Audio/_Sunrise/TapePlayer/switch.ogg
+    tapeSlot:
+      insertSound: /Audio/_Sunrise/TapePlayer/insert_tape.ogg
+      ejectSound: /Audio/_Sunrise/TapePlayer/eject_tape.ogg
+      whitelist:
+        components:
+        - MusicTape
+  - type: Item
+    size: Medium
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      tape: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: ActivatableUI
+    key: enum.MusicConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.MusicConsoleUiKey.Key:
+        type: MusicConsoleBoundUserInterface
+  - type: ApcPowerReceiver
+    needsPower: true
+    voltage: 220

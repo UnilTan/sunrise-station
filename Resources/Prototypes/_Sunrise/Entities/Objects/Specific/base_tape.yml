@@ -9,3 +9,15 @@
     size: Tiny
   - type: Sprite
     sprite: _Sunrise/Objects/Devices/tapes.rsi
+
+- type: entity
+  parent: BaseMusicTape
+  id: MusicTapeTest
+  name: cassette tape (Sunset by PigeonBeans)
+  description:
+  components:
+  - type: Sprite
+    state: tape1
+  - type: MusicTape
+    songName: Sunset by PigeonBeans Sunset by PigeonBeans
+    sound: /Audio/_Sunrise/TapePlayer/Tracks/sunset.ogg

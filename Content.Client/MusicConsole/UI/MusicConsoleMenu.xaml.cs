@@ -6,22 +6,16 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Sunrise.TapePlayer;
+namespace Content.Client.MusicConsole.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class TapePlayerMenu : FancyWindow
+public sealed partial class MusicConsoleMenu : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
     private AudioSystem _audioSystem;
 
-    /// <summary>
-    /// Are we currently 'playing' or paused for the play / pause button.
-    /// </summary>
     private bool _playState;
 
-    /// <summary>
-    /// True if playing, false if paused.
-    /// </summary>
     public event Action<bool>? OnPlayPressed;
     public event Action? OnStopPressed;
     public event Action<float>? SetTime;
@@ -31,7 +25,7 @@ public sealed partial class TapePlayerMenu : FancyWindow
 
     private float _lockTimer;
 
-    public TapePlayerMenu()
+    public MusicConsoleMenu()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -52,7 +46,7 @@ public sealed partial class TapePlayerMenu : FancyWindow
         SetPlayPauseButton(_audioSystem.IsPlaying(_audio), force: true);
     }
 
-    public TapePlayerMenu(AudioSystem audioSystem)
+    public MusicConsoleMenu(AudioSystem audioSystem)
     {
         _audioSystem = audioSystem;
     }
