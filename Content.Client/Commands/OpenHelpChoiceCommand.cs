@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client.UserInterface.Systems.Bwoink;
 using Content.Client.UserInterface.Systems.MentorHelp;
 using Content.Shared.Administration;
@@ -6,6 +5,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Console;
+using System.Numerics;
 
 namespace Content.Client.Commands;
 

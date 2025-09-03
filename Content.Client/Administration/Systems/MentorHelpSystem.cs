@@ -104,5 +104,15 @@ namespace Content.Client.Administration.Systems
         {
             RaiseNetworkEvent(new MentorHelpRequestTicketsMessage(onlyMine));
         }
+
+        /// <summary>
+        /// Request messages for a specific ticket
+        /// </summary>
+        public void RequestTicketMessages(int ticketId)
+        {
+            // For now, we'll implement this as part of ticket selection
+            // In a more complete implementation, you'd want a separate message type
+            // For simplicity, we'll trigger this when a ticket is selected
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client.Administration.Systems;
 using Content.Client.UserInterface.Systems.Bwoink;
 using Content.Client.UserInterface.Systems.MentorHelp;
@@ -10,6 +9,7 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Input.Binding;
+using System.Numerics;
 
 namespace Content.Client.UserInterface.Systems.HelpChoice;
 

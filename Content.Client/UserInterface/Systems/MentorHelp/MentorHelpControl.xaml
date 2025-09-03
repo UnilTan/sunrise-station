@@ -1,0 +1,47 @@
+﻿<Control
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
+    <PanelContainer StyleClasses="BackgroundDark">
+        <SplitContainer Orientation="Vertical" ResizeMode="NotResizable">
+            <SplitContainer Orientation="Horizontal" VerticalExpand="True">
+                <!-- Ticket List on the Left -->
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                    <Label Text="{Loc 'mentor-help-tickets-title'}" StyleClasses="LabelHeading" />
+                    <ScrollContainer VerticalExpand="True">
+                        <ItemList Name="TicketsList" Access="Public" />
+                    </ScrollContainer>
+                    <BoxContainer Orientation="Horizontal" SetHeight="30">
+                        <Button Name="NewTicketButton" Access="Public" Text="{Loc 'mentor-help-new-ticket'}" />
+                        <Control HorizontalExpand="True" />
+                        <Button Name="RefreshButton" Access="Public" Text="{Loc 'mentor-help-refresh'}" />
+                    </BoxContainer>
+                </BoxContainer>
+                
+                <!-- Ticket Details and Messages on the Right -->
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="2">
+                    <!-- Ticket Header -->
+                    <BoxContainer Name="TicketHeader" Access="Public" Orientation="Vertical" SetHeight="60">
+                        <Label Name="TicketSubject" Access="Public" StyleClasses="LabelHeading" />
+                        <Label Name="TicketInfo" Access="Public" StyleClasses="LabelSubText" />
+                    </BoxContainer>
+                    
+                    <!-- Messages Area -->
+                    <ScrollContainer Name="MessagesScroll" Access="Public" VerticalExpand="True">
+                        <BoxContainer Name="MessagesContainer" Access="Public" Orientation="Vertical" />
+                    </ScrollContainer>
+                    
+                    <!-- Reply Area -->
+                    <BoxContainer Orientation="Vertical" SetHeight="80">
+                        <LineEdit Name="ReplyInput" Access="Public" PlaceHolder="{Loc 'mentor-help-reply-placeholder'}" />
+                        <BoxContainer Orientation="Horizontal" SetHeight="30">
+                            <Button Name="SendReplyButton" Access="Public" Text="{Loc 'mentor-help-send-reply'}" />
+                            <Control HorizontalExpand="True" />
+                            <Button Name="ClaimButton" Access="Public" Text="{Loc 'mentor-help-claim'}" />
+                            <Button Name="CloseTicketButton" Access="Public" Text="{Loc 'mentor-help-close-ticket'}" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </SplitContainer>
+        </SplitContainer>
+    </PanelContainer>
+</Control>

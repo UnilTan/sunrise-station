@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Content.Client.Administration.Managers;
 using Content.Client.Administration.Systems;
@@ -233,7 +235,7 @@ public interface IMentorHelpUIHandler : IDisposable
 /// <summary>
 /// UI handler for players (can only see their own tickets)
 /// </summary>
-public class PlayerMentorHelpUIHandler : IMentorHelpUIHandler
+public sealed class PlayerMentorHelpUIHandler : IMentorHelpUIHandler
 {
     public bool IsOpen { get; private set; }
     public bool HasMentorPermissions => false;
@@ -241,6 +243,7 @@ public class PlayerMentorHelpUIHandler : IMentorHelpUIHandler
 
     private readonly NetUserId _ownerUserId;
     private readonly MentorHelpSystem? _mentorHelpSystem;
+    private MentorHelpWindow? _window;
 
     public PlayerMentorHelpUIHandler(NetUserId ownerUserId, MentorHelpSystem? mentorHelpSystem)
     {
@@ -250,30 +253,48 @@ public class PlayerMentorHelpUIHandler : IMentorHelpUIHandler
 
     public void OpenWindow()
     {
+        if (_window != null)
+        {
+            _window.MoveToFront();
+            IsOpen = true;
+            return;
+        }
+
+        _window = new MentorHelpWindow();
+        _window.MentorHelp.Initialize(_mentorHelpSystem, _ownerUserId, false);
+        _window.OnClose += () =>
+        {
+            IsOpen = false;
+            OnClose?.Invoke();
+            _window = null;
+        };
+
+        _window.OpenCentered();
         IsOpen = true;
-        // TODO: Implement actual window opening
+        
         _mentorHelpSystem?.RequestTickets(onlyMine: true);
     }
 
     public void CloseWindow()
     {
+        _window?.Close();
         IsOpen = false;
         OnClose?.Invoke();
     }
 
     public void TicketUpdated(MentorHelpTicketData ticket)
     {
-        // TODO: Update ticket display
+        _window?.MentorHelp.UpdateTicket(ticket);
     }
 
     public void TicketsListReceived(List<MentorHelpTicketData> tickets)
     {
-        // TODO: Display tickets list
+        _window?.MentorHelp.UpdateTicketsList(tickets);
     }
 
     public void TicketMessagesReceived(int ticketId, List<MentorHelpMessageData> messages)
     {
-        // TODO: Display ticket messages
+        _window?.MentorHelp.UpdateTicketMessages(ticketId, messages);
     }
 
     public void Dispose()
@@ -285,7 +306,7 @@ public class PlayerMentorHelpUIHandler : IMentorHelpUIHandler
 /// <summary>
 /// UI handler for mentors/admins (can see and manage all tickets)
 /// </summary>
-public class MentorMentorHelpUIHandler : IMentorHelpUIHandler
+public sealed class MentorMentorHelpUIHandler : IMentorHelpUIHandler
 {
     public bool IsOpen { get; private set; }
     public bool HasMentorPermissions => true;
@@ -293,6 +314,7 @@ public class MentorMentorHelpUIHandler : IMentorHelpUIHandler
 
     private readonly NetUserId _ownerUserId;
     private readonly MentorHelpSystem? _mentorHelpSystem;
+    private MentorHelpWindow? _window;
 
     public MentorMentorHelpUIHandler(NetUserId ownerUserId, MentorHelpSystem? mentorHelpSystem)
     {
@@ -302,30 +324,48 @@ public class MentorMentorHelpUIHandler : IMentorHelpUIHandler
 
     public void OpenWindow()
     {
+        if (_window != null)
+        {
+            _window.MoveToFront();
+            IsOpen = true;
+            return;
+        }
+
+        _window = new MentorHelpWindow();
+        _window.MentorHelp.Initialize(_mentorHelpSystem, _ownerUserId, true);
+        _window.OnClose += () =>
+        {
+            IsOpen = false;
+            OnClose?.Invoke();
+            _window = null;
+        };
+
+        _window.OpenCentered();
         IsOpen = true;
-        // TODO: Implement actual window opening
+        
         _mentorHelpSystem?.RequestTickets(onlyMine: false);
     }
 
     public void CloseWindow()
     {
+        _window?.Close();
         IsOpen = false;
         OnClose?.Invoke();
     }
 
     public void TicketUpdated(MentorHelpTicketData ticket)
     {
-        // TODO: Update ticket display
+        _window?.MentorHelp.UpdateTicket(ticket);
     }
 
     public void TicketsListReceived(List<MentorHelpTicketData> tickets)
     {
-        // TODO: Display tickets list
+        _window?.MentorHelp.UpdateTicketsList(tickets);
     }
 
     public void TicketMessagesReceived(int ticketId, List<MentorHelpMessageData> messages)
     {
-        // TODO: Display ticket messages
+        _window?.MentorHelp.UpdateTicketMessages(ticketId, messages);
     }
 
     public void Dispose()
