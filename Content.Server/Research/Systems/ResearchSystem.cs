@@ -8,6 +8,7 @@ using Content.Shared.Research.Components;
 using Content.Shared.Research.Systems;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Research.Systems
@@ -22,6 +23,7 @@ namespace Content.Server.Research.Systems
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly RadioSystem _radio = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
 
         private static readonly HashSet<Entity<ResearchServerComponent>> ClientLookup = new();
 
@@ -118,6 +120,25 @@ namespace Content.Server.Research.Systems
 
                 UpdateServer(uid, (int) server.ResearchConsoleUpdateTime.TotalSeconds, server);
             }
+        }
+
+        /// <summary>
+        /// Gets the cost multiplier for research based on online player count.
+        /// 1-90 players: 1x cost
+        /// 91-105 players: 1.5x cost
+        /// 106-150+ players: 2x cost
+        /// </summary>
+        private float GetResearchCostMultiplier()
+        {
+            var onlinePlayerCount = _playerManager.Sessions.Count(session => 
+                session.Status is Robust.Shared.Enums.SessionStatus.Connected or Robust.Shared.Enums.SessionStatus.InGame);
+
+            return onlinePlayerCount switch
+            {
+                <= 90 => 1.0f,
+                <= 105 => 1.5f,
+                _ => 2.0f
+            };
         }
     }
 }

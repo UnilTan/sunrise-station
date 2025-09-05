@@ -82,11 +82,12 @@ public sealed partial class ResearchSystem
 
         AddTechnology(serverEnt.Value, prototype);
         TrySetMainDiscipline(prototype, serverEnt.Value);
-        ModifyServerPoints(serverEnt.Value, -prototype.Cost);
+        var scaledCost = (int)(prototype.Cost * GetResearchCostMultiplier());
+        ModifyServerPoints(serverEnt.Value, -scaledCost);
         UpdateTechnologyCards(serverEnt.Value);
 
         _adminLog.Add(LogType.Action, LogImpact.Medium,
-            $"{ToPrettyString(user):player} unlocked {prototype.ID} (discipline: {prototype.Discipline}, tier: {prototype.Tier}) at {ToPrettyString(client)}, for server {ToPrettyString(serverEnt.Value)}.");
+            $"{ToPrettyString(user):player} unlocked {prototype.ID} (discipline: {prototype.Discipline}, tier: {prototype.Tier}, cost: {scaledCost}/{prototype.Cost}) at {ToPrettyString(client)}, for server {ToPrettyString(serverEnt.Value)}.");
         return true;
     }
 
@@ -154,7 +155,8 @@ public sealed partial class ResearchSystem
         if (!IsTechnologyAvailable(database, technology))
             return false;
 
-        if (technology.Cost > serverComp.Points)
+        var scaledCost = (int)(technology.Cost * GetResearchCostMultiplier());
+        if (scaledCost > serverComp.Points)
             return false;
 
         return true;
