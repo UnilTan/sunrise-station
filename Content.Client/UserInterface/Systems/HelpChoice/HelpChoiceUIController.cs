@@ -6,104 +6,59 @@ using JetBrains.Annotations;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Input.Binding;
-using System.Numerics;
 
 namespace Content.Client.UserInterface.Systems.HelpChoice;
 
-/// <summary>
-/// UI controller that shows choice dialog between Admin Help and Mentor Help
-/// </summary>
 [UsedImplicitly]
-public sealed class HelpChoiceUIController : UIController
+public sealed class HelpChoiceUIController: UIController, IOnSystemChanged<MentorHelpSystem>
 {
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IInputManager _input = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-    }
+    private HelpChoiceWindow? _dialog;
 
     public void OnSystemLoaded(MentorHelpSystem system)
     {
-        CommandBinds.Builder
-            .Bind(ContentKeyFunctions.OpenHelpChoice,
-                InputCmdHandler.FromDelegate(_ => ShowHelpChoiceDialog()))
-            .Register<HelpChoiceUIController>();
+        _input.SetInputCommand(ContentKeyFunctions.OpenHelpChoice,
+            InputCmdHandler.FromDelegate(_ => ShowHelpChoiceDialog()));
     }
 
     public void OnSystemUnloaded(MentorHelpSystem system)
     {
-        CommandBinds.Unregister<HelpChoiceUIController>();
+        _input.SetInputCommand(ContentKeyFunctions.OpenHelpChoice, null);
     }
 
     private void ShowHelpChoiceDialog()
     {
-        var dialog = new DefaultWindow
+        if (_dialog != null && _dialog.IsOpen)
         {
-            Title = "Выберите тип помощи",
-            SetSize = new Vector2(400, 200)
-        };
+            _dialog.Close();
+            _dialog = null;
+            return;
+        }
 
-        var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
-        dialog.Contents.AddChild(container);
+        if (_dialog == null)
+        {
+            _dialog = new HelpChoiceWindow();
 
-        // Title label
-        var titleLabel = new RichTextLabel
-        {
-            SetSize = new Vector2(380, 40),
-            Text = "[color=white][font size=16]Какой тип помощи вам нужен?[/font][/color]"
-        };
-        container.AddChild(titleLabel);
+            var local = _dialog;
 
-        // Button container
-        var buttonContainer = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalAlignment = Control.HAlignment.Center,
-            SeparationOverride = 20
-        };
-        container.AddChild(buttonContainer);
+            local.AHelpButton.OnPressed += _ =>
+            {
+                local.Close();
+                _uiManager.GetUIController<AHelpUIController>().Open();
+            };
 
-        // Admin Help button
-        var ahelpButton = new Button
-        {
-            Text = "Админ-помощь\n(для нарушений правил)",
-            SetSize = new Vector2(150, 80),
-            HorizontalAlignment = Control.HAlignment.Center
-        };
-        ahelpButton.OnPressed += _ =>
-        {
-            dialog.Close();
-            _uiManager.GetUIController<AHelpUIController>().Open();
-        };
-        buttonContainer.AddChild(ahelpButton);
+            local.MentorHelpButton.OnPressed += _ =>
+            {
+                local.Close();
+                _uiManager.GetUIController<MentorHelpUIController>().Open();
+            };
 
-        // Mentor Help button
-        var mhelpButton = new Button
-        {
-            Text = "Ментор-помощь\n(для вопросов по игре)",
-            SetSize = new Vector2(150, 80),
-            HorizontalAlignment = Control.HAlignment.Center
-        };
-        mhelpButton.OnPressed += _ =>
-        {
-            dialog.Close();
-            _uiManager.GetUIController<MentorHelpUIController>().Open();
-        };
-        buttonContainer.AddChild(mhelpButton);
+            _dialog.OnClose += () => _dialog = null;
+        }
 
-        // Description
-        var descLabel = new RichTextLabel
-        {
-            SetSize = new Vector2(380, 60),
-            Text = "[color=#CCCCCC][font size=12]• Админ-помощь - для жалоб на игроков, сообщений о багах и нарушениях правил\n• Ментор-помощь - для вопросов о механиках игры и помощи новичкам[/font][/color]"
-        };
-        container.AddChild(descLabel);
-
-        dialog.OpenCentered();
+        _dialog.OpenCentered();
     }
 }

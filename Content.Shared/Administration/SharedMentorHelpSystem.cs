@@ -1,4 +1,3 @@
-#nullable enable
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Content.Shared.Database;
@@ -19,6 +18,10 @@ namespace Content.Shared.Administration
             SubscribeNetworkEvent<MentorHelpReplyMessage>(OnReplyMessage);
             SubscribeNetworkEvent<MentorHelpCloseTicketMessage>(OnCloseTicketMessage);
             SubscribeNetworkEvent<MentorHelpRequestTicketsMessage>(OnRequestTicketsMessage);
+            SubscribeNetworkEvent<MentorHelpUnassignTicketMessage>(OnUnassignTicketMessage);
+            SubscribeNetworkEvent<MentorHelpRequestStatisticsMessage>(OnRequestStatisticsMessage);
+            SubscribeNetworkEvent<MentorHelpRequestTicketMessagesMessage>(OnRequestTicketMessagesMessage);
+
         }
 
         protected virtual void OnCreateTicketMessage(MentorHelpCreateTicketMessage message, EntitySessionEventArgs eventArgs) { }
@@ -26,6 +29,9 @@ namespace Content.Shared.Administration
         protected virtual void OnReplyMessage(MentorHelpReplyMessage message, EntitySessionEventArgs eventArgs) { }
         protected virtual void OnCloseTicketMessage(MentorHelpCloseTicketMessage message, EntitySessionEventArgs eventArgs) { }
         protected virtual void OnRequestTicketsMessage(MentorHelpRequestTicketsMessage message, EntitySessionEventArgs eventArgs) { }
+        protected virtual void OnUnassignTicketMessage(MentorHelpUnassignTicketMessage message, EntitySessionEventArgs eventArgs) { }
+        protected virtual void OnRequestStatisticsMessage(MentorHelpRequestStatisticsMessage message, EntitySessionEventArgs eventArgs) { }
+        protected virtual void OnRequestTicketMessagesMessage(MentorHelpRequestTicketMessagesMessage message, EntitySessionEventArgs eventArgs) { }
     }
 
     /// <summary>
@@ -73,6 +79,20 @@ namespace Content.Shared.Administration
             TicketId = ticketId;
             Message = message;
             IsStaffOnly = isStaffOnly;
+        }
+    }
+
+    /// <summary>
+    /// Message to unassign a mentor help ticket
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class MentorHelpUnassignTicketMessage : EntityEventArgs
+    {
+        public int TicketId { get; }
+
+        public MentorHelpUnassignTicketMessage(int ticketId)
+        {
+            TicketId = ticketId;
         }
     }
 
@@ -160,7 +180,6 @@ namespace Content.Shared.Administration
         public NetUserId? AssignedToUserId { get; set; }
         public string? AssignedToName { get; set; }
         public string Subject { get; set; } = string.Empty;
-        public string InitialMessage { get; set; } = string.Empty;
         public MentorHelpTicketStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
@@ -181,8 +200,56 @@ namespace Content.Shared.Administration
         public int TicketId { get; set; }
         public NetUserId SenderUserId { get; set; }
         public string SenderName { get; set; } = string.Empty;
+        public string FormattedSender { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
         public DateTime SentAt { get; set; }
         public bool IsStaffOnly { get; set; }
+    }
+
+    /// <summary>
+    /// DTO для передачи статистики по менторам
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class MentorHelpStatisticsData
+    {
+        public string MentorName { get; set; } = string.Empty;
+        public int TicketsClaimed { get; set; }
+        public int MessagesCount { get; set; }
+    }
+
+    /// <summary>
+    /// Сообщение-запрос статистики по менторам
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class MentorHelpRequestStatisticsMessage : EntityEventArgs
+    {
+        // Пустой класс-запрос
+    }
+
+    /// <summary>
+    /// Сообщение с результатами статистики по менторам
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class MentorHelpStatisticsMessage : EntityEventArgs
+    {
+        public List<MentorHelpStatisticsData> Statistics { get; }
+        public MentorHelpStatisticsMessage(List<MentorHelpStatisticsData> statistics)
+        {
+            Statistics = statistics;
+        }
+    }
+
+    /// <summary>
+    /// Message to request messages for a specific ticket (from client)
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class MentorHelpRequestTicketMessagesMessage : EntityEventArgs
+    {
+        public int TicketId { get; }
+
+        public MentorHelpRequestTicketMessagesMessage(int ticketId)
+        {
+            TicketId = ticketId;
+        }
     }
 }

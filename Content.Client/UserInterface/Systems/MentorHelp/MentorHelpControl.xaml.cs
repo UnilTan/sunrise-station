@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Content.Client.Administration.Systems;
 using Content.Shared.Administration;
@@ -29,6 +27,17 @@ namespace Content.Client.UserInterface.Systems.MentorHelp
         private MentorHelpTicketData? _selectedTicket;
         private Dictionary<int, List<MentorHelpMessageData>> _ticketMessages = new();
 
+        private readonly Dictionary<int, TicketEntryControl> _openTicketControls = new();
+        private readonly Dictionary<int, TicketEntryControl> _closedTicketControls = new();
+
+        private enum ViewState
+        {
+            TicketsList,
+            TicketView
+        }
+
+        private MentorHelpNewTicketDialog? _newTicketDialog;
+
         public MentorHelpControl()
         {
             RobustXamlLoader.Load(this);
@@ -36,19 +45,26 @@ namespace Content.Client.UserInterface.Systems.MentorHelp
 
             // Wire up button events
             NewTicketButton.OnPressed += _ => OpenNewTicketDialog();
-            RefreshButton.OnPressed += _ => RefreshTickets();
-            SendReplyButton.OnPressed += _ => SendReply();
-            ClaimButton.OnPressed += _ => ClaimTicket();
-            CloseTicketButton.OnPressed += _ => CloseTicket();
+            StatisticsButton.OnPressed += _ => _ui.GetUIController<MentorHelpStatisticsUIController>().ToggleStatistics();
+            BackToListButton.OnPressed += _ => SwitchState(ViewState.TicketsList);
 
-            // Wire up ticket selection
-            TicketsList.OnItemSelected += OnTicketSelected;
+            // Wire up ticket action buttons
+            ClaimButton.OnPressed += _ => ClaimTicket();
+            UnassignButton.OnPressed += _ => UnassignTicket();
+            CloseTicketButton.OnPressed += _ => CloseTicket();
 
             // Handle enter key in reply input
             ReplyInput.OnTextEntered += _ => SendReply();
 
-            // Hide ticket details initially
-            UpdateTicketDetailsVisibility();
+            // Setup tab container like in AdminMenuWindow
+            TicketsTabContainer.SetTabTitle(0, Loc.GetString("mentor-help-tab-open"));
+            TicketsTabContainer.SetTabTitle(1, Loc.GetString("mentor-help-tab-closed"));
+
+            // Handle tab changes to load closed tickets when needed
+            TicketsTabContainer.OnTabChanged += OnTabChanged;
+
+            // Set initial state
+            SwitchState(ViewState.TicketsList);
         }
 
         public void Initialize(MentorHelpSystem? mentorHelpSystem, NetUserId ownerUserId, bool hasMentorPermissions)
@@ -57,50 +73,122 @@ namespace Content.Client.UserInterface.Systems.MentorHelp
             _ownerUserId = ownerUserId;
             _hasMentorPermissions = hasMentorPermissions;
 
-            // Update UI based on permissions
-            NewTicketButton.Visible = true; // Everyone can create tickets
-            ClaimButton.Visible = _hasMentorPermissions;
-            CloseTicketButton.Visible = _hasMentorPermissions;
+            // Show/hide buttons based on permissions
+            StatisticsButton.Visible = _hasMentorPermissions;
+            UpdateTicketActionButtons();
+        }
+
+        private void OnTabChanged(int tabIndex)
+        {
+            // When switching to closed tickets tab, request all tickets including closed ones
+            if (tabIndex == 1 && _hasMentorPermissions)
+            {
+                _mentorHelpSystem?.RequestTickets(onlyMine: false);
+            }
+            else if (tabIndex == 1 && !_hasMentorPermissions)
+            {
+                _mentorHelpSystem?.RequestTickets(onlyMine: true);
+            }
+        }
+
+        // State switching like in LobbyGui
+        private void SwitchState(ViewState state)
+        {
+            DefaultState.Visible = false;
+            TicketViewState.Visible = false;
+            BackToListButton.Visible = false;
+
+            switch (state)
+            {
+                case ViewState.TicketsList:
+                    DefaultState.Visible = true;
+                    _selectedTicket = null;
+                    break;
+                case ViewState.TicketView:
+                    TicketViewState.Visible = true;
+                    BackToListButton.Visible = true;
+                    UpdateTicketHeader();
+                    UpdateTicketActionButtons();
+                    break;
+            }
         }
 
         public void UpdateTicketsList(List<MentorHelpTicketData> tickets)
         {
             _tickets = tickets;
-            TicketsList.Clear();
+            RefreshTicketsList();
+        }
 
-            foreach (var ticket in tickets.OrderByDescending(t => t.UpdatedAt))
+        // Refresh tickets like in ContributorsTop
+        private void RefreshTicketsList()
+        {
+            var openTickets = _tickets.Where(t => t.Status != MentorHelpTicketStatus.Closed).ToList();
+            var closedTickets = _tickets.Where(t => t.Status == MentorHelpTicketStatus.Closed).ToList();
+
+            // Filter for players to show only their tickets
+            if (!_hasMentorPermissions)
             {
-                var statusIcon = ticket.Status switch
-                {
-                    MentorHelpTicketStatus.Open => "[color=green]●[/color]",
-                    MentorHelpTicketStatus.Assigned => "[color=yellow]●[/color]",
-                    MentorHelpTicketStatus.AwaitingResponse => "[color=orange]●[/color]",
-                    MentorHelpTicketStatus.Closed => "[color=gray]●[/color]",
-                    _ => "[color=red]●[/color]"
-                };
-
-                var hasUnread = ticket.HasUnreadMessages ? "[color=red]*[/color]" : "";
-                var listItem = $"{statusIcon} #{ticket.Id} {hasUnread} {ticket.Subject}";
-
-                TicketsList.AddItem(listItem);
+                openTickets = openTickets.Where(t => t.PlayerId == _ownerUserId).ToList();
+                closedTickets = closedTickets.Where(t => t.PlayerId == _ownerUserId).ToList();
             }
 
-            // Try to keep current selection if possible - simplified for now
-            // if (_selectedTicket != null)
-            // {
-            //     var selectedIndex = _tickets.FindIndex(t => t.Id == _selectedTicket.Id);
-            //     if (selectedIndex >= 0 && selectedIndex < TicketsList.Count)
-            //     {
-            //         TicketsList.Select(selectedIndex);
-            //     }
-            // }
+            // Update open tickets
+            RefreshTicketTab(openTickets, _openTicketControls, OpenTicketsList);
+
+            // Update closed tickets
+            RefreshTicketTab(closedTickets, _closedTicketControls, ClosedTicketsList);
+        }
+
+        private void RefreshTicketTab(List<MentorHelpTicketData> tickets, Dictionary<int, TicketEntryControl> controls, BoxContainer container)
+        {
+            var sortedTickets = tickets.OrderByDescending(t => t.UpdatedAt).ToList();
+
+            // Remove tickets that no longer exist
+            var toRemove = controls.Keys.Where(id => !sortedTickets.Any(t => t.Id == id)).ToList();
+            foreach (var id in toRemove)
+            {
+                if (controls.TryGetValue(id, out var control))
+                {
+                    container.RemoveChild(control);
+                    controls.Remove(id);
+                }
+            }
+
+            // Add or update existing tickets
+            foreach (var ticket in sortedTickets)
+            {
+                if (controls.TryGetValue(ticket.Id, out var existingControl))
+                {
+                    existingControl.UpdateData(ticket);
+                }
+                else
+                {
+                    var control = new TicketEntryControl();
+                    control.UpdateData(ticket);
+                    control.OnTicketSelected += OnTicketSelected;
+                    controls[ticket.Id] = control;
+                    container.AddChild(control);
+                }
+            }
+        }
+
+        private void OnTicketSelected(MentorHelpTicketData ticket)
+        {
+            _selectedTicket = ticket;
+            SwitchState(ViewState.TicketView);
+
+            // Clear previous messages first
+            MessagesContainer.RemoveAllChildren();
+
+            // Request messages for this ticket
+            _mentorHelpSystem?.RequestTicketMessages(ticket.Id);
         }
 
         public void UpdateTicketMessages(int ticketId, List<MentorHelpMessageData> messages)
         {
             _ticketMessages[ticketId] = messages;
 
-            if (_selectedTicket?.Id == ticketId)
+            if (_selectedTicket?.Id == ticketId && TicketViewState.Visible)
             {
                 DisplayTicketMessages(messages);
             }
@@ -123,35 +211,24 @@ namespace Content.Client.UserInterface.Systems.MentorHelp
             if (_selectedTicket?.Id == ticket.Id)
             {
                 _selectedTicket = ticket;
-                UpdateTicketHeader();
+                if (TicketViewState.Visible)
+                {
+                    UpdateTicketHeader();
+                    UpdateTicketActionButtons();
+                }
+            }
+
+            // If admin closed the ticket while player was viewing it, return to list
+            if (ticket.Status == MentorHelpTicketStatus.Closed &&
+                _selectedTicket?.Id == ticket.Id &&
+                !_hasMentorPermissions &&
+                TicketViewState.Visible)
+            {
+                SwitchState(ViewState.TicketsList);
             }
 
             // Refresh the list to show updated status
-            UpdateTicketsList(_tickets);
-        }
-
-        private void OnTicketSelected(ItemList.ItemListSelectedEventArgs args)
-        {
-            if (args.ItemIndex < 0 || args.ItemIndex >= _tickets.Count)
-                return;
-
-            _selectedTicket = _tickets[args.ItemIndex];
-            UpdateTicketDetailsVisibility();
-            UpdateTicketHeader();
-
-            // Request messages for this ticket
-            _mentorHelpSystem?.RequestTicketMessages(_selectedTicket.Id);
-        }
-
-        private void UpdateTicketDetailsVisibility()
-        {
-            var hasTicket = _selectedTicket != null;
-            TicketHeader.Visible = hasTicket;
-            MessagesScroll.Visible = hasTicket;
-            ReplyInput.Visible = hasTicket;
-            SendReplyButton.Visible = hasTicket;
-            ClaimButton.Visible = hasTicket && _hasMentorPermissions;
-            CloseTicketButton.Visible = hasTicket && _hasMentorPermissions;
+            RefreshTicketsList();
         }
 
         private void UpdateTicketHeader()
@@ -159,78 +236,125 @@ namespace Content.Client.UserInterface.Systems.MentorHelp
             if (_selectedTicket == null)
                 return;
 
-            TicketSubject.Text = $"#{_selectedTicket.Id}: {_selectedTicket.Subject}";
+            // Отдельные метки для ID и темы (чтобы занимали меньше места и были выровнены)
+            TicketIdLabel.Text = $"#{_selectedTicket.Id}";
+            TicketSubjectLabel.Text = _selectedTicket.Subject;
 
-            var statusText = _selectedTicket.Status.ToString();
-            var assignedText = _selectedTicket.AssignedToName ?? "Не назначен";
-            var createdText = _selectedTicket.CreatedAt.ToString("dd.MM.yyyy HH:mm");
+            // Компактная строка: статус | назначен | создано
+            TicketStatus.Text = Loc.GetString("mentor-help-status-label", ("status", GetStatusText(_selectedTicket.Status)));
+            TicketAssigned.Text = Loc.GetString("mentor-help-assigned-label",
+                ("assigned", _selectedTicket.AssignedToName ?? Loc.GetString("mentor-help-unassigned")));
+            TicketCreated.Text = Loc.GetString("mentor-help-created-label",
+                ("created", _selectedTicket.CreatedAt.ToString("dd.MM.yyyy HH:mm")));
+        }
 
-            TicketInfo.Text = $"Статус: {statusText} | Назначен: {assignedText} | Создан: {createdText}";
+        private void UpdateTicketActionButtons()
+        {
+            if (_selectedTicket == null)
+            {
+                ReplyPanel.Visible = false;
+                return;
+            }
 
-            // Update button states
+            var canReply = _selectedTicket.Status != MentorHelpTicketStatus.Closed;
+            var isAssignedToMe = _selectedTicket.AssignedToUserId == _ownerUserId;
+            var isOpen = _selectedTicket.Status != MentorHelpTicketStatus.Closed;
+
+            // Hide reply panel for closed tickets
+            ReplyPanel.Visible = canReply;
+
             if (_hasMentorPermissions)
             {
-                ClaimButton.Text = _selectedTicket.AssignedToUserId == _ownerUserId ? "Освободить" : "Взять";
-                CloseTicketButton.Disabled = _selectedTicket.Status == MentorHelpTicketStatus.Closed;
+                ClaimButton.Visible = isOpen && !isAssignedToMe;
+                UnassignButton.Visible = isOpen && isAssignedToMe;
+                CloseTicketButton.Visible = isOpen;
             }
+            else
+            {
+                ClaimButton.Visible = false;
+                UnassignButton.Visible = false;
+                CloseTicketButton.Visible = isOpen; // Players can close their own tickets
+            }
+        }
+
+        private string GetStatusText(MentorHelpTicketStatus status)
+        {
+            return status switch
+            {
+                MentorHelpTicketStatus.Open => Loc.GetString("mentor-help-status-open"),
+                MentorHelpTicketStatus.Assigned => Loc.GetString("mentor-help-status-assigned"),
+                MentorHelpTicketStatus.AwaitingResponse => Loc.GetString("mentor-help-status-awaiting"),
+                MentorHelpTicketStatus.Closed => Loc.GetString("mentor-help-status-closed"),
+                _ => Loc.GetString("mentor-help-status-unknown")
+            };
         }
 
         private void DisplayTicketMessages(List<MentorHelpMessageData> messages)
         {
             MessagesContainer.RemoveAllChildren();
 
+            DateTime? lastDate = null;
+
             foreach (var message in messages.OrderBy(m => m.SentAt))
             {
+                // Ensure we show a date header when the day changes
+                var sentAt = message.SentAt;
+                var sentDate = sentAt.Date;
+                if (lastDate == null || lastDate.Value != sentDate)
+                {
+                    lastDate = sentDate;
+                    var dateLabel = new RichTextLabel
+                    {
+                        Text = $"[center=\"{sentAt:dd.MM.yyyy}\"]",
+                        HorizontalExpand = true
+                    };
+
+                    MessagesContainer.AddChild(dateLabel);
+                }
+
                 var messageBox = new PanelContainer
                 {
                     StyleClasses = { "PanelColorMedium" },
-                    SetHeight = 60
+                    HorizontalExpand = true,
+                    Margin = new Thickness(0, 2)
                 };
 
                 var vbox = new BoxContainer
                 {
                     Orientation = BoxContainer.LayoutOrientation.Vertical,
-                    Margin = new Thickness(5)
+                    HorizontalExpand = true
                 };
 
-                // Message header with sender and time
-                var header = new Label
-                {
-                    Text = $"{message.SenderName} - {message.SentAt:dd.MM.yyyy HH:mm}",
-                    StyleClasses = { "LabelSubText" }
-                };
-
-                // Message content
+                // Format: [HH:mm] Author: message
                 var content = new RichTextLabel
                 {
-                    Text = message.Message,
-                    VerticalExpand = true
+                    Text = $"[bold]{sentAt:HH:mm}[/bold] {message.FormattedSender}: {message.Message}",
+                    HorizontalExpand = true
                 };
 
-                vbox.AddChild(header);
                 vbox.AddChild(content);
                 messageBox.AddChild(vbox);
                 MessagesContainer.AddChild(messageBox);
             }
-
-            // Scroll to bottom - simplified approach
-            // MessagesScroll.GetVScrollBar().ValueTarget = MessagesScroll.GetVScrollBar().MaxValue;
         }
 
         private void OpenNewTicketDialog()
         {
-            var dialog = new MentorHelpNewTicketDialog();
-            dialog.OnTicketCreated += (subject, message) =>
+            if (_newTicketDialog != null)
             {
-                _mentorHelpSystem?.CreateTicket(subject, message);
-                dialog.Close();
-            };
-            dialog.OpenCentered();
-        }
+                _newTicketDialog.Close();
+                _newTicketDialog = null;
+                return;
+            }
 
-        private void RefreshTickets()
-        {
-            _mentorHelpSystem?.RequestTickets(!_hasMentorPermissions);
+            _newTicketDialog = new MentorHelpNewTicketDialog();
+            _newTicketDialog.OnTicketCreated += (subject, message) =>
+            {
+                _newTicketDialog?.Close();
+                _mentorHelpSystem?.CreateTicket(subject, message);
+            };
+            _newTicketDialog.OnClose += () => _newTicketDialog = null;
+            _newTicketDialog.OpenCentered();
         }
 
         private void SendReply()
@@ -248,6 +372,14 @@ namespace Content.Client.UserInterface.Systems.MentorHelp
                 return;
 
             _mentorHelpSystem?.ClaimTicket(_selectedTicket.Id);
+        }
+
+        private void UnassignTicket()
+        {
+            if (_selectedTicket == null)
+                return;
+
+            _mentorHelpSystem?.UnassignTicket(_selectedTicket.Id);
         }
 
         private void CloseTicket()

@@ -26,6 +26,14 @@ using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Content.Server.Database
 {
+    // Структура для статистики по менторам
+    public struct MentorHelpStatistics
+    {
+        public Guid MentorUserId { get; set; }
+        public int TicketsClaimed { get; set; }
+        public int MessagesCount { get; set; }
+    }
+
     public interface IServerDbManager
     {
         void Init();
@@ -380,6 +388,7 @@ namespace Content.Server.Database
 
         #region MentorHelp
 
+        Task<List<MentorHelpStatistics>> GetMentorHelpStatisticsAsync();
         Task AddMentorHelpTicketAsync(MentorHelpTicket ticket);
         Task<MentorHelpTicket?> GetMentorHelpTicketAsync(int ticketId);
         Task UpdateMentorHelpTicketAsync(MentorHelpTicket ticket);
@@ -388,6 +397,7 @@ namespace Content.Server.Database
         Task<List<MentorHelpTicket>> GetAssignedMentorHelpTicketsAsync(Guid mentorId);
         Task AddMentorHelpMessageAsync(MentorHelpMessage message);
         Task<List<MentorHelpMessage>> GetMentorHelpMessagesByTicketAsync(int ticketId);
+        Task<List<MentorHelpTicket>> GetClosedMentorHelpTicketsAsync();
 
         #endregion
         // Sunrise-End
@@ -1113,6 +1123,11 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.AddMentorHelpTicketAsync(ticket));
         }
 
+        public Task<List<MentorHelpStatistics>> GetMentorHelpStatisticsAsync()
+        {
+            return RunDbCommand(() => _db.GetMentorHelpStatisticsAsync());
+        }
+
         public Task<MentorHelpTicket?> GetMentorHelpTicketAsync(int ticketId)
         {
             return RunDbCommand(() => _db.GetMentorHelpTicketAsync(ticketId));
@@ -1148,6 +1163,11 @@ namespace Content.Server.Database
         public Task<List<MentorHelpMessage>> GetMentorHelpMessagesByTicketAsync(int ticketId)
         {
             return RunDbCommand(() => _db.GetMentorHelpMessagesByTicketAsync(ticketId));
+        }
+
+        public Task<List<MentorHelpTicket>> GetClosedMentorHelpTicketsAsync()
+        {
+            return RunDbCommand(() => _db.GetClosedMentorHelpTicketsAsync());
         }
 
         public void SubscribeToNotifications(Action<DatabaseNotification> handler)

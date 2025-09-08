@@ -20,7 +20,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     player_id = table.Column<Guid>(type: "TEXT", nullable: false),
                     assigned_to_user_id = table.Column<Guid>(type: "TEXT", nullable: true),
                     subject = table.Column<string>(type: "TEXT", maxLength: 512, nullable: false),
-                    initial_message = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: false),
                     status = table.Column<int>(type: "INTEGER", nullable: false),
                     created_at = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     updated_at = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),

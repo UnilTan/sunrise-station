@@ -771,12 +771,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("created_at");
 
-                    b.Property<string>("InitialMessage")
-                        .IsRequired()
-                        .HasMaxLength(4096)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("initial_message");
-
                     b.Property<Guid>("PlayerId")
                         .HasColumnType("TEXT")
                         .HasColumnName("player_id");

@@ -1,6 +1,6 @@
 ﻿<DefaultWindow xmlns="https://spacestation14.io"
             xmlns:cc="clr-namespace:Content.Client.UserInterface.Systems.MentorHelp"
-            SetSize="900 500"
+            SetSize="900 700"
             HeaderClass="windowHeaderHelp"
             TitleClass="windowTitleHelp"
             Title="{Loc 'mentor-help-window-title'}" >

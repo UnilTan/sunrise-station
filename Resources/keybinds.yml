@@ -241,6 +241,12 @@ binds:
 - function: OpenGuidebook
   type: State
   key: NumpadNum0
+#- function: OpenAHelp
+#  type: State
+#  key: F1
+#- function: OpenMentorHelp
+#  type: State
+#  key: F1
 - function: OpenHelpChoice
   type: State
   key: F1

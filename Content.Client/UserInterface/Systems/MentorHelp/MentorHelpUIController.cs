@@ -6,7 +6,9 @@ using Content.Client.Administration.Systems;
 using Content.Client.Gameplay;
 using Content.Client.Lobby;
 using Content.Client.Lobby.UI;
+using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
+using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Input;
@@ -45,6 +47,9 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
     private bool _mentorHelpSoundEnabled;
     private string? _mentorHelpSound;
 
+    private Button? LobbyMHelpButton => (UIManager.ActiveScreen as LobbyGui)?.MHelpButton;
+    private MenuButton? GameMHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.MHelpButton;
+
     protected override string SawmillName => "c.s.go.es.mhelp";
 
     public override void Initialize()
@@ -52,8 +57,8 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
         base.Initialize();
 
         _adminManager.AdminStatusUpdated += OnAdminStatusUpdated;
-        _config.OnValueChanged(CCVars.AHelpSound, v => _mentorHelpSound = v, true); // Reuse ahelp sound for now
-        _config.OnValueChanged(CCVars.BwoinkSoundEnabled, v => _mentorHelpSoundEnabled = v, true);
+        _config.OnValueChanged(SunriseCCVars.MentorHelpSound, v => _mentorHelpSound = v, true); // Reuse ahelp sound for now
+        _config.OnValueChanged(SunriseCCVars.MentorHelpSoundEnabled, v => _mentorHelpSoundEnabled = v, true);
     }
 
     public void OnSystemLoaded(MentorHelpSystem system)
@@ -80,11 +85,18 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
             _mentorHelpSystem.OnTicketMessagesReceived -= OnTicketMessagesReceived;
             _mentorHelpSystem = null;
         }
+
+        if (GameMHelpButton != null)
+            GameMHelpButton.OnPressed -= MHelpButtonPressed;
+
+        if (LobbyMHelpButton != null)
+            LobbyMHelpButton.OnPressed -= MHelpButtonPressed;
     }
 
     public void OnStateEntered(GameplayState state)
     {
         EnsureUIHelper();
+        SubscribeToButtons();
     }
 
     public void OnStateExited(GameplayState state)
@@ -95,6 +107,7 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
     public void OnStateEntered(LobbyState state)
     {
         EnsureUIHelper();
+        SubscribeToButtons();
     }
 
     public void OnStateExited(LobbyState state)
@@ -102,9 +115,23 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
         // Keep UI helper for potential return to lobby
     }
 
+    private void SubscribeToButtons()
+    {
+        if (GameMHelpButton != null)
+            GameMHelpButton.OnPressed += MHelpButtonPressed;
+
+        if (LobbyMHelpButton != null)
+            LobbyMHelpButton.OnPressed += MHelpButtonPressed;
+    }
+
+    private void MHelpButtonPressed(BaseButton.ButtonEventArgs obj)
+    {
+        ToggleWindow();
+    }
+
     private void OnAdminStatusUpdated()
     {
-        _hasMentorPermissions = _adminManager.HasFlag(AdminFlags.Adminhelp);
+        _hasMentorPermissions = _adminManager.HasFlag(AdminFlags.Mentor);
 
         if (UIHelper is not { IsOpen: true })
             return;
@@ -144,7 +171,7 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
 
     public void EnsureUIHelper()
     {
-        var hasMentorPerms = _adminManager.HasFlag(AdminFlags.Adminhelp);
+        var hasMentorPerms = _adminManager.HasFlag(AdminFlags.Mentor);
 
         if (UIHelper != null && UIHelper.HasMentorPermissions == hasMentorPerms)
             return;
@@ -201,18 +228,42 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
     {
         UIManager.ClickSound();
         UnreadTicketRead();
+
+        if (GameMHelpButton != null)
+        {
+            GameMHelpButton.Pressed = pressed;
+        }
+
+        if (LobbyMHelpButton != null)
+        {
+            LobbyMHelpButton.Pressed = pressed;
+        }
     }
 
     private void UnreadTicketReceived()
     {
         _hasUnreadTickets = true;
-        // Could update UI button state here
+        UpdateButtonStyling();
     }
 
     private void UnreadTicketRead()
     {
         _hasUnreadTickets = false;
-        // Could update UI button state here
+        UpdateButtonStyling();
+    }
+
+    private void UpdateButtonStyling()
+    {
+        if (_hasUnreadTickets)
+        {
+            GameMHelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
+            LobbyMHelpButton?.StyleClasses.Add("ButtonColorRed");
+        }
+        else
+        {
+            GameMHelpButton?.StyleClasses.Remove(MenuButton.StyleClassRedTopButton);
+            LobbyMHelpButton?.StyleClasses.Remove("ButtonColorRed");
+        }
     }
 }
 
@@ -271,7 +322,7 @@ public sealed class PlayerMentorHelpUIHandler : IMentorHelpUIHandler
 
         _window.OpenCentered();
         IsOpen = true;
-        
+
         _mentorHelpSystem?.RequestTickets(onlyMine: true);
     }
 
@@ -342,7 +393,7 @@ public sealed class MentorMentorHelpUIHandler : IMentorHelpUIHandler
 
         _window.OpenCentered();
         IsOpen = true;
-        
+
         _mentorHelpSystem?.RequestTickets(onlyMine: false);
     }
 

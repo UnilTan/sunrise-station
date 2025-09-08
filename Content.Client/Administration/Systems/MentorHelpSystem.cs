@@ -15,6 +15,7 @@ namespace Content.Client.Administration.Systems
         public event EventHandler<MentorHelpTicketUpdateMessage>? OnTicketUpdated;
         public event EventHandler<MentorHelpTicketsListMessage>? OnTicketsListReceived;
         public event EventHandler<MentorHelpTicketMessagesMessage>? OnTicketMessagesReceived;
+        public event EventHandler<MentorHelpStatisticsMessage>? OnStatisticsReceived;
 
         protected override void OnCreateTicketMessage(MentorHelpCreateTicketMessage message, EntitySessionEventArgs eventArgs)
         {
@@ -41,6 +42,16 @@ namespace Content.Client.Administration.Systems
             // Client doesn't handle this directly
         }
 
+        protected override void OnUnassignTicketMessage(MentorHelpUnassignTicketMessage message, EntitySessionEventArgs eventArgs)
+        {
+            // Client doesn't handle this directly
+        }
+
+        protected override void OnRequestStatisticsMessage(MentorHelpRequestStatisticsMessage message, EntitySessionEventArgs eventArgs)
+        {
+            // Client doesn't handle this directly
+        }
+
         public override void Initialize()
         {
             base.Initialize();
@@ -48,6 +59,7 @@ namespace Content.Client.Administration.Systems
             SubscribeNetworkEvent<MentorHelpTicketUpdateMessage>(OnTicketUpdate);
             SubscribeNetworkEvent<MentorHelpTicketsListMessage>(OnTicketsList);
             SubscribeNetworkEvent<MentorHelpTicketMessagesMessage>(OnTicketMessages);
+            SubscribeNetworkEvent<MentorHelpStatisticsMessage>(OnStatistics);
         }
 
         private void OnTicketUpdate(MentorHelpTicketUpdateMessage message, EntitySessionEventArgs eventArgs)
@@ -68,6 +80,12 @@ namespace Content.Client.Administration.Systems
         /// <summary>
         /// Create a new mentor help ticket
         /// </summary>
+        private void OnStatistics(MentorHelpStatisticsMessage message, EntitySessionEventArgs eventArgs)
+        {
+            OnStatisticsReceived?.Invoke(this, message);
+        }
+
+        /// </summary>
         public void CreateTicket(string subject, string message)
         {
             RaiseNetworkEvent(new MentorHelpCreateTicketMessage(subject, message));
@@ -79,6 +97,14 @@ namespace Content.Client.Administration.Systems
         public void ClaimTicket(int ticketId)
         {
             RaiseNetworkEvent(new MentorHelpClaimTicketMessage(ticketId));
+        }
+
+        /// <summary>
+        /// Unassign a mentor help ticket
+        /// </summary>
+        public void UnassignTicket(int ticketId)
+        {
+            RaiseNetworkEvent(new MentorHelpUnassignTicketMessage(ticketId));
         }
 
         /// <summary>
@@ -110,9 +136,16 @@ namespace Content.Client.Administration.Systems
         /// </summary>
         public void RequestTicketMessages(int ticketId)
         {
-            // For now, we'll implement this as part of ticket selection
-            // In a more complete implementation, you'd want a separate message type
-            // For simplicity, we'll trigger this when a ticket is selected
+            // Send a request to the server to fetch messages for the given ticket
+            RaiseNetworkEvent(new MentorHelpRequestTicketMessagesMessage(ticketId));
+        }
+
+        /// <summary>
+        /// Request mentor help statistics
+        /// </summary>
+        public void RequestStatistics()
+        {
+            RaiseNetworkEvent(new MentorHelpRequestStatisticsMessage());
         }
     }
 }
