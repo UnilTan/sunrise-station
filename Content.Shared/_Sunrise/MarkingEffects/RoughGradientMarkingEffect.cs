@@ -47,12 +47,6 @@ public sealed partial class RoughGradientMarkingEffect : MarkingEffect
             }
         }
 
-        // Ensure both base and gradient colors are present for compatibility
-        if (!colors.ContainsKey("base"))
-            colors["base"] = Color.White;
-        if (!colors.ContainsKey("gradient"))
-            colors["gradient"] = colors["base"]; // Use base color as fallback
-
         return new RoughGradientMarkingEffect(colors, horizontal);
     }
     #endregion
@@ -62,8 +56,7 @@ public sealed partial class RoughGradientMarkingEffect : MarkingEffect
     {
         Colors = new Dictionary<string, Color>()
         {
-            { "base", Color.White },
-            { "gradient", Color.White }
+            { "base", Color.White }
         };
     }
 
@@ -71,8 +64,7 @@ public sealed partial class RoughGradientMarkingEffect : MarkingEffect
     {
         Colors = new Dictionary<string, Color>
         {
-            {"base", color },
-            {"gradient", color }
+            {"base", color }
         };
     }
 
