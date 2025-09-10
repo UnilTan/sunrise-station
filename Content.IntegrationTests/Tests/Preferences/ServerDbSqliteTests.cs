@@ -53,7 +53,9 @@ namespace Content.IntegrationTests.Tests.Preferences
                     Color.Aquamarine,
                     Color.Azure,
                     Color.Beige,
-                    new ())
+                    new (),
+                    1.0f,
+                    1.0f)
             };
         }
 
