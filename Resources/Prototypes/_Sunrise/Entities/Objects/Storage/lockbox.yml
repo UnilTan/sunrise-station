@@ -57,7 +57,6 @@
     - state: internals
     - state: implant
   - type: Storage
-    maxItemSize: Normal
     grid:
     - 0,0,1,1
   - type: Item
@@ -76,7 +75,6 @@
     - state: box_security
     - state: implant
   - type: Storage
-    maxItemSize: Normal
     grid:
     - 0,0,1,1
   - type: Item
