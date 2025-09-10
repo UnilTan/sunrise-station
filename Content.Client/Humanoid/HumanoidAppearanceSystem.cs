@@ -13,6 +13,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics; //Sunrise
 using Robust.Shared.Maths; //Sunrise
 using Robust.Shared.Configuration;
+using Robust.Shared.Log; //Lua: for debug logging
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -245,7 +246,10 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         humanoid.FacialHairGradientDirection = profile.Appearance.FacialHairGradientDirection;
         humanoid.AllMarkingsGradientEnabled = profile.Appearance.AllMarkingsGradientEnabled;
         humanoid.AllMarkingsGradientSecondaryColor = profile.Appearance.AllMarkingsGradientSecondaryColor;
-        humanoid.AllMarkingsGradientDirection = profile.Appearance.AllMarkingsGradientDirection; //Sunrise end
+        humanoid.AllMarkingsGradientDirection = profile.Appearance.AllMarkingsGradientDirection;
+        // Set cached hair colors for gradient shader
+        humanoid.CachedHairColor = hairColor;
+        humanoid.CachedFacialHairColor = facialHairColor; //Sunrise end
 
         UpdateSprite((uid, humanoid, Comp<SpriteComponent>(uid)));
     }
@@ -408,6 +412,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 
             if (isHair && humanoid.HairGradientEnabled)
             {
+                Log.Debug($"Applying hair gradient: enabled={humanoid.HairGradientEnabled}, secondaryColor={humanoid.HairGradientSecondaryColor}, direction={humanoid.HairGradientDirection}"); //Lua: debug
                 var inst = _prototypeManager.Index<ShaderPrototype>("HairGradient").InstanceUnique();
                 var baseCol = (colors != null && j < colors.Count)
                     ? colors[j]

@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Robust.Shared.Log;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
@@ -252,9 +253,11 @@ namespace Content.Client.Lobby.UI
 
             #endregion
 
-            RefreshSpecies();
+            // Sunrise: Инициализируем градиентные контролы ПЕРЕД RefreshSpecies
             InitializeHairGradientControls(); //Sunrise
             InitializeAllMarkingsGradientControls(); //Sunrise
+
+            RefreshSpecies();
 
             SpeciesButton.OnItemSelected += args =>
             {
@@ -692,7 +695,7 @@ namespace Content.Client.Lobby.UI
             SpeciesButton.Clear();
             _species.Clear();
 
-            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart));
+            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart).OrderBy(s => Loc.GetString(s.Name))); //Lua: Сортировка рас по алфавиту
             var speciesIds = _species.Select(o => o.ID).ToList();
 
             for (var i = 0; i < _species.Count; i++)
@@ -868,6 +871,7 @@ namespace Content.Client.Lobby.UI
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
+            UpdateGradientControls(); //Sunrise: Ensure gradient controls are updated
 
             RefreshAntags();
             RefreshJobs();
@@ -1734,18 +1738,8 @@ namespace Content.Client.Lobby.UI
                 Profile.Species,
                 1);
 
-            // Sunrise start Apply gradient toggles to UI controls if they exist
-            HairGradientToggle.Pressed = Profile.Appearance.HairGradientEnabled;
-            HairGradientSecondColorSelector.Color = Profile.Appearance.HairGradientSecondaryColor;
-            HairGradientDirectionSelector.SelectId(Profile.Appearance.HairGradientDirection);
-
-            FacialHairGradientToggle.Pressed = Profile.Appearance.FacialHairGradientEnabled;
-            FacialHairGradientSecondColorSelector.Color = Profile.Appearance.FacialHairGradientSecondaryColor;
-            FacialHairGradientDirectionSelector.SelectId(Profile.Appearance.FacialHairGradientDirection);
-
-            AllMarkingsGradientToggle.Pressed = Profile.Appearance.AllMarkingsGradientEnabled;
-            AllMarkingsGradientSecondColorSelector.Color = Profile.Appearance.AllMarkingsGradientSecondaryColor;
-            AllMarkingsGradientDirectionSelector.SelectId(Profile.Appearance.AllMarkingsGradientDirection); //Sunrise end
+            // Sunrise start: Apply gradient toggles to UI controls if they exist
+            UpdateGradientControls(); //Sunrise end
         }
 
         private void UpdateCMarkingsHair()
@@ -2012,6 +2006,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairGradientEnabled(args.Pressed));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2022,6 +2017,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairGradientSecondaryColor(newColor));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2033,6 +2029,7 @@ namespace Content.Client.Lobby.UI
                 HairGradientDirectionSelector.SelectId(args.Id);
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairGradientDirection(args.Id));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2043,6 +2040,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairGradientEnabled(args.Pressed));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2053,6 +2051,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairGradientSecondaryColor(newColor));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2064,6 +2063,7 @@ namespace Content.Client.Lobby.UI
                 FacialHairGradientDirectionSelector.SelectId(args.Id);
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairGradientDirection(args.Id));
+                SetDirty();
                 ReloadPreview();
             };
         }
@@ -2083,6 +2083,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithAllMarkingsGradientEnabled(args.Pressed));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2093,6 +2094,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithAllMarkingsGradientSecondaryColor(newColor));
+                SetDirty();
                 ReloadPreview();
             };
 
@@ -2104,8 +2106,66 @@ namespace Content.Client.Lobby.UI
                 AllMarkingsGradientDirectionSelector.SelectId(args.Id);
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithAllMarkingsGradientDirection(args.Id));
+                SetDirty();
                 ReloadPreview();
             };
+        }
+
+        private void UpdateGradientControls()
+        {
+            if (Profile == null)
+                return;
+
+            try
+            {
+                // Hair gradient controls
+                if (HairGradientToggle != null)
+                {
+                    HairGradientToggle.Pressed = Profile.Appearance.HairGradientEnabled;
+                }
+                if (HairGradientSecondColorSelector != null)
+                {
+                    HairGradientSecondColorSelector.Color = Profile.Appearance.HairGradientSecondaryColor;
+                }
+                if (HairGradientDirectionSelector != null)
+                {
+                    HairGradientDirectionSelector.SelectId(Profile.Appearance.HairGradientDirection);
+                }
+
+                // Facial hair gradient controls
+                if (FacialHairGradientToggle != null)
+                {
+                    FacialHairGradientToggle.Pressed = Profile.Appearance.FacialHairGradientEnabled;
+                }
+                if (FacialHairGradientSecondColorSelector != null)
+                {
+                    FacialHairGradientSecondColorSelector.Color = Profile.Appearance.FacialHairGradientSecondaryColor;
+                }
+                if (FacialHairGradientDirectionSelector != null)
+                {
+                    FacialHairGradientDirectionSelector.SelectId(Profile.Appearance.FacialHairGradientDirection);
+                }
+
+                // All markings gradient controls
+                if (AllMarkingsGradientToggle != null)
+                {
+                    AllMarkingsGradientToggle.Pressed = Profile.Appearance.AllMarkingsGradientEnabled;
+                }
+                if (AllMarkingsGradientSecondColorSelector != null)
+                {
+                    AllMarkingsGradientSecondColorSelector.Color = Profile.Appearance.AllMarkingsGradientSecondaryColor;
+                }
+                if (AllMarkingsGradientDirectionSelector != null)
+                {
+                    AllMarkingsGradientDirectionSelector.SelectId(Profile.Appearance.AllMarkingsGradientDirection);
+                }
+
+                Logger.Debug($"Sunrise: Градиентные контролы обновлены - Hair: {Profile.Appearance.HairGradientEnabled}, FacialHair: {Profile.Appearance.FacialHairGradientEnabled}, AllMarkings: {Profile.Appearance.AllMarkingsGradientEnabled}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Sunrise: Ошибка при обновлении градиентных контролов: {ex}");
+            }
         }
         //Sunrise end
     }

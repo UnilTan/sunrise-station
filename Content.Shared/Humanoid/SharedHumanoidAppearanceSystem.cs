@@ -198,6 +198,20 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         targetHumanoid.Width = sourceHumanoid.Width; //Sunrise
         targetHumanoid.Height = sourceHumanoid.Height; //Sunrise
 
+        //Sunrise start: Copy gradient settings
+        targetHumanoid.HairGradientEnabled = sourceHumanoid.HairGradientEnabled;
+        targetHumanoid.HairGradientSecondaryColor = sourceHumanoid.HairGradientSecondaryColor;
+        targetHumanoid.HairGradientDirection = sourceHumanoid.HairGradientDirection;
+        targetHumanoid.FacialHairGradientEnabled = sourceHumanoid.FacialHairGradientEnabled;
+        targetHumanoid.FacialHairGradientSecondaryColor = sourceHumanoid.FacialHairGradientSecondaryColor;
+        targetHumanoid.FacialHairGradientDirection = sourceHumanoid.FacialHairGradientDirection;
+        targetHumanoid.AllMarkingsGradientEnabled = sourceHumanoid.AllMarkingsGradientEnabled;
+        targetHumanoid.AllMarkingsGradientSecondaryColor = sourceHumanoid.AllMarkingsGradientSecondaryColor;
+        targetHumanoid.AllMarkingsGradientDirection = sourceHumanoid.AllMarkingsGradientDirection;
+        targetHumanoid.CachedHairColor = sourceHumanoid.CachedHairColor;
+        targetHumanoid.CachedFacialHairColor = sourceHumanoid.CachedFacialHairColor;
+        //Sunrise end
+
         SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
         SetGender((target, targetHumanoid), sourceHumanoid.Gender);
 
@@ -506,6 +520,20 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
         humanoid.Width = profile.Appearance.Width; //Sunrise
         humanoid.Height = profile.Appearance.Height; //Sunrise
+
+        //Sunrise start: Load gradient settings from profile
+        humanoid.HairGradientEnabled = profile.Appearance.HairGradientEnabled;
+        humanoid.HairGradientSecondaryColor = profile.Appearance.HairGradientSecondaryColor;
+        humanoid.HairGradientDirection = profile.Appearance.HairGradientDirection;
+        humanoid.FacialHairGradientEnabled = profile.Appearance.FacialHairGradientEnabled;
+        humanoid.FacialHairGradientSecondaryColor = profile.Appearance.FacialHairGradientSecondaryColor;
+        humanoid.FacialHairGradientDirection = profile.Appearance.FacialHairGradientDirection;
+        humanoid.AllMarkingsGradientEnabled = profile.Appearance.AllMarkingsGradientEnabled;
+        humanoid.AllMarkingsGradientSecondaryColor = profile.Appearance.AllMarkingsGradientSecondaryColor;
+        humanoid.AllMarkingsGradientDirection = profile.Appearance.AllMarkingsGradientDirection;
+        // Set cached hair colors for gradient shader
+        humanoid.CachedHairColor = hairColor;
+        humanoid.CachedFacialHairColor = facialHairColor; //Sunrise end
 
         Dirty(uid, humanoid);
     }

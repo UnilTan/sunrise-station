@@ -30,15 +30,13 @@ void fragment()
         t = 1.0 - UV2.x;
 
     highp float tt = clamp(t, 0.0, 1.0);
+
+    // Создаем градиентный цвет: переходим от color1 к color2
     highp vec3 gradColor = mix(color1, color2, tt);
 
-    // Preserve original hair texture fully, tint with base color (color1)
-    highp vec3 baseTint = base.rgb * color1;
-    // Gradient-tinted variant
-    highp vec3 gradTint = base.rgb * gradColor;
-
-    // Blend gradient over base at fixed 50% strength
-    highp vec3 finalRgb = mix(baseTint, gradTint, 0.5);
+    // Применяем градиентный цвет к оригинальной текстуре
+    // Текстура волос умножается на градиентный цвет напрямую
+    highp vec3 finalRgb = base.rgb * gradColor;
     COLOR = vec4(finalRgb, base.a);
 }
 

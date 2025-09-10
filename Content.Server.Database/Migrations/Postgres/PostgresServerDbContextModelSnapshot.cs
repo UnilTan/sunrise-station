@@ -972,6 +972,45 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("real")
                         .HasColumnName("width");
 
+                    b.Property<bool>("AllMarkingsGradientEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("all_markings_gradient_enabled");
+
+                    b.Property<string>("AllMarkingsGradientSecondaryColor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("all_markings_gradient_secondary_color");
+
+                    b.Property<int>("AllMarkingsGradientDirection")
+                        .HasColumnType("integer")
+                        .HasColumnName("all_markings_gradient_direction");
+
+                    b.Property<bool>("FacialHairGradientEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("facial_hair_gradient_enabled");
+
+                    b.Property<string>("FacialHairGradientSecondaryColor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("facial_hair_gradient_secondary_color");
+
+                    b.Property<int>("FacialHairGradientDirection")
+                        .HasColumnType("integer")
+                        .HasColumnName("facial_hair_gradient_direction");
+
+                    b.Property<bool>("HairGradientEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("hair_gradient_enabled");
+
+                    b.Property<string>("HairGradientSecondaryColor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("hair_gradient_secondary_color");
+
+                    b.Property<int>("HairGradientDirection")
+                        .HasColumnType("integer")
+                        .HasColumnName("hair_gradient_direction");
+
                     b.HasKey("Id")
                         .HasName("PK_profile");
 
