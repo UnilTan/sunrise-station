@@ -253,6 +253,8 @@ namespace Content.Client.Lobby.UI
             #endregion
 
             RefreshSpecies();
+            InitializeHairGradientControls(); //Sunrise
+            InitializeAllMarkingsGradientControls(); //Sunrise
 
             SpeciesButton.OnItemSelected += args =>
             {
@@ -1731,6 +1733,19 @@ namespace Content.Client.Lobby.UI
                 facialHairMarking,
                 Profile.Species,
                 1);
+
+            // Sunrise start Apply gradient toggles to UI controls if they exist
+            HairGradientToggle.Pressed = Profile.Appearance.HairGradientEnabled;
+            HairGradientSecondColorSelector.Color = Profile.Appearance.HairGradientSecondaryColor;
+            HairGradientDirectionSelector.SelectId(Profile.Appearance.HairGradientDirection);
+
+            FacialHairGradientToggle.Pressed = Profile.Appearance.FacialHairGradientEnabled;
+            FacialHairGradientSecondColorSelector.Color = Profile.Appearance.FacialHairGradientSecondaryColor;
+            FacialHairGradientDirectionSelector.SelectId(Profile.Appearance.FacialHairGradientDirection);
+
+            AllMarkingsGradientToggle.Pressed = Profile.Appearance.AllMarkingsGradientEnabled;
+            AllMarkingsGradientSecondColorSelector.Color = Profile.Appearance.AllMarkingsGradientSecondaryColor;
+            AllMarkingsGradientDirectionSelector.SelectId(Profile.Appearance.AllMarkingsGradientDirection); //Sunrise end
         }
 
         private void UpdateCMarkingsHair()
@@ -1974,5 +1989,124 @@ namespace Content.Client.Lobby.UI
 
             CBodyTypesButton.Select(_bodyTypes.FindIndex(x => x.ID == Profile.BodyType));
         }
+
+        //Sunrise start - Hair gradient initialization methods
+        private void InitializeHairGradientControls()
+        {
+            // Initialize hair gradient direction selector
+            HairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-bottom-top"), 0);
+            HairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-top-bottom"), 1);
+            HairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-left-right"), 2);
+            HairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-right-left"), 3);
+
+            // Initialize facial hair gradient direction selector
+            FacialHairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-bottom-top"), 0);
+            FacialHairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-top-bottom"), 1);
+            FacialHairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-left-right"), 2);
+            FacialHairGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-right-left"), 3);
+
+            // Hair gradient toggle
+            HairGradientToggle.OnToggled += args =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithHairGradientEnabled(args.Pressed));
+                ReloadPreview();
+            };
+
+            // Hair gradient secondary color
+            HairGradientSecondColorSelector.OnColorChanged += newColor =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithHairGradientSecondaryColor(newColor));
+                ReloadPreview();
+            };
+
+            // Hair gradient direction
+            HairGradientDirectionSelector.OnItemSelected += args =>
+            {
+                if (Profile is null)
+                    return;
+                HairGradientDirectionSelector.SelectId(args.Id);
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithHairGradientDirection(args.Id));
+                ReloadPreview();
+            };
+
+            // Facial hair gradient toggle
+            FacialHairGradientToggle.OnToggled += args =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithFacialHairGradientEnabled(args.Pressed));
+                ReloadPreview();
+            };
+
+            // Facial hair gradient secondary color
+            FacialHairGradientSecondColorSelector.OnColorChanged += newColor =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithFacialHairGradientSecondaryColor(newColor));
+                ReloadPreview();
+            };
+
+            // Facial hair gradient direction
+            FacialHairGradientDirectionSelector.OnItemSelected += args =>
+            {
+                if (Profile is null)
+                    return;
+                FacialHairGradientDirectionSelector.SelectId(args.Id);
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithFacialHairGradientDirection(args.Id));
+                ReloadPreview();
+            };
+        }
+
+        private void InitializeAllMarkingsGradientControls()
+        {
+            // Initialize all markings gradient direction selector
+            AllMarkingsGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-bottom-top"), 0);
+            AllMarkingsGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-top-bottom"), 1);
+            AllMarkingsGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-left-right"), 2);
+            AllMarkingsGradientDirectionSelector.AddItem(Loc.GetString("humanoid-profile-editor-hair-gradient-dir-right-left"), 3);
+
+            // All markings gradient toggle
+            AllMarkingsGradientToggle.OnToggled += args =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithAllMarkingsGradientEnabled(args.Pressed));
+                ReloadPreview();
+            };
+
+            // All markings gradient secondary color
+            AllMarkingsGradientSecondColorSelector.OnColorChanged += newColor =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithAllMarkingsGradientSecondaryColor(newColor));
+                ReloadPreview();
+            };
+
+            // All markings gradient direction
+            AllMarkingsGradientDirectionSelector.OnItemSelected += args =>
+            {
+                if (Profile is null)
+                    return;
+                AllMarkingsGradientDirectionSelector.SelectId(args.Id);
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithAllMarkingsGradientDirection(args.Id));
+                ReloadPreview();
+            };
+        }
+        //Sunrise end
     }
 }
